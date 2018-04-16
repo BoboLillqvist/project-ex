@@ -1,11 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { TwbootstrapModule } from './twbootstrap/twbootstrap.module';
 
 import { AppComponent } from './app.component';
-
-// Bootstrap modules
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   declarations: [
@@ -13,8 +10,10 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
   ],
   imports: [
     BrowserModule,
-    BsDropdownModule.forRoot(),
-    TooltipModule.forRoot()
+    TwbootstrapModule
+  ],
+  exports: [
+    TwbootstrapModule
   ],
   providers: [],
   bootstrap: [AppComponent]
