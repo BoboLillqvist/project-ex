@@ -1,38 +1,7 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div class="container">
-
-  <div class="jumbotron">
-    <h1 class="display-4">{{ title }}</h1>
-    <p>Testa så att bootstraps javascript funkar:</p>
-
-    <button type="button" class="btn btn-primary"
-            tooltip="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">
-      Simple demo
-    </button>
-
-    <div class="btn-group" dropdown>
-      <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-        Button dropdown <span class="caret"></span>
-      </button>
-      <ul *dropdownMenu class="dropdown-menu" role="menu">
-        <li role="menuitem"><a class="dropdown-item" href="#">Action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Another action</a></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
-        <li class="divider dropdown-divider"></li>
-        <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-        </li>
-      </ul>
-    </div>
-
-  </div>
-
-
-</div>
-
+<app-navbar></app-navbar>
 
 <div class="container">
   <router-outlet></router-outlet>
 </div>
-<app-navbar></app-navbar>
 
 
