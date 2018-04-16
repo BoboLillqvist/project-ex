@@ -14,13 +14,18 @@ import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
 
+import { TwbootstrapModule } from './twbootstrap/twbootstrap.module';
+
+
+import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CompaniesComponent,
     CompaniesComponent,
-    HomeComponent
+    HomeComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +33,12 @@ import { HomeComponent } from './home/home.component';
     TooltipModule.forRoot(),
     AppRoutingModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    TwbootstrapModule
+  ],
 
+  exports: [
+    TwbootstrapModule
   ],
   providers: [],
   bootstrap: [AppComponent]
