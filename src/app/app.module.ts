@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { TwbootstrapModule } from './twbootstrap/twbootstrap.module';
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './layout/navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
