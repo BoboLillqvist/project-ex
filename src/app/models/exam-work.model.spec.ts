@@ -1,4 +1,4 @@
-import { ExamWork } from './exam-work';
+import { ExamWork } from './exam-work.model';
 
 describe('ExamWork', () => {
   it('should create an instance', () => {
