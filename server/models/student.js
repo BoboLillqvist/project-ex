@@ -1,16 +1,16 @@
-import { Course } from '../../src/app/models/course.model';
-import { Person } from '../../src/app/models/person.model';
 //TODO: schema för studenter som matchar vår modell
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
+
 const studentSchema = new Schema({
-    person: Person,
+    person: { type: Schema.Types.ObjectId, ref: 'person'},
     name: String,
     education: String,
     examYear: Number,
-    skills: String[],
-    courses: Course[]
+    skills: [String],
+    courses: [ { type: Schema.Types.ObjectId, ref: 'course' }]
 });
 
 module.exports = mongoose.model('student', studentSchema, 'students');
