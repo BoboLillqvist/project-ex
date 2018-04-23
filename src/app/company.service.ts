@@ -21,7 +21,9 @@ export class CompanyService {
       .map((response: Response) => response.json());
   }
 
-
-
+  deleteCompany(company: Company){
+    return this._http.delete(this._deleteUrl + company._id)
+      .map((response: Response) => response.json());
+  }
 
 }
