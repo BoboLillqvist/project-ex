@@ -13,6 +13,9 @@ export class ImageUploadComponent implements OnInit {
   maxHeight: number = 100;
   context: CanvasRenderingContext2D;
   @ViewChild('previewcanvas') previewcanvas;
+
+  constructor(private http: HttpClient) { }
+
   ngOnInit() {
   }
 }
