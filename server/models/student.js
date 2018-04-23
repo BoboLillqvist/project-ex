@@ -9,6 +9,7 @@ const studentSchema = new Schema({
     name: String,
     education: String,
     examYear: Number,
+    description: String,
     skills: [String],
     courses: [ { type: Schema.Types.ObjectId, ref: 'course' }]
 });
