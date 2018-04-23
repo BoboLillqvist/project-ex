@@ -12,6 +12,7 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { StudentsComponent } from './students/students.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { StudentsComponent } from './students/students.component';
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
-    TwbootstrapModule
+    TwbootstrapModule,
+    FormsModule
   ],
 
   exports: [
