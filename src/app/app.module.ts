@@ -12,6 +12,7 @@ import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ImageUploadComponent } from './file-upload/image-upload/image-upload.component';
+import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ImageUploadComponent } from './file-upload/image-upload/image-upload.co
     CompaniesComponent,
     HomeComponent,
     NavbarComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    PostExamWorkComponent
   ],
   imports: [
     BrowserModule,
