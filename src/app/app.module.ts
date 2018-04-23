@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { ImageUploadComponent } from './file-upload/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
     CompaniesComponent,
     CompaniesComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,
