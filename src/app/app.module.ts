@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CompaniesComponent } from './companies/companies.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { TwbootstrapModule } from './twbootstrap/twbootstrap.module';
+import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
 
 import { AppComponent } from './app.component';
 
