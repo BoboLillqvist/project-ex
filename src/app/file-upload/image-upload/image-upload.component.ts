@@ -22,6 +22,38 @@ export class ImageUploadComponent implements OnInit {
 
     this.previewImage(image);
   }
+
+  previewImage(image: File) {
+    const canvas = this.previewcanvas.nativeElement;
+    const context = canvas.getContext('2d');
+    // context.clearRect(0, 0, this.maxWidth, this.maxHeight);
+
+    const render = new FileReader();
+
+    render.onload = function(event: any) {
+      const img = new Image();
+
+      img.onload = function() {
+        // TODO: Kalla på scaleImage() istället, av nån anledning kan jag inte få ut objektet som returnas.
+
+        // Scale image
+        const imageWidth = img.width;
+        const imageHeight = img.height;
+        const scale = Math.min((100 / imageWidth), (100 / imageHeight));
+        const imageWidthScaled = (imageWidth * scale);
+        const imageHeightScaled = (imageHeight * scale);
+
+        canvas.width = imageWidthScaled;
+        canvas.height = imageHeightScaled;
+
+        context.drawImage(img, 0, 0, imageWidthScaled, imageHeightScaled);
+      };
+
+      img.src = event.target.result;
+    };
+
+    render.readAsDataURL(image);
+  }
   ngOnInit() {
   }
 }
