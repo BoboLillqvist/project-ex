@@ -34,5 +34,12 @@ export class CompanyService {
 
   }
 
+  updateCompany(company: Company){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers});
+    return this._http.put(this._putUrl + company._id, JSON.stringify(company), options)
+      .map((response: Response) => response.json());
+  }
+
 
 }
