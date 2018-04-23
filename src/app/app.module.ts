@@ -24,7 +24,8 @@ import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component
     HomeComponent,
     NavbarComponent,
     ImageUploadComponent,
-    PostExamWorkComponent
+    PostExamWorkComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
