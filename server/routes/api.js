@@ -15,8 +15,7 @@ mongoose.connect(db, function(err){
 
 //TODO: Lägga till API för studenter get all, get by id, post, update, delete
 
-/* Student API */
-//#region Student
+//#region Student API
 
 router.get('/students', function(req, res){
     console.log('get request for all students');
@@ -31,8 +30,8 @@ router.get('/students', function(req, res){
 
 //#endregion
 
-/* Company API */
-//#region Company
+
+//#region Company API
 
 router.get('/companies', function(req, res){
     console.log('get request for all companies');
@@ -45,9 +44,6 @@ router.get('/companies', function(req, res){
         }
     });
 });
-
-//#endregion
-
 
 router.get('/companies/:id', function(req, res){
     console.log('get request for a single video');
@@ -106,5 +102,6 @@ router.delete('/company/:id', function(req, res){
     });
 });
 
+//#endregion
 
 module.exports = router;
