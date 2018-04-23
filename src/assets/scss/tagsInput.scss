@@ -1,0 +1,36 @@
+.tags-input {
+    border: 1px solid $primary;
+    display: inline-block;
+}
+
+.tags-input .tag {
+    font-size: 85%;
+    padding: 0.5em 0.75em;
+    margin: 0.25em 0.25em;
+    display: inline-block;
+    background-color: $secondary;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+
+.tags-input .tag:hover {
+    
+    background-color: $info;
+}
+
+.tags-input .tag .close:after {
+    content: '×';
+    font-weight: bold;
+    display: inline-block;
+    margin-left: 0.25em;
+}
+
+.tags-input .tag .close:hover::after {
+    color: $danger;
+}
+
+.tags-input .main-input {
+    border: 0;
+    outline: 0;
+    padding: 0.25em;
+}
