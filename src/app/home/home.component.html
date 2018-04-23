@@ -3,5 +3,17 @@
 
     <!--testar så att routingen fungerar.-->
     <li><a routerLink="/companies" routerLinkActive="active">Companies</a></li>
-    
+
+
+</div>
+
+<div *ngFor="let examwork of examWorks; let i = index">
+        <div class="jumbotron-fc">
+                <div class="container">
+                            <div class="text-uppercase">
+                                    <h1 class="display-5">{{ examwork.title }}</h1>
+                            </div>
+                            <p class="display-7"> {{ examwork.description }} </p>
+                </div>
+            </div>
 </div>

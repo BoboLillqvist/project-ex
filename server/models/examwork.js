@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const companySchema = new Schema({
+const examworkSchema = new Schema({
     _id: String,
     title: string,
     location: string,
     applyDueDate: Date,
-    essentialSkills: Array<string>[],
-    complementarySkills: Array<string>[],
+    essentialSkills: [String],
+    complementarySkills: [String],
     description: String,
     presence: string,
     contact: Person,
     teachings: string,
     company: Company
 });
+
+module.exports = mongoose.model('examwork', examworkSchema, 'examworks');

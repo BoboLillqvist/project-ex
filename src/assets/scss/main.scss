@@ -1,11 +1,15 @@
 // Custom modules
 @import "colors";
 @import "navbar";
+@import "jumbotron";
 
 // Global styles
 * {
     border-radius: 0 !important;
   }
 
+
+
 // Include Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+
