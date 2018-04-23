@@ -16,6 +16,12 @@ export class ImageUploadComponent implements OnInit {
 
   constructor(private http: HttpClient) { }
 
+  getFile(event) {
+    const image: File = <File>event.target.files[0];
+    this.uploadedImage = image;
+
+    this.previewImage(image);
+  }
   ngOnInit() {
   }
 }
