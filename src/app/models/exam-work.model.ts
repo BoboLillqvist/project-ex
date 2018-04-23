@@ -4,13 +4,13 @@ import { Person } from "./person.model";
 export class ExamWork {
     _id: string;
     title: string;
-    location: string;
-    applyDueDate: Date;
+    location: string;      
+    applyDueDate: Date;   
     essentialSkills: Array<string>;
     complementarySkills: Array<string>;
     description: string;
     presence: string;
-    contact: Person;
+    contact: Person; 
     teachings: string;
     company: Company;
 

@@ -21,25 +21,7 @@ export class CompanyService {
       .map((response: Response) => response.json());
   }
 
-  deleteCompany(company: Company){
-    return this._http.delete(this._deleteUrl + company._id)
-      .map((response: Response) => response.json());
-  }
 
-  addCompany(company: Company){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers});
-    return this._http.post(this._postUrl, JSON.stringify(company), options)
-      .map((response: Response) => response.json());
-
-  }
-
-  updateCompany(company: Company){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers});
-    return this._http.put(this._putUrl + company._id, JSON.stringify(company), options)
-      .map((response: Response) => response.json());
-  }
 
 
 }

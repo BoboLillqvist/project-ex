@@ -1,13 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 //blueprint av objektet i vår databas
+//TODO:: Updatera schema så att det matchar vår modell för företag
 const companySchema = new Schema({
-    _id: String,
     name: String,
-    description: String,
-    url: String,
-    examWorks: [{ type: Schema.Types.ObjectId, ref: 'examwork' }]
+    description: String
 });
 
 module.exports = mongoose.model('company', companySchema, 'companies');

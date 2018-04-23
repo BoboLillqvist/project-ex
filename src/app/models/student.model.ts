@@ -1,22 +1,20 @@
-import { Course } from './course.model';
-import { Person } from './person.model';
+import { Course } from "./course.model";
 
 export class Student {
     _id: string;
-    person: Person;
     name: string;
     education: string;
     examYear: number;
     skills: Array<string>;
     courses: Array<Course>;
+    email: string;
 
-    constructor(firstName, lastName, education: string, examYear: number, skills: Array<string>, courses: Array<Course>, email: string,
-         phoneNbr: string) {
-        this.person = new Person(firstName, lastName, email, phoneNbr);
-        this.name = firstName + ' ' + lastName;
+    constructor(name: string, education: string, examYear: number, skills: Array<string>, courses: Array<Course>, email: string){
+        this.name = name;
         this.education = education;
         this.examYear = examYear;
         this.skills = skills;
         this.courses = courses;
+        this.email = email;
     }
 }
