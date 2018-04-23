@@ -54,6 +54,22 @@ export class ImageUploadComponent implements OnInit {
 
     render.readAsDataURL(image);
   }
+
+  scaleImage(image: any, width: number, height: number) {
+        const imageWidth = image.width;
+        const imageHeight = image.height;
+
+        const scale = Math.min((width / imageWidth), (height / imageHeight));
+
+        const imageWidthScaled = (imageWidth * scale);
+        const imageHeightScaled = (imageHeight * scale);
+
+        return {
+          width: imageWidthScaled,
+          height: imageHeightScaled
+        };
+  }
+
   ngOnInit() {
   }
 }
