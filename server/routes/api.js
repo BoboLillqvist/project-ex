@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Company = require('../models/company');
 const Student = require('../models/student');
+const Examwork = require('../models/examwork');
 
 const db = "mongodb://firstcontact:projectex1@ds149865.mlab.com:49865/projex";
 mongoose.Promise = global.Promise;
@@ -104,4 +105,20 @@ router.delete('/company/:id', function(req, res){
 
 //#endregion
 
+
+//#region examwork API
+
+router.get('/examworks', function(req, res){
+    console.log('get request for all exam works');
+    Examwork.find({})
+    .exec(function(err,examworks){
+        if(err){
+            console.log('error retrieving exam works'+ err);
+        }else{
+            res.json(examworks);
+        }
+    });
+});
+
+//#endregion
 module.exports = router;

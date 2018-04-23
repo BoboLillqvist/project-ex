@@ -3,15 +3,15 @@ const Schema = mongoose.Schema;
 
 const examworkSchema = new Schema({
     _id: String,
-    title: string,
-    location: string,
+    title: String,
+    location: String,
     applyDueDate: Date,
     essentialSkills: [String],
     complementarySkills: [String],
     description: String,
-    presence: string,
+    presence: String,
     contact: Person,
-    teachings: string,
+    teachings: String,
     company: Company
 });
 

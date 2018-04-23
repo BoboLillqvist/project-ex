@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CompaniesComponent } from './companies/companies.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-import { TwbootstrapModule } from './twbootstrap/twbootstrap.module';
+import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
 
 import { AppComponent } from './app.component';
 
@@ -13,6 +13,8 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { StudentsComponent } from './students/students.component';
 import { FormsModule } from '@angular/forms';
+import { ImageUploadComponent } from './file-upload/image-upload/image-upload.component';
+import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     CompaniesComponent,
     HomeComponent,
     NavbarComponent,
-    StudentsComponent
+    ImageUploadComponent,
+    PostExamWorkComponent
   ],
   imports: [
     BrowserModule,

@@ -3,15 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { CompaniesComponent } from './companies/companies.component';
 import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
-import { StudentsComponent } from './students/students.component';
+import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
 
 
-// Routes sköts här
+
+//Routes sköts här
 const routes: Routes = [
-{path: '', redirectTo: '/home', pathMatch: 'full'},
+{path:'', redirectTo:'/home', pathMatch:'full'},
 {path: 'home', component: HomeComponent},
 {path: 'companies', component: CompaniesComponent},
-{path: 'students', component: StudentsComponent },
+{path: 'post-exam-work', component: PostExamWorkComponent}
 ];
 
 @NgModule({
