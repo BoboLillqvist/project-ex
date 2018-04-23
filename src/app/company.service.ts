@@ -26,4 +26,13 @@ export class CompanyService {
       .map((response: Response) => response.json());
   }
 
+  addCompany(company: Company){
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers});
+    return this._http.post(this._postUrl, JSON.stringify(company), options)
+      .map((response: Response) => response.json());
+
+  }
+
+
 }
