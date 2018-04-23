@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const Company = require('../models/company');
+const Student = require('../models/student');
 
 const db = "mongodb://firstcontact:projectex1@ds149865.mlab.com:49865/projex";
 mongoose.Promise = global.Promise;
@@ -14,6 +15,24 @@ mongoose.connect(db, function(err){
 
 //TODO: Lägga till API för studenter get all, get by id, post, update, delete
 
+/* Student API */
+//#region Student
+
+router.get('/students', function(req, res){
+    console.log('get request for all students');
+    Student.find({}).exec(function(err, students){
+        if(err){
+            console.log('Error retrieving students');
+        }else {
+            res.json(students);
+        }
+    })
+})
+
+//#endregion
+
+/* Company API */
+//#region Company
 
 router.get('/companies', function(req, res){
     console.log('get request for all companies');
@@ -27,6 +46,7 @@ router.get('/companies', function(req, res){
     });
 });
 
+//#endregion
 
 
 router.get('/companies/:id', function(req, res){
