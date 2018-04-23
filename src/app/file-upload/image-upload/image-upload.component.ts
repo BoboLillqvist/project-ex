@@ -7,6 +7,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 })
 export class ImageUploadComponent implements OnInit {
 
+  uploadedImage: File = null;
+  maxWidth: number = 100;
+  maxHeight: number = 100;
+  context: CanvasRenderingContext2D;
+  @ViewChild('previewcanvas') previewcanvas;
   ngOnInit() {
   }
 }
