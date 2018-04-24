@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Company = require('../models/company');
 const Student = require('../models/student');
+const Person = require('../models/person');
 const Examwork = require('../models/examwork');
 
 const db = "mongodb://firstcontact:projectex1@ds149865.mlab.com:49865/projex";
@@ -26,8 +27,46 @@ router.get('/students', function(req, res){
         }else {
             res.json(students);
         }
-    })
-})
+    });
+});
+
+router.post('/student', (req, res) => {
+    console.log('Post a student');
+
+    var newPerson = new Person({
+        _id: new mongoose.Types.ObjectId(),
+        firstName: req.body.person.firstName,
+        lastName: req.body.person.lastName,
+        email: req.body.person.email,
+        phoneNbr: req.body.person.phoneNbr
+    });
+    
+    newPerson.save(function(err, insertedPerson) {
+        if(err)
+            return console.log(err);
+        
+        res.json(insertedPerson);
+        
+        var newStudent = new Student({
+            person: newPerson._id,
+            name: req.body.name,
+            education: req.body.education,
+            examYear: req.body.examYear,
+            description: req.body.description,
+            skills: req.body.skills,
+            courses: req.body.courses,
+        });
+
+        newStudent.save( (err, insertedStudent) => {
+            if(err) {
+                console.log('Error saving student ' + err);
+            } else {
+                res.json(insertedStudent);
+            }
+        }); 
+    });
+});
+
 
 //#endregion
 
