@@ -6,7 +6,7 @@ const Student = require('../models/student');
 const Person = require('../models/person');
 const Examwork = require('../models/examwork');
 
-const db = "mongodb://firstcontact:projectex1@ds149865.mlab.com:49865/projex";
+const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
 
 mongoose.connect(db, function(err){
