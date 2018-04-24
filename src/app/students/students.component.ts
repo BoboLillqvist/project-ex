@@ -13,7 +13,6 @@ import { Tags } from '../tagsInput';
 })
 
 
-
 export class StudentsComponent implements OnInit {
 
   tags: Tags;
@@ -21,43 +20,55 @@ export class StudentsComponent implements OnInit {
     'Högskoleingenjör, datateknik',
   ];
   yearRange = [];
-  students: Array<Student>;
+  students: Array<Student> = [];
   name: string;
   education: string;
   examYear: number;
   email: string;
-  phoneNbr: string;
-  description: string;
+  phoneNbr: string = '';
+  description: string = '';
   skills: Array<string>;
-  courses: Array<Course>;
+  courseName: string;
+  courses: string[] = [];
 
   constructor(private studentService: StudentService) { }
 
   ngOnInit() {
     this.setUpYearList();
-
     // activate tags-input
     this.tags = new Tags(document);
-    
-   // this.skills = tags.tags;
 
-    //this.studentService.getStudents().subscribe(resStudentData => this.students = resStudentData);
+    this.studentService.getStudents().subscribe(resStudentData => this.students = resStudentData);
+    console.log(this.students);
   }
 
-
   addStudent() {
-    console.log(this.name);
-    console.log(this.education);
-    console.log(this.examYear);
-    console.log(this.email);
-    console.log(this.phoneNbr);
-    console.log(this.description);
-
-    // hämta och dela upp skillsen
     this.skills = this.tags.getData();
 
     console.log(this.skills);
-    console.log(this.courses);
+
+    // split name
+    const fullName = this.name.split(' ');
+    if (fullName[1] === undefined) {
+      fullName[1] = '';
+    }
+
+    const student = new Student(fullName[0], fullName[1], this.education, this.examYear,
+                                this.description, this.skills, this.courses, this.email, this.phoneNbr);
+
+    
+    this.studentService.addStudent(student).subscribe(resNewStudent => {
+      this.students.push(resNewStudent);
+    });
+  }
+
+  addCourse() {
+    this.courses.push(this.courseName);
+    this.courseName = '';
+  }
+
+  removeCourse(index) {
+    this.courses.splice(index, 1);
   }
 
   setUpYearList() {
@@ -69,3 +80,5 @@ export class StudentsComponent implements OnInit {
   }
 
 }
+
+

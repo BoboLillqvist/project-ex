@@ -22,13 +22,9 @@
 */
 
 export class Tags {
-
-
     constructor(private doc: Document) {
         [].forEach.call(doc.getElementsByClassName('tags-input'), function(element) {
-            const hiddenInput = doc.createElement('input'),
-                mainInput = doc.createElement('input'),
-                tags = [];
+            const hiddenInput = doc.createElement('input'), mainInput = doc.createElement('input'), tags = [];
                 hiddenInput.setAttribute('type', 'hidden');
                 hiddenInput.setAttribute('id', 'data');
                 hiddenInput.setAttribute('name', element.getAttribute('data-name'));
@@ -90,7 +86,7 @@ export class Tags {
                   });
                   hiddenInput.value = tagsList.join(',');
                 }
-        
+                
                 function filterTag(tag) {
                   return tag.replace(/ /g, '-');
                 }
@@ -98,6 +94,16 @@ export class Tags {
     }
 
     getData() {
-      return this.doc.getElementById('data').getAttribute('value').split(',');
+      if (this.doc.getElementById('data').getAttribute('value')) {
+        return this.doc.getElementById('data').getAttribute('value').split(',');
+      } else {
+        return [];
+      }
+      // const dataArr = 
+      // if (dataArr != null) {
+      //   return dataArr;
+      // } else {
+      //   return [];
+      // }
     }
 }
