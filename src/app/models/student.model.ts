@@ -7,15 +7,17 @@ export class Student {
     name: string;
     education: string;
     examYear: number;
+    description: string;
     skills: Array<string>;
     courses: Array<Course>;
 
-    constructor(firstName, lastName, education: string, examYear: number, skills: Array<string>, courses: Array<Course>, email: string,
-         phoneNbr: string) {
+    constructor(firstName, lastName, education: string, examYear: number, description, skills: Array<string>,
+                    courses: Array<Course>, email: string, phoneNbr: string) {
         this.person = new Person(firstName, lastName, email, phoneNbr);
         this.name = firstName + ' ' + lastName;
         this.education = education;
         this.examYear = examYear;
+        this.description = description;
         this.skills = skills;
         this.courses = courses;
     }

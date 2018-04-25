@@ -11,6 +11,8 @@ import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
+import { StudentsComponent } from './students/students.component';
+import { FormsModule } from '@angular/forms';
 import { ImageUploadComponent } from './file-upload/image-upload/image-upload.component';
 import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
 import { CreateCompanyProfileComponent } from './profiles/create-company-profile/create-company-profile.component';
@@ -24,14 +26,16 @@ import { CreateCompanyProfileComponent } from './profiles/create-company-profile
     NavbarComponent,
     ImageUploadComponent,
     PostExamWorkComponent,
-    CreateCompanyProfileComponent
+    CreateCompanyProfileComponent,
+    StudentsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpModule,
     HttpClientModule,
-    TwbootstrapModule
+    TwbootstrapModule,
+    FormsModule
   ],
 
   exports: [

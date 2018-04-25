@@ -1,4 +1,80 @@
-<h3>Listar studenter från database</h3>
-<ul>
-  <li *ngFor ="let student of students"><a>{{student.name}}</a></li>
-</ul>
+<div class="jumbotron">
+  <h3>Listar studenter från database</h3>
+  <ul>
+    <li *ngFor ="let student of students">
+      <a>
+        {{ student }}
+      </a>
+    </li>
+  </ul>
+
+  <h3>Lägg till ny test</h3>
+  
+  <form #myForm="ngForm">
+    <div class="form-group required">
+        <label class="control-label" for="nameInput">Namn</label>
+        <input type="text" class="form-control" id="nameInput" required
+               placeholder="För- och efternamn" name="fullName" [(ngModel)]="name">
+    </div>
+
+    <div class="form-group required">
+        <label class="control-label" for="educationSelect">Utbildning</label>
+        <select required class="form-control" id="educationSelect" name="selectedEducation" [(ngModel)]="education">
+          <option *ngFor="let edu of eduPrograms" [value]="edu">
+            {{ edu }}
+          </option>>
+        </select>
+    </div>
+
+    <div class="form-group required">
+      <label class="control-label" for="gradYear">Examensår</label>
+      <select required class="form-control" id="gradYear" name="selectedYear" [(ngModel)]="examYear">
+        <option *ngFor="let year of yearRange" [value]="year">
+          {{ year }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group required">
+        <label class="control-label" for="emailInput">Email</label>
+        <input required type="email" class="form-control" id="emailInput" name="email" [(ngModel)]="email" placeholder="name@example.com">
+    </div>
+
+    <div class="form-group">
+        <label for="phoneInput">Telefonnummer</label>
+        <input type="tel" class="form-control" id="phoneInput" name="phoneNbr" [(ngModel)]="phoneNbr">
+    </div>
+
+    
+    <div class="form-group">
+      <label for="aboutText">Om dig</label>
+      <textarea class="form-control" id="aboutText" rows="3" name="description" [(ngModel)]="description">
+      </textarea>
+    </div>
+
+    <label for="tags">Färdigheter</label>
+    <div class="form-group">
+      <div class="tags-input" data-name="tags-input" id="tags"></div>
+    </div>
+
+    <div class="form-group">
+      <label for="courseSelection">
+        Skriv in vilka kurser du klarat. (Lägg till med enter)<br>
+        De kommer upp i listan under.
+      </label>
+      <input type="text" class="form-control" name="courseInput" 
+              id="courseSelection" [(ngModel)]="courseName" (keydown.enter)="addCourse($event)">
+    </div>
+    <div class="form-group">
+        <label for="courseList">Kurser</label>
+        <ul class="list-group" id="courseList" >
+            <li class="list-group-item" *ngFor="let course of courses; let i = index" (click)="removeCourse(i)">{{ course }}</li>
+        </ul>
+    </div>
+
+    <button type="button" class="btn btn-primary" [disabled]="!myForm.form.valid" (click)="addStudent()">
+      Skicka
+    </button>
+  </form>
+  
+</div>
