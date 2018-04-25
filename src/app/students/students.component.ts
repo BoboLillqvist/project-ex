@@ -59,7 +59,7 @@ export class StudentsComponent implements OnInit {
   }
 
   addCourse() {
-    this.courses.push(this.courseName);
+    this.courses.push(new Course(this.courseName));
     this.courseName = '';
   }
 
