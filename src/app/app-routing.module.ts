@@ -4,15 +4,18 @@ import { CompaniesComponent } from './companies/companies.component';
 import { HomeComponent } from './home/home.component';
 import { AppComponent } from './app.component';
 import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
+import { CreateCompanyProfileComponent } from './profiles/create-company-profile/create-company-profile.component';
 
 
 
-//Routes sköts här
+
+// Routes sköts här
 const routes: Routes = [
-{path:'', redirectTo:'/home', pathMatch:'full'},
+{path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'home', component: HomeComponent},
 {path: 'companies', component: CompaniesComponent},
-{path: 'post-exam-work', component: PostExamWorkComponent}
+{path: 'post-exam-work', component: PostExamWorkComponent},
+{path: 'create-company-profile', component: CreateCompanyProfileComponent}
 ];
 
 @NgModule({
