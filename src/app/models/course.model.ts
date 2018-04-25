@@ -7,6 +7,9 @@ export class Course {
         this.name = name;
         this.points = points;
     }
+
+    toString() {
+        return this.name + ', ' + this.points + 'hp';
     }
 }
 
