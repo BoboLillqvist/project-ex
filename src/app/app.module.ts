@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ImageUploadComponent } from './file-upload/image-upload/image-upload.component';
 import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
+import { CreateCompanyProfileComponent } from './profiles/create-company-profile/create-company-profile.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component
     HomeComponent,
     NavbarComponent,
     ImageUploadComponent,
-    PostExamWorkComponent
+    PostExamWorkComponent,
+    CreateCompanyProfileComponent
   ],
   imports: [
     BrowserModule,
