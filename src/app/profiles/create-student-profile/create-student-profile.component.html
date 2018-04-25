@@ -1,0 +1,77 @@
+<div class="jumbotron">
+    <h3>Skapa ny studentprofil</h3>
+    <br><br>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="nameLabel">För- och efternamn</span>
+        </div>
+        <input required type="text" class="form-control" [(ngModel)]="fName" id="firstName" name="firstName">
+        <input required type="text" class="form-control" [(ngModel)]="lName" id="lastName" name="lastName">
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="eduLabel">Utbildning</span>
+        </div>
+        <select required class="custom-select" id="educationSelect" name="selectedEducation" [(ngModel)]="education">
+            <option *ngFor="let edu of eduPrograms" [value]="edu">
+              {{ edu }}
+            </option>>
+        </select>
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="gradYearLabel">Examensår</span>
+        </div>
+        <select required class="custom-select" id="gradYear" name="selectedYear" [(ngModel)]="examYear">
+            <option *ngFor="let year of yearRange" [value]="year">
+              {{ year }}
+            </option>
+        </select>
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="emailLabel">E-postadress</span>
+        </div>
+        <input required type="email" class="form-control" id="emailInput" name="email" [(ngModel)]="email" placeholder="name@example.com">
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="phoneLabel">Telefon</span>
+        </div>
+        <input type="tel" class="form-control" id="phoneInput" name="phoneNbr" [(ngModel)]="phoneNbr">
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="aboutLabel">Om dig</span>
+        </div>
+        <textarea class="form-control" id="aboutText" rows="3" name="description" [(ngModel)]="description"></textarea>
+    </div>
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Kompetenser</span>
+        </div>
+        <div class="tags-input" data-name="tags-input" id="tags"></div>
+    </div>
+    <span class="input-group-text" id="addCourseLabel">Lägg till kurser</span>
+    <div class="input-group mb-2">
+        <input type="text" class="form-control" name="courseInput" id="courseInput" [(ngModel)]="courseName" placeholder="Kursnamn">
+        <input type="text" class="form-control" name="pointsInput" placeholder="Poäng (7.5)" (input)="onPointsChange($event.target.value)"
+                          id="pointsInput" [(ngModel)]="coursePoints" (keydown.enter)="addCourse($event)">
+    </div>
+
+    <div class="input-group mb-4">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">Tillagda kurser</span>
+        </div>
+        <ul class="list-group" id="courseList" >
+            <li class="list-group-item" *ngFor="let course of courses; let i = index" (click)="removeCourse(i)">
+              {{ course }}
+            </li>
+          </ul>
+    </div>
+    <div class="input-group mb-4">
+        <button type="button" class="btn btn-primary" (click)="addStudent()">
+            Skicka
+        </button>
+    </div>
+</div>

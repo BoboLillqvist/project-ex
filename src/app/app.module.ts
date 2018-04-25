@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { ImageUploadComponent } from './file-upload/image-upload/image-upload.component';
 import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
 import { CreateCompanyProfileComponent } from './profiles/create-company-profile/create-company-profile.component';
+import { CreateStudentProfileComponent } from './profiles/create-student-profile/create-student-profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CreateCompanyProfileComponent } from './profiles/create-company-profile
     ImageUploadComponent,
     PostExamWorkComponent,
     CreateCompanyProfileComponent,
-    StudentsComponent
+    StudentsComponent,
+    CreateStudentProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { CreateCompanyProfileComponent } from './profiles/create-company-profile
     HttpModule,
     HttpClientModule,
     TwbootstrapModule,
-    FormsModule
+    FormsModule,
   ],
 
   exports: [
