@@ -22,6 +22,8 @@ export class StudentsComponent implements OnInit {
   yearRange = [];
   students: Array<Student> = [];
   name: string;
+  fName: string;
+  lName: string;
   education: string;
   examYear: number;
   email: string;
@@ -47,13 +49,7 @@ export class StudentsComponent implements OnInit {
 
     console.log(this.skills);
 
-    // split name
-    const fullName = this.name.split(' ');
-    if (fullName[1] === undefined) {
-      fullName[1] = '';
-    }
-
-    const student = new Student(fullName[0], fullName[1], this.education, this.examYear,
+    const student = new Student(this.fName, this.lName, this.education, this.examYear,
                                 this.description, this.skills, this.courses, this.email, this.phoneNbr);
 
     
@@ -63,7 +59,7 @@ export class StudentsComponent implements OnInit {
   }
 
   addCourse() {
-    this.courses.push(this.courseName);
+    this.courses.push(new Course(this.courseName));
     this.courseName = '';
   }
 
