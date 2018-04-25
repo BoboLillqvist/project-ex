@@ -29,7 +29,7 @@ export class StudentsComponent implements OnInit {
   description: string = '';
   skills: Array<string>;
   courseName: string;
-  courses: Array<Course>;
+  courses: string[] = [];
 
   constructor(private studentService: StudentService) { }
 
