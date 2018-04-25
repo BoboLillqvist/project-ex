@@ -5,6 +5,7 @@ const Company = require('../models/company');
 const Student = require('../models/student');
 const Person = require('../models/person');
 const Examwork = require('../models/examwork');
+const Course = require('../models/course');
 
 const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
@@ -21,9 +22,9 @@ mongoose.connect(db, function(err){
 
 router.get('/students', function(req, res){
     console.log('get request for all students');
-    Student.find({}).exec(function(err, students){
+    Student.find({}).populate('person','courses').exec(function(err, students){
         if(err){
-            console.log('Error retrieving students');
+            console.log('Error retrieving students: ' + err);
         }else {
             res.json(students);
         }
