@@ -10,9 +10,9 @@ const examworkSchema = new Schema({
     complementarySkills: [String],
     description: String,
     presence: String,
-    contact: Person,
+    contact: { type: Schema.Types.ObjectId, ref: 'person'},
     teachings: String,
-    company: Company
+    company: { type: Schema.Types.ObjectId, ref: 'company'}
 });
 
 module.exports = mongoose.model('examwork', examworkSchema, 'examworks');
