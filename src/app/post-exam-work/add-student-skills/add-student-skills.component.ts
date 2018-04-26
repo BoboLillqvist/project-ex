@@ -80,4 +80,9 @@ export class AddStudentSkillsComponent implements OnInit {
       });
     }
   }
+
+  removeStoredTag(tag: any): void {
+      const index = this.availableTags.indexOf(tag);
+      this.availableTags.splice(index, 1);
+  }
 }
