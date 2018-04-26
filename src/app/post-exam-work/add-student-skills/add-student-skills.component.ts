@@ -34,4 +34,17 @@ export class AddStudentSkillsComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  // TODO: Gör generell metod, läs nedan:
+  // onSelectEssential() och onSelectComplimentary() bör så klart
+  // vara EN generell metod, men jag vet inte hur man kollar
+  // vilken input element som skickar, eller hur man tar reda på det ¯\_(ツ)_/¯
+  onSelectEssential(event: any): void {
+    const enteredTag = event.value;
+    if (!this.tagAlreadyEntered(enteredTag)) {
+      this.enteredTags.essentials.push(enteredTag);
+      this.removeStoredTag(enteredTag);
+    }
+    this.essentialInputElement = null;
+  }
 }
