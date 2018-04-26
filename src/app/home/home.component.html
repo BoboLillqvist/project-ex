@@ -14,13 +14,15 @@
                                 <div class="input-group-prepend">
 
                                 </div>
-                                <input type="text" class="form-control" placeholder="Search" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                                <input [(ngModel)]="searchText" type="text" class="form-control" placeholder="Search" aria-label="Input group example" aria-describedby="btnGroupAddon">
+
                               </div>
             </div>
 
 </div>
 
-<div *ngFor="let examwork of examWorks; let i = index">
+<div *ngFor="let examwork of (examWorks | filter: searchText || filter2 : searchText)">
+
         <div class="jumbotron-fc">
 
             <div class="text-uppercase">
