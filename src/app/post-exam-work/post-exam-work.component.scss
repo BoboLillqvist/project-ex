@@ -14,3 +14,7 @@ h1, h4 {
 #contact-person-title {
     margin-top: ($title-space * 2);
 }
+
+.form-control.ng-touched.ng-invalid{
+    border: 2px solid red;
+}
