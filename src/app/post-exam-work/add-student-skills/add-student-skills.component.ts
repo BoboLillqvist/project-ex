@@ -85,4 +85,8 @@ export class AddStudentSkillsComponent implements OnInit {
       const index = this.availableTags.indexOf(tag);
       this.availableTags.splice(index, 1);
   }
+
+  restoreTag(tag: any): void {
+    this.availableTags.push(tag);
+  }
 }
