@@ -1,36 +1,40 @@
 <h1>Skapa annons för examensarbete</h1>
 <div class="jumbotron">
   <h4>Fyll i information för examensarbetet</h4>
+  <br>
+  <form>
   <div class="form-group">
-    <br>
     <label for="title" class="col-sm-2 control-label">Titel</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="title" name="title" value="">
+      <input ngModel required #title="ngModel" type="text" class="form-control" id="title" name="title" value="">
+      <div class="alert alert-danger" *ngIf="title.touched && !title.valid">Titel måste vara ifyllt</div>
     </div>
   </div>
   <div class="form-group">
     <label for="location" class="col-sm-2 control-label">Ort</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="location" name="location" value="">
+      <input ngModel required #location="ngModel" type="text" class="form-control" id="location" name="location" value="">
+      <div class="alert alert-danger" *ngIf="location.touched && !location.valid">Ort måste vara ifyllt</div>
     </div>
   </div>
   <div class="form-group">
-    <label for="apply-due-date" class="col-sm-10 control-label">Sista anmälningsdag</label>
+    <label for="applyDueDate" class="col-sm-10 control-label">Sista anmälningsdag</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" id="apply-due-date" name="apply-due-date" value="">
+      <input ngModel required #applyDueDate="ngModel" type="date" class="form-control" id="applyDueDate" name="applyDueDate" value="">
+      <div class="alert alert-danger" *ngIf="applyDueDate.touched && !applyDueDate.valid">Sista anmälningsdag måste vara ifyllt</div>
     </div>
   </div>
-  <!--TODO kompetenskrav och meriterande kompetenser byts ut mot en komponent (?)-->
+  <!-- TODO: Byta ut Kompetenskrav och Mertiterande kompetenskrav mot komponent? -->
   <div class="form-group">
-    <label for="essential-skills" class="col-sm-2 control-label">Kompetenskrav</label>
+    <label for="essentialSkills" class="col-sm-2 control-label">Kompetenskrav</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="essential-skills" name="essential-skills" value="">
+      <input type="text" class="form-control" id="essentialSkills" name="essentialSkills" value="">
     </div>
   </div>
   <div class="form-group">
-    <label for="complementary-skills" class="col-sm-10 control-label">Meriterande kompetens</label>
+    <label for="complementarySkills" class="col-sm-10 control-label">Meriterande kompetens</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="complementary-skills" name="complementary-skills" value="">
+      <input type="text" class="form-control" id="complementarySkills" name="complementarySkills" value="">
     </div>
   </div>
   <div class="form-group">
@@ -54,40 +58,40 @@
   <br>
   <div class="input-group">
     <div class="form-group">
-      <label for="contact-firstname" class="col-sm-2 control-label">Förnamn</label>
+      <label for="contactFirstName" class="col-sm-2 control-label">Förnamn</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="contact-firstname" name="contact-firstname" value="">
+        <input ngModel required #contactFirstName="ngModel" type="text" class="form-control" id="contactFirstName" name="contactFirstName" value="">
+        <div class="alert alert-danger" *ngIf="contactFirstName.touched && !contactFirstName.valid">Förnamn måste vara ifyllt</div>
       </div>
     </div>
     <div class="form-group">
-      <label for="contact-last-name" class="col-sm-2 control-label">Efternamn</label>
+      <label for="contactLastName" class="col-sm-2 control-label">Efternamn</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="contact-last-name" name="contact-last-name" value="">
+        <input ngModel required #contactLastName="ngModel" type="text" class="form-control" id="contactLastName" name="contactLastName" value="">
+        <div class="alert alert-danger" *ngIf="contactLastName.touched && !contactLastName.valid">Efternamn måste vara ifyllt</div>
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label for="contact-number" class="col-sm-2 control-label">Telefon</label>
+    <label for="contactNumber" class="col-sm-2 control-label">Telefon</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="contact-number" name="contact-number" value="">
+      <input ngModel required #contactNumber="ngModel" type="text" class="form-control" id="contactNumber" name="contactNumber" value="">
+      <div class="alert alert-danger" *ngIf="contactNumber.touched && !contactNumber.valid">Telefonnummer måste vara ifyllt</div>
     </div>
   </div>
   <div class="form-group">
-    <label for="contact-email" class="col-sm-2 control-label">E-postadress</label>
+    <label for="contactEmail" class="col-sm-2 control-label">E-postadress</label>
     <div class="col-sm-10">
-      <input type="email" class="form-control" id="contact-email" name="contact-email" value="">
+      <input ngModel required #contactEmail="ngModel" type="email" class="form-control" id="contactEmail" name="contactEmail" value="">
+      <div class="alert alert-danger" *ngIf="contactEmail.touched && !contactEmail.valid">E-postadress måste vara ifyllt</div>
     </div>
   </div>
   <div class="form-group">
     <br>
     <div class="col-sm-10 col-sm-offset-2">
-      <input id="submit" name="submit" type="submit" value="Spara" class="btn btn-primary">
+      <button id="submit" name="submit" type="submit" class="btn btn-primary">Spara</button>
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-10 col-sm-offset-2">
-      <! Skriv ut om uppladdningen lyckades>
-    </div>
-  </div>
+</form>
 </div>
