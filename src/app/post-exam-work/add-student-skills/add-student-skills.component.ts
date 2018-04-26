@@ -65,4 +65,19 @@ export class AddStudentSkillsComponent implements OnInit {
     }
     return false;
   }
+
+  removeEnteredTag(element: any): void {
+    const tagToDelete = element.textContent;
+
+    for (const tagList of Object.keys(this.enteredTags)) {
+      let index = 0;
+      this.enteredTags[tagList].forEach(enteredTag => {
+          if (enteredTag === tagToDelete) {
+            this.enteredTags[tagList].splice(index, 1);
+            this.restoreTag(enteredTag);
+          }
+        index++;
+      });
+    }
+  }
 }
