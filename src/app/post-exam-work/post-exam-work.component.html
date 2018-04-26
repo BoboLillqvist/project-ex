@@ -1,18 +1,26 @@
 <h1>Skapa annons för examensarbete</h1>
+
 <div class="jumbotron">
+
   <h4>Fyll i information för examensarbetet</h4>
+
+  <!-- title -->
   <div class="form-group">
     <label for="title" class="col-sm-2 control-label">Titel</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="title" name="title" value="">
     </div>
   </div>
+
+  <!-- location -->
   <div class="form-group">
     <label for="location" class="col-sm-2 control-label">Ort</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="location" name="location" value="">
     </div>
   </div>
+
+  <!-- apply-due-date -->
   <div class="form-group">
     <label for="apply-due-date" class="col-sm-10 control-label">Sista anmälningsdag</label>
     <div class="col-sm-10">
@@ -22,12 +30,15 @@
 
   <app-add-student-skills></app-add-student-skills>
 
+  <!-- description -->
   <div class="form-group">
     <label for="description" class="col-sm-2 control-label">Beskrivning</label>
     <div class="col-sm-10">
       <textarea class="form-control" rows="4" name="description"></textarea>
     </div>
   </div>
+
+  <!-- teachings -->
   <div class="form-group">
     <label for="teachings" class="col-sm-2 control-label">Lärdomar</label>
     <div class="col-sm-10">
@@ -36,41 +47,54 @@
   </div>
 
   <h4 id="contact-person-title">Kontaktperson</h4>
+  <!-- Contact -->
   <div class="input-group">
+
+    <!-- firstname -->
     <div class="form-group">
       <label for="contact-firstname" class="col-sm-2 control-label">Förnamn</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="contact-firstname" name="contact-firstname" value="">
       </div>
     </div>
+
+    <!-- last-name -->
     <div class="form-group">
       <label for="contact-last-name" class="col-sm-2 control-label">Efternamn</label>
       <div class="col-sm-10">
         <input type="text" class="form-control" id="contact-last-name" name="contact-last-name" value="">
       </div>
     </div>
+
   </div>
 
+  <!-- number -->
   <div class="form-group">
     <label for="contact-number" class="col-sm-2 control-label">Telefon</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="contact-number" name="contact-number" value="">
     </div>
   </div>
+
+  <!-- email -->
   <div class="form-group">
     <label for="contact-email" class="col-sm-2 control-label">E-postadress</label>
     <div class="col-sm-10">
       <input type="email" class="form-control" id="contact-email" name="contact-email" value="">
     </div>
   </div>
+
+  <!-- Submit button -->
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
       <input id="submit" name="submit" type="submit" value="Publicera examensarbete" class="btn btn-block btn-primary">
     </div>
   </div>
+
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
       <! Skriv ut om uppladdningen lyckades>
     </div>
   </div>
-</div>
+
+</div> <!-- /jumbotron -->
