@@ -17,6 +17,7 @@ import { ImageUploadComponent } from './file-upload/image-upload/image-upload.co
 import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component';
 import { CreateCompanyProfileComponent } from './profiles/create-company-profile/create-company-profile.component';
 import { CreateStudentProfileComponent } from './profiles/create-student-profile/create-student-profile.component';
+import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/add-student-skills.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { CreateStudentProfileComponent } from './profiles/create-student-profile
     PostExamWorkComponent,
     CreateCompanyProfileComponent,
     StudentsComponent,
-    CreateStudentProfileComponent
+    CreateStudentProfileComponent,
+    AddStudentSkillsComponent
   ],
   imports: [
     BrowserModule,
