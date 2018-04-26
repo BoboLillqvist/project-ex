@@ -56,4 +56,13 @@ export class AddStudentSkillsComponent implements OnInit {
     }
     this.complimentaryInputElement = null;
   }
+
+  tagAlreadyEntered(tag: any): boolean {
+    for (const tagList in this.enteredTags) {
+      if (this.enteredTags[tagList].includes(tag)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }
