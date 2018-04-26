@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
 
 import { AppComponent } from './app.component';
-
+import { FilterTitlePipe, FilterDescriptionPipe } from './home/filter.pipe';
 import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
@@ -29,7 +29,9 @@ import { CreateStudentProfileComponent } from './profiles/create-student-profile
     PostExamWorkComponent,
     CreateCompanyProfileComponent,
     StudentsComponent,
-    CreateStudentProfileComponent
+    CreateStudentProfileComponent,
+    FilterTitlePipe,
+    FilterDescriptionPipe
   ],
   imports: [
     BrowserModule,
