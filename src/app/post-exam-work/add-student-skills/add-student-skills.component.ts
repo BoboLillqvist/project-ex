@@ -47,4 +47,13 @@ export class AddStudentSkillsComponent implements OnInit {
     }
     this.essentialInputElement = null;
   }
+
+  onSelectComplimentary(event: any): void {
+    const enteredTag = event.value;
+    if (!this.tagAlreadyEntered(enteredTag)) {
+      this.enteredTags.complimentary.push(enteredTag);
+      this.removeStoredTag(enteredTag);
+    }
+    this.complimentaryInputElement = null;
+  }
 }
