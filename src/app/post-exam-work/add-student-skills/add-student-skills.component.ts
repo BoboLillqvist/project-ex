@@ -9,7 +9,27 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class AddStudentSkillsComponent implements OnInit {
+
+  enteredTags = {
+    essentials: [],
+    complimentary: []
+  };
+
+  essentialInputElement: any;
+  complimentaryInputElement: any;
+
+  availableTags: any[] = [
+    'C++',
+    'C#',
+    'C',
+    'PHP',
+    'Python',
+    'Java',
+    'Javascript'
+  ];
+
   constructor() {
+    // TODO: Läs in "skills"-array från databasen
   }
 
   ngOnInit() {
