@@ -1,0 +1,16 @@
+$title-space: 1em;
+
+h1, h4 {
+    margin-bottom: $title-space;
+}
+
+.jumbotron {
+    margin-right: 0em;
+    .btn {
+        margin-top: 4em;
+    }
+}
+
+#contact-person-title {
+    margin-top: ($title-space * 2);
+}
