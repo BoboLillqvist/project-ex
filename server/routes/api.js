@@ -22,7 +22,8 @@ mongoose.connect(db, function(err){
 
 router.get('/students', function(req, res){
     console.log('get request for all students');
-    Student.find({}).populate('person','courses').exec(function(err, students){
+    var populateQuery = [{path:'person'}, {path:'courses', model:'course'}];
+    Student.find({}).populate(populateQuery).exec(function(err, students){
         if(err){
             console.log('Error retrieving students: ' + err);
         }else {
