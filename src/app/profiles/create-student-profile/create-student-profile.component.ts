@@ -51,8 +51,10 @@ export class CreateStudentProfileComponent implements OnInit {
   // skapa studenten utifrån formulär
   createStudent() {
     this.skills = this.tags.getData();
+
     if (this.courses.length === 0) {
-     this.courses.push(new Course('Inga kurser tillagda', 0));
+      // tror post routen ballar ur just nu om ingen kurs kommer med
+      this.courses.push(new Course('Inga kurser tillagda', 0));
     }
     const student = new Student(this.fName, this.lName, this.education, this.examYear,
                                 this.description, this.skills, this.courses, this.email, this.phoneNbr);
@@ -62,24 +64,32 @@ export class CreateStudentProfileComponent implements OnInit {
   // Startar kedjan med att lägga till en hel student.
   addPerson(stud: Student) {
     this.studentService.addPerson(stud.person).subscribe(resNewPerson => {
+      // spara en kopia av det id som personen fått av mongoose
       stud.personId = resNewPerson._id;
+
+      // personen är tillagd, dags att lägga till kurser
       this.addCourses(stud);
     });
   }
 
+  // lagra alla kurser
   addCourses(stud: Student) {
     let i = 0;
     stud.courses.forEach(course => {
       this.studentService.addCourse(course).subscribe(resNewCourse => {
+        // spara en kopia av det id som kursen har fått av mongoose
         stud.courseIds.push(resNewCourse._id);
         i++;
+
         if (i === stud.courses.length) {
+          // alla kurser är inlagda i databasen, dags att lägga till studenten
           this.addStudent(stud);
         }
       });
     });
   }
 
+  // och tillsist lagra studenten med korrekta referenser till det som skapats innan
   addStudent(stud: Student) {
     this.studentService.addStudent(stud).subscribe(resNewStudent => {
       this.students.push(resNewStudent);
