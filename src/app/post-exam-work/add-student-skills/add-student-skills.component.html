@@ -4,8 +4,8 @@
   <div class="col-sm-6">
     <button Primarytype="button" class="btn btn-primary btn-sm tag tag-essential"
             #tagEssential
-            (click)="removeEnteredTag(tagEssential)"
-            *ngFor="let tag of enteredTags.essentials">{{ tag }}</button>
+            (mouseup)="removeEnteredTag(tagEssential)"
+            *ngFor="let tag of storedTags.essentials">{{ tag }}</button>
   </div>
 
   <div class="col-sm-6">
@@ -26,8 +26,8 @@
   <div class="col-sm-6">
     <button Primarytype="button" class="btn btn-secondary btn-sm tag tag-complimentary"
             #tagComplimentary
-            (click)="removeEnteredTag(tagComplimentary)"
-            *ngFor="let tag of enteredTags.complimentary">{{ tag }}</button>
+            (mouseup)="removeEnteredTag(tagComplimentary)"
+            *ngFor="let tag of storedTags.complimentary">{{ tag }}</button>
   </div>
 
   <div class="col-sm-6">
