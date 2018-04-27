@@ -88,28 +88,28 @@ router.post('/person', function(req, res){
 
 //#endregion
 
-        name: req.body.name,
-        education: req.body.education,
-        examYear: req.body.examYear,
-        description: req.body.description,
-        skills: req.body.skills,
-        courses: courseIds
-    });
+//#region Course API
 
-    newStudent.save( (err, insertedStudent) => {
-        if(err) {
-            console.log('Error saving student ' + err);
-        } else {
-            console.log('saving student');
-            res.json(insertedStudent);
-        }
-    }); 
+router.post('/course', function(req, res){
+    console.log('Post a course');
+    var newCourse = new Course({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        points: req.body.points,
+    });
     
+    newCourse.save(function(err, insertedCourse) {
+        if(err) {
+            console.log('error saving course ' + err);
+        }
+        
+        console.log('saving course');
+
+        res.json(insertedCourse);
+    });
 });
 
-
 //#endregion
-
 
 //#region Company API
 
