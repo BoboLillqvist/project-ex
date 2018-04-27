@@ -96,6 +96,17 @@ export class AddStudentSkillsComponent implements OnInit {
 
       this.storedTags[this.tagList].push(this.selectedTag);
   }
+
+  removeTagFromAvailable() {
+    for (let i = 0; i < this.availableTags.length; i++) {
+      if (this.availableTags[i] === this.selectedTag) {
+        this.availableTags.splice(i, 1);
+        return;
+      }
+    }
+    console.log('Could not find tag to remove');
+  }
+
   removeStoredTag(tag: any): void {
       const index = this.availableTags.indexOf(tag);
       this.availableTags.splice(index, 1);
