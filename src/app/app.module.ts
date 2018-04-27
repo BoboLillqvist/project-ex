@@ -32,7 +32,7 @@ import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/a
     StudentsComponent,
     CreateStudentProfileComponent,
     FilterTitlePipe,
-    FilterDescriptionPipe
+    FilterDescriptionPipe,
     AddStudentSkillsComponent
   ],
   imports: [
