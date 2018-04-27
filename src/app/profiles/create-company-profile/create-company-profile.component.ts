@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { CompanyService } from '../../company.service';
 import { Company } from '../../models/company.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-create-company-profile',
@@ -10,6 +11,7 @@ import { Company } from '../../models/company.model';
 })
 export class CreateCompanyProfileComponent implements OnInit {
 
+  @ViewChild(NgForm) myForm: NgForm;
 
   constructor(private companyService: CompanyService) { }
   
@@ -22,5 +24,12 @@ export class CreateCompanyProfileComponent implements OnInit {
     console.log(company.description);
     this.companyService.addCompany(company)
     .subscribe();
+
+    this.clearValues();
   }
+
+  clearValues() {
+    this.myForm.resetForm();
+  }
+
 }
