@@ -11,11 +11,11 @@ import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
 })
 export class AddStudentSkillsComponent implements OnInit {
 
-  enteredTags = {
   selectedTag: string;
   tagList: string;
   noResult = false;
 
+  storedTags = {
     essentials: [],
     complimentary: []
   };
@@ -49,11 +49,11 @@ export class AddStudentSkillsComponent implements OnInit {
   removeEnteredTag(element: any): void {
     const tagToDelete = element.textContent;
 
-    for (const tagList of Object.keys(this.enteredTags)) {
+    for (const tagList of Object.keys(this.storedTags)) {
       let index = 0;
-      this.enteredTags[tagList].forEach(enteredTag => {
+      this.storedTags[tagList].forEach(enteredTag => {
           if (enteredTag === tagToDelete) {
-            this.enteredTags[tagList].splice(index, 1);
+            this.storedTags[tagList].splice(index, 1);
             this.restoreTag(enteredTag);
           }
         index++;
