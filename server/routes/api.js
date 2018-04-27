@@ -58,9 +58,11 @@ router.post('/student', (req, res) => {
     });
 
     console.log(courseIds);
+
+    var personId = new mongoose.Types.ObjectId();
     
     var newPerson = new Person({
-        _id: new mongoose.Types.ObjectId(),
+        _id: personId,
         firstName: req.body.person.firstName,
         lastName: req.body.person.lastName,
         email: req.body.person.email,
@@ -75,27 +77,26 @@ router.post('/student', (req, res) => {
         console.log('saving person');
 
         res.json(insertedPerson);
-        
-        var newStudent = new Student({
-            person: newPerson._id,
-            name: req.body.name,
-            education: req.body.education,
-            examYear: req.body.examYear,
-            description: req.body.description,
-            skills: req.body.skills,
-            courses: courseIds
-        });
-
-        newStudent.save( (err, insertedStudent) => {
-            if(err) {
-                console.log('Error saving student ' + err);
-            } else {
-                console.log('saving student');
-                res.json(insertedStudent);
-            }
-        }); 
     });
 
+    var newStudent = new Student({
+        person: personId,
+        name: req.body.name,
+        education: req.body.education,
+        examYear: req.body.examYear,
+        description: req.body.description,
+        skills: req.body.skills,
+        courses: courseIds
+    });
+
+    newStudent.save( (err, insertedStudent) => {
+        if(err) {
+            console.log('Error saving student ' + err);
+        } else {
+            console.log('saving student');
+            res.json(insertedStudent);
+        }
+    }); 
     
 });
 
@@ -133,12 +134,14 @@ router.post('/company', function(req, res){
     console.log('Post a company');
     var newCompany = new Company();
     newCompany.name = req.body.name;
+    newCompany.url = req.body.url;
     newCompany.description = req.body.description;
     newCompany.save(function(err, insertedCompany){
         if(err){
-            console.log('Error saving company');
+            console.log('Error saving company' + err);
         }else{
             res.json(insertedCompany);
+            console.log('Company saved');
         }
     });
 });

@@ -1,53 +1,47 @@
 <h1>Skapa företagskonto</h1>
 <div class="jumbotron">
   <h4>Fyll i företagets uppgifter</h4>
-  <div class="box one">
-    <app-image-upload></app-image-upload>
-  </div>
-  <div class="box two">
+
+  <!-- TODO: Spara bilden i databasen(?) -->
+  <app-image-upload></app-image-upload>
+
+  <br>
+  <form #form="ngForm" (ngSubmit)="onSubmitAddCompany(form.value)">
+
+    <!-- name -->
     <div class="form-group">
-      <br>
-      <label for="company-name" class="col-sm-2 control-label">Namn</label>
+      <label for="companyName" class="col-sm-2 control-label">Namn</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="company-name" name="company-name" value="">
+        <input ngModel required #companyName="ngModel" type="text" class="form-control" id="companyName" name="name" value="">
+        <div class="alert alert-danger" *ngIf="companyName.touched && !companyName.valid">Namn måste vara ifyllt</div>
       </div>
-    </div>
-    <div class="form-group">
-      <label for="company-url" class="col-sm-10 control-label">Hemsida</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="company-url" name="url" value="">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="description" class="col-sm-10 control-label">Beskrivning</label>
-      <div class="col-sm-10">
-        <textarea class="form-control" rows="4" name="description" placeholder="Beskriv företagets verksamhet..."></textarea>
-      </div>
-    </div>
-    <div>
-      <br>
-      <br>
     </div>
 
-    <h4>Inloggningsuppgifter</h4>
+    <!-- url -->
     <div class="form-group">
-      <br>
-      <label for="company-user-name" class="col-sm-2 control-label">Användarnamn</label>
+      <label for="companyUrl" class="col-sm-10 control-label">Hemsida</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="company-user-name" name="company-user-name" value="">
+        <input ngModel required #companyUrl="ngModel" name="url" id="companyUrl" type="text" class="form-control" value="">
+        <div class="alert alert-danger" *ngIf="companyUrl.touched && !companyUrl.valid">Hemsida måste vara ifyllt</div>
       </div>
     </div>
+
+    <!-- description -->
     <div class="form-group">
-      <label for="company-password" class="col-sm-10 control-label">Lösenord</label>
+      <label for="companyDescription" class="col-sm-10 control-label">Beskrivning</label>
       <div class="col-sm-10">
-        <input type="password" class="form-control" id="company-password" name="company-password" value="">
+        <textarea ngModel name="description" id="companyDescription" class="form-control" rows="4" placeholder="Beskriv företagets verksamhet..."></textarea>
       </div>
     </div>
     <br>
+
+    <!-- submit button -->
     <div class="form-group">
       <div class="col-sm-10 col-sm-offset-2">
-        <input id="submit" name="submit" type="submit" value="Spara" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary">Spara</button>
       </div>
     </div>
-  </div>
-</div>
+  </form>
+
+  <h4>Inloggningsuppgifter</h4>
+  TODO: login-komponent
