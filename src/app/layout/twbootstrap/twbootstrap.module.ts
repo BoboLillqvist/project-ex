@@ -4,18 +4,21 @@ import { CommonModule } from '@angular/common';
 import { CollapseModule } from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 @NgModule({
   imports: [
     CommonModule,
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
-    CollapseModule.forRoot()
+    CollapseModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
     TooltipModule,
-    CollapseModule
+    CollapseModule,
+    TypeaheadModule
   ],
   declarations: []
 })

@@ -1,93 +1,101 @@
 <h1>Skapa annons för examensarbete</h1>
+
 <div class="jumbotron">
+
   <h4>Fyll i information för examensarbetet</h4>
+  <!-- title -->
+  <form>
   <div class="form-group">
-    <br>
     <label for="title" class="col-sm-2 control-label">Titel</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="title" name="title" value="">
+      <input ngModel required #title="ngModel" type="text" class="form-control" id="title" name="title" value="">
+      <div class="alert alert-danger" *ngIf="title.touched && !title.valid">Titel måste vara ifyllt</div>
     </div>
   </div>
+
+  <!-- location -->
   <div class="form-group">
     <label for="location" class="col-sm-2 control-label">Ort</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="location" name="location" value="">
+      <input ngModel required #location="ngModel" type="text" class="form-control" id="location" name="location" value="">
+      <div class="alert alert-danger" *ngIf="location.touched && !location.valid">Ort måste vara ifyllt</div>
     </div>
   </div>
+
+  <!-- apply-due-date -->
   <div class="form-group">
-    <label for="apply-due-date" class="col-sm-10 control-label">Sista anmälningsdag</label>
+    <label for="applyDueDate" class="col-sm-10 control-label">Sista anmälningsdag</label>
     <div class="col-sm-10">
-      <input type="date" class="form-control" id="apply-due-date" name="apply-due-date" value="">
+      <input ngModel required #applyDueDate="ngModel" type="date" class="form-control" id="applyDueDate" name="applyDueDate" value="">
+      <div class="alert alert-danger" *ngIf="applyDueDate.touched && !applyDueDate.valid">Sista anmälningsdag måste vara ifyllt</div>
     </div>
   </div>
-  <!--TODO kompetenskrav och meriterande kompetenser byts ut mot en komponent (?)-->
-  <div class="form-group">
-    <label for="essential-skills" class="col-sm-2 control-label">Kompetenskrav</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="essential-skills" name="essential-skills" value="">
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="complementary-skills" class="col-sm-10 control-label">Meriterande kompetens</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="complementary-skills" name="complementary-skills" value="">
-    </div>
-  </div>
+
+  <app-add-student-skills></app-add-student-skills>
+
+  <!-- description -->
   <div class="form-group">
     <label for="description" class="col-sm-2 control-label">Beskrivning</label>
     <div class="col-sm-10">
       <textarea class="form-control" rows="4" name="description"></textarea>
     </div>
   </div>
+
+  <!-- teachings -->
   <div class="form-group">
     <label for="teachings" class="col-sm-2 control-label">Lärdomar</label>
     <div class="col-sm-10">
       <textarea class="form-control" rows="2" name="teachings" placeholder="Vad får studenten chans att lära sig under examensarbetet?"></textarea>
     </div>
   </div>
-  <div>
-    <br>
-    <br>
-  </div>
 
-  <h4>Kontaktperson</h4>
-  <br>
+  <h4 id="contact-person-title">Kontaktperson</h4>
+  <!-- Contact -->
   <div class="input-group">
+
+    <!-- firstname -->
     <div class="form-group">
-      <label for="contact-firstname" class="col-sm-2 control-label">Förnamn</label>
+      <label for="contactFirstName" class="col-sm-2 control-label">Förnamn</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="contact-firstname" name="contact-firstname" value="">
+        <input ngModel required #contactFirstName="ngModel" type="text" class="form-control" id="contactFirstName" name="contactFirstName" value="">
+        <div class="alert alert-danger" *ngIf="contactFirstName.touched && !contactFirstName.valid">Förnamn måste vara ifyllt</div>
       </div>
     </div>
+
+    <!-- last-name -->
     <div class="form-group">
-      <label for="contact-last-name" class="col-sm-2 control-label">Efternamn</label>
+      <label for="contactLastName" class="col-sm-2 control-label">Efternamn</label>
       <div class="col-sm-10">
-        <input type="text" class="form-control" id="contact-last-name" name="contact-last-name" value="">
+        <input ngModel required #contactLastName="ngModel" type="text" class="form-control" id="contactLastName" name="contactLastName" value="">
+        <div class="alert alert-danger" *ngIf="contactLastName.touched && !contactLastName.valid">Efternamn måste vara ifyllt</div>
       </div>
+    </div>
+
+  </div>
+
+  <!-- number -->
+  <div class="form-group">
+    <label for="contactNumber" class="col-sm-2 control-label">Telefon</label>
+    <div class="col-sm-10">
+      <input ngModel required #contactNumber="ngModel" type="text" class="form-control" id="contactNumber" name="contactNumber" value="">
+      <div class="alert alert-danger" *ngIf="contactNumber.touched && !contactNumber.valid">Telefonnummer måste vara ifyllt</div>
     </div>
   </div>
 
+  <!-- email -->
   <div class="form-group">
-    <label for="contact-number" class="col-sm-2 control-label">Telefon</label>
+    <label for="contactEmail" class="col-sm-2 control-label">E-postadress</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="contact-number" name="contact-number" value="">
+      <input ngModel required #contactEmail="ngModel" type="email" class="form-control" id="contactEmail" name="contactEmail" value="">
+      <div class="alert alert-danger" *ngIf="contactEmail.touched && !contactEmail.valid">E-postadress måste vara ifyllt</div>
     </div>
   </div>
-  <div class="form-group">
-    <label for="contact-email" class="col-sm-2 control-label">E-postadress</label>
-    <div class="col-sm-10">
-      <input type="email" class="form-control" id="contact-email" name="contact-email" value="">
-    </div>
-  </div>
-  <div class="form-group">
-    <br>
-    <div class="col-sm-10 col-sm-offset-2">
-      <input id="submit" name="submit" type="submit" value="Spara" class="btn btn-primary">
-    </div>
-  </div>
+
+  <!-- Submit button -->
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
-      <! Skriv ut om uppladdningen lyckades>
+      <button id="submit" name="submit" type="submit" class="btn btn-primary">Spara</button>
     </div>
   </div>
+</form>
 </div>
