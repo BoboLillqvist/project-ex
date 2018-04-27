@@ -87,6 +87,15 @@ export class AddStudentSkillsComponent implements OnInit {
     inputElement.value = null;
   }
 
+  storeTag(): void {
+    if (this.tagAlreadyStored(this.selectedTag)) {
+      console.log('Tag"' + this.selectedTag + '" already stored');
+      return;
+    }
+      this.removeTagFromAvailable();
+
+      this.storedTags[this.tagList].push(this.selectedTag);
+  }
   removeStoredTag(tag: any): void {
       const index = this.availableTags.indexOf(tag);
       this.availableTags.splice(index, 1);
