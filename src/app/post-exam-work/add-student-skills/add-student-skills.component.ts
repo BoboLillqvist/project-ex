@@ -61,6 +61,10 @@ export class AddStudentSkillsComponent implements OnInit {
     }
   }
 
+  typeaheadNoResults(event: boolean): void {
+    this.noResult = event;
+  }
+
   onSelect(event: TypeaheadMatch, tagList: string, inputElement: any): void {
     this.selectedTag = event.value;
     this.tagList = tagList;
