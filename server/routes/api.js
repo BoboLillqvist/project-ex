@@ -63,15 +63,16 @@ router.post('/student', (req, res) => {
 
 //#endregion
 
+//#region Person API
 
-    var personId = new mongoose.Types.ObjectId();
-    
+router.post('/person', function(req, res){
+    console.log('Post a person');
     var newPerson = new Person({
-        _id: personId,
-        firstName: req.body.person.firstName,
-        lastName: req.body.person.lastName,
-        email: req.body.person.email,
-        phoneNbr: req.body.person.phoneNbr
+        _id: new mongoose.Types.ObjectId(),
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phoneNbr: req.body.phoneNbr
     });
     
     newPerson.save(function(err, insertedPerson) {
@@ -83,9 +84,10 @@ router.post('/student', (req, res) => {
 
         res.json(insertedPerson);
     });
+});
 
-    var newStudent = new Student({
-        person: personId,
+//#endregion
+
         name: req.body.name,
         education: req.body.education,
         examYear: req.body.examYear,
