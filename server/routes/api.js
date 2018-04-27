@@ -32,33 +32,37 @@ router.get('/students', function(req, res){
     });
 });
 
-// TODO: fixa detta, Error: Can't set headers after they are sent.
 router.post('/student', (req, res) => {
     console.log('Post a student');
-    var courseIds = [];
 
-    // add courses to db
-    req.body.courses.forEach(course => {
-
-        var newCourse = new Course({
-            _id: new mongoose.Types.ObjectId(),
-            name: course.name,
-            points: course.points
-        });
-
-        courseIds.push(newCourse._id);
-
-        newCourse.save((err, insertedCourse) => {
-            if(err) {
-                return console.log(err);
-            }
-            console.log('saving course');
-
-            res.json(insertedCourse);     
-        });
+    const courseIds = [];
+    req.body.courseIds.forEach(courseId => {
+        courseIds.push(new mongoose.Types.ObjectId(courseId));
     });
 
-    console.log(courseIds);
+    var newStudent = new Student({
+        person: new mongoose.Types.ObjectId(req.body.personId),
+        name: req.body.name,
+        education: req.body.education,
+        examYear: req.body.examYear,
+        description: req.body.description,
+        skills: req.body.skills,
+        courses: courseIds
+    });
+
+    newStudent.save( (err, insertedStudent) => {
+        if(err) {
+            console.log('Error saving student ' + err);
+        } else {
+            console.log('saving student');
+            res.json(insertedStudent);
+        }
+    }); 
+});
+
+
+//#endregion
+
 
     var personId = new mongoose.Types.ObjectId();
     
