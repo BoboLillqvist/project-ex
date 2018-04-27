@@ -9,11 +9,14 @@
   </div>
 
   <div class="col-sm-6">
-    <input type="text" class="form-control"
-          [(ngModel)]="essentialInputElement"
+    <input type="text" class="form-control" id="essentials" #essential
+          [(ngModel)]="essentialSkillInput"
+          container="body"
           [typeahead]="availableTags"
-          placeholder="Ange kompetens som etikett"
-          (typeaheadOnSelect)="onSelectEssential($event)">
+          (typeaheadOnSelect)="onSelect($event, essential.id, essential)"
+          (typeaheadNoResults)="typeaheadNoResults($event)"
+          (keyup.enter)="onEnter($event)"
+          placeholder="Ange kompetens som etikett">
   </div>
 </div>
 
@@ -28,10 +31,12 @@
   </div>
 
   <div class="col-sm-6">
-    <input type="text" class="form-control"
-          [(ngModel)]="complimentaryInputElement"
+    <input type="text" class="form-control" id="complimentary" #complimentary
+          [(ngModel)]="complimentarySkillInput"
           [typeahead]="availableTags"
-          placeholder="Ange kompetens som etikett"
-          (typeaheadOnSelect)="onSelectComplimentary($event)">
+          (typeaheadNoResults)="typeaheadNoResults($event)"
+          (typeaheadOnSelect)="onSelect($event, complimentary.id, complimentary)"
+          (keyup.enter)="onEnter($event)"
+          placeholder="Ange kompetens som etikett">
     </div>
 </div>

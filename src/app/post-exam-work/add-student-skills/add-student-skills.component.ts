@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
 
 @Component({
   selector: 'app-add-student-skills',
@@ -11,12 +12,13 @@ import { Component, OnInit } from '@angular/core';
 export class AddStudentSkillsComponent implements OnInit {
 
   enteredTags = {
+  selectedTag: string;
+  tagList: string;
+  noResult = false;
+
     essentials: [],
     complimentary: []
   };
-
-  essentialInputElement: any;
-  complimentaryInputElement: any;
 
   availableTags: any[] = [
     'C++',
@@ -35,31 +37,9 @@ export class AddStudentSkillsComponent implements OnInit {
   ngOnInit() {
   }
 
-  // TODO: Gör generell metod, läs nedan:
-  // onSelectEssential() och onSelectComplimentary() bör så klart
-  // vara EN generell metod, men jag vet inte hur man kollar
-  // vilken input element som skickar, eller hur man tar reda på det ¯\_(ツ)_/¯
-  onSelectEssential(event: any): void {
-    const enteredTag = event.value;
-    if (!this.tagAlreadyEntered(enteredTag)) {
-      this.enteredTags.essentials.push(enteredTag);
-      this.removeStoredTag(enteredTag);
-    }
-    this.essentialInputElement = null;
-  }
-
-  onSelectComplimentary(event: any): void {
-    const enteredTag = event.value;
-    if (!this.tagAlreadyEntered(enteredTag)) {
-      this.enteredTags.complimentary.push(enteredTag);
-      this.removeStoredTag(enteredTag);
-    }
-    this.complimentaryInputElement = null;
-  }
-
-  tagAlreadyEntered(tag: any): boolean {
-    for (const tagList in this.enteredTags) {
-      if (this.enteredTags[tagList].includes(tag)) {
+  tagAlreadyStored(tag: any): boolean {
+    for (const tagList in this.storedTags) {
+      if (this.storedTags[tagList].includes(tag)) {
         return true;
       }
     }
@@ -79,6 +59,28 @@ export class AddStudentSkillsComponent implements OnInit {
         index++;
       });
     }
+  }
+
+  onSelect(event: TypeaheadMatch, tagList: string, inputElement: any): void {
+    this.selectedTag = event.value;
+    this.tagList = tagList;
+
+    this.storeTag();
+    inputElement.value = null;
+  }
+
+  onEnter(event: any): void {
+    if (!this.noResult) {
+      return;
+    }
+
+    const inputElement = event.originalTarget;
+
+    this.tagList = inputElement.id;
+    this.selectedTag = inputElement.value;
+
+    this.storeTag();
+    inputElement.value = null;
   }
 
   removeStoredTag(tag: any): void {
