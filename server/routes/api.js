@@ -134,12 +134,14 @@ router.post('/company', function(req, res){
     console.log('Post a company');
     var newCompany = new Company();
     newCompany.name = req.body.name;
+    newCompany.url = req.body.url;
     newCompany.description = req.body.description;
     newCompany.save(function(err, insertedCompany){
         if(err){
-            console.log('Error saving company');
+            console.log('Error saving company' + err);
         }else{
             res.json(insertedCompany);
+            console.log('Company saved');
         }
     });
 });
