@@ -89,6 +89,13 @@ export class CreateStudentProfileComponent implements OnInit {
     });
   }
 
+  readyToAddStudent(stud: Student, index) {
+    if (index === stud.courses.length) {
+      // alla kurser är inlagda i databasen, dags att lägga till studenten
+      this.addStudent(stud);
+    }
+  }
+
   // och tillsist lagra studenten med korrekta referenser till det som skapats innan
   addStudent(stud: Student) {
     this.studentService.addStudent(stud).subscribe(resNewStudent => {
