@@ -106,7 +106,7 @@ export class CreateStudentProfileComponent implements OnInit {
     }
   }
 
-  addCourse() {
+  addCourseToStudent() {
     if (!isFinite(this.coursePoints)) {
       document.getElementById('addCourseLabel').firstChild.nodeValue = 'Lägg till kurser - Poäng ej korrekt';
     } else {
