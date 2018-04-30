@@ -193,5 +193,31 @@ router.get('/examworks', function(req, res){
     });
 });
 
+
+// TODO: samtliga variabler returnerar undefined 
+router.post('/examworks', function(req, res){
+    console.log('Post an exam work');
+
+    var newExamWork = new Examwork();
+    newExamWork.title = req.body.title;
+    newExamWork.location = req.body.location;
+    newExamWork.applyDueDate = req.body.applyDueDate;
+    newExamWork.essentialSkills = req.body.essentialSkills;
+    newExamWork.complementarySkills = req.body.complementarySkills;
+    newExamWork.description = req.body.description;
+    newExamWork.teachings = req.body.teachings;
+    newExamWork.contact = req.body.contact;
+    newExamWork.company = req.body.company;
+
+    newExamWork.save(function(err, insertedExamwork){
+        if(err){
+            console.log('Error saving exam work' + err);
+        }else{
+            res.json(insertedExamwork);
+            console.log('Exam work saved');
+        }
+    });
+});
+
 //#endregion
 module.exports = router;
