@@ -4,16 +4,19 @@
   <div class="col-sm-6">
     <button Primarytype="button" class="btn btn-primary btn-sm tag tag-essential"
             #tagEssential
-            (click)="removeEnteredTag(tagEssential)"
-            *ngFor="let tag of enteredTags.essentials">{{ tag }}</button>
+            (mouseup)="removeEnteredTag(tagEssential)"
+            *ngFor="let tag of storedTags.essentials">{{ tag }}</button>
   </div>
 
   <div class="col-sm-6">
-    <input type="text" class="form-control"
-          [(ngModel)]="essentialInputElement"
+    <input type="text" class="form-control" id="essentials" #essential
+          [(ngModel)]="essentialSkillInput"
+          container="body"
           [typeahead]="availableTags"
-          placeholder="Ange kompetens som etikett"
-          (typeaheadOnSelect)="onSelectEssential($event)">
+          (typeaheadOnSelect)="onSelect($event, essential.id, essential)"
+          (typeaheadNoResults)="typeaheadNoResults($event)"
+          (keyup.enter)="onEnter($event)"
+          placeholder="Ange kompetens som etikett">
   </div>
 </div>
 
@@ -23,15 +26,17 @@
   <div class="col-sm-6">
     <button Primarytype="button" class="btn btn-secondary btn-sm tag tag-complimentary"
             #tagComplimentary
-            (click)="removeEnteredTag(tagComplimentary)"
-            *ngFor="let tag of enteredTags.complimentary">{{ tag }}</button>
+            (mouseup)="removeEnteredTag(tagComplimentary)"
+            *ngFor="let tag of storedTags.complimentary">{{ tag }}</button>
   </div>
 
   <div class="col-sm-6">
-    <input type="text" class="form-control"
-          [(ngModel)]="complimentaryInputElement"
+    <input type="text" class="form-control" id="complimentary" #complimentary
+          [(ngModel)]="complimentarySkillInput"
           [typeahead]="availableTags"
-          placeholder="Ange kompetens som etikett"
-          (typeaheadOnSelect)="onSelectComplimentary($event)">
+          (typeaheadNoResults)="typeaheadNoResults($event)"
+          (typeaheadOnSelect)="onSelect($event, complimentary.id, complimentary)"
+          (keyup.enter)="onEnter($event)"
+          placeholder="Ange kompetens som etikett">
     </div>
 </div>

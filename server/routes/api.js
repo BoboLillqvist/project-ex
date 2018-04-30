@@ -22,7 +22,8 @@ mongoose.connect(db, function(err){
 
 router.get('/students', function(req, res){
     console.log('get request for all students');
-    Student.find({}).populate('person','courses').exec(function(err, students){
+    var populateQuery = [{path:'person'}, {path:'courses', model:'course'}];
+    Student.find({}).populate(populateQuery).exec(function(err, students){
         if(err){
             console.log('Error retrieving students: ' + err);
         }else {
@@ -31,40 +32,47 @@ router.get('/students', function(req, res){
     });
 });
 
-// TODO: fixa detta, Error: Can't set headers after they are sent.
 router.post('/student', (req, res) => {
     console.log('Post a student');
-    var courseIds = [];
 
-    // add courses to db
-    req.body.courses.forEach(course => {
-
-        var newCourse = new Course({
-            _id: new mongoose.Types.ObjectId(),
-            name: course.name,
-            points: course.points
-        });
-
-        courseIds.push(newCourse._id);
-
-        newCourse.save((err, insertedCourse) => {
-            if(err) {
-                return console.log(err);
-            }
-            console.log('saving course');
-
-            res.json(insertedCourse);     
-        });
+    const courseIds = [];
+    req.body.courseIds.forEach(courseId => {
+        courseIds.push(new mongoose.Types.ObjectId(courseId));
     });
 
-    console.log(courseIds);
-    
+    var newStudent = new Student({
+        person: new mongoose.Types.ObjectId(req.body.personId),
+        name: req.body.name,
+        education: req.body.education,
+        examYear: req.body.examYear,
+        description: req.body.description,
+        skills: req.body.skills,
+        courses: courseIds
+    });
+
+    newStudent.save( (err, insertedStudent) => {
+        if(err) {
+            console.log('Error saving student ' + err);
+        } else {
+            console.log('saving student');
+            res.json(insertedStudent);
+        }
+    }); 
+});
+
+
+//#endregion
+
+//#region Person API
+
+router.post('/person', function(req, res){
+    console.log('Post a person');
     var newPerson = new Person({
         _id: new mongoose.Types.ObjectId(),
-        firstName: req.body.person.firstName,
-        lastName: req.body.person.lastName,
-        email: req.body.person.email,
-        phoneNbr: req.body.person.phoneNbr
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phoneNbr: req.body.phoneNbr
     });
     
     newPerson.save(function(err, insertedPerson) {
@@ -75,33 +83,33 @@ router.post('/student', (req, res) => {
         console.log('saving person');
 
         res.json(insertedPerson);
-        
-        var newStudent = new Student({
-            person: newPerson._id,
-            name: req.body.name,
-            education: req.body.education,
-            examYear: req.body.examYear,
-            description: req.body.description,
-            skills: req.body.skills,
-            courses: courseIds
-        });
-
-        newStudent.save( (err, insertedStudent) => {
-            if(err) {
-                console.log('Error saving student ' + err);
-            } else {
-                console.log('saving student');
-                res.json(insertedStudent);
-            }
-        }); 
     });
-
-    
 });
-
 
 //#endregion
 
+//#region Course API
+
+router.post('/course', function(req, res){
+    console.log('Post a course');
+    var newCourse = new Course({
+        _id: new mongoose.Types.ObjectId(),
+        name: req.body.name,
+        points: req.body.points,
+    });
+    
+    newCourse.save(function(err, insertedCourse) {
+        if(err) {
+            console.log('error saving course ' + err);
+        }
+        
+        console.log('saving course');
+
+        res.json(insertedCourse);
+    });
+});
+
+//#endregion
 
 //#region Company API
 

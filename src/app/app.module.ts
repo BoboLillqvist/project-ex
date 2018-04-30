@@ -18,6 +18,7 @@ import { PostExamWorkComponent } from './post-exam-work/post-exam-work.component
 import { CreateCompanyProfileComponent } from './profiles/create-company-profile/create-company-profile.component';
 import { CreateStudentProfileComponent } from './profiles/create-student-profile/create-student-profile.component';
 import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/add-student-skills.component';
+import { PdfUploadComponent } from './file-upload/pdf-upload/pdf-upload.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/a
     CreateStudentProfileComponent,
     FilterTitlePipe,
     FilterDescriptionPipe,
-    AddStudentSkillsComponent
+    AddStudentSkillsComponent,
+    PdfUploadComponent
   ],
   imports: [
     BrowserModule,

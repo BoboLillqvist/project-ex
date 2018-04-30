@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
 
 @Component({
   selector: 'app-add-student-skills',
@@ -10,13 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddStudentSkillsComponent implements OnInit {
 
-  enteredTags = {
+  selectedTag: string;
+  tagList: string;
+  noResult = false;
+
+  storedTags = {
     essentials: [],
     complimentary: []
   };
-
-  essentialInputElement: any;
-  complimentaryInputElement: any;
 
   availableTags: any[] = [
     'C++',
@@ -35,31 +37,9 @@ export class AddStudentSkillsComponent implements OnInit {
   ngOnInit() {
   }
 
-  // TODO: Gör generell metod, läs nedan:
-  // onSelectEssential() och onSelectComplimentary() bör så klart
-  // vara EN generell metod, men jag vet inte hur man kollar
-  // vilken input element som skickar, eller hur man tar reda på det ¯\_(ツ)_/¯
-  onSelectEssential(event: any): void {
-    const enteredTag = event.value;
-    if (!this.tagAlreadyEntered(enteredTag)) {
-      this.enteredTags.essentials.push(enteredTag);
-      this.removeStoredTag(enteredTag);
-    }
-    this.essentialInputElement = null;
-  }
-
-  onSelectComplimentary(event: any): void {
-    const enteredTag = event.value;
-    if (!this.tagAlreadyEntered(enteredTag)) {
-      this.enteredTags.complimentary.push(enteredTag);
-      this.removeStoredTag(enteredTag);
-    }
-    this.complimentaryInputElement = null;
-  }
-
-  tagAlreadyEntered(tag: any): boolean {
-    for (const tagList in this.enteredTags) {
-      if (this.enteredTags[tagList].includes(tag)) {
+  tagAlreadyStored(tag: any): boolean {
+    for (const tagList in this.storedTags) {
+      if (this.storedTags[tagList].includes(tag)) {
         return true;
       }
     }
@@ -69,11 +49,11 @@ export class AddStudentSkillsComponent implements OnInit {
   removeEnteredTag(element: any): void {
     const tagToDelete = element.textContent;
 
-    for (const tagList of Object.keys(this.enteredTags)) {
+    for (const tagList of Object.keys(this.storedTags)) {
       let index = 0;
-      this.enteredTags[tagList].forEach(enteredTag => {
+      this.storedTags[tagList].forEach(enteredTag => {
           if (enteredTag === tagToDelete) {
-            this.enteredTags[tagList].splice(index, 1);
+            this.storedTags[tagList].splice(index, 1);
             this.restoreTag(enteredTag);
           }
         index++;
@@ -81,9 +61,55 @@ export class AddStudentSkillsComponent implements OnInit {
     }
   }
 
+  typeaheadNoResults(event: boolean): void {
+    this.noResult = event;
+  }
+
+  onSelect(event: TypeaheadMatch, tagList: string, inputElement: any): void {
+    this.selectedTag = event.value;
+    this.tagList = tagList;
+
+    this.storeTag();
+    inputElement.value = null;
+  }
+
+  onEnter(event: any): void {
+    if (!this.noResult) {
+      return;
+    }
+
+    const inputElement = event.originalTarget;
+
+    this.tagList = inputElement.id;
+    this.selectedTag = inputElement.value;
+
+    this.storeTag();
+    inputElement.value = null;
+  }
+
+  storeTag(): void {
+    if (this.tagAlreadyStored(this.selectedTag)) {
+      console.log('Tag"' + this.selectedTag + '" already stored');
+      return;
+    }
+      this.removeTagFromAvailable();
+
+      this.storedTags[this.tagList].push(this.selectedTag);
+  }
+
+  removeTagFromAvailable() {
+    for (let i = 0; i < this.availableTags.length; i++) {
+      if (this.availableTags[i] === this.selectedTag) {
+        this.availableTags.splice(i, 1);
+        return;
+      }
+    }
+    console.log('Could not find tag to remove');
+  }
+
   removeStoredTag(tag: any): void {
-      const index = this.availableTags.indexOf(tag);
-      this.availableTags.splice(index, 1);
+    const index = this.availableTags.indexOf(tag);
+    this.availableTags.splice(index, 1);
   }
 
   restoreTag(tag: any): void {

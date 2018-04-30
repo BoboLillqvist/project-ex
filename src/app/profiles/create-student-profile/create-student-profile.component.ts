@@ -4,6 +4,7 @@ import { Tags } from '../../tagsInput';
 import { Course } from '../../models/course.model';
 import { StudentService } from '../../student.service';
 import { isNumber } from 'util';
+import { Person } from '../../models/person.model';
 
 @Component({
   selector: 'app-create-student-profile',
@@ -19,6 +20,7 @@ export class CreateStudentProfileComponent implements OnInit {
   ];
   yearRange = [];
   students: Array<Student> = [];
+  persons: Array<Student> = [];
   fName: string;
   lName: string;
   education: string;
@@ -29,7 +31,7 @@ export class CreateStudentProfileComponent implements OnInit {
   skills: Array<string>;
   courseName: string;
   coursePoints: number;
-  courses: Array<Course> = [];
+  courses: Course[] = [];
 
   constructor(private studentService: StudentService) { }
 
@@ -37,17 +39,59 @@ export class CreateStudentProfileComponent implements OnInit {
     this.setUpYearList();
     // activate tags-input
     this.tags = new Tags(document);
-
-    this.studentService.getStudents().subscribe(resStudentData => this.students = resStudentData);
   }
 
-  addStudent() {
+  // temp metod
+  createMockStudent() {
+    const stud = new Student('Jan', 'Jahn', 'Engineer', 2019, 'Doing work2',
+                            ['c#', 'js'], [new Course('Course4', 7.5)], 'jahn@test.se', '070555111');
+    this.addPerson(stud);
+  }
+
+  // skapa studenten utifrån formulär
+  createStudent() {
     this.skills = this.tags.getData();
 
+    if (this.courses.length === 0) {
+      // tror post routen ballar ur just nu om ingen kurs kommer med
+      this.courses.push(new Course('Inga kurser tillagda', 0));
+    }
     const student = new Student(this.fName, this.lName, this.education, this.examYear,
                                 this.description, this.skills, this.courses, this.email, this.phoneNbr);
+    this.addPerson(student);
+  }
 
-    this.studentService.addStudent(student).subscribe(resNewStudent => {
+  // Startar kedjan med att lägga till en hel student.
+  addPerson(stud: Student) {
+    this.studentService.addPerson(stud.person).subscribe(resNewPerson => {
+      // spara en kopia av det id som personen fått av mongoose
+      stud.personId = resNewPerson._id;
+
+      // personen är tillagd, dags att lägga till kurser
+      this.addCourses(stud);
+    });
+  }
+
+  // lagra alla kurser
+  addCourses(stud: Student) {
+    let i = 0;
+    stud.courses.forEach(course => {
+      this.studentService.addCourse(course).subscribe(resNewCourse => {
+        // spara en kopia av det id som kursen har fått av mongoose
+        stud.courseIds.push(resNewCourse._id);
+        i++;
+
+        if (i === stud.courses.length) {
+          // alla kurser är inlagda i databasen, dags att lägga till studenten
+          this.addStudent(stud);
+        }
+      });
+    });
+  }
+
+  // och tillsist lagra studenten med korrekta referenser till det som skapats innan
+  addStudent(stud: Student) {
+    this.studentService.addStudent(stud).subscribe(resNewStudent => {
       this.students.push(resNewStudent);
     });
   }

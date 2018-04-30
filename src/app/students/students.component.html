@@ -3,9 +3,10 @@
   <ul>
     <li *ngFor ="let student of students">
       <a>
-        {{ student.person.firstName + student.person.email }}
+        {{ student.name }}, 
+        {{ student.person.email }},
+        {{ student.courses[0].name }}
       </a>
     </li>
   </ul>
-
 </div>
