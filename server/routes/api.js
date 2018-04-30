@@ -109,6 +109,19 @@ router.post('/course', function(req, res){
     });
 });
 
+router.get('/courses/:name', (req, res) => {
+    console.log("Get request for one course: " + req.params.name);
+    Course.findOne({ name: req.params.name}).exec( (err, course) => {
+        if(course === null) {
+            console.log('Error retrieving course with name:' + req.params.name + '. ' + err);
+        } else {
+            console.log('Found it: ' + course);
+        }
+        res.json(course);
+    });
+    
+});
+
 //#endregion
 
 //#region Company API
