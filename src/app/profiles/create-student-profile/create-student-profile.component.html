@@ -53,11 +53,11 @@
         </div>
         <div class="tags-input" data-name="tags-input" id="tags"></div>
     </div>
-    <span class="input-group-text" id="addCourseLabel">Lägg till kurser</span>
+    <span class="input-group-text" id="addCourseLabel">Lägg till några favoritkurser som du klarat</span>
     <div class="input-group mb-2">
         <input type="text" class="form-control" name="courseInput" id="courseInput" [(ngModel)]="courseName" placeholder="Kursnamn">
         <input type="text" class="form-control" name="pointsInput" placeholder="Poäng (7.5)" (input)="onPointsChange($event.target.value)"
-                          id="pointsInput" [(ngModel)]="coursePoints" (keydown.enter)="addCourse($event)">
+                          id="pointsInput" [(ngModel)]="coursePoints" (keydown.enter)="addCourseToStudent($event)">
     </div>
 
     <div class="input-group mb-4">
@@ -71,8 +71,8 @@
           </ul>
     </div>
     
-  <app-pdf-upload></app-pdf-upload>
-  <br><br><br>
+    <app-pdf-upload></app-pdf-upload>
+    <br><br><br>
   
     <div class="input-group mb-4">
         <button type="button" class="btn btn-primary" (click)="createStudent()">
