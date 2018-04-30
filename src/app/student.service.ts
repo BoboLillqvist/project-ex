@@ -9,6 +9,7 @@ import { Person } from './models/person.model';
 export class StudentService {
 
   private _getUrl = '/api/students';
+  private _getUrlCourse = '/api/courses/';
   private _postUrl = '/api/student';
   private _postUrlPerson = '/api/person';
   private _postUrlCourse = '/api/course';
@@ -32,6 +33,10 @@ export class StudentService {
     const options = new RequestOptions( {headers: headers } );
     console.log(JSON.stringify(course));
     return this._http.post(this._postUrlCourse, JSON.stringify(course), options).map( (res: Response) => res.json() );
+  }
+
+  getCourse(course: Course) {
+    return this._http.get(this._getUrlCourse + course.name).map((response: Response) => response.json());
   }
 
   addPerson(person: Person) {
