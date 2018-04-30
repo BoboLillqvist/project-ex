@@ -73,17 +73,25 @@ export class CreateStudentProfileComponent implements OnInit {
   }
 
   // lagra alla kurser
+  // Ser lite konstigt ut med flera i++ och this.readyToAddStudent calls, 
+  // men det är för koden utanför subscribe fortsätter att exekvera av någon anledning
   addCourses(stud: Student) {
     let i = 0;
     stud.courses.forEach(course => {
-      this.studentService.addCourse(course).subscribe(resNewCourse => {
-        // spara en kopia av det id som kursen har fått av mongoose
-        stud.courseIds.push(resNewCourse._id);
-        i++;
-
-        if (i === stud.courses.length) {
-          // alla kurser är inlagda i databasen, dags att lägga till studenten
-          this.addStudent(stud);
+      // kolla om kurs finns i databas
+      this.studentService.getCourse(course).subscribe(resCourse => {
+        if (resCourse != null) {
+          console.log('Kurs fanns: ' + resCourse.name);
+          stud.courseIds.push(resCourse._id);
+          i++;
+          this.readyToAddStudent(stud, i);
+        } else {
+          this.studentService.addCourse(course).subscribe(resNewCourse => {
+            // spara en kopia av det id som kursen har fått av mongoose
+            stud.courseIds.push(resNewCourse._id);
+            i++;
+            this.readyToAddStudent(stud, i);
+          });
         }
       });
     });
