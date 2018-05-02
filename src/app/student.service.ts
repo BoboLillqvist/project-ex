@@ -55,4 +55,7 @@ export class StudentService {
     return this._http.get(this._getCourses).map((res: Response) => res.json());
   }
 
+  getCourse(courseName: string) {
+    return this._http.get(this._getCourses + '/' + courseName).map((res: Response) => res.json());
+  }
 }
