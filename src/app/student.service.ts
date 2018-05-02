@@ -58,4 +58,12 @@ export class StudentService {
   getCourse(courseName: string) {
     return this._http.get(this._getCourses + '/' + courseName).map((res: Response) => res.json());
   }
+
+  addCourse(course: Course) {
+    const headers = new Headers( {'Content-Type': 'application/json'} );
+    const options = new RequestOptions( {headers: headers } );
+    console.log(JSON.stringify(course));
+    return this._http.post(this._postCourse, JSON.stringify(course), options).map( (res: Response) => res.json() );
+  }
+
 }
