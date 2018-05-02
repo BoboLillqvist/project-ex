@@ -86,6 +86,18 @@ router.post('/person', function(req, res){
     });
 });
 
+router.delete('/person/:id', (req, res) => {
+    Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
+        if(err) {
+            console.log('Error person: ' + deletedPerson);
+            res.send('Error deleting person');
+        } else {
+            console.log('Deleting person: ' + deletedPerson);
+            res.json(deletedPerson);
+        }
+    });
+});
+
 //#endregion
 
 //#region Course API
