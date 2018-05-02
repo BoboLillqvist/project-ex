@@ -55,9 +55,12 @@
     </div>
     <span class="input-group-text" id="addCourseLabel">Lägg till några favoritkurser som du klarat</span>
     <div class="input-group mb-2">
-        <input type="text" class="form-control" name="courseInput" id="courseInput" [(ngModel)]="courseName" placeholder="Kursnamn">
-        <input type="text" class="form-control" name="pointsInput" placeholder="Poäng (7.5)" (input)="onPointsChange($event.target.value)"
-                          id="pointsInput" [(ngModel)]="coursePoints" (keydown.enter)="addCourseToStudent($event)">
+        <input type="text" class="form-control" name="courseInput" id="courseInput" 
+                [(ngModel)]="courseName" placeholder="Kursnamn"
+                >
+        <input type="text" class="form-control" name="pointsInput" placeholder="Poäng (7.5)" 
+                (input)="onPointsChange($event.target.value)" id="pointsInput" [(ngModel)]="coursePoints" (keydown.enter)="addCourseToStudent($event)"
+                >
     </div>
 
     <div class="input-group mb-4">

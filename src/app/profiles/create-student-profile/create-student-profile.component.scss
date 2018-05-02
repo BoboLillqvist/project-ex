@@ -6,3 +6,11 @@
     content:"*";
     color:red;
   }
+
+  input.ng-valid.ng-touched {
+      border-left: 5px solid green;
+  }
+
+  input.ng-invalid.ng-touched {
+      border-left: 5px solid red;
+  }

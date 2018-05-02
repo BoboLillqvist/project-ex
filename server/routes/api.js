@@ -20,10 +20,10 @@ mongoose.connect(db, function(err){
 
 //#region Student API
 
-router.get('/students', function(req, res){
+router.get('/students', (req, res) => {
     console.log('get request for all students');
     var populateQuery = [{path:'person'}, {path:'courses', model:'course'}];
-    Student.find({}).populate(populateQuery).exec(function(err, students){
+    Student.find({}).populate(populateQuery).exec((err, students) => {
         if(err){
             console.log('Error retrieving students: ' + err);
         }else {
@@ -103,7 +103,7 @@ router.delete('/student/:id', (req, res) => {
 
 //#region Person API
 
-router.post('/person', function(req, res){
+router.post('/person', (req, res) => {
     console.log('Post a person');
     var newPerson = new Person({
         _id: new mongoose.Types.ObjectId(),
@@ -113,7 +113,7 @@ router.post('/person', function(req, res){
         phoneNbr: req.body.phoneNbr
     });
     
-    newPerson.save(function(err, insertedPerson) {
+    newPerson.save( (err, insertedPerson) => {
         if(err) {
             console.log('error saving person ' + err);
         }
@@ -140,7 +140,7 @@ router.delete('/person/:id', (req, res) => {
 
 //#region Course API
 
-router.post('/course', function(req, res){
+router.post('/course', (req, res) => {
     console.log('Post a course');
     var newCourse = new Course({
         _id: new mongoose.Types.ObjectId(),
@@ -148,7 +148,7 @@ router.post('/course', function(req, res){
         points: req.body.points,
     });
     
-    newCourse.save(function(err, insertedCourse) {
+    newCourse.save( (err, insertedCourse) => {
         if(err) {
             console.log('error saving course ' + err);
         }

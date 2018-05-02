@@ -8,35 +8,35 @@ import { Person } from './models/person.model';
 @Injectable()
 export class StudentService {
 
-  private _getUrl = '/api/students';
-  private _getUrlCourse = '/api/courses/';
-  private _postUrl = '/api/student';
-  private _postUrlPerson = '/api/person';
-  private _postUrlCourse = '/api/course';
+  private _getStudents = '/api/students';
+  private _postStudent = '/api/student';
+  private _putStudent = '/api/student/';
+  private _postPerson = '/api/person';
+  private _deletePerson = '/api/person/';
+  private _getCourses = '/api/courses';
+  private _postCourse = '/api/course';
 
 
   constructor(private _http: Http) { }
 
   getStudents() {
-    return this._http.get(this._getUrl).map((response: Response) => response.json());
+    return this._http.get(this._getStudents).map((res: Response) => res.json());
   }
 
   addStudent(student: Student) {
     const headers = new Headers( {'Content-Type': 'application/json'} );
     const options = new RequestOptions( {headers: headers } );
-    console.log(JSON.stringify(student));
-    return this._http.post(this._postUrl, JSON.stringify(student), options).map( (res: Response) => res.json() );
+    return this._http.post(this._postStudent, JSON.stringify(student), options).map( (res: Response) => res.json() );
   }
 
-  addCourse(course: Course) {
+  updateStudent(student: Student) {
     const headers = new Headers( {'Content-Type': 'application/json'} );
     const options = new RequestOptions( {headers: headers } );
-    console.log(JSON.stringify(course));
-    return this._http.post(this._postUrlCourse, JSON.stringify(course), options).map( (res: Response) => res.json() );
+    return this._http.put(this._putStudent + student._id, JSON.stringify(student), options).map((res: Response) => res.json());
   }
 
-  getCourse(course: Course) {
-    return this._http.get(this._getUrlCourse + course.name).map((response: Response) => response.json());
+  deleteStudent(student: Student) {
+    return this._http.delete(this._putStudent + student._id).map((res: Response) => res.json());
   }
 
   addPerson(person: Person) {
@@ -44,7 +44,7 @@ export class StudentService {
     const headers = new Headers( {'Content-Type': 'application/json'} );
     const options = new RequestOptions( {headers: headers } );
     console.log(JSON.stringify(person));
-    return this._http.post(this._postUrlPerson, JSON.stringify(person), options).map( (res: Response) => res.json() );
+    return this._http.post(this._postPerson, JSON.stringify(person), options).map( (res: Response) => res.json() );
   }
 
 }
