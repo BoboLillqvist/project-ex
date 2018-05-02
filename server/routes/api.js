@@ -60,6 +60,31 @@ router.post('/student', (req, res) => {
     }); 
 });
 
+router.put('/student/:id', (req, res) => {
+    console.log('Update student with id: ' + req.params.id);
+    Student.findByIdAndUpdate(req.params.id, 
+    {
+        $set: {
+            education: req.body.education,
+            examYear: req.body.examYear,
+            description: req.body.description,
+            skills: req.body.skills,
+            courses: req.body.courses
+        }
+    },
+    {
+        new: true
+    }, 
+    (err, updatedStudent) => {
+        if(err) {
+            res.send('Error updating student: ' + err);
+        } else {
+            res.json(updatedStudent);
+        }
+    }
+    );
+});
+
 router.delete('/student/:id', (req, res) => {
     console.log('Delete a student');
     Student.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
