@@ -32,6 +32,19 @@ router.get('/students', (req, res) => {
     });
 });
 
+router.get('/students/:id', (req, res) => {
+    console.log("Get request for one student: " + req.params.id);
+    Student.findById(req.params.id).exec( (err, student) => {
+        if(err) {
+            console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
+        } else {
+            console.log('Found it: ' + student);
+        }
+        res.json(student);
+    });
+    
+});
+
 router.post('/student', (req, res) => {
     console.log('Post a student');
 
