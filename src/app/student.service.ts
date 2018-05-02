@@ -51,4 +51,8 @@ export class StudentService {
     return this._http.delete(this._deletePerson + person._id).map((res: Response) => res.json());
   }
 
+  getCourses() {
+    return this._http.get(this._getCourses).map((res: Response) => res.json());
+  }
+
 }
