@@ -34,7 +34,8 @@ router.get('/students', (req, res) => {
 
 router.get('/students/:id', (req, res) => {
     console.log("Get request for one student: " + req.params.id);
-    Student.findById(req.params.id).exec( (err, student) => {
+    var populateQuery = [{path:'person'}, {path:'courses', model:'course'}];
+    Student.findById(req.params.id).populate(populateQuery).exec( (err, student) => {
         if(err) {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
         } else {
