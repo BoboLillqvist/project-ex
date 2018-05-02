@@ -109,6 +109,17 @@ router.post('/course', function(req, res){
     });
 });
 
+router.get('/courses', (req, res) => {
+    console.log('Get request for courses');
+    Course.find({}).exec( (err, courses) => {
+        if(err){
+            console.log('Error retrieving courses: ' + err);
+        } else {
+            res.json(courses);
+        }
+    });
+})
+
 router.get('/courses/:name', (req, res) => {
     console.log("Get request for one course: " + req.params.name);
     Course.findOne({ name: req.params.name}).exec( (err, course) => {
