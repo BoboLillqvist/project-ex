@@ -79,7 +79,7 @@ export class CreateStudentProfileComponent implements OnInit {
     let i = 0;
     stud.courses.forEach(course => {
       // kolla om kurs finns i databas
-      this.studentService.getCourse(course).subscribe(resCourse => {
+      this.studentService.getCourse(course.name).subscribe(resCourse => {
         if (resCourse != null) {
           console.log('Kurs fanns: ' + resCourse.name);
           stud.courseIds.push(resCourse._id);
