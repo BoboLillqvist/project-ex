@@ -60,6 +60,19 @@ router.post('/student', (req, res) => {
     }); 
 });
 
+router.delete('/student/:id', (req, res) => {
+    console.log('Delete a student');
+    Student.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
+        if(err) {
+            console.log('Error deleting student' + err);
+            res.send('Error deleting student' + err);
+        } else {
+            console.log('Deleting student: ' + deletedStudent);
+            res.json(deletedStudent);
+        }
+    });
+});
+
 
 //#endregion
 
