@@ -47,4 +47,8 @@ export class StudentService {
     return this._http.post(this._postPerson, JSON.stringify(person), options).map( (res: Response) => res.json() );
   }
 
+  deletePerson(person: Person) {
+    return this._http.delete(this._deletePerson + person._id).map((res: Response) => res.json());
+  }
+
 }
