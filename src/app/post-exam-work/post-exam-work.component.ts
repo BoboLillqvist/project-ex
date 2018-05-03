@@ -12,6 +12,8 @@ import { Person } from '../models/person.model';
 })
 export class PostExamWorkComponent implements OnInit {
 
+  @ViewChild(NgForm) myForm: NgForm;
+
   fName: string;
   lName: string;
   phoneNbr: string;
@@ -36,5 +38,9 @@ export class PostExamWorkComponent implements OnInit {
     this.examWorkService.addExamWork(examWork)
     .subscribe();
 
+    this.clearValues()
+  clearValues() {
+    this.myForm.resetForm();
+  }
   }
 }
