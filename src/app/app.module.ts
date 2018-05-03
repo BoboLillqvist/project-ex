@@ -20,6 +20,7 @@ import { CreateStudentProfileComponent } from './profiles/create-student-profile
 import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/add-student-skills.component';
 import { PdfUploadComponent } from './file-upload/pdf-upload/pdf-upload.component';
 import { StudentHomeComponent } from './student-pages/student-home/student-home.component';
+import { EditStudentProfileComponent } from './student-pages/edit-student-profile/edit-student-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { StudentHomeComponent } from './student-pages/student-home/student-home.
     AddStudentSkillsComponent,
     PdfUploadComponent,
     StudentHomeComponent,
+    EditStudentProfileComponent,
   ],
   imports: [
     BrowserModule,
