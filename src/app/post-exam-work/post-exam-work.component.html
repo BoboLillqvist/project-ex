@@ -1,51 +1,83 @@
 <h1>Skapa annons för examensarbete</h1>
-
 <div class="jumbotron">
-
   <h4>Fyll i information för examensarbetet</h4>
-  <!-- title -->
-  <form>
+ 
+  <form #form="ngForm" (ngSubmit)="onSubmitAddExamWork(form.value)">
+
+     <!-- title -->
   <div class="form-group">
-    <label for="title" class="col-sm-2 control-label">Titel</label>
+    <label for="workTitle" class="col-sm-2 control-label">Titel</label>
     <div class="col-sm-10">
-      <input ngModel required #title="ngModel" type="text" class="form-control" id="title" name="title" value="">
-      <div class="alert alert-danger" *ngIf="title.touched && !title.valid">Titel måste vara ifyllt</div>
+      <input ngModel 
+              required 
+              #workTitle="ngModel" 
+              type="text" 
+              class="form-control" 
+              id="workTitle" 
+              name="title" 
+              value="">
+      <div class="alert alert-danger" *ngIf="workTitle.touched && !workTitle.valid">Titel måste vara ifyllt</div>
     </div>
   </div>
 
   <!-- location -->
   <div class="form-group">
-    <label for="location" class="col-sm-2 control-label">Ort</label>
+    <label for="workLocation" class="col-sm-2 control-label">Ort</label>
     <div class="col-sm-10">
-      <input ngModel required #location="ngModel" type="text" class="form-control" id="location" name="location" value="">
-      <div class="alert alert-danger" *ngIf="location.touched && !location.valid">Ort måste vara ifyllt</div>
+      <input ngModel 
+              required 
+              #workLocation="ngModel" 
+              type="text" 
+              class="form-control" 
+              id="workLocation" 
+              name="location" 
+              value="">
+      <div class="alert alert-danger" *ngIf="workLocation.touched && !workLocation.valid">Ort måste vara ifyllt</div>
     </div>
   </div>
 
   <!-- apply-due-date -->
   <div class="form-group">
-    <label for="applyDueDate" class="col-sm-10 control-label">Sista anmälningsdag</label>
+    <label for="workApplyDueDate" class="col-sm-10 control-label">Sista anmälningsdag</label>
     <div class="col-sm-10">
-      <input ngModel required #applyDueDate="ngModel" type="date" class="form-control" id="applyDueDate" name="applyDueDate" value="">
-      <div class="alert alert-danger" *ngIf="applyDueDate.touched && !applyDueDate.valid">Sista anmälningsdag måste vara ifyllt</div>
+      <input ngModel 
+              required 
+              #workApplyDueDate="ngModel" 
+              type="date" 
+              class="form-control" 
+              id="workApplyDueDate" 
+              name="applyDueDate" 
+              value="">
+      <div class="alert alert-danger" *ngIf="workApplyDueDate.touched && !workApplyDueDate.valid">Sista anmälningsdag måste vara ifyllt</div>
     </div>
   </div>
-
+  
   <app-add-student-skills></app-add-student-skills>
 
   <!-- description -->
   <div class="form-group">
-    <label for="description" class="col-sm-2 control-label">Beskrivning</label>
+    <label for="workDescription" class="col-sm-2 control-label">Beskrivning</label>
     <div class="col-sm-10">
-      <textarea class="form-control" rows="4" name="description"></textarea>
+      <textarea ngModel 
+                class="form-control" 
+                rows="4" 
+                id="workDescription" 
+                name="description">
+    </textarea>
     </div>
   </div>
 
   <!-- teachings -->
   <div class="form-group">
-    <label for="teachings" class="col-sm-2 control-label">Lärdomar</label>
+    <label for="workTeachings" class="col-sm-2 control-label">Lärdomar</label>
     <div class="col-sm-10">
-      <textarea class="form-control" rows="2" name="teachings" placeholder="Vad får studenten chans att lära sig under examensarbetet?"></textarea>
+      <textarea ngModel 
+                class="form-control" 
+                rows="2" 
+                id="workTeachings"
+                name="teachings" 
+                placeholder="Vad får studenten chans att lära sig under examensarbetet?">
+    </textarea>
     </div>
   </div>
 
@@ -55,30 +87,48 @@
 
     <!-- firstname -->
     <div class="form-group">
-      <label for="contactFirstName" class="col-sm-2 control-label">Förnamn</label>
+      <label for="firstName" class="col-sm-2 control-label">Förnamn</label>
       <div class="col-sm-10">
-        <input ngModel required #contactFirstName="ngModel" type="text" class="form-control" id="contactFirstName" name="contactFirstName" value="">
+          <input required 
+                  #contactFirstName="ngModel" 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="fName" 
+                  id="firstName" 
+                  name="firstName">
         <div class="alert alert-danger" *ngIf="contactFirstName.touched && !contactFirstName.valid">Förnamn måste vara ifyllt</div>
       </div>
     </div>
 
     <!-- last-name -->
     <div class="form-group">
-      <label for="contactLastName" class="col-sm-2 control-label">Efternamn</label>
+      <label for="lastName" class="col-sm-2 control-label">Efternamn</label>
       <div class="col-sm-10">
-        <input ngModel required #contactLastName="ngModel" type="text" class="form-control" id="contactLastName" name="contactLastName" value="">
+          <input required 
+                  #contactLastName="ngModel" 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="lName" 
+                  id="lastName" 
+                  name="lastName">
         <div class="alert alert-danger" *ngIf="contactLastName.touched && !contactLastName.valid">Efternamn måste vara ifyllt</div>
       </div>
     </div>
 
   </div>
 
-  <!-- number -->
+  <!-- phoneNumber -->
   <div class="form-group">
-    <label for="contactNumber" class="col-sm-2 control-label">Telefon</label>
+    <label for="phoneNumber" class="col-sm-2 control-label">Telefon</label>
     <div class="col-sm-10">
-      <input ngModel required #contactNumber="ngModel" type="text" class="form-control" id="contactNumber" name="contactNumber" value="">
-      <div class="alert alert-danger" *ngIf="contactNumber.touched && !contactNumber.valid">Telefonnummer måste vara ifyllt</div>
+        <input required 
+                #phoneNumber="ngModel" 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="phoneNbr" 
+                id="phoneNumber" 
+                name="phoneNumber">
+      <div class="alert alert-danger" *ngIf="phoneNumber.touched && !phoneNumber.valid">Telefonnummer måste vara ifyllt</div>
     </div>
   </div>
 
@@ -86,7 +136,13 @@
   <div class="form-group">
     <label for="contactEmail" class="col-sm-2 control-label">E-postadress</label>
     <div class="col-sm-10">
-      <input ngModel required #contactEmail="ngModel" type="email" class="form-control" id="contactEmail" name="contactEmail" value="">
+        <input required 
+                #contactEmail="ngModel" 
+                type="text" 
+                class="form-control" 
+                [(ngModel)]="email" 
+                id="contactEmail" 
+                name="contactEmail">
       <div class="alert alert-danger" *ngIf="contactEmail.touched && !contactEmail.valid">E-postadress måste vara ifyllt</div>
     </div>
   </div>
@@ -94,7 +150,11 @@
   <!-- Submit button -->
   <div class="form-group">
     <div class="col-sm-10 col-sm-offset-2">
-      <button id="submit" name="submit" type="submit" class="btn btn-primary">Spara</button>
+      <button id="submit" 
+              name="submit" 
+              type="submit" 
+              class="btn btn-primary">Publicera examensarbete
+    </button>
     </div>
   </div>
 </form>
