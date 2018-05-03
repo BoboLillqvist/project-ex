@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const examworkSchema = new Schema({
-    _id: String,
     title: String,
     location: String,
     applyDueDate: Date,
