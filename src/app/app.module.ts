@@ -22,6 +22,7 @@ import { PdfUploadComponent } from './file-upload/pdf-upload/pdf-upload.componen
 import { StudentHomeComponent } from './student-pages/student-home/student-home.component';
 import { EditStudentProfileComponent } from './student-pages/edit-student-profile/edit-student-profile.component';
 import { StudentProfileComponent } from './student-pages/student-profile/student-profile.component';
+import { EditCompanyProfileComponent } from './company-pages/edit-company-profile/edit-company-profile.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { StudentProfileComponent } from './student-pages/student-profile/student
     StudentHomeComponent,
     EditStudentProfileComponent,
     StudentProfileComponent,
+    EditCompanyProfileComponent,
   ],
   imports: [
     BrowserModule,
