@@ -18,6 +18,8 @@ export class PostExamWorkComponent implements OnInit {
   lName: string;
   phoneNbr: string;
   email: string;
+
+
   constructor(private examWorkService: ExamworkService) { }
 
   ngOnInit() {
@@ -25,6 +27,7 @@ export class PostExamWorkComponent implements OnInit {
 
   onSubmitAddExamWork(examWork: ExamWork){
 
+    this.createPerson(examWork);
 
     console.log("titel: " + examWork.title);
     console.log("ort: " + examWork.location);
@@ -39,8 +42,15 @@ export class PostExamWorkComponent implements OnInit {
     .subscribe();
 
     this.clearValues()
+  }
+
   clearValues() {
     this.myForm.resetForm();
   }
+
+  createPerson(examWork: ExamWork){
+    const contact = new Person(this.fName, this.lName,this.email, this.phoneNbr);
+    console.log("kontaktperson: " + contact);
+    return contact;
   }
 }
