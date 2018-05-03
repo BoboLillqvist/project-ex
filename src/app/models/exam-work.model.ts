@@ -2,7 +2,6 @@ import { Company } from "./company.model";
 import { Person } from "./person.model";
 
 export class ExamWork {
-    _id: string;
     title: string;
     location: string;
     applyDueDate: Date;
@@ -14,7 +13,7 @@ export class ExamWork {
     teachings: string;
     company: Company;
 
-    constructor(title: string, location: string, essentialSkills: Array<string>, complementarySkills: Array<string>, description: string, applyDueDate: Date, presence: string, contact: Person, teachings: string, company: Company){
+    constructor(title, location, essentialSkills, complementarySkills, description, applyDueDate, presence, contact, teachings, company){
         this.title = title;
         this.location = location;
         this.essentialSkills = essentialSkills;
