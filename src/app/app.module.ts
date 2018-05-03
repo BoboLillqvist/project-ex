@@ -19,6 +19,7 @@ import { CreateCompanyProfileComponent } from './profiles/create-company-profile
 import { CreateStudentProfileComponent } from './profiles/create-student-profile/create-student-profile.component';
 import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/add-student-skills.component';
 import { PdfUploadComponent } from './file-upload/pdf-upload/pdf-upload.component';
+import { StudentHomeComponent } from './student-pages/student-home/student-home.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { PdfUploadComponent } from './file-upload/pdf-upload/pdf-upload.componen
     FilterTitlePipe,
     FilterDescriptionPipe,
     AddStudentSkillsComponent,
-    PdfUploadComponent
+    PdfUploadComponent,
+    StudentHomeComponent,
   ],
   imports: [
     BrowserModule,
