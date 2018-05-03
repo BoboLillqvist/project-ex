@@ -10,8 +10,8 @@ const Course = require('../models/course');
 const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
 
-mongoose.connect(db, function(err){
-    if(err){
+mongoose.connect(db, function (err) {
+    if (err) {
         console.error("error!" + err);
     }
 });
@@ -22,11 +22,11 @@ mongoose.connect(db, function(err){
 
 router.get('/students', (req, res) => {
     console.log('get request for all students');
-    var populateQuery = [{path:'person'}, {path:'courses', model:'course'}];
+    var populateQuery = [{ path: 'person' }, { path: 'courses', model: 'course' }];
     Student.find({}).populate(populateQuery).exec((err, students) => {
-        if(err){
+        if (err) {
             console.log('Error retrieving students: ' + err);
-        }else {
+        } else {
             res.json(students);
         }
     });
@@ -34,16 +34,16 @@ router.get('/students', (req, res) => {
 
 router.get('/students/:id', (req, res) => {
     console.log("Get request for one student: " + req.params.id);
-    var populateQuery = [{path:'person'}, {path:'courses', model:'course'}];
-    Student.findById(req.params.id).populate(populateQuery).exec( (err, student) => {
-        if(err) {
+    var populateQuery = [{ path: 'person' }, { path: 'courses', model: 'course' }];
+    Student.findById(req.params.id).populate(populateQuery).exec((err, student) => {
+        if (err) {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
         } else {
             console.log('Found it: ' + student);
         }
         res.json(student);
     });
-    
+
 });
 
 router.post('/student', (req, res) => {
@@ -64,45 +64,45 @@ router.post('/student', (req, res) => {
         courses: courseIds
     });
 
-    newStudent.save( (err, insertedStudent) => {
-        if(err) {
+    newStudent.save((err, insertedStudent) => {
+        if (err) {
             console.log('Error saving student ' + err);
         } else {
             console.log('saving student');
             res.json(insertedStudent);
         }
-    }); 
+    });
 });
 
 router.put('/student/:id', (req, res) => {
     console.log('Update student with id: ' + req.params.id);
-    Student.findByIdAndUpdate(req.params.id, 
-    {
-        $set: {
-            education: req.body.education,
-            examYear: req.body.examYear,
-            description: req.body.description,
-            skills: req.body.skills,
-            courses: req.body.courses
+    Student.findByIdAndUpdate(req.params.id,
+        {
+            $set: {
+                education: req.body.education,
+                examYear: req.body.examYear,
+                description: req.body.description,
+                skills: req.body.skills,
+                courses: req.body.courses
+            }
+        },
+        {
+            new: true
+        },
+        (err, updatedStudent) => {
+            if (err) {
+                res.send('Error updating student: ' + err);
+            } else {
+                res.json(updatedStudent);
+            }
         }
-    },
-    {
-        new: true
-    }, 
-    (err, updatedStudent) => {
-        if(err) {
-            res.send('Error updating student: ' + err);
-        } else {
-            res.json(updatedStudent);
-        }
-    }
     );
 });
 
 router.delete('/student/:id', (req, res) => {
     console.log('Delete a student');
     Student.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
-        if(err) {
+        if (err) {
             console.log('Error deleting student' + err);
             res.send('Error deleting student' + err);
         } else {
@@ -126,12 +126,12 @@ router.post('/person', (req, res) => {
         email: req.body.email,
         phoneNbr: req.body.phoneNbr
     });
-    
-    newPerson.save( (err, insertedPerson) => {
-        if(err) {
+
+    newPerson.save((err, insertedPerson) => {
+        if (err) {
             console.log('error saving person ' + err);
         }
-        
+
         console.log('saving person');
 
         res.json(insertedPerson);
@@ -140,7 +140,7 @@ router.post('/person', (req, res) => {
 
 router.delete('/person/:id', (req, res) => {
     Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
-        if(err) {
+        if (err) {
             console.log('Error person: ' + deletedPerson);
             res.send('Error deleting person');
         } else {
@@ -161,12 +161,12 @@ router.post('/course', (req, res) => {
         name: req.body.name,
         points: req.body.points,
     });
-    
-    newCourse.save( (err, insertedCourse) => {
-        if(err) {
+
+    newCourse.save((err, insertedCourse) => {
+        if (err) {
             console.log('error saving course ' + err);
         }
-        
+
         console.log('saving course');
 
         res.json(insertedCourse);
@@ -175,8 +175,8 @@ router.post('/course', (req, res) => {
 
 router.get('/courses', (req, res) => {
     console.log('Get request for courses');
-    Course.find({}).exec( (err, courses) => {
-        if(err){
+    Course.find({}).exec((err, courses) => {
+        if (err) {
             console.log('Error retrieving courses: ' + err);
         } else {
             res.json(courses);
@@ -186,87 +186,87 @@ router.get('/courses', (req, res) => {
 
 router.get('/courses/:name', (req, res) => {
     console.log("Get request for one course: " + req.params.name);
-    Course.findOne({ name: req.params.name}).exec( (err, course) => {
-        if(course === null) {
+    Course.findOne({ name: req.params.name }).exec((err, course) => {
+        if (course === null) {
             console.log('Error retrieving course with name:' + req.params.name + '. ' + err);
         } else {
             console.log('Found it: ' + course);
         }
         res.json(course);
     });
-    
+
 });
 
 //#endregion
 
 //#region Company API
 
-router.get('/companies', function(req, res){
+router.get('/companies', function (req, res) {
     console.log('get request for all companies');
     Company.find({})
-    .exec(function(err,companies){
-        if(err){
-            console.log('error retrieving companies'+ err);
-        }else{
-            res.json(companies);
-        }
-    });
+        .exec(function (err, companies) {
+            if (err) {
+                console.log('error retrieving companies' + err);
+            } else {
+                res.json(companies);
+            }
+        });
 });
 
-router.get('/companies/:id', function(req, res){
+router.get('/companies/:id', function (req, res) {
     console.log('get request for a single video');
     Company.findById(req.params.id)
-    .exec(function(err,company){
-        if(err){
-            console.log('error retrieving companies'+ err);
-        }else{
-            res.json(company);
-        }
-    });
+        .exec(function (err, company) {
+            if (err) {
+                console.log('error retrieving companies' + err);
+            } else {
+                res.json(company);
+            }
+        });
 });
 
-router.post('/company', function(req, res){
+router.post('/company', function (req, res) {
     console.log('Post a company');
     var newCompany = new Company();
     newCompany.name = req.body.name;
     newCompany.url = req.body.url;
     newCompany.description = req.body.description;
-    newCompany.save(function(err, insertedCompany){
-        if(err){
+    newCompany.save(function (err, insertedCompany) {
+        if (err) {
             console.log('Error saving company' + err);
-        }else{
+        } else {
             res.json(insertedCompany);
             console.log('Company saved');
         }
     });
 });
 
-router.put('/company/:id', function(req, res){
+router.put('/company/:id', function (req, res) {
     console.log('update a company');
-    Company.findByIdAndUpdate(req.params.id, 
-    {
-        $set: {name: req.body.name, description: req.body.description}
-    },
-    {
-        new: true
-    },
-    function(err, updatedCompay){
-        if(err){
-            res.send("Error updating company");
-        }else{
-            res.json(updatedCompay);
+    Company.findByIdAndUpdate(req.params.id,
+        {
+            $set: { name: req.body.name, description: req.body.description }
+        },
+        {
+            new: true
+        },
+        function (err, updatedCompay) {
+            if (err) {
+                res.send("Error updating company");
+            } else {
+                res.json(updatedCompay);
+            }
         }
-    }
 
     );
 });
 
-router.delete('/company/:id', function(req, res){
+router.delete('/company/:id', function (req, res) {
     console.log('Deleting a company');
-    Company.findByIdAndRemove(req.params.id, function(err, deletedCompany){
-        if(err){
+    Company.findByIdAndRemove(req.params.id, function (err, deletedCompany) {
+        if (err) {
             res.send("Error deleting company");
-        }else{
+        } else {
             res.json(deletedCompany);
         }
     });
@@ -277,20 +277,20 @@ router.delete('/company/:id', function(req, res){
 
 //#region examwork API
 
-router.get('/examworks', function(req, res){
+router.get('/examworks', function (req, res) {
     console.log('get request for all exam works');
     Examwork.find({})
-    .exec(function(err,examworks){
-        if(err){
-            console.log('error retrieving exam works'+ err);
-        }else{
-            res.json(examworks);
-        }
-    });
+        .exec(function (err, examworks) {
+            if (err) {
+                console.log('error retrieving exam works' + err);
+            } else {
+                res.json(examworks);
+            }
+        });
 });
 
 
-router.post('/examworks', function(req, res){
+router.post('/examwork', function (req, res) {
     console.log('Post an exam work');
 
     var newExamWork = new Examwork();
@@ -304,10 +304,10 @@ router.post('/examworks', function(req, res){
     newExamWork.contact = req.body.contact;
     newExamWork.company = req.body.company;
 
-    newExamWork.save(function(err, insertedExamwork){
-        if(err){
+    newExamWork.save(function (err, insertedExamwork) {
+        if (err) {
             console.log('Error saving exam work' + err);
-        }else{
+        } else {
             res.json(insertedExamwork);
             console.log('Exam work saved');
         }
