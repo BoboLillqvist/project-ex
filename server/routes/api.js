@@ -290,7 +290,6 @@ router.get('/examworks', function(req, res){
 });
 
 
-// TODO: samtliga variabler returnerar undefined 
 router.post('/examworks', function(req, res){
     console.log('Post an exam work');
 
@@ -315,5 +314,16 @@ router.post('/examworks', function(req, res){
     });
 });
 
+router.delete('/examwork/:id', function (req, res) {
+    console.log('Deleting exam work');
+    Company.findByIdAndRemove(req.params.id, function (err, deletedExamwork) {
+        if (err) {
+            res.send("Error deleting exam work");
+        } else {
+            res.json(deletedCompany);
+            console.log('Exam work deleted');
+        }
+    });
+});
 //#endregion
 module.exports = router;
