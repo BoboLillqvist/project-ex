@@ -24,6 +24,7 @@ import { EditStudentProfileComponent } from './student-pages/edit-student-profil
 import { StudentProfileComponent } from './student-pages/student-profile/student-profile.component';
 import { EditCompanyProfileComponent } from './company-pages/edit-company-profile/edit-company-profile.component';
 import { CompanyHomeComponent } from './company-pages/company-home/company-home.component';
+import { CompanyProfileComponent } from './company-pages/company-profile/company-profile.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { CompanyHomeComponent } from './company-pages/company-home/company-home.
     StudentProfileComponent,
     EditCompanyProfileComponent,
     CompanyHomeComponent,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,
