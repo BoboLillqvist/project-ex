@@ -21,6 +21,7 @@ import { AddStudentSkillsComponent } from './post-exam-work/add-student-skills/a
 import { PdfUploadComponent } from './file-upload/pdf-upload/pdf-upload.component';
 import { StudentHomeComponent } from './student-pages/student-home/student-home.component';
 import { EditStudentProfileComponent } from './student-pages/edit-student-profile/edit-student-profile.component';
+import { StudentProfileComponent } from './student-pages/student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { EditStudentProfileComponent } from './student-pages/edit-student-profil
     PdfUploadComponent,
     StudentHomeComponent,
     EditStudentProfileComponent,
+    StudentProfileComponent,
   ],
   imports: [
     BrowserModule,
