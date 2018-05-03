@@ -325,5 +325,37 @@ router.delete('/examwork/:id', function (req, res) {
         }
     });
 });
+
+router.put('/examwork/:id', function (req, res) {
+    console.log('update examwork');
+    Company.findByIdAndUpdate(req.params.id,
+        {
+            $set: {
+                title: req.body.title,
+                location: req.body.location,
+                applyDueDate: req.body.applyDueDate,
+                essentialSkills: req.body.essentialSkills,
+                complementarySkills: req.body.complementarySkills,
+                description: req.body.description,
+                teachings: req.body.teachings,
+                contact: req.body.contact,
+                company: req.body.company
+            }
+        },
+        {
+            new: true
+        },
+        function (err, updatedExamwork) {
+            if (err) {
+                res.send("Error updating exam work");
+            } else {
+                res.json(updatedExamwork);
+                console.log('Exam work updated');
+            }
+        }
+
+    );
+});
+
 //#endregion
 module.exports = router;
