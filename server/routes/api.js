@@ -22,7 +22,7 @@ mongoose.connect(db, function (err) {
 
 router.get('/students', (req, res) => {
     console.log('get request for all students');
-    var populateQuery = [{ path: 'person' }, { path: 'courses', model: 'course' }];
+    var populateQuery = [{ path: 'person', model: 'person' }, { path: 'courses', model: 'course' }];
     Student.find({}).populate(populateQuery).exec((err, students) => {
         if (err) {
             console.log('Error retrieving students: ' + err);
@@ -34,7 +34,7 @@ router.get('/students', (req, res) => {
 
 router.get('/students/:id', (req, res) => {
     console.log("Get request for one student: " + req.params.id);
-    var populateQuery = [{ path: 'person' }, { path: 'courses', model: 'course' }];
+    var populateQuery = [{ path: 'person', model: 'person' }, { path: 'courses', model: 'course' }];
     Student.findById(req.params.id).populate(populateQuery).exec((err, student) => {
         if (err) {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
