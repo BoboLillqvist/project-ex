@@ -1,10 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Student } from '../../models/student.model';
-import { Tags } from '../../tagsInput';
 import { Course } from '../../models/course.model';
 import { StudentService } from '../../student.service';
 import { isNumber } from 'util';
 import { Person } from '../../models/person.model';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+import { NgForm } from '@angular/forms';
+import { TypeaheadMatch } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-create-student-profile',
@@ -14,7 +19,22 @@ import { Person } from '../../models/person.model';
 })
 export class CreateStudentProfileComponent implements OnInit {
 
-  tags: Tags;
+  @ViewChild(NgForm) studentForm: NgForm;
+
+  selectedTag: string;
+  tagList: string;
+  noResult = false;
+
+  availableTags: any[] = [
+    'C++',
+    'C#',
+    'C',
+    'PHP',
+    'Python',
+    'Java',
+    'Javascript'
+  ];
+
   eduPrograms: string[] = [
     'Högskoleingenjör, datateknik',
   ];
@@ -28,29 +48,20 @@ export class CreateStudentProfileComponent implements OnInit {
   email: string;
   phoneNbr: string = '';
   description: string = '';
-  skills: Array<string>;
+  skills: Array<string> = [];
   courseName: string;
   coursePoints: number;
-  courses: Course[] = [];
+  courses: Array<Course> = [];
 
   constructor(private studentService: StudentService) { }
 
   ngOnInit() {
     this.setUpYearList();
-    // activate tags-input
-    this.tags = new Tags(document);
-  }
-
-  // temp metod
-  createMockStudent() {
-    const stud = new Student('Jan', 'Jahn', 'Engineer', 2019, 'Doing work2',
-                            ['c#', 'js'], [new Course('Course4', 7.5)], 'jahn@test.se', '070555111');
-    this.addPerson(stud);
   }
 
   // skapa studenten utifrån formulär
   createStudent() {
-    this.skills = this.tags.getData();
+    console.log('submitting');
 
     if (this.courses.length === 0) {
       // tror post routen ballar ur just nu om ingen kurs kommer med
@@ -113,22 +124,11 @@ export class CreateStudentProfileComponent implements OnInit {
 
   onPointsChange() {
     const point = this.coursePoints.toString().replace(',', '.');
-    if (point.length > 0) {
-      this.coursePoints = parseFloat(point);
-      document.getElementById('addCourseLabel').firstChild.nodeValue = 'Lägg till kurser - Tryck enter för att lägga till!';
-    } else {
-      document.getElementById('addCourseLabel').firstChild.nodeValue = 'Lägg till kurser';
-    }
   }
 
   addCourseToStudent() {
-    if (!isFinite(this.coursePoints)) {
-      document.getElementById('addCourseLabel').firstChild.nodeValue = 'Lägg till kurser - Poäng ej korrekt';
-    } else {
-      this.courses.push(new Course(this.courseName, this.coursePoints));
-      this.courseName = '';
-      document.getElementById('addCourseLabel').firstChild.nodeValue = 'Lägg till kurser';
-    }
+    this.courses.push(new Course(this.courseName, this.coursePoints));
+    this.courseName = '';
     document.getElementById('courseInput').focus();
     this.coursePoints = undefined;
   }
@@ -144,5 +144,84 @@ export class CreateStudentProfileComponent implements OnInit {
       this.yearRange.push(year + i);
     }
   }
+
+  //#region Tag functions
+
+  tagAlreadyStored(tag: any): boolean {
+    if (this.skills.includes(tag)) {
+      return true;
+    }
+    return false;
+  }
+
+  removeEnteredTag(element: any): void {
+    const tagToDelete = element.textContent;
+
+    let index = 0;
+    this.skills.forEach(enteredTag => {
+        if (enteredTag === tagToDelete) {
+          this.skills.splice(index, 1);
+          this.restoreTag(enteredTag);
+        }
+      index++;
+    });
+  }
+
+  typeaheadNoResults(event: boolean): void {
+    this.noResult = event;
+  }
+
+  onSelect(event: TypeaheadMatch, tagList: string, inputElement: any): void {
+    this.selectedTag = event.value;
+    this.tagList = tagList;
+
+    this.storeTag();
+    inputElement.value = null;
+  }
+
+  onEnter(event: any): void {
+    if (!this.noResult) {
+      return;
+    }
+
+    const inputElement = event.originalTarget;
+
+    this.tagList = inputElement.id;
+    this.selectedTag = inputElement.value;
+
+    this.storeTag();
+    inputElement.value = null;
+  }
+
+  storeTag(): void {
+    if (this.tagAlreadyStored(this.selectedTag)) {
+      console.log('Tag"' + this.selectedTag + '" already stored');
+      return;
+    }
+      this.removeTagFromAvailable();
+
+      this.skills.push(this.selectedTag);
+  }
+
+  removeTagFromAvailable() {
+    for (let i = 0; i < this.availableTags.length; i++) {
+      if (this.availableTags[i] === this.selectedTag) {
+        this.availableTags.splice(i, 1);
+        return;
+      }
+    }
+    console.log('Could not find tag to remove');
+  }
+
+  removeStoredTag(tag: any): void {
+    const index = this.availableTags.indexOf(tag);
+    this.availableTags.splice(index, 1);
+  }
+
+  restoreTag(tag: any): void {
+    this.availableTags.push(tag);
+  }
+
+  //#endregion
 
 }

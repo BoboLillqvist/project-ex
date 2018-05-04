@@ -5,12 +5,20 @@
 .form-group.required .control-label:after {
     content:"*";
     color:red;
-  }
+}
 
-  input.ng-valid.ng-touched {
-      border-left: 5px solid green;
-  }
+input.ng-valid.ng-touched {
+    border-left: 5px solid green;
+}
 
-  input.ng-invalid.ng-touched {
-      border-left: 5px solid red;
-  }
+input.ng-invalid.ng-touched {
+    border-left: 5px solid red;
+}
+
+select.ng-valid.ng-touched {
+border-left: 5px solid green;
+}
+
+select.ng-invalid.ng-touched {
+    border-left: 5px solid red;
+}
