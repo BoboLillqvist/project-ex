@@ -27,6 +27,7 @@ import { CompanyHomeComponent } from './company-pages/company-home/company-home.
 import { CompanyProfileComponent } from './company-pages/company-profile/company-profile.component';
 import { StudentViewExamWorkComponent } from './student-pages/student-view-exam-work/student-view-exam-work.component';
 import { FindStudentsComponent } from './company-pages/exam-work-pages/find-students/find-students.component';
+import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam-work/edit-exam-work.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { FindStudentsComponent } from './company-pages/exam-work-pages/find-stud
     CompanyProfileComponent,
     StudentViewExamWorkComponent,
     FindStudentsComponent,
+    EditExamWorkComponent
   ],
   imports: [
     BrowserModule,
