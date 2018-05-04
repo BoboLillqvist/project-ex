@@ -23,10 +23,10 @@
                 [ngClass]="{'show': !isCollapsed}">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a routerLink="/student-home" routerLinkActive="active" class="nav-link">Student Hem</a>
+                    <a routerLink="/student/home" routerLinkActive="active" class="nav-link">Student Hem</a>
                 </li>
                 <li class="nav-item">
-                    <a routerLink="/company-home" routerLinkActive="active" class="nav-link">Företag Hem</a>
+                    <a routerLink="/company/home" routerLinkActive="active" class="nav-link">Företag Hem</a>
                 </li>
             </ul>
                 
@@ -40,8 +40,8 @@
                         </button>
                         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                             role="menu" aria-labelledby="button-basic">
-                          <li role="menuitem"><a class="dropdown-item" routerLink="student-profile">Min profil</a></li>
-                          <li role="menuitem"><a class="dropdown-item" routerLink="edit-student-profile">Redigera profil</a></li>
+                          <li role="menuitem"><a class="dropdown-item" routerLink="/student/profile">Min profil</a></li>
+                          <li role="menuitem"><a class="dropdown-item" routerLink="/student/edit-profile">Redigera profil</a></li>
                           <li class="divider dropdown-divider"></li>
                           <li role="menuitem"><a class="dropdown-item" href="#">Logga ut</a>
                           </li>
@@ -58,8 +58,8 @@
                         </button>
                         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                             role="menu" aria-labelledby="button-basic">
-                          <li role="menuitem"><a class="dropdown-item" routerLink="company-profile">Företagsprofil</a></li>
-                          <li role="menuitem"><a class="dropdown-item" routerLink="edit-company-profile">Redigera profil</a></li>
+                          <li role="menuitem"><a class="dropdown-item" routerLink="/company/profile">Företagsprofil</a></li>
+                          <li role="menuitem"><a class="dropdown-item" routerLink="/company/edit-profile">Redigera profil</a></li>
                           <li class="divider dropdown-divider"></li>
                           <li role="menuitem"><a class="dropdown-item" href="#">Logga ut</a>
                           </li>
