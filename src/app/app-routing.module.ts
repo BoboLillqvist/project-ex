@@ -19,15 +19,15 @@ const routes: Routes = [
 {path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'home', component: HomeComponent},
 
-{path: 'student-home', component: StudentHomeComponent},
-{path: 'student-profile', component: StudentProfileComponent},
-{path: 'edit-student-profile', component: EditStudentProfileComponent},
 {path: 'create-student-profile', component: CreateStudentProfileComponent},
 
-{path: 'company-home', component: CompanyHomeComponent},
-{path: 'company-profile', component: CompanyProfileComponent},
-{path: 'edit-company-profile', component: EditCompanyProfileComponent},
 {path: 'create-company-profile', component: CreateCompanyProfileComponent},
+{path: 'student/home', component: StudentHomeComponent},
+{path: 'student/profile', component: StudentProfileComponent},
+{path: 'student/edit-profile', component: EditStudentProfileComponent},
+{path: 'company/home', component: CompanyHomeComponent},
+{path: 'company/profile', component: CompanyProfileComponent},
+{path: 'company/edit-profile', component: EditCompanyProfileComponent},
 
 {path: 'companies', component: CompaniesComponent},
 {path: 'post-exam-work', component: PostExamWorkComponent},
