@@ -46,7 +46,6 @@ export class StudentService {
   }
 
   addPerson(person: Person) {
-    console.log(person + ' from service');
     const headers = new Headers( {'Content-Type': 'application/json'} );
     const options = new RequestOptions( {headers: headers } );
     console.log(JSON.stringify(person));
