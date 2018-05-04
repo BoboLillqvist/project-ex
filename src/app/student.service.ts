@@ -16,11 +16,17 @@ export class StudentService {
   private _getCourses = '/api/courses';
   private _postCourse = '/api/course';
 
+  public _id = '5aec68f586e32f2e804d4699';
+
 
   constructor(private _http: Http) { }
 
   getStudents() {
     return this._http.get(this._getStudents).map((res: Response) => res.json());
+  }
+
+  getStudent(studentId) {
+    return this._http.get(this._getStudents + '/' + studentId).map((res: Response) => res.json());
   }
 
   addStudent(student: Student) {
