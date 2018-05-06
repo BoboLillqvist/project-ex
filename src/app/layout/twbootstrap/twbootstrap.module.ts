@@ -5,6 +5,7 @@ import { CollapseModule } from 'ngx-bootstrap';
 import { TooltipModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -12,13 +13,15 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
     BsDropdownModule.forRoot(),
     TooltipModule.forRoot(),
     CollapseModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    ModalModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
     TooltipModule,
     CollapseModule,
-    TypeaheadModule
+    TypeaheadModule,
+    ModalModule
   ],
   declarations: []
 })
