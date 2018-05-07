@@ -10,12 +10,13 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { NgForm } from '@angular/forms';
 import { TypeaheadMatch } from 'ngx-bootstrap';
+import { PersonService } from '../../person.service';
 
 @Component({
   selector: 'app-create-student-profile',
   templateUrl: './create-student-profile.component.html',
   styleUrls: ['./create-student-profile.component.scss'],
-  providers: [StudentService],
+  providers: [StudentService, PersonService],
 })
 export class CreateStudentProfileComponent implements OnInit {
 
@@ -53,7 +54,7 @@ export class CreateStudentProfileComponent implements OnInit {
   coursePoints: number;
   courses: Array<Course> = [];
 
-  constructor(private studentService: StudentService) { }
+  constructor(private studentService: StudentService, private personService: PersonService) { }
 
   ngOnInit() {
     this.setUpYearList();
@@ -74,7 +75,7 @@ export class CreateStudentProfileComponent implements OnInit {
 
   // Startar kedjan med att lägga till en hel student.
   addPerson(stud: Student) {
-    this.studentService.addPerson(stud.person).subscribe(resNewPerson => {
+    this.personService.addPerson(stud.person).subscribe(resNewPerson => {
       // spara en kopia av det id som personen fått av mongoose
       stud.personId = resNewPerson._id;
 

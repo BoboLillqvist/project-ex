@@ -1,12 +1,33 @@
-<div class="form-group">
-  <label for="essential-skills" class="col-sm-2 control-label">Kompetenskrav</label>
+<div class="form-row">
 
+  <!-- essential skills -->
   <div class="col-sm-6">
-    <button Primarytype="button" class="btn btn-primary btn-sm tag tag-essential"
-            #tagEssential
-            (mouseup)="removeEnteredTag(tagEssential)"
-            *ngFor="let tag of storedTags.essentials">{{ tag }}</button>
+    <label for="essential-skills">Kompetenskrav</label>
+    <div class="row">
+      <div class="col">
+        <button Primarytype="button" class="btn btn-primary btn-sm tag tag-essential"
+                #tagEssential
+                (mouseup)="removeEnteredTag(tagEssential)"
+                *ngFor="let tag of storedTags.essentials">{{ tag }}</button>
+      </div>
+    </div>
   </div>
+  
+  <!-- complimentary skills -->
+  <div class="col-sm-6">
+    <label for="complementary-skills">Meriterande kompetens: </label>
+    <div class="row">
+      <div class="col">
+        <button Primarytype="button" class="btn btn-secondary btn-sm tag tag-complimentary"
+                #tagComplimentary
+                (mouseup)="removeEnteredTag(tagComplimentary)"
+                *ngFor="let tag of storedTags.complimentary">{{ tag }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+            
+<div class="form-row">
 
   <div class="col-sm-6">
     <input type="text" class="form-control" id="essentials" #essential
@@ -18,18 +39,7 @@
           (keyup.enter)="onEnter($event)"
           placeholder="Ange kompetens som etikett">
   </div>
-</div>
-
-<div class="form-group">
-  <label for="complementary-skills" class="col-sm-6 control-label">Meriterande kompetens: </label>
-
-  <div class="col-sm-6">
-    <button Primarytype="button" class="btn btn-secondary btn-sm tag tag-complimentary"
-            #tagComplimentary
-            (mouseup)="removeEnteredTag(tagComplimentary)"
-            *ngFor="let tag of storedTags.complimentary">{{ tag }}</button>
-  </div>
-
+  
   <div class="col-sm-6">
     <input type="text" class="form-control" id="complimentary" #complimentary
           [(ngModel)]="complimentarySkillInput"
@@ -38,5 +48,6 @@
           (typeaheadOnSelect)="onSelect($event, complimentary.id, complimentary)"
           (keyup.enter)="onEnter($event)"
           placeholder="Ange kompetens som etikett">
-    </div>
+  </div>
+  
 </div>

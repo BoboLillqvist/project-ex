@@ -29,6 +29,7 @@ import { StudentViewExamWorkComponent } from './student-pages/student-view-exam-
 import { FindStudentsComponent } from './company-pages/exam-work-pages/find-students/find-students.component';
 import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam-work/edit-exam-work.component';
 import { LoginComponent } from './login/login.component';
+import { CancleComponent } from './cancle/cancle.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { LoginComponent } from './login/login.component';
     StudentViewExamWorkComponent,
     FindStudentsComponent,
     EditExamWorkComponent,
-    LoginComponent
+    LoginComponent,
+    CancleComponent,
   ],
   imports: [
     BrowserModule,

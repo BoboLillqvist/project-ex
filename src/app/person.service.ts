@@ -1,0 +1,28 @@
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Person } from './models/person.model';
+
+@Injectable()
+export class PersonService {
+  private _getPersons = '/api/persons';
+  private _postPerson = '/api/person';
+  private _deletePerson = '/api/person/';
+
+  constructor(private _http: Http) { }
+
+  getPersons() {
+    return this._http.get(this._getPersons).map((res: Response) => res.json());
+  }
+  
+  addPerson(person: Person) {
+    const headers = new Headers( {'Content-Type': 'application/json'} );
+    const options = new RequestOptions( {headers: headers } );
+    console.log(JSON.stringify(person));
+    return this._http.post(this._postPerson, JSON.stringify(person), options).map( (res: Response) => res.json() );
+  }
+
+  deletePerson(person: Person) {
+    return this._http.delete(this._deletePerson + person._id).map((res: Response) => res.json());
+  }
+}
