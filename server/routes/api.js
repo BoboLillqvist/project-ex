@@ -16,8 +16,6 @@ mongoose.connect(db, function (err) {
     }
 });
 
-//TODO: Lägga till API för studenter get all, get by id, post, update, delete
-
 //#region Student API
 
 router.get('/students', (req, res) => {
@@ -117,6 +115,17 @@ router.delete('/student/:id', (req, res) => {
 
 //#region Person API
 
+router.get('/persons', (req, res) => {
+    console.log('Get request for persons');
+    Person.find({}).exec((err, persons) => {
+        if (err) {
+            console.log('Error retrieving persons: ' + err);
+        } else {
+            res.json(persons);
+        }
+    });
+})
+
 router.post('/person', (req, res) => {
     console.log('Post a person');
     var newPerson = new Person({
@@ -195,6 +204,18 @@ router.get('/courses/:name', (req, res) => {
         res.json(course);
     });
 
+});
+
+router.delete('/course/:id', (req, res) => {
+    Course.findByIdAndUpdate(req.params.id, (err, deletedCourse) => {
+        if (err) {
+            console.log('Error deleting course: ' + deletedCourse);
+            res.send('Error deleting course');
+        } else {
+            console.log('Deleting course: ' + deletedCourse);
+            res.json(deletedCourse);
+        }
+    });
 });
 
 //#endregion
