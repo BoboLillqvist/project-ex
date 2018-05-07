@@ -16,11 +16,13 @@ import { CompanyProfileComponent } from './company-pages/company-profile/company
 import { EditCompanyProfileComponent } from './company-pages/edit-company-profile/edit-company-profile.component';
 import { FindStudentsComponent } from './company-pages/exam-work-pages/find-students/find-students.component';
 import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam-work/edit-exam-work.component';
+import { LoginComponent } from './login/login.component';
 
 // Routes sköts här
 const routes: Routes = [
 {path: '', redirectTo: '/home', pathMatch: 'full'},
 {path: 'home', component: HomeComponent},
+{path: 'login', component: LoginComponent},
 
 {path: 'create-company-profile', component: CreateCompanyProfileComponent},
 {path: 'create-student-profile', component: CreateStudentProfileComponent},
