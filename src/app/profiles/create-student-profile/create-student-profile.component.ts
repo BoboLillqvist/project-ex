@@ -62,8 +62,6 @@ export class CreateStudentProfileComponent implements OnInit {
 
   // skapa studenten utifrån formulär
   createStudent() {
-    console.log('submitting');
-
     if (this.courses.length === 0) {
       // tror post routen ballar ur just nu om ingen kurs kommer med
       this.courses.push(new Course('Inga kurser tillagda', 0));
