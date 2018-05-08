@@ -1,1 +1,180 @@
-<h1>Student - Edit profile</h1>
+
+
+<div class="jumbotron" id="main-jumbo">
+
+        <div class="row">
+
+            <div class="col">
+                    <h4>
+                        <span class="badge badge-primary">
+                            Namn
+                        </span>
+                    </h4>
+
+                <!-- firstname -->
+                <input required 
+                        #firstName="ngModel" 
+                        type="text" 
+                        class="form-control" 
+                        [(ngModel)]="student.person.firstName" 
+                        id="firstName" 
+                        name="firstName"
+                >
+        
+                <!-- last-name -->
+                <input required 
+                        #lastName="ngModel" 
+                        type="text" 
+                        class="form-control" 
+                        [(ngModel)]="student.person.lastName" 
+                        id="lastName" 
+                        name="lastName"
+                >
+    
+                <br>
+    
+                <h4>
+                    <span class="badge badge-primary">
+                        Examensår
+                    </span>
+                </h4>
+                <!-- examYear -->
+                <div>
+                    <input required 
+                            type="text" 
+                            class="form-control" 
+                            [(ngModel)]="student.examYear" 
+                            id="examYear" 
+                            name="examYear">
+                </div>
+
+            </div>
+            <div class="col">
+                <img src="" 
+                    class="img-fluid" 
+                    alt="Responsive image">
+            </div>
+        </div>
+        
+        <br>
+    
+        <div>
+            <!-- education -->
+            <h4>
+                <span class="badge badge-primary">
+                    Utbildning
+                </span>
+            </h4>
+            <div>
+                <select required
+                        class="custom-select"
+                        id="educationSelect"
+                        name="educationSelect"
+                        [(ngModel)]="student.education">
+
+                    <option *ngFor="let edu of eduPrograms" [value]="edu">
+                        {{ edu }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    
+        <br>
+    
+        <div>
+            <h4>
+                <span class="badge badge-primary">
+                    Om mig
+                </span>
+            </h4>
+                <!-- about -->
+                <textarea   class="form-control" 
+                            id="aboutText" 
+                            rows="3" 
+                            name="description" 
+                            [(ngModel)]="student.description">
+                </textarea>
+        </div>
+    
+        <br>
+    
+        <div class="row">
+
+            <div class="col">
+                <h4>
+                    <span class="badge badge-primary">
+                        Kompetenser
+                    </span>
+                </h4>
+                <app-simple-tag></app-simple-tag>
+            </div>
+
+            <div class="col">
+                <h4><span class="badge badge-primary">Favoritkurser</span></h4>
+                <!-- addedCourses -->
+                <ul class="list-group" id="courseList" >
+                    <li class="list-group-item" 
+                        *ngFor="let course of student.courses; let i = index" 
+                        (click)="removeCourse(i)"
+                        >
+                        {{ course.name }} {{ course.points }}
+                    </li>
+                </ul>
+                <br>
+                <h4>Lägg till fler kurser</h4>
+                 <!-- courses -->
+                <input type="text" 
+                        class="form-control" 
+                        name="courseInput" 
+                        id="courseInput" 
+                        [(ngModel)]="courseName" 
+                        placeholder="Kursnamn"
+                >
+                <input type="text" 
+                        class="form-control" 
+                        name="pointsInput" 
+                        placeholder="Poäng (7.5)" 
+                        (input)="onPointsChange($event.target.value)" 
+                        id="pointsInput" 
+                        [(ngModel)]="coursePoints" 
+                        (keydown.enter)="addCourseToStudent($event)"
+                >
+            </div>
+        </div>
+    
+        <br>
+    
+        <div>
+            <h4>
+                <span class="badge badge-primary">
+                    Kontaktinformation
+                </span>
+            </h4>
+            <div class="row">
+                <div class="col">
+                    <h5>
+                        <span class="badge badge-info">
+                            Telefon
+                        </span>
+                    </h5>
+                    <input required 
+                            type="text" 
+                            class="form-control" 
+                            [(ngModel)]="student.person.phoneNbr" 
+                            id="phoneNbr" 
+                            name="phoneNbr">
+                </div>
+            </div>
+        </div>
+
+        <br><br>
+        <button class="btn btn-primary"
+                (click)="updateStudent()">
+            Spara och gå tillbaka
+        </button>
+        <button class="btn btn-primary"
+                (click)="cancelEdit()">
+            Avbryt
+        </button>
+        
+    </div>

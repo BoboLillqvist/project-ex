@@ -1,0 +1,28 @@
+.list-group-item:hover{
+    background-color: #d41217;
+}
+
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
+}
+
+input.ng-valid.ng-touched {
+    border-left: 5px solid green;
+}
+
+input.ng-invalid.ng-touched {
+    border-left: 5px solid red;
+}
+
+select.ng-valid.ng-touched {
+border-left: 5px solid green;
+}
+
+select.ng-invalid.ng-touched {
+    border-left: 5px solid red;
+}
+
+[hidden] {
+display: none !important;
+}
