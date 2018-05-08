@@ -260,11 +260,11 @@ router.get('/companies', function (req, res) {
 });
 
 router.get('/companies/:id', function (req, res) {
-    console.log('get request for a single video');
+    console.log('get request for a single company');
     Company.findById(req.params.id)
         .exec(function (err, company) {
             if (err) {
-                console.log('error retrieving companies' + err);
+                console.log('error retrieving companies: ' + err);
             } else {
                 res.json(company);
             }
