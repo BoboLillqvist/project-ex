@@ -4,9 +4,8 @@ import { CompaniesComponent } from './companies/companies.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
-
 import { AppComponent } from './app.component';
-import { FilterTitlePipe, FilterDescriptionPipe } from './home/filter.pipe';
+import { FilterPipe } from './home/filter.pipe';
 import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
@@ -47,8 +46,7 @@ import { RegisterLoginComponent } from './register-login/register-login.componen
     CreateCompanyProfileComponent,
     StudentsComponent,
     CreateStudentProfileComponent,
-    FilterTitlePipe,
-    FilterDescriptionPipe,
+    FilterPipe,
     AddStudentSkillsComponent,
     PdfUploadComponent,
     StudentHomeComponent,
