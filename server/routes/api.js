@@ -74,6 +74,12 @@ router.post('/student', (req, res) => {
 
 router.put('/student/:id', (req, res) => {
     console.log('Update student with id: ' + req.params.id);
+
+    const courseIds = [];
+    req.body.courseIds.forEach(courseId => {
+        courseIds.push(new mongoose.Types.ObjectId(courseId));
+    });
+    
     Student.findByIdAndUpdate(req.params.id,
         {
             $set: {
@@ -81,7 +87,7 @@ router.put('/student/:id', (req, res) => {
                 examYear: req.body.examYear,
                 description: req.body.description,
                 skills: req.body.skills,
-                courses: req.body.courses
+                courses: courseIds
             }
         },
         {
