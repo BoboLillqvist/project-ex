@@ -11,13 +11,15 @@ export class StudentService {
   private _getStudents = '/api/students';
   private _postStudent = '/api/student';
   private _putStudent = '/api/student/';
-  private _postPerson = '/api/person';
-  private _deletePerson = '/api/person/';
   private _getCourses = '/api/courses';
   private _postCourse = '/api/course';
+  private _putCourse = '/api/course/';
 
   public _id = '5aec68f586e32f2e804d4699';
 
+  eduPrograms: string[] = [
+    'Högskoleingenjör, datateknik',
+  ];
 
   constructor(private _http: Http) { }
 
@@ -45,17 +47,6 @@ export class StudentService {
     return this._http.delete(this._putStudent + student._id).map((res: Response) => res.json());
   }
 
-  addPerson(person: Person) {
-    const headers = new Headers( {'Content-Type': 'application/json'} );
-    const options = new RequestOptions( {headers: headers } );
-    console.log(JSON.stringify(person));
-    return this._http.post(this._postPerson, JSON.stringify(person), options).map( (res: Response) => res.json() );
-  }
-
-  deletePerson(person: Person) {
-    return this._http.delete(this._deletePerson + person._id).map((res: Response) => res.json());
-  }
-
   getCourses() {
     return this._http.get(this._getCourses).map((res: Response) => res.json());
   }
@@ -69,6 +60,10 @@ export class StudentService {
     const options = new RequestOptions( {headers: headers } );
     console.log(JSON.stringify(course));
     return this._http.post(this._postCourse, JSON.stringify(course), options).map( (res: Response) => res.json() );
+  }
+
+  deleteCourse(course: Course) {
+    return this._http.delete(this._putCourse + course._id).map((res: Response) => res.json());
   }
 
 }

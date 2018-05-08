@@ -10,34 +10,20 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { NgForm } from '@angular/forms';
 import { TypeaheadMatch } from 'ngx-bootstrap';
+import { PersonService } from '../../person.service';
+import { SimpleTagComponent } from './simple-tag/simple-tag.component';
 
 @Component({
   selector: 'app-create-student-profile',
   templateUrl: './create-student-profile.component.html',
   styleUrls: ['./create-student-profile.component.scss'],
-  providers: [StudentService],
+  providers: [StudentService, PersonService],
 })
 export class CreateStudentProfileComponent implements OnInit {
 
   @ViewChild(NgForm) studentForm: NgForm;
 
-  selectedTag: string;
-  tagList: string;
-  noResult = false;
-
-  availableTags: any[] = [
-    'C++',
-    'C#',
-    'C',
-    'PHP',
-    'Python',
-    'Java',
-    'Javascript'
-  ];
-
-  eduPrograms: string[] = [
-    'Högskoleingenjör, datateknik',
-  ];
+  eduPrograms: string[] = [];
   yearRange = [];
   students: Array<Student> = [];
   persons: Array<Student> = [];
@@ -48,12 +34,16 @@ export class CreateStudentProfileComponent implements OnInit {
   email: string;
   phoneNbr: string = '';
   description: string = '';
-  skills: Array<string> = [];
+  skills:  string[] = [];
   courseName: string;
   coursePoints: number;
   courses: Array<Course> = [];
 
-  constructor(private studentService: StudentService) { }
+  @ViewChild(SimpleTagComponent) studentSkillsComp;
+
+  constructor(private studentService: StudentService, private personService: PersonService) {
+    this.eduPrograms = studentService.eduPrograms;
+   }
 
   ngOnInit() {
     this.setUpYearList();
@@ -61,12 +51,13 @@ export class CreateStudentProfileComponent implements OnInit {
 
   // skapa studenten utifrån formulär
   createStudent() {
-    console.log('submitting');
-
     if (this.courses.length === 0) {
       // tror post routen ballar ur just nu om ingen kurs kommer med
       this.courses.push(new Course('Inga kurser tillagda', 0));
     }
+
+    this.skills = this.studentSkillsComp.skills;
+
     const student = new Student(this.fName, this.lName, this.education, this.examYear,
                                 this.description, this.skills, this.courses, this.email, this.phoneNbr);
     this.addPerson(student);
@@ -74,7 +65,7 @@ export class CreateStudentProfileComponent implements OnInit {
 
   // Startar kedjan med att lägga till en hel student.
   addPerson(stud: Student) {
-    this.studentService.addPerson(stud.person).subscribe(resNewPerson => {
+    this.personService.addPerson(stud.person).subscribe(resNewPerson => {
       // spara en kopia av det id som personen fått av mongoose
       stud.personId = resNewPerson._id;
 
@@ -144,84 +135,4 @@ export class CreateStudentProfileComponent implements OnInit {
       this.yearRange.push(year + i);
     }
   }
-
-  //#region Tag functions
-
-  tagAlreadyStored(tag: any): boolean {
-    if (this.skills.includes(tag)) {
-      return true;
-    }
-    return false;
-  }
-
-  removeEnteredTag(element: any): void {
-    const tagToDelete = element.textContent;
-
-    let index = 0;
-    this.skills.forEach(enteredTag => {
-        if (enteredTag === tagToDelete) {
-          this.skills.splice(index, 1);
-          this.restoreTag(enteredTag);
-        }
-      index++;
-    });
-  }
-
-  typeaheadNoResults(event: boolean): void {
-    this.noResult = event;
-  }
-
-  onSelect(event: TypeaheadMatch, tagList: string, inputElement: any): void {
-    this.selectedTag = event.value;
-    this.tagList = tagList;
-
-    this.storeTag();
-    inputElement.value = null;
-  }
-
-  onEnter(event: any): void {
-    if (!this.noResult) {
-      return;
-    }
-
-    const inputElement = event.originalTarget;
-
-    this.tagList = inputElement.id;
-    this.selectedTag = inputElement.value;
-
-    this.storeTag();
-    inputElement.value = null;
-  }
-
-  storeTag(): void {
-    if (this.tagAlreadyStored(this.selectedTag)) {
-      console.log('Tag"' + this.selectedTag + '" already stored');
-      return;
-    }
-      this.removeTagFromAvailable();
-
-      this.skills.push(this.selectedTag);
-  }
-
-  removeTagFromAvailable() {
-    for (let i = 0; i < this.availableTags.length; i++) {
-      if (this.availableTags[i] === this.selectedTag) {
-        this.availableTags.splice(i, 1);
-        return;
-      }
-    }
-    console.log('Could not find tag to remove');
-  }
-
-  removeStoredTag(tag: any): void {
-    const index = this.availableTags.indexOf(tag);
-    this.availableTags.splice(index, 1);
-  }
-
-  restoreTag(tag: any): void {
-    this.availableTags.push(tag);
-  }
-
-  //#endregion
-
 }

@@ -16,8 +16,6 @@ mongoose.connect(db, function (err) {
     }
 });
 
-//TODO: Lägga till API för studenter get all, get by id, post, update, delete
-
 //#region Student API
 
 router.get('/students', (req, res) => {
@@ -76,6 +74,12 @@ router.post('/student', (req, res) => {
 
 router.put('/student/:id', (req, res) => {
     console.log('Update student with id: ' + req.params.id);
+
+    const courseIds = [];
+    req.body.courseIds.forEach(courseId => {
+        courseIds.push(new mongoose.Types.ObjectId(courseId));
+    });
+    
     Student.findByIdAndUpdate(req.params.id,
         {
             $set: {
@@ -83,7 +87,7 @@ router.put('/student/:id', (req, res) => {
                 examYear: req.body.examYear,
                 description: req.body.description,
                 skills: req.body.skills,
-                courses: req.body.courses
+                courses: courseIds
             }
         },
         {
@@ -117,6 +121,17 @@ router.delete('/student/:id', (req, res) => {
 
 //#region Person API
 
+router.get('/persons', (req, res) => {
+    console.log('Get request for persons');
+    Person.find({}).exec((err, persons) => {
+        if (err) {
+            console.log('Error retrieving persons: ' + err);
+        } else {
+            res.json(persons);
+        }
+    });
+})
+
 router.post('/person', (req, res) => {
     console.log('Post a person');
     var newPerson = new Person({
@@ -135,6 +150,25 @@ router.post('/person', (req, res) => {
         console.log('saving person');
 
         res.json(insertedPerson);
+    });
+});
+
+router.put('/person/:id', (req, res) => {
+    console.log('Update person with id: ' + req.params.id);
+    Person.findByIdAndUpdate(req.params.id, {
+        $set: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNbr: req.body.phoneNbr
+        }
+    }, {
+        new: true
+    }, (err, updatedPerson) => {
+        if(err) {
+            res.send('Error updating person' + err);
+        } else {
+            res.json(updatedPerson);
+        }
     });
 });
 
@@ -197,6 +231,18 @@ router.get('/courses/:name', (req, res) => {
 
 });
 
+router.delete('/course/:id', (req, res) => {
+    Course.findByIdAndUpdate(req.params.id, (err, deletedCourse) => {
+        if (err) {
+            console.log('Error deleting course: ' + deletedCourse);
+            res.send('Error deleting course');
+        } else {
+            console.log('Deleting course: ' + deletedCourse);
+            res.json(deletedCourse);
+        }
+    });
+});
+
 //#endregion
 
 //#region Company API
@@ -214,11 +260,11 @@ router.get('/companies', function (req, res) {
 });
 
 router.get('/companies/:id', function (req, res) {
-    console.log('get request for a single video');
+    console.log('get request for a single company');
     Company.findById(req.params.id)
         .exec(function (err, company) {
             if (err) {
-                console.log('error retrieving companies' + err);
+                console.log('error retrieving companies: ' + err);
             } else {
                 res.json(company);
             }
