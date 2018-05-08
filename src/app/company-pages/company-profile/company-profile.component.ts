@@ -10,6 +10,12 @@ export class CompanyProfileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  goToUrl() {
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(this.company.url)) {
+        url += 'http://';
+    }
+
   }
 
 }
