@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 
 @Component({
-  selector: 'app-add-simple-tag',
-  templateUrl: './add-simple-tag.component.html',
+  selector: 'app-simple-tag',
+  templateUrl: './simple-tag.component.html',
   styleUrls: ['./simple-tag.component.scss']
 })
 export class SimpleTagComponent implements OnInit {
