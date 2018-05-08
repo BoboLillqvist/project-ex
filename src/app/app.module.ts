@@ -33,6 +33,7 @@ import { CancleComponent } from './cancle/cancle.component';
 import { SimpleTagComponent } from './profiles/create-student-profile/simple-tag/simple-tag.component';
 import { BackComponent } from './back/back.component';
 import { RegisterChoiceComponent } from './register-choice/register-choice.component';
+import { RegisterLoginComponent } from './register-login/register-login.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { RegisterChoiceComponent } from './register-choice/register-choice.compo
     CancleComponent,
     SimpleTagComponent,
     BackComponent,
-    RegisterChoiceComponent
+    RegisterChoiceComponent,
+    RegisterLoginComponent
   ],
   imports: [
     BrowserModule,
