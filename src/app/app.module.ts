@@ -30,6 +30,7 @@ import { FindStudentsComponent } from './company-pages/exam-work-pages/find-stud
 import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam-work/edit-exam-work.component';
 import { LoginComponent } from './login/login.component';
 import { CancleComponent } from './cancle/cancle.component';
+import { BackComponent } from './back/back.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { CancleComponent } from './cancle/cancle.component';
     EditExamWorkComponent,
     LoginComponent,
     CancleComponent,
+    BackComponent
   ],
   imports: [
     BrowserModule,
