@@ -16,6 +16,9 @@ export class CompanyProfileComponent implements OnInit {
         url += 'http://';
     }
 
+    url += this.company.url;
+    window.open(url, '_blank');
+  }
   }
 
 }
