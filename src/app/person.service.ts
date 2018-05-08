@@ -7,6 +7,7 @@ import { Person } from './models/person.model';
 export class PersonService {
   private _getPersons = '/api/persons';
   private _postPerson = '/api/person';
+  private _putPerson = '/api/person/';
   private _deletePerson = '/api/person/';
 
   constructor(private _http: Http) { }
@@ -20,6 +21,12 @@ export class PersonService {
     const options = new RequestOptions( {headers: headers } );
     console.log(JSON.stringify(person));
     return this._http.post(this._postPerson, JSON.stringify(person), options).map( (res: Response) => res.json() );
+  }
+
+  updatePerson(person: Person) {
+    const headers = new Headers( {'Content-Type': 'application/json'} );
+    const options = new RequestOptions( {headers: headers } );
+    return this._http.put(this._putPerson + person._id, JSON.stringify(person), options).map((res: Response) => res.json());
   }
 
   deletePerson(person: Person) {

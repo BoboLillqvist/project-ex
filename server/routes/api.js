@@ -147,6 +147,25 @@ router.post('/person', (req, res) => {
     });
 });
 
+router.put('/person/:id', (req, res) => {
+    console.log('Update person with id: ' + req.params.id);
+    Person.findByIdAndUpdate(req.params.id, {
+        $set: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNbr: req.body.phoneNbr
+        }
+    }, {
+        new: true
+    }, (err, updatedPerson) => {
+        if(err) {
+            res.send('Error updating person' + err);
+        } else {
+            res.json(updatedPerson);
+        }
+    });
+});
+
 router.delete('/person/:id', (req, res) => {
     Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
         if (err) {
