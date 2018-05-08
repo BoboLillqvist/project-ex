@@ -31,6 +31,7 @@ import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam
 import { LoginComponent } from './login/login.component';
 import { CancleComponent } from './cancle/cancle.component';
 import { SimpleTagComponent } from './profiles/create-student-profile/simple-tag/simple-tag.component';
+import { RegisterChoiceComponent } from './register-choice/register-choice.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,8 @@ import { SimpleTagComponent } from './profiles/create-student-profile/simple-tag
     LoginComponent,
     CancleComponent,
     SimpleTagComponent,
+    BackComponent,
+    RegisterChoiceComponent
   ],
   imports: [
     BrowserModule,
