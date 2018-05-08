@@ -11,6 +11,8 @@ export class CompanyService {
   private _putUrl = "/api/company/";
   private _deleteUrl = "/api/company/";
 
+  public _id = '5ae2b45513ed9310c06691a9';
+
   constructor(private _http: Http) { }
 
   //TODO :: resten av CRUD operationerna
@@ -19,6 +21,10 @@ export class CompanyService {
   getCompanies(){
     return this._http.get(this._getUrl)
       .map((response: Response) => response.json());
+  }
+
+  getCompany(compId) {
+    return this._http.get(this._getUrl + '/' + compId).map((res: Response) => res.json());
   }
 
   deleteCompany(company: Company){
