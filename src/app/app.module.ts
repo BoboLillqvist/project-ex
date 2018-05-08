@@ -31,6 +31,7 @@ import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam
 import { LoginComponent } from './login/login.component';
 import { CancleComponent } from './cancle/cancle.component';
 import { BackComponent } from './back/back.component';
+import { RegisterChoiceComponent } from './register-choice/register-choice.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { BackComponent } from './back/back.component';
     EditExamWorkComponent,
     LoginComponent,
     CancleComponent,
-    BackComponent
+    BackComponent,
+    RegisterChoiceComponent
   ],
   imports: [
     BrowserModule,
