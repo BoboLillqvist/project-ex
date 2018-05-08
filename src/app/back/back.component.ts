@@ -13,5 +13,8 @@ export class BackComponent implements OnInit {
   ngOnInit() {
   }
 
+  back() {
+    this.location.back();
+  }
 
 }
