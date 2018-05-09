@@ -46,9 +46,4 @@ export class CompanyProfileComponent implements OnInit {
     url += this.company.url;
     window.open(url, '_blank');
   }
-
-  goToExamWork(index) {
-    this.router.navigate(['student/view-exam-work']);
-  }
-
 }
