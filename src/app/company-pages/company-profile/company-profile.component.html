@@ -70,8 +70,10 @@
 
             <div class="container">
                 <ul class="list-group" id="examworkList" >
-                    <li class="list-group-item" *ngFor="let examwork of company.examWorks; let i = index" (click)="goToExamWork(i)">
-                        {{ examwork.title }}
+                    <li class="list-group-item" *ngFor="let examWork of company.examWorks; let i = index">
+                        <a [routerLink]="['/student/view-exam-work', examWork._id]">
+                            {{ examWork.title }}
+                        </a>
                     </li>
                 </ul>
             </div>
