@@ -325,7 +325,8 @@ router.delete('/company/:id', function (req, res) {
 
 router.get('/examworks', function (req, res) {
     console.log('get request for all exam works');
-    Examwork.find({})
+    var populateQuery = [{ path: 'contact', model: 'person' }, { path: 'company', model: 'company' }];
+    Examwork.find({}).populate(populateQuery)
         .exec(function (err, examworks) {
             if (err) {
                 console.log('error retrieving exam works' + err);
