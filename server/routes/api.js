@@ -249,8 +249,8 @@ router.delete('/course/:id', (req, res) => {
 
 router.get('/companies', function (req, res) {
     console.log('get request for all companies');
-    Company.find({})
-        .exec(function (err, companies) {
+    var populateQuery = [{ path: 'examWorks', model: 'examwork' }];
+    Company.find({}).populate(populateQuery).exec(function (err, companies) {
             if (err) {
                 console.log('error retrieving companies' + err);
             } else {
@@ -261,7 +261,8 @@ router.get('/companies', function (req, res) {
 
 router.get('/companies/:id', function (req, res) {
     console.log('get request for a single company');
-    Company.findById(req.params.id)
+    var populateQuery = [{ path: 'examWorks', model: 'examwork' }];
+    Company.findById(req.params.id).populate(populateQuery)
         .exec(function (err, company) {
             if (err) {
                 console.log('error retrieving companies: ' + err);
