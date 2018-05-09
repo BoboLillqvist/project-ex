@@ -6,7 +6,8 @@ import { ExamworkService } from '../../examwork.service';
 @Component({
   selector: 'app-student-view-exam-work',
   templateUrl: './student-view-exam-work.component.html',
-  styleUrls: ['./student-view-exam-work.component.scss']
+  styleUrls: ['./student-view-exam-work.component.scss'],
+  providers: [ExamworkService]
 })
 export class StudentViewExamWorkComponent implements OnInit {
 
