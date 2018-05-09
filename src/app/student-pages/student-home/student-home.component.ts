@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ExamWork } from '../../models/exam-work.model';
 
 @Component({
   selector: 'app-student-home',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class StudentHomeComponent implements OnInit {
 
   constructor() { }
+  examWorks: Array<ExamWork> = [];
 
   ngOnInit() {
   }
