@@ -1,0 +1,52 @@
+// jumbotron
+.jumbotron-fc{
+  border-radius: 35px !important;
+  background-color: $white;
+  border-style: solid;
+  border-width: thin;
+  padding-top: 10px;
+  padding-bottom: 2%;
+  position: relative;
+
+}
+
+.jumbotron-search{
+  border-radius: 10px !important;
+  border-style: transparent;
+  background-color: $gray-light;
+  padding-top: 15px;
+  padding-bottom: 8%;
+  position: relative;
+
+  .btn-group{
+    position: absolute;
+    top:0%;
+    left:0%;
+    background-color: $gray-light;
+    border-color: $gray-light;
+    border-style: transparent;
+
+    .btn-primary{
+      background-color: inherit;
+      color: $gray-dark;
+      border-color: inherit;
+      padding: 10px 20px;
+      font-size: 20px;
+      border-radius: 50px;
+    }
+
+    .btn-toolbar .mb3{
+      background-color: $gray-light;
+
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .open .dropdown-toggle.btn-primary{
+      background-color: $gray;
+      border-color: inherit;
+    }
+}
+
+}

@@ -1,11 +1,24 @@
 // Custom modules
 @import "colors";
 @import "navbar";
+@import "jumbotron";
+@import "tagsInput";
 
 // Global styles
 * {
     border-radius: 0 !important;
   }
 
+.center-content {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.text-title {
+  margin-bottom: 1em;
+}
+
 // Include Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
+

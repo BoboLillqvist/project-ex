@@ -1,0 +1,29 @@
+<h4 id="register-login-header" class="text-left">Inloggningsuppgifter</h4>
+
+  <div class="form-group">
+      <label for="inputUserName" class="col-sm-2 control-label">Användarnamn</label>
+     
+      <div class="col-sm-10">
+          <input required 
+                  #inputUserName="ngModel" 
+                  type="text" 
+                  class="form-control" 
+                  [(ngModel)]="fName" 
+                  id="inputUserName" 
+                  name="inputUserName">
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="col-sm-2 control-label">Lösenord</label>
+    <div class="col-sm-10">
+        <input required 
+                #inputPassword="ngModel" 
+                type="password" 
+                class="form-control" 
+                [(ngModel)]="fPassword" 
+                id="inputPassword" 
+                name="inputPassword">
+    </div>
+</div>
+  <!-- TODO: Lägg till knapp för att göra lösenordet synligt, alltså toggla på inputpasswords type från "password" till "text". -->
+  <!-- Extra: Lägg till dubbelbekräftelse på lösenordet". -->

@@ -1,12 +1,16 @@
+import { ExamWork } from "./exam-work.model";
+
 export class Company {
-    ///TODO:: Uppdatera
     _id: string;
     name: string;
     description: string;
+    url: string;
+    examWorks: Array<ExamWork>;
 
-    constructor(id: string, name, description){
-        this._id = id;
+    constructor(name, description, url, examWorks){
         this.name = name;
         this.description = description;
+        this.url = url;
+        this.examWorks = examWorks;
     }
 }

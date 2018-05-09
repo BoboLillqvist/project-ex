@@ -1,0 +1,166 @@
+
+<div class="jumbotron" id="mainJumbo">
+    <h4>Registrera dig som student</h4>
+
+    <form #form="ngForm" name="studentForm">
+        <div class="input-group">
+            <!-- firstname -->
+            <div class="form-group">
+                <label for="firstName" class="col-sm-2 control-label">Förnamn</label>
+                <div class="col-sm-10">
+                    <input required 
+                            #firstName="ngModel" 
+                            type="text" 
+                            class="form-control" 
+                            [(ngModel)]="fName" 
+                            id="firstName" 
+                            name="firstName">
+                </div>
+            </div>
+        
+            <!-- last-name -->
+            <div class="form-group">
+                <label for="lastName" class="col-sm-2 control-label">Efternamn</label>
+                <div class="col-sm-10">
+                    <input required 
+                            #lastName="ngModel" 
+                            type="text" 
+                            class="form-control" 
+                            [(ngModel)]="lName" 
+                            id="lastName" 
+                            name="lastName">
+                </div>
+            </div>
+        </div>
+        
+        <!-- email -->
+        <div class="form-group">
+            <label for="contactEmail" class="col-sm-2 control-label">E-postadress</label>
+            <div class="col-sm-10">
+                <input required 
+                        #contactEmail="ngModel" 
+                        type="text" 
+                        class="form-control" 
+                        [(ngModel)]="email" 
+                        id="contactEmail" 
+                        name="contactEmail">
+            </div>
+        </div>
+        
+        <!-- phoneNumber -->
+        <div class="form-group">
+            <label for="phoneNumber" class="col-sm-2 control-label">Telefon</label>
+            <div class="col-sm-10">
+                <input 
+                        #phoneNumber="ngModel" 
+                        type="text" 
+                        class="form-control" 
+                        [(ngModel)]="phoneNbr" 
+                        id="phoneNumber" 
+                        name="phoneNumber">
+            </div>
+        </div>
+
+        <!-- education -->
+        <div class="form-group">
+            <label for="educationSelect" class="col-sm-2 control-label">Utbildning</label>
+            <div class="col-sm-10">
+                <select required
+                        class="custom-select"
+                        id="educationSelect"
+                        name="educationSelect"
+                        [(ngModel)]="education">
+
+                    <option *ngFor="let edu of eduPrograms" [value]="edu">
+                        {{ edu }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+         <!-- examYear -->
+         <div class="form-group">
+            <label for="gradYearSelect" class="col-sm-2 control-label">Examensår</label>
+            <div class="col-sm-10">
+                <select required
+                        class="custom-select"
+                        id="gradYearSelect"
+                        name="gradYearSelect"
+                        [(ngModel)]="examYear">
+
+                    <option *ngFor="let year of yearRange" [value]="year">
+                        {{ year }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <!-- about -->
+        <div class="form-group">
+            <label for="description" class="col-sm-10 control-label">Om dig</label>
+            <div class="col-sm-10">
+                <textarea   class="form-control" 
+                            id="aboutText" 
+                            rows="3" 
+                            name="description" 
+                            [(ngModel)]="description">
+                </textarea>
+            </div>
+        </div>
+
+        <div class="col-sm-10">
+            <app-simple-tag></app-simple-tag>
+        </div>
+       
+        <!-- courses -->
+        <div class="form-group">
+            <label for="courseInput" class="col-sm-10 control-label">Lägg till dina favoritkurser</label>
+            <div class="col-sm-10">
+                <input type="text" 
+                        class="form-control" 
+                        name="courseInput" 
+                        id="courseInput" 
+                        [(ngModel)]="courseName" 
+                        placeholder="Kursnamn"
+                >
+            </div>
+            <div class="col-sm-5">
+                <input type="text" 
+                        class="form-control" 
+                        name="pointsInput" 
+                        placeholder="Poäng (7.5)" 
+                        (input)="onPointsChange($event.target.value)" 
+                        id="pointsInput" 
+                        [(ngModel)]="coursePoints" 
+                        (keydown.enter)="addCourseToStudent($event)"
+                >
+            </div>
+        </div>
+
+        <!-- addedCourses -->
+        <div class="form-group">
+            <label for="courseList" class="col-sm-10 control-label">Tillagda kurser</label>
+            <div class="col-sm-10">
+                <ul class="list-group" id="courseList" >
+                    <li class="list-group-item" *ngFor="let course of courses; let i = index" (click)="removeCourse(i)">
+                        {{ course }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <app-register-login></app-register-login>
+         <!-- Submit button -->
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button id="submit" 
+                        name="submit" 
+                        type="button" 
+                        (click)="createStudent()"
+                        class="btn btn-primary"
+                        [disabled]="!studentForm.valid">
+                        Skapa konto
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
