@@ -348,8 +348,8 @@ router.post('/examwork', function (req, res) {
     newExamWork.complementarySkills = req.body.complementarySkills;
     newExamWork.description = req.body.description;
     newExamWork.teachings = req.body.teachings;
-    newExamWork.contact = req.body.contact;
-    newExamWork.company = req.body.company;
+    newExamWork.contact = req.body.contactId;
+    newExamWork.company = req.body.companyId;
 
     newExamWork.save(function (err, insertedExamwork) {
         if (err) {
