@@ -21,7 +21,7 @@ export class AddStudentSkillsComponent implements OnInit {
     essentials: [],
     complimentary: []
   };
-  // Skapa new Tag
+
   availableTags: Array<String>;
 
   constructor(private tagsService: TagsService) {}
