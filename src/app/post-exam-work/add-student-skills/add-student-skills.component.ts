@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
+import { Tags } from '../../models/tags.model';
+import { TagsService } from '../../tags.service';
 
 @Component({
   selector: 'app-add-student-skills',
@@ -7,10 +9,10 @@ import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
   styleUrls: [
     './../post-exam-work.component.scss',
     './add-student-skills.component.scss'
-  ]
+  ],
+  providers: [TagsService]
 })
 export class AddStudentSkillsComponent implements OnInit {
-
   selectedTag: string;
   tagList: string;
   noResult = false;
@@ -19,22 +21,15 @@ export class AddStudentSkillsComponent implements OnInit {
     essentials: [],
     complimentary: []
   };
+  // Skapa new Tag
+  availableTags: Array<String>;
 
-  availableTags: any[] = [
-    'C++',
-    'C#',
-    'C',
-    'PHP',
-    'Python',
-    'Java',
-    'Javascript'
-  ];
-
-  constructor() {
-    // TODO: Läs in "skills"-array från databasen
-  }
+  constructor(private tagsService: TagsService) {}
 
   ngOnInit() {
+    if (!this.fetchTagsFromDatabase(this.tagsService)) {
+      console.log('Could not get tags from database');
+    }
   }
 
   tagAlreadyStored(tag: any): boolean {
@@ -114,5 +109,18 @@ export class AddStudentSkillsComponent implements OnInit {
 
   restoreTag(tag: any): void {
     this.availableTags.push(tag);
+  }
+
+  fetchTagsFromDatabase(tagsService: TagsService): Boolean {
+    this.tagsService.getTags()
+      .subscribe((resTags) => {
+        this.availableTags = resTags[0].values;
+
+        if (this.availableTags === undefined || this.availableTags.length === 0) {
+          return false;
+        }
+      });
+
+    return true;
   }
 }
