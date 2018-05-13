@@ -6,6 +6,7 @@ const Student = require('../models/student');
 const Person = require('../models/person');
 const Examwork = require('../models/examwork');
 const Course = require('../models/course');
+const Tags = require('../models/tags');
 
 const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
@@ -379,4 +380,20 @@ router.put('/examwork/:id', function (req, res) {
 });
 
 //#endregion
+
+// #region Tags API
+router.get('/tags', function (req, res) {
+    console.log('get request for all tags');
+    Tags.find({})
+        .exec(function (err, tags) {
+            if (err) {
+                console.log('error retrieving tags' + err);
+            } else {
+                res.json(tags);
+                console.log(tags);
+            }
+        });
+});
+// #endregion
+
 module.exports = router;
