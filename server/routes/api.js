@@ -75,6 +75,12 @@ router.post('/student', (req, res) => {
 
 router.put('/student/:id', (req, res) => {
     console.log('Update student with id: ' + req.params.id);
+
+    const courseIds = [];
+    req.body.courseIds.forEach(courseId => {
+        courseIds.push(new mongoose.Types.ObjectId(courseId));
+    });
+    
     Student.findByIdAndUpdate(req.params.id,
         {
             $set: {
@@ -82,7 +88,7 @@ router.put('/student/:id', (req, res) => {
                 examYear: req.body.examYear,
                 description: req.body.description,
                 skills: req.body.skills,
-                courses: req.body.courses
+                courses: courseIds
             }
         },
         {
@@ -145,6 +151,25 @@ router.post('/person', (req, res) => {
         console.log('saving person');
 
         res.json(insertedPerson);
+    });
+});
+
+router.put('/person/:id', (req, res) => {
+    console.log('Update person with id: ' + req.params.id);
+    Person.findByIdAndUpdate(req.params.id, {
+        $set: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            phoneNbr: req.body.phoneNbr
+        }
+    }, {
+        new: true
+    }, (err, updatedPerson) => {
+        if(err) {
+            res.send('Error updating person' + err);
+        } else {
+            res.json(updatedPerson);
+        }
     });
 });
 
@@ -225,8 +250,8 @@ router.delete('/course/:id', (req, res) => {
 
 router.get('/companies', function (req, res) {
     console.log('get request for all companies');
-    Company.find({})
-        .exec(function (err, companies) {
+    var populateQuery = [{ path: 'examWorks', model: 'examwork' }];
+    Company.find({}).populate(populateQuery).exec(function (err, companies) {
             if (err) {
                 console.log('error retrieving companies' + err);
             } else {
@@ -236,11 +261,12 @@ router.get('/companies', function (req, res) {
 });
 
 router.get('/companies/:id', function (req, res) {
-    console.log('get request for a single video');
-    Company.findById(req.params.id)
+    console.log('get request for a single company');
+    var populateQuery = [{ path: 'examWorks', model: 'examwork' }];
+    Company.findById(req.params.id).populate(populateQuery)
         .exec(function (err, company) {
             if (err) {
-                console.log('error retrieving companies' + err);
+                console.log('error retrieving companies: ' + err);
             } else {
                 res.json(company);
             }
@@ -301,7 +327,8 @@ router.delete('/company/:id', function (req, res) {
 
 router.get('/examworks', function (req, res) {
     console.log('get request for all exam works');
-    Examwork.find({})
+    var populateQuery = [{ path: 'contact', model: 'person' }, { path: 'company', model: 'company' }];
+    Examwork.find({}).populate(populateQuery)
         .exec(function (err, examworks) {
             if (err) {
                 console.log('error retrieving exam works' + err);
@@ -323,8 +350,8 @@ router.post('/examwork', function (req, res) {
     newExamWork.complementarySkills = req.body.complementarySkills;
     newExamWork.description = req.body.description;
     newExamWork.teachings = req.body.teachings;
-    newExamWork.contact = req.body.contact;
-    newExamWork.company = req.body.company;
+    newExamWork.contact = req.body.contactId;
+    newExamWork.company = req.body.companyId;
 
     newExamWork.save(function (err, insertedExamwork) {
         if (err) {

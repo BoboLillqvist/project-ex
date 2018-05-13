@@ -1,0 +1,17 @@
+ <!-- skills -->
+ <div class="form-group">
+    <button Primarytype="button" class="btn btn-primary btn-sm tag tag-essential"
+            #skill
+            (mouseup)="removeEnteredTag(skill)"
+            *ngFor="let tag of skills">{{ tag }}</button>
+
+    <input type="text" class="form-control" id="skills" #skill
+            [(ngModel)]="essentialSkillInput"
+            name="skillInput"
+            container="body"
+            [typeahead]="availableTags"
+            (typeaheadOnSelect)="onSelect($event, skill.id, skill)"
+            (typeaheadNoResults)="typeaheadNoResults($event)"
+            (keyup.enter)="onEnter($event)"
+            placeholder="Ange kompetens som etikett">
+</div>

@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     document.getElementById("main-navbar").setAttribute('hidden', 'true');
+      document.body.style.backgroundImage = "url('https://image.ibb.co/ediGeS/wp_blue.jpg')"; 
   }
 
 }

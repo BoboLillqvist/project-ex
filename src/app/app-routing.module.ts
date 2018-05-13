@@ -32,7 +32,7 @@ const routes: Routes = [
 {path: 'student/home', component: StudentHomeComponent},
 {path: 'student/profile', component: StudentProfileComponent},
 {path: 'student/edit-profile', component: EditStudentProfileComponent},
-{path: 'student/view-exam-work', component: StudentViewExamWorkComponent},
+{path: 'student/view-exam-work/:id', component: StudentViewExamWorkComponent},
 
 {path: 'company/home', component: CompanyHomeComponent},
 {path: 'company/profile', component: CompanyProfileComponent},

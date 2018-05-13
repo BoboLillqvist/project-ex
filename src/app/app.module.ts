@@ -4,9 +4,8 @@ import { CompaniesComponent } from './companies/companies.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
-
 import { AppComponent } from './app.component';
-import { FilterTitlePipe, FilterDescriptionPipe } from './home/filter.pipe';
+import { FilterPipe } from './home/filter.pipe';
 import { HttpModule } from '@angular/http';
 import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './home/home.component';
@@ -30,8 +29,10 @@ import { FindStudentsComponent } from './company-pages/exam-work-pages/find-stud
 import { EditExamWorkComponent } from './company-pages/exam-work-pages/edit-exam-work/edit-exam-work.component';
 import { LoginComponent } from './login/login.component';
 import { CancleComponent } from './cancle/cancle.component';
+import { SimpleTagComponent } from './profiles/create-student-profile/simple-tag/simple-tag.component';
 import { BackComponent } from './back/back.component';
 import { RegisterChoiceComponent } from './register-choice/register-choice.component';
+import { RegisterLoginComponent } from './register-login/register-login.component';
 
 @NgModule({
   declarations: [
@@ -45,8 +46,7 @@ import { RegisterChoiceComponent } from './register-choice/register-choice.compo
     CreateCompanyProfileComponent,
     StudentsComponent,
     CreateStudentProfileComponent,
-    FilterTitlePipe,
-    FilterDescriptionPipe,
+    FilterPipe,
     AddStudentSkillsComponent,
     PdfUploadComponent,
     StudentHomeComponent,
@@ -60,8 +60,10 @@ import { RegisterChoiceComponent } from './register-choice/register-choice.compo
     EditExamWorkComponent,
     LoginComponent,
     CancleComponent,
+    SimpleTagComponent,
     BackComponent,
-    RegisterChoiceComponent
+    RegisterChoiceComponent,
+    RegisterLoginComponent
   ],
   imports: [
     BrowserModule,

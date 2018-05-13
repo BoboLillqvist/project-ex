@@ -17,6 +17,9 @@ export class StudentService {
 
   public _id = '5aec68f586e32f2e804d4699';
 
+  eduPrograms: string[] = [
+    'Högskoleingenjör, datateknik',
+  ];
 
   constructor(private _http: Http) { }
 
