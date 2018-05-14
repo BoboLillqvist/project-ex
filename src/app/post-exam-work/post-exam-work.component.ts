@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExamworkService } from '../examwork.service';
+import { PersonService } from '../person.service';
 import { ExamWork } from '../models/exam-work.model';
 import { NgForm } from '@angular/forms';
 import { Person } from '../models/person.model';
@@ -8,7 +9,9 @@ import { Person } from '../models/person.model';
   selector: 'app-post-exam-work',
   templateUrl: './post-exam-work.component.html',
   styleUrls: ['./post-exam-work.component.scss'],
-  providers: [ExamworkService]
+  providers: [
+    ExamworkService,
+    PersonService,
 })
 export class PostExamWorkComponent implements OnInit {
 
@@ -19,15 +22,15 @@ export class PostExamWorkComponent implements OnInit {
   phoneNbr: string;
   email: string;
 
-
-  constructor(private examWorkService: ExamworkService) { }
+  constructor(
+    private examWorkService: ExamworkService,
+    private personService: PersonService,
 
   ngOnInit() {
   }
 
-  onSubmitAddExamWork(examWork: ExamWork){
-
-    this.createPerson(examWork);
+  onSubmitAddExamWork(examWork: ExamWork) {
+    this.createPerson(this.personService);
 
     console.log("titel: " + examWork.title);
     console.log("ort: " + examWork.location);
@@ -52,5 +55,11 @@ export class PostExamWorkComponent implements OnInit {
     const contact = new Person(this.fName, this.lName,this.email, this.phoneNbr);
     console.log("kontaktperson: " + contact);
     return contact;
+  createPerson(personService: PersonService) {
+    const contact = new Person(this.fName, this.lName, this.email, this.phoneNbr);
+
+    // TODO: Kolla om användaren finns, isf hämta
+    personService.addPerson(contact).subscribe();
+  }
   }
 }
