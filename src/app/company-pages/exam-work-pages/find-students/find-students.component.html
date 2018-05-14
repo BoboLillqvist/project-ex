@@ -43,7 +43,7 @@
 
                                 </small>
                             </p>
-                            <a routerLink="/students/:id/student-profile" class="btn btn-primary">Gå till profilsidan</a>
+                            <a [routerLink]="['/students', student._id]" class="btn btn-primary">Gå till profilsidan</a>
                         </div>
                         <div class="col col-3 center-content">
                             <img src="http://via.placeholder.com/140x140" alt="student-profile-picture" class="float-right">
@@ -52,4 +52,4 @@
                 </div>
             </div>
           </div>
-          </div>          </div>
+          </div>          
