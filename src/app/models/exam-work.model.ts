@@ -1,5 +1,5 @@
-import { Company } from "./company.model";
-import { Person } from "./person.model";
+import { Company } from './company.model';
+import { Person } from './person.model';
 
 export class ExamWork {
     _id: string;

@@ -60,7 +60,8 @@ router.post('/student', (req, res) => {
         examYear: req.body.examYear,
         description: req.body.description,
         skills: req.body.skills,
-        courses: courseIds
+        courses: courseIds,
+        pictureID: req.body.pictureID
     });
 
     newStudent.save((err, insertedStudent) => {
@@ -279,6 +280,7 @@ router.post('/company', function (req, res) {
     newCompany.name = req.body.name;
     newCompany.url = req.body.url;
     newCompany.description = req.body.description;
+    newCompany.pictureID = req.body.pictureID;
     newCompany.save(function (err, insertedCompany) {
         if (err) {
             console.log('Error saving company' + err);
