@@ -60,7 +60,8 @@ router.post('/student', (req, res) => {
         examYear: req.body.examYear,
         description: req.body.description,
         skills: req.body.skills,
-        courses: courseIds
+        courses: courseIds,
+        pictureID: req.body.pictureID
     });
 
     newStudent.save((err, insertedStudent) => {
