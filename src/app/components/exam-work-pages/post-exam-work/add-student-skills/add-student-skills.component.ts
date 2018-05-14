@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead/typeahead-match.class';
-import { Tags } from '../../../models/tags.model';
-import { TagsService } from '../../../services/tags.service';
+import { Tags } from '../../../../models/tags.model';
+import { TagsService } from '../../../../services/tags.service';
 
 @Component({
   selector: 'app-add-student-skills',

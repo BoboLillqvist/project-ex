@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExamWork } from '../../../models/exam-work.model';
 import { ExamworkService } from '../../../services/examwork.service';
-import { SimpleTagComponent } from '../../profiles/create-student-profile/simple-tag/simple-tag.component';
+import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 
 @Component({
   selector: 'app-student-home',

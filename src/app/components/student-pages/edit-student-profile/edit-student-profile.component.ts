@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef  } from 
 import { StudentService } from '../../../services/student.service';
 import { Student } from '../../../models/student.model';
 import { Course } from '../../../models/course.model';
-import { SimpleTagComponent } from '../../profiles/create-student-profile/simple-tag/simple-tag.component';
+import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { Router } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
 

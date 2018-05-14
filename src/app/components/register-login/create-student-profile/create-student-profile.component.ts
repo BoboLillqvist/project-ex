@@ -11,7 +11,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import { NgForm } from '@angular/forms';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { PersonService } from '../../../services/person.service';
-import { SimpleTagComponent } from './simple-tag/simple-tag.component';
+import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 
 @Component({
