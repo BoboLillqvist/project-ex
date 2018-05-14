@@ -4,6 +4,7 @@ import { PersonService } from '../person.service';
 import { ExamWork } from '../models/exam-work.model';
 import { NgForm } from '@angular/forms';
 import { Person } from '../models/person.model';
+import { NotificationService } from '../notification.service';
 
 @Component({
   selector: 'app-post-exam-work',
@@ -12,6 +13,8 @@ import { Person } from '../models/person.model';
   providers: [
     ExamworkService,
     PersonService,
+    NotificationService
+  ]
 })
 export class PostExamWorkComponent implements OnInit {
 
@@ -25,6 +28,7 @@ export class PostExamWorkComponent implements OnInit {
   constructor(
     private examWorkService: ExamworkService,
     private personService: PersonService,
+    private notificationService: NotificationService
 
   ngOnInit() {
   }
@@ -43,6 +47,7 @@ export class PostExamWorkComponent implements OnInit {
     
     this.examWorkService.addExamWork(examWork)
     .subscribe();
+    this.notificationService.notify('Examensarbetet är publicerat!', 'success');
 
     this.clearValues()
   }
