@@ -31,6 +31,11 @@ export class FilterPipe implements PipeTransform {
     }
   }
 }
+    transform(items: any[], filter: Array<String>): any {
+        if (filter === undefined)
+            return items;
+        
+        let sortedArray = [];
 
 
 // @Pipe({
@@ -41,13 +46,22 @@ export class FilterPipe implements PipeTransform {
 //     transform(items: any, filter: string): any {
 //         if (filter === undefined)
 //             return items;
+        items.forEach(item => {
+            filter.forEach(skill => {
+                item.skills.forEach(essSkill => {
+                    if(skill === essSkill)
+                        sortedArray.push(item);
+                });
+            })
 
 //         //items som matchar och returnerar true är kvar, de som är false filtreras ut
 
 //             return items.filter(item => item.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1);
 //         }
 //     }
+        })
 
+        return sortedArray;
 
 // @Pipe({
 //     name: 'filter2',
