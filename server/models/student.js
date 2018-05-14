@@ -11,7 +11,8 @@ const studentSchema = new Schema({
     examYear: Number,
     description: String,
     skills: [String],
-    courses: [ { type: Schema.Types.ObjectId, ref: 'course' } ]
+    courses: [ { type: Schema.Types.ObjectId, ref: 'course' } ],
+    pictureID: String
 });
 
 module.exports = mongoose.model('student', studentSchema, 'students');
