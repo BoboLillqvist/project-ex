@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Student } from '../../../models/student.model'
+import { Student } from '../../../models/student.model';
 import { Course } from '../../../models/course.model';
 import { StudentService } from '../../../student.service';
 
@@ -7,8 +7,8 @@ import { StudentService } from '../../../student.service';
 @Component({
   selector: 'app-find-students',
   templateUrl: './find-students.component.html',
-  styleUrls: ['./find-students.component.scss']
- providers: [StudentService]
+  styleUrls: ['./find-students.component.scss'],
+  providers: [StudentService]
 })
 export class FindStudentsComponent implements OnInit {
 
