@@ -17,8 +17,8 @@
         </h3>
     </div>
 
-    <div class="col-sm-10" *ngFor="let examWork of sortedWorks">
-        <div class="card">
+    <div class="col-sm-10" *ngFor="let examWork of sortedWorks; let i = index">
+        <div class="card" *ngIf="i < showLimit">
         <div class="card-body">
             <div class="row">
                 <div class="col col-9">
@@ -36,5 +36,24 @@
                 </div>
             </div>
         </div>
+        </div>
     </div>
+
+    <div class="col-sm-10" *ngIf="showMoreBtn">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-block"
+                                (click)="showMoreWorks()">
+                            Läs in fler
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+
