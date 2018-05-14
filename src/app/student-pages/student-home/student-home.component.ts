@@ -27,4 +27,40 @@ export class StudentHomeComponent implements OnInit {
     });
   }
 
+  sortExamWorks() {
+    console.log(this.tagComp.skills);
+    this.noWorks = false;
+    this.sortedWorks = [];
+
+    this.examWorks.forEach(examwork => {
+      let countMatching = 0;
+
+      this.tagComp.skills.forEach(skill => {
+
+        // check versus essential skills
+        examwork.essentialSkills.forEach(essSkill => {
+          if(skill === essSkill) {
+            countMatching++;
+          }
+        });
+        
+        // check versus complementary skill
+        examwork.complementarySkills.forEach(compSkill => {
+          if(skill === compSkill) {
+            countMatching++;
+          }
+        });
+      });
+
+      if(this.tagComp.skills.length === countMatching) {
+        this.sortedWorks.push(examwork);
+      }
+
+    });
+
+    if (this.sortedWorks.length < 1) {
+      this.noWorks = true;
+    }
+    
+  }
 }
