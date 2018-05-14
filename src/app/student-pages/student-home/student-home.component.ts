@@ -16,6 +16,8 @@ export class StudentHomeComponent implements OnInit {
   examWorks: Array<ExamWork> = [];
   sortedWorks: Array<ExamWork> = [];
   noWorks: boolean = false;
+  showMoreBtn: boolean = false;
+  showLimit: number = 5;
 
   constructor(private examService: ExamworkService) { }
 
