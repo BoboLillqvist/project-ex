@@ -74,6 +74,14 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     HttpClientModule,
     TwbootstrapModule,
     FormsModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyAhpOlHdneiUA4iwlv9Ul2RmZANXxXHrmM",
+      authDomain: "firstcontact-3ad7f.firebaseapp.com",
+      databaseURL: "https://firstcontact-3ad7f.firebaseio.com",
+      projectId: "firstcontact-3ad7f",
+      storageBucket: "firstcontact-3ad7f.appspot.com",
+    }),
+    AngularFireStorageModule
   ],
 
   exports: [
