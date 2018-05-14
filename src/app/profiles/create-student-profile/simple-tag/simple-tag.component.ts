@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 
 @Component({
@@ -7,6 +7,8 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
   styleUrls: ['./simple-tag.component.scss']
 })
 export class SimpleTagComponent implements OnInit {
+
+  @Output() onNewTag = new EventEmitter<boolean>();
   
   placeholderText: string = "Ange kompetens som etikett";
   selectedTag: string;
@@ -47,6 +49,7 @@ export class SimpleTagComponent implements OnInit {
         if (enteredTag === tagToDelete) {
           this.skills.splice(index, 1);
           this.restoreTag(enteredTag);
+          this.onNewTag.emit(true);
         }
       index++;
     });
@@ -86,6 +89,8 @@ export class SimpleTagComponent implements OnInit {
       this.removeTagFromAvailable();
 
       this.skills.push(this.selectedTag);
+
+      this.onNewTag.emit(true);
   }
 
   removeTagFromAvailable() {
