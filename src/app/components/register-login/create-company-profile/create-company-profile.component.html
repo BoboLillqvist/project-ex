@@ -1,0 +1,43 @@
+<h1>Skapa företagskonto</h1>
+<div class="jumbotron">
+  <h4>Fyll i företagets uppgifter</h4>
+
+  <app-image-upload></app-image-upload>
+
+  <br>
+  <form #form="ngForm" name="companyForm" (ngSubmit)="onSubmitAddCompany(form.value)">
+
+    <!-- name -->
+    <div class="form-group">
+      <label for="companyName" class="col-sm-2 control-label">Namn</label>
+      <div class="col-sm-10">
+        <input ngModel required #companyName="ngModel" type="text" class="form-control" id="companyName" name="name" value="">
+        <!-- <div class="alert alert-danger" *ngIf="companyName.touched && !companyName.valid">Namn måste vara ifyllt</div> -->
+      </div>
+    </div>
+
+    <!-- url -->
+    <div class="form-group">
+      <label for="companyUrl" class="col-sm-10 control-label">Hemsida</label>
+      <div class="col-sm-10">
+        <input ngModel required #companyUrl="ngModel" name="url" id="companyUrl" type="text" class="form-control" value="">
+        <!-- <div class="alert alert-danger" *ngIf="companyUrl.touched && !companyUrl.valid">Hemsida måste vara ifyllt</div> -->
+      </div>
+    </div>
+
+    <!-- description -->
+    <div class="form-group">
+      <label for="companyDescription" class="col-sm-10 control-label">Beskrivning</label>
+      <div class="col-sm-10">
+        <textarea ngModel name="description" id="companyDescription" class="form-control" rows="4" placeholder="Beskriv företagets verksamhet..."></textarea>
+      </div>
+    </div>
+    <br>
+    <app-register-login></app-register-login>
+    <!-- submit button -->
+    <div class="form-group">
+      <div class="col-sm-10 col-sm-offset-2">
+        <button type="submit" class="btn btn-primary">Skapa konto</button>
+      </div>
+    </div>
+  </form>
