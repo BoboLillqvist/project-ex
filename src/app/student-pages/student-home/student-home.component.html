@@ -13,10 +13,7 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{ examWork.company.name }}</h6>
                     <p class="card-text">
                         <small>
-                            Lorem ipsum dolor sit åmet, ne duo utinam suscipiæntur, 
-                            epicuri phaedrum aliquændö usu id. Est dolöre repudiåre repudiandåe 
-                            eu, te suåvitæte vituperatöribus eum. Ut vitäe causae ömittam vis, 
-                            wisi plåtönem eum te, ei error doctus fåbellås vix.
+                            {{ examWork.description }}
                         </small>
                     </p>
                     <a [routerLink]="['/student/view-exam-work', examWork._id]" class="btn btn-primary">Gå till examensarbetet</a>
