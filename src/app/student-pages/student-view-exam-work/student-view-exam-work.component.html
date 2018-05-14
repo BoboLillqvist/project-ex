@@ -1,11 +1,126 @@
-<div class="row">
-  <div class="col col-12">
-    <h1 class="text-title">Student - Visa examensarbete</h1>
-  </div>
-</div>
+<div class="jumbotron">
 
-<div class="row justify-content-center">
-  <div class="col col-10">
-    <h3>Innehåll</h3>
+  <div class="row">
+      <div class="col">
+          <h1>
+              {{ examWork.title }}
+          </h1>
+          <h3>
+              {{ examWork.location }}
+          </h3>
+      </div>
+      <div class="col">
+          <img src="" 
+              class="img-fluid" 
+              alt="Responsive image">
+      </div>
   </div>
+
+  <div>
+    <h4>
+      <span class="badge badge-primary">
+        Vad du kommer att lära dig
+      </span> 
+    </h4>
+    {{ examWork.teachings}}
+  </div>
+
+  <div>
+    <h4>
+      <span class="badge badge-primary">
+        Beskrivning
+      </span>
+    </h4>
+    {{ examWork.description}}
+  </div>
+
+  <br>
+  
+  <div class="row">
+    <div class="col">
+        <h4>
+            <span class="badge badge-primary">
+                Nödvändiga kompetenser
+            </span>
+        </h4>
+        {{ examWork.essentialSkills }}
+    </div>
+    <div class="col">
+        <h5>
+            <span class="badge badge-info">
+              Komplementerande kompetenser
+            </span>
+        </h5>
+        {{ examWork.complementarySkills }}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+   <div class="col">
+      <h4>
+          <span class="badge badge-primary">
+              Företag som håller examensarbetet 
+          </span>
+      </h4>
+      {{ examWork.company.name }} 
+      <br>
+      <a href="url">{{examWork.company.url}}</a>
+    </div>
+
+    <div class="col">
+    <h5>
+        <span class="badge badge-info">
+            Närvarokrav
+        </span>
+    </h5>
+        {{ examWork.presence }}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="col">
+      <h4>
+          <span class="badge badge-primary">
+              Kontaktperson
+          </span>
+      </h4>
+          {{ examWork.contact.firstName }}&nbsp;{{ examWork.contact.lastName }} 
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <h5>
+        <span class="badge badge-info">
+             E-post
+        </span>
+      </h5>
+        <a  href="mailto:{{ examWork.contact.email }}" 
+          target="_blank"> 
+          {{ examWork.contact.email }}
+        </a>
+    </div>
+    <div class="col">
+      <h5>
+        <span class="badge badge-info">
+          Telefon
+        </span>
+        </h5>
+          {{ examWork.contact.phoneNbr  }}
+    </div>
+  </div>
+  <br>
+  <div>
+    <h4>
+        <span class="badge badge-primary">
+            Sista ansökningsdag
+        </span>
+    </h4>
+    {{examWork.applyDueDate | date:'yyyy-MM-dd' }}
+  </div>
+  
 </div>
