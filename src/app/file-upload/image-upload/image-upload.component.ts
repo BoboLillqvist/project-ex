@@ -1,5 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
+//firebase
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from 'angularfire2/storage';
+import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators/map';
+
 
 @Component({
   selector: 'app-image-upload',
@@ -8,18 +15,43 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ImageUploadComponent implements OnInit {
 
+  id: string = "";
   uploadedImage: File = null;
   maxWidth: number = 100;
   maxHeight: number = 100;
   context: CanvasRenderingContext2D;
+
+  //firebase
+  ref: AngularFireStorageReference;
+  task: AngularFireUploadTask;
+  uploadProgress: Observable<number>;
+  downloadURL: Observable<string>;
+
   @ViewChild('previewcanvas') previewcanvas;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private afStorage: AngularFireStorage, private router: Router) {}
+
+  // firebase
+  upload(image){
+    this.id = Math.random().toString(36).substring(2);
+    console.log("genererat image id: " + this.id);
+
+    if(this.router.url == "/create-company-profile"){
+      this.ref = this.afStorage.ref("company-profile-pictures/"+this.id); 
+    }
+    else if(this.router.url == "/create-student-profile"){
+      this.ref = this.afStorage.ref("student-profile-pictures/"+this.id);
+    }
+
+    this.task = this.ref.put(image);  //ladda upp fil till given referensplats
+    this.uploadProgress = this.task.percentageChanges();  //används för progressbar 
+    this.downloadURL = this.task.downloadURL();
+  }
 
   getFile(event) {
     const image: File = <File>event.target.files[0];
     this.uploadedImage = image;
-
+    this.upload(image); //firebase
     this.previewImage(image);
   }
 
