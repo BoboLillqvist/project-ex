@@ -2,6 +2,8 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { CompanyService } from '../../company.service';
 import { Company } from '../../models/company.model';
 import { NgForm } from '@angular/forms';
+import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+
 
 @Component({
   selector: 'app-create-company-profile',
@@ -12,6 +14,7 @@ import { NgForm } from '@angular/forms';
 export class CreateCompanyProfileComponent implements OnInit {
 
   @ViewChild(NgForm) myForm: NgForm;
+  @ViewChild(ImageUploadComponent) imageUpload;
 
   constructor(private companyService: CompanyService) { }
   
@@ -22,6 +25,8 @@ export class CreateCompanyProfileComponent implements OnInit {
     console.log(company.name);
     console.log(company.url);
     console.log(company.description);
+    console.log(company.pictureID);
+    company.pictureID = this.imageUpload.id;
     this.companyService.addCompany(company)
     .subscribe();
 
