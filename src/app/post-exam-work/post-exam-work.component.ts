@@ -38,21 +38,12 @@ export class PostExamWorkComponent implements OnInit {
   onSubmitAddExamWork(examWork: ExamWork) {
     this.addTagsFromAddStudentSkillsComponent(examWork);
     this.createPerson(this.personService);
+    this.createExamWork(this.examWorkService, examWork);
 
-    console.log("titel: " + examWork.title);
-    console.log("ort: " + examWork.location);
-    console.log("datum: " + examWork.applyDueDate);
-    console.log("ess.skills: " + examWork.essentialSkills);
-    console.log("comp.skills: " + examWork.complementarySkills);
-    console.log("beskrivning: " + examWork.description);
-    console.log("lärdomar: " + examWork.teachings);
-    console.log("company: " + examWork.company);
-    
-    this.examWorkService.addExamWork(examWork)
-    .subscribe();
+    // Store success for notification
     this.notificationService.notify('Examensarbetet är publicerat!', 'success');
 
-    this.clearValues()
+    this.sendUserBack();
   }
 
   clearValues() {
@@ -70,5 +61,23 @@ export class PostExamWorkComponent implements OnInit {
     // TODO: Kolla om användaren finns, isf hämta
     personService.addPerson(contact).subscribe();
   }
+
+  createExamWork(examWorkService: ExamworkService, examWork: any) {
+    const newExamWork = new ExamWork(
+      examWork.title,
+      examWork.location,
+      examWork.essentialSkills,
+      examWork.complementarySkills,
+      examWork.description,
+      examWork.applyDueDate,
+      null, // Contact
+      null, // Company
+      'precense',
+      examWork.teachings
+    );
+
+    examWorkService.addExamWork(newExamWork).subscribe();
+  }
+
   }
 }
