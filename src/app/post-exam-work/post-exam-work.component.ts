@@ -4,6 +4,7 @@ import { PersonService } from '../person.service';
 import { ExamWork } from '../models/exam-work.model';
 import { NgForm } from '@angular/forms';
 import { Person } from '../models/person.model';
+import { AddStudentSkillsComponent } from './add-student-skills/add-student-skills.component';
 import { NotificationService } from '../notification.service';
 
 @Component({
@@ -19,6 +20,7 @@ import { NotificationService } from '../notification.service';
 export class PostExamWorkComponent implements OnInit {
 
   @ViewChild(NgForm) myForm: NgForm;
+  @ViewChild(AddStudentSkillsComponent) studentSkillsComponent: AddStudentSkillsComponent;
 
   fName: string;
   lName: string;
@@ -34,6 +36,7 @@ export class PostExamWorkComponent implements OnInit {
   }
 
   onSubmitAddExamWork(examWork: ExamWork) {
+    this.addTagsFromAddStudentSkillsComponent(examWork);
     this.createPerson(this.personService);
 
     console.log("titel: " + examWork.title);
@@ -56,10 +59,11 @@ export class PostExamWorkComponent implements OnInit {
     this.myForm.resetForm();
   }
 
-  createPerson(examWork: ExamWork){
-    const contact = new Person(this.fName, this.lName,this.email, this.phoneNbr);
-    console.log("kontaktperson: " + contact);
-    return contact;
+  addTagsFromAddStudentSkillsComponent(examWork: any) {
+    examWork.essentialSkills  = this.studentSkillsComponent.storedTags.essentials;
+    examWork.complementarySkills  = this.studentSkillsComponent.storedTags.complimentary;
+  }
+
   createPerson(personService: PersonService) {
     const contact = new Person(this.fName, this.lName, this.email, this.phoneNbr);
 
