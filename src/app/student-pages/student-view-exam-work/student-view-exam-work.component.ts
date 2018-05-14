@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExamWork } from '../../models/exam-work.model';
 import { ExamworkService } from '../../examwork.service';
+import { Person } from '../../models/person.model';
+import { Company } from '../../models/company.model';
 
 @Component({
   selector: 'app-student-view-exam-work',
@@ -16,11 +18,11 @@ export class StudentViewExamWorkComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private examService: ExamworkService) {
     this.exWorkId = route.snapshot.params['id'];
+    this.examWork= new ExamWork("","","",[],[],"","",new Person("", "", "", ""),"",new Company("", "", "", []));
   }
 
   ngOnInit() {
-    // TODO: hämta exjobb utifrån id och spara i examWork
-    console.log(this.exWorkId);
+    this.examService.getExamWork(this.exWorkId).subscribe(resData => this.examWork = resData);
   }
 
 }
