@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Company } from '../../models/company.model';
-import { CompanyService } from '../../company.service';
+import { CompanyService } from '../../services/company.service';
 import { ExamWork } from '../../models/exam-work.model';
 import { Person } from '../../models/person.model';
 import { Router } from '@angular/router';

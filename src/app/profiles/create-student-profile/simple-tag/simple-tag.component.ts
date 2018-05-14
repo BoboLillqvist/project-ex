@@ -9,8 +9,8 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 export class SimpleTagComponent implements OnInit {
 
   @Output() onNewTag = new EventEmitter<boolean>();
-  
-  placeholderText: string = "Ange kompetens som etikett";
+
+  placeholderText: string = 'Ange kompetens som etikett';
   selectedTag: string;
   tagList: string;
   noResult = false;

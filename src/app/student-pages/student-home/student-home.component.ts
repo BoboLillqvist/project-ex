@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ExamWork } from '../../models/exam-work.model';
-import { ExamworkService } from '../../examwork.service';
+import { ExamworkService } from '../../services/examwork.service';
 import { SimpleTagComponent } from '../../profiles/create-student-profile/simple-tag/simple-tag.component';
 
 @Component({

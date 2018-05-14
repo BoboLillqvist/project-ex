@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { ExamWork } from './models/exam-work.model';
+import { ExamWork } from '../models/exam-work.model';
 
 @Injectable()
 export class ExamworkService {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ExamWork } from '../../models/exam-work.model';
-import { ExamworkService } from '../../examwork.service';
+import { ExamworkService } from '../../services/examwork.service';
 
 @Component({
   selector: 'app-student-view-exam-work',

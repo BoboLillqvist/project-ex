@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ExamworkService } from '../examwork.service';
+import { ExamworkService } from '../services/examwork.service';
 import { ExamWork } from '../models/exam-work.model';
 import { NgForm } from '@angular/forms';
 import { Person } from '../models/person.model';

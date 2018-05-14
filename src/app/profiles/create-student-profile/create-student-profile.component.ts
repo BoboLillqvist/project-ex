@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Student } from '../../models/student.model';
 import { Course } from '../../models/course.model';
-import { StudentService } from '../../student.service';
+import { StudentService } from '../../services/student.service';
 import { isNumber } from 'util';
 import { Person } from '../../models/person.model';
 import { Observable } from 'rxjs/Observable';
@@ -10,7 +10,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { NgForm } from '@angular/forms';
 import { TypeaheadMatch } from 'ngx-bootstrap';
-import { PersonService } from '../../person.service';
+import { PersonService } from '../../services/person.service';
 import { SimpleTagComponent } from './simple-tag/simple-tag.component';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 

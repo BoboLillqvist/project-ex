@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { CompanyService } from '../../company.service';
+import { CompanyService } from '../../services/company.service';
 import { Company } from '../../models/company.model';
 import { NgForm } from '@angular/forms';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';

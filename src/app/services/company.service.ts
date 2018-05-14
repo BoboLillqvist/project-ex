@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Company } from './models/company.model';
+import { Company } from '../models/company.model';
 
 @Injectable()
 export class CompanyService {
