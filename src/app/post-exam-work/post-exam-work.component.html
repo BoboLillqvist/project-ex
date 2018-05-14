@@ -3,7 +3,8 @@
 <div class="jumbotron content">
   <h4>Fyll i information för examensarbetet</h4>
  
-  <form #form="ngForm" (ngSubmit)="onSubmitAddExamWork(form.value)">
+  <!-- <form #form="ngForm" (ngSubmit)="onSubmitAddExamWork(form.value)"> -->
+  <form #form="ngForm">
 
     <!-- title -->
     <div class="form-row">
@@ -145,6 +146,7 @@
         <button id="submit" 
                 name="submit" 
                 type="submit" 
+                (mouseup)="onSubmitAddExamWork(form.value)"
                 class="btn btn-primary">Publicera examensarbete
         </button>
       </div>
