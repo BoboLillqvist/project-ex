@@ -14,6 +14,9 @@ export class FindStudentsComponent implements OnInit {
 
  students: Array<Student> = [];
 
+ //TODO: Läs in den specifika examensarbetens essential skills.
+ essSkills: Array<String> = ['C#'];
+
 //  Students = [
 //   new Student('Sven','Svensson','Maskiningenjör',2019,'Gillar att äta glass',
 //   ['Matematik','Fysik'],[new Course('Matematik I',7.5), new Course('Maskinteknik A',7.5)],
