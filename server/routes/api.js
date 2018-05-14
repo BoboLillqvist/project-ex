@@ -345,13 +345,14 @@ router.post('/examwork', function (req, res) {
     var newExamWork = new Examwork();
     newExamWork.title = req.body.title;
     newExamWork.location = req.body.location;
-    newExamWork.applyDueDate = req.body.applyDueDate;
     newExamWork.essentialSkills = req.body.essentialSkills;
     newExamWork.complementarySkills = req.body.complementarySkills;
     newExamWork.description = req.body.description;
+    newExamWork.applyDueDate = req.body.applyDueDate;
+    newExamWork.presence = req.body.presence;
     newExamWork.teachings = req.body.teachings;
-    newExamWork.contact = req.body.contactId;
-    newExamWork.company = req.body.companyId;
+    newExamWork.contact = new mongoose.mongo.ObjectId('5af94b79af22a127ea036673'),
+    newExamWork.company = new mongoose.mongo.ObjectId('5ae2b45513ed9310c06691a9'),
 
     newExamWork.save(function (err, insertedExamwork) {
         if (err) {
@@ -417,7 +418,6 @@ router.get('/tags', function (req, res) {
                 console.log('error retrieving tags' + err);
             } else {
                 res.json(tags);
-                console.log(tags);
             }
         });
 });
