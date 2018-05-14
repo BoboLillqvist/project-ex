@@ -33,6 +33,8 @@ import { SimpleTagComponent } from './profiles/create-student-profile/simple-tag
 import { BackComponent } from './back/back.component';
 import { RegisterChoiceComponent } from './register-choice/register-choice.component';
 import { RegisterLoginComponent } from './register-login/register-login.component';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [
