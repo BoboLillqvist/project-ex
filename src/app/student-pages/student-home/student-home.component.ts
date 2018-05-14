@@ -26,7 +26,18 @@ export class StudentHomeComponent implements OnInit {
     this.examService.getExamWorks().subscribe( resData => {
       this.examWorks = resData;
       this.sortedWorks = resData;
+
+      if(this.sortedWorks.length > this.showLimit) {
+        this.showMoreBtn = true;
+      }
     });
+  }
+
+  showMoreWorks() {
+    this.showLimit += 5;
+    if (this.showLimit > this.sortedWorks.length) {
+      this.showMoreBtn = false;
+    }
   }
 
   sortExamWorks() {
@@ -62,6 +73,10 @@ export class StudentHomeComponent implements OnInit {
 
     if (this.sortedWorks.length < 1) {
       this.noWorks = true;
+    } else if(this.sortedWorks.length < this.showLimit) {
+      this.showMoreBtn = false;
+    } else {
+      this.showMoreBtn = true;
     }
     
   }
