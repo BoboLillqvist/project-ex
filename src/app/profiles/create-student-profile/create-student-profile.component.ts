@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { PersonService } from '../../person.service';
 import { SimpleTagComponent } from './simple-tag/simple-tag.component';
+import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 
 @Component({
   selector: 'app-create-student-profile',
@@ -40,7 +41,8 @@ export class CreateStudentProfileComponent implements OnInit {
   courses: Array<Course> = [];
 
   @ViewChild(SimpleTagComponent) studentSkillsComp;
-
+  @ViewChild(ImageUploadComponent) imageUpload;
+  
   constructor(private studentService: StudentService, private personService: PersonService) {
     this.eduPrograms = studentService.eduPrograms;
    }
@@ -57,9 +59,10 @@ export class CreateStudentProfileComponent implements OnInit {
     }
 
     this.skills = this.studentSkillsComp.skills;
-
+ 
     const student = new Student(this.fName, this.lName, this.education, this.examYear,
                                 this.description, this.skills, this.courses, this.email, this.phoneNbr);
+    student.pictureID = this.imageUpload.id;
     this.addPerson(student);
   }
 
