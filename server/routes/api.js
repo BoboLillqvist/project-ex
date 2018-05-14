@@ -338,6 +338,18 @@ router.get('/examworks', function (req, res) {
         });
 });
 
+router.get('/examworks/:id', function (req, res) {
+    console.log('get request for a single exam work');
+    var populateQuery = [{ path: 'contact', model: 'person' }, { path: 'company', model: 'company' }];
+    Examwork.findById(req.params.id).populate(populateQuery)
+        .exec(function (err, examwork) {
+            if (err) {
+                console.log('error retrieving exam work' + err);
+            } else {
+                res.json(examwork);
+            }
+        });
+});
 
 router.post('/examwork', function (req, res) {
     console.log('Post an exam work');
