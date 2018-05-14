@@ -4,6 +4,7 @@ import { PersonService } from '../person.service';
 import { ExamWork } from '../models/exam-work.model';
 import { NgForm } from '@angular/forms';
 import { Person } from '../models/person.model';
+import { Router } from '@angular/router';
 import { AddStudentSkillsComponent } from './add-student-skills/add-student-skills.component';
 import { NotificationService } from '../notification.service';
 
@@ -30,7 +31,9 @@ export class PostExamWorkComponent implements OnInit {
   constructor(
     private examWorkService: ExamworkService,
     private personService: PersonService,
+    private router: Router,
     private notificationService: NotificationService
+  ) { }
 
   ngOnInit() {
   }
@@ -79,5 +82,7 @@ export class PostExamWorkComponent implements OnInit {
     examWorkService.addExamWork(newExamWork).subscribe();
   }
 
+  sendUserBack() {
+    this.router.navigate(['/company/home']);
   }
 }
