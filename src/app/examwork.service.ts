@@ -15,6 +15,10 @@ export class ExamworkService {
     return this._http.get(this._getUrl).map((res: Response) => res.json());
   }
 
+  getExamWork(examId) {
+    return this._http.get(this._getUrl + '/' + examId).map((res: Response) => res.json());
+  }
+  
   addExamWork(examwork: ExamWork) {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     const options = new RequestOptions({ headers: headers});
