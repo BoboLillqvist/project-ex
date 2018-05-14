@@ -8,6 +8,7 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 })
 export class SimpleTagComponent implements OnInit {
   
+  placeholderText: string = "Ange kompetens som etikett";
   selectedTag: string;
   tagList: string;
   noResult = false;
