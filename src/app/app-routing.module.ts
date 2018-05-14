@@ -30,7 +30,7 @@ const routes: Routes = [
 {path: 'create-student-profile', component: CreateStudentProfileComponent},
 
 {path: 'student/home', component: StudentHomeComponent},
-{path: 'student/profile', component: StudentProfileComponent},
+{path: 'students/:id', component: StudentProfileComponent},
 {path: 'student/edit-profile', component: EditStudentProfileComponent},
 {path: 'student/view-exam-work/:id', component: StudentViewExamWorkComponent},
 
