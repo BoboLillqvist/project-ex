@@ -35,6 +35,13 @@ export class EditCompanyProfileComponent implements OnInit {
       this.backupContact = Object.assign({}, this.contact);
     });
   }
+
+  updateCompany() {
+    this.compServ.updateCompany(this.company).subscribe( resData => {
+      this.company = resData;
+      this.router.navigate(['/company/profile']);
+    });
+  }
   }
 
 }
