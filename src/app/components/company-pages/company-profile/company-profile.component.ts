@@ -27,6 +27,8 @@ export class CompanyProfileComponent implements OnInit {
     const _id = this.companyService._id;
 
     this.companyService.getCompany(_id).subscribe( resCompData => this.company = resCompData);
+
+    this.loadProfilePicture();
   }
 
   goToExamWork(id) {
@@ -41,5 +43,10 @@ export class CompanyProfileComponent implements OnInit {
 
     url += this.company.url;
     window.open(url, '_blank');
+  }
+
+  loadProfilePicture(){
+     // tilldela profilbildens url till img src
+     document.getElementById('companyPicture').setAttribute('src', this.company.pictureURL);
   }
 }
