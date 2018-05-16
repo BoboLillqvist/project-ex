@@ -54,9 +54,9 @@ export class ImageUploadComponent implements OnInit {
     })
   }
 
-  
-  getImageUrl() {
-    this.url = document.getElementById('uploadedPictureURL').getAttribute('src');
+  // anropas i html:en när downloadUrl.subscribe i upload() är "färdig"
+  getImageUrl(url) {
+    this.url = url;
     console.log(this.url);
   }
 
