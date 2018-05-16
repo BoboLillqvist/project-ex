@@ -36,6 +36,7 @@ import { RegisterChoiceComponent } from './components/register-login/register-ch
 import { RegisterLoginComponent } from './components/register-login/register-login/register-login.component';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
 
 @NgModule({
@@ -68,6 +69,7 @@ import { ProgressBarComponent } from './components/misc/progress-bar/progress-ba
     BackComponent,
     RegisterChoiceComponent,
     RegisterLoginComponent,
+    ExamWorkDashboardComponent,
     ProgressBarComponent
   ],
   imports: [
