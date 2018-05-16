@@ -7,6 +7,7 @@ export class Company {
     url: string;
     examWorks: Array<ExamWork>;
     pictureID: string;
+    pictureURL: string;
 
     constructor(name, description, url, examWorks){
         this.name = name;

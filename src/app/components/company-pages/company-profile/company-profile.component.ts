@@ -22,7 +22,7 @@ export class CompanyProfileComponent implements OnInit {
     // för ng serve develop
     this.contact = new Person('Monti', 'Berg', 'montiberg321@ggcorp.co', '070555111');
 
-    this.company = new Company('', '', '',  [], 'http://via.placeholder.com/140x140');
+    this.company = new Company('', '', '',  []);
 
     const _id = this.companyService._id;
 
