@@ -5,7 +5,8 @@
 <input type="file" (change)="getFile($event)" accept="image/*">
 <br>
 
+<!-- Tilldela url till this.url i komponenten när bilden laddats färdigt -->
 <div class="container" *ngIf="downloadURL | async; let url">
-    <img id ="uploadedPictureURL" [src]="url" alt="Image from AngularFireStorage">
+    {{ getImageUrl(url)}}
   </div>
   
