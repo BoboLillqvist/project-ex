@@ -4,3 +4,8 @@
 <br>
 <input type="file" (change)="getFile($event)" accept="image/*">
 <br>
+
+<div class="container" *ngIf="downloadURL | async; let url">
+    <img id ="uploadedPictureURL" [src]="url" alt="Image from AngularFireStorage">
+  </div>
+  
