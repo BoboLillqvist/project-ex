@@ -26,7 +26,9 @@ export class CreateCompanyProfileComponent implements OnInit {
     console.log(company.url);
     console.log(company.description);
     console.log(company.pictureID);
+    console.log(company.pictureURL);
     company.pictureID = this.imageUpload.id;
+    company.pictureURL = this.imageUpload.url;
     this.companyService.addCompany(company)
     .subscribe();
 
