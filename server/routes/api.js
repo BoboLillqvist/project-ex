@@ -134,6 +134,18 @@ router.get('/persons', (req, res) => {
     });
 })
 
+router.get('/persons/:id', (req, res) => {
+    console.log('Get request for one person, id: ' + req.params.id);
+    
+    Person.findById(req.params.id).exec( (err, person) => {
+        if(err) {
+            console.log('Error retrieving person: ' + err);
+        } else {
+            res.json(person);
+        }
+    });
+})
+
 router.post('/person', (req, res) => {
     console.log('Post a person');
     var newPerson = new Person({
