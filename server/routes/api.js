@@ -307,7 +307,7 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, description: req.body.description }
+            $set: { name: req.body.name, url: req.body.url, description: req.body.description }
         },
         {
             new: true
