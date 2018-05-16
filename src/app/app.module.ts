@@ -4,6 +4,7 @@ import { CompaniesComponent } from './components/misc/companies/companies.compon
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppComponent } from './app.component';
 import { FilterPipe } from './components/misc/home/filter.pipe';
 import { HttpModule } from '@angular/http';
@@ -73,6 +74,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     HttpModule,
     HttpClientModule,
     TwbootstrapModule,
+    AngularFontAwesomeModule,
     FormsModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyAhpOlHdneiUA4iwlv9Ul2RmZANXxXHrmM",
