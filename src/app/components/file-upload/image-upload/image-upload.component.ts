@@ -16,7 +16,9 @@ import { map } from 'rxjs/operators/map';
 export class ImageUploadComponent implements OnInit {
 
   id: string = "";
-  uploadedImage: File = null;
+  url: string;
+  uploadedImage: File = null; 
+  imagepath: string = "";
   maxWidth: number = 100;
   maxHeight: number = 100;
   context: CanvasRenderingContext2D;
@@ -34,18 +36,28 @@ export class ImageUploadComponent implements OnInit {
   // firebase
   upload(image){
     this.id = Math.random().toString(36).substring(2);
-    console.log("genererat image id: " + this.id);
+    console.log("generated image id: " + this.id);
 
     if(this.router.url == "/create-company-profile"){
-      this.ref = this.afStorage.ref("company-profile-pictures/"+this.id); 
+      this.imagepath = "company-profile-pictures/"+this.id;
+      this.ref = this.afStorage.ref(this.imagepath); 
     }
     else if(this.router.url == "/create-student-profile"){
-      this.ref = this.afStorage.ref("student-profile-pictures/"+this.id);
+      this.imagepath = "student-profile-pictures/"+this.id;
+      this.ref = this.afStorage.ref(this.imagepath);
     }
 
     this.task = this.ref.put(image);  //ladda upp fil till given referensplats
-    this.uploadProgress = this.task.percentageChanges();  //används för progressbar 
-    this.downloadURL = this.task.downloadURL();
+    //this.uploadProgress = this.task.percentageChanges();  //används för progressbar 
+    this.task.downloadURL().subscribe(url => {
+      this.downloadURL = this.afStorage.ref(this.imagepath).getDownloadURL();
+    })
+  }
+
+  
+  getImageUrl() {
+    this.url = document.getElementById('uploadedPictureURL').getAttribute('src');
+    console.log(this.url);
   }
 
   getFile(event) {
@@ -71,7 +83,7 @@ export class ImageUploadComponent implements OnInit {
         // Scale image
         const imageWidth = img.width;
         const imageHeight = img.height;
-        const scale = Math.min((100 / imageWidth), (100 / imageHeight));
+        const scale = Math.min((140 / imageWidth), (140 / imageHeight));
         const imageWidthScaled = (imageWidth * scale);
         const imageHeightScaled = (imageHeight * scale);
 
