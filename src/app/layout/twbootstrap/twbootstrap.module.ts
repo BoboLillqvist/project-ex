@@ -8,6 +8,7 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { Alert } from 'selenium-webdriver';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { Alert } from 'selenium-webdriver';
     CollapseModule.forRoot(),
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -25,7 +27,8 @@ import { Alert } from 'selenium-webdriver';
     CollapseModule,
     TypeaheadModule,
     ModalModule,
-    AlertModule
+    AlertModule,
+    ProgressbarModule
   ],
   declarations: []
 })
