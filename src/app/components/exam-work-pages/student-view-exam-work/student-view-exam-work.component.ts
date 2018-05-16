@@ -19,7 +19,7 @@ export class StudentViewExamWorkComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private examService: ExamworkService) {
     this.exWorkId = route.snapshot.params['id'];
-    this.examWork= new ExamWork("","","",[],[],"","",new Person("", "", "", ""),"",new Company("", "", "", []));
+    this.examWork= new ExamWork("","","",[],[],"","",new Person("", "", "", ""),"",new Company("", "", "", [], 'http://via.placeholder.com/140x140'));
   }
 
   ngOnInit() {
