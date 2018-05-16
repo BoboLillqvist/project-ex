@@ -40,9 +40,9 @@ export class CreateStudentProfileComponent implements OnInit {
   coursePoints: number;
   courses: Array<Course> = [];
 
-  @ViewChild(SimpleTagComponent) studentSkillsComp;
+  @ViewChild(SimpleTagComponent) studentSkills;
   @ViewChild(ImageUploadComponent) imageUpload;
-  
+
   constructor(private studentService: StudentService, private personService: PersonService) {
     this.eduPrograms = studentService.eduPrograms;
    }
@@ -58,10 +58,12 @@ export class CreateStudentProfileComponent implements OnInit {
       this.courses.push(new Course('Inga kurser tillagda', 0));
     }
 
-    this.skills = this.studentSkillsComp.skills;
- 
-    const student = new Student(this.fName, this.lName, this.education, this.examYear,
-                                this.description, this.skills, this.courses, this.email, this.phoneNbr);
+    this.skills = this.studentSkills.skills;
+
+    const student = new Student(this.fName, this.lName, this.education,
+                                this.examYear, this.description, this.skills,
+                                this.courses, this.email, this.phoneNbr
+    );
     student.pictureID = this.imageUpload.id;
     this.addPerson(student);
   }
