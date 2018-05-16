@@ -9,7 +9,7 @@
         </div>
 
         <div class="col">
-            <img src="" 
+            <img src="http://via.placeholder.com/140x140" 
                 class="img-fluid" 
                 alt="Responsive image"
             >
@@ -69,13 +69,16 @@
             </div>
 
             <div class="container">
+
                 <ul class="list-group" id="examworkList" >
-                    <li class="list-group-item" *ngFor="let examWork of company.examWorks; let i = index">
-                        <a [routerLink]="['/student/view-exam-work', examWork._id]">
-                            {{ examWork.title }}
-                        </a>
-                    </li>
+
+                    <button class="btn btn-info" *ngFor="let examWork of company.examWorks"
+                            (click)="goToExamWork(examWork._id)">
+                        {{ examWork.title }}
+                    </button>
+
                 </ul>
+                
             </div>
         
         </div>
@@ -124,6 +127,15 @@
 
         </div>
 
+    </div>
+    
+    <br><br>
+
+    <div>
+        <button class="btn btn-primary"
+                routerLink="/company/edit-profile">
+            Redigera profil
+        </button>
     </div>
 
 </div>
