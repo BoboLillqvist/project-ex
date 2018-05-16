@@ -293,6 +293,7 @@ router.post('/company', function (req, res) {
     newCompany.url = req.body.url;
     newCompany.description = req.body.description;
     newCompany.pictureID = req.body.pictureID;
+    newCompany.pictureURL = req.body.pictureURL;
     newCompany.save(function (err, insertedCompany) {
         if (err) {
             console.log('Error saving company' + err);
