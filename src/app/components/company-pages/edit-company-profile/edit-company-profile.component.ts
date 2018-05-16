@@ -19,7 +19,7 @@ export class EditCompanyProfileComponent implements OnInit {
   backupContact: Person;
 
   constructor(private compServ: CompanyService, private router: Router) {
-    this.company = new Company('ÖRebro uni', 'Bra uni du vet', 'https://oru.se', [], 'http://via.placeholder.com/140x140');
+    this.company = new Company('ÖRebro uni', 'Bra uni du vet', 'https://oru.se', []);
     this.contact = new Person('', '', '', '');
   }
 
