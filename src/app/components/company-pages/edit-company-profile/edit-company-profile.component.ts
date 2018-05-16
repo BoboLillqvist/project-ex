@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Company } from '../../../models/company.model';
+import { Person } from '../../../models/person.model';
 
 @Component({
   selector: 'app-edit-company-profile',
@@ -8,6 +10,12 @@ import { Component, OnInit } from '@angular/core';
 export class EditCompanyProfileComponent implements OnInit {
 
   constructor() { }
+  company: Company;
+  contact: Person;
+
+  backupCompany: Company;
+  backupContact: Person;
+
 
   ngOnInit() {
   }
