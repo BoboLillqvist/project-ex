@@ -42,6 +42,16 @@ export class EditCompanyProfileComponent implements OnInit {
       this.router.navigate(['/company/profile']);
     });
   }
+
+  cancelEdit() {
+    this.company = Object.assign({}, this.backupCompany);
+    this.contact = Object.assign({}, this.backupContact);
+    this.router.navigate(['/company/profile']);
+  }
+
+  goToManageExamWorks() {
+    // TODO: Fixa en sida där företagen kan överblicka sina arbeten, men knappar för redigera, ta bort osv.
+    //this.router.navigate(['/company/exam-works/']);
   }
 
 }
