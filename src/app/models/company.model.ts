@@ -7,13 +7,11 @@ export class Company {
     url: string;
     examWorks: Array<ExamWork>;
     pictureID: string;
-    pictureURL: string;
 
-    constructor(name, description, url, examWorks, pictureURL){
+    constructor(name, description, url, examWorks){
         this.name = name;
         this.description = description;
         this.url = url;
         this.examWorks = examWorks;
-        this.pictureURL;
     }
 }
