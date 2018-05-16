@@ -30,6 +30,10 @@ export class CompanyProfileComponent implements OnInit {
     this.companyService.getCompany(_id).subscribe( resCompData => this.company = resCompData);
   }
 
+  goToExamWork(id) {
+    this.router.navigate(['/student/view-exam-work/' + id]);
+  }
+
   goToUrl() {
     let url: string = '';
     if (!/^http[s]?:\/\//.test(this.company.url)) {

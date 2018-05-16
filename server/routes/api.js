@@ -134,6 +134,18 @@ router.get('/persons', (req, res) => {
     });
 })
 
+router.get('/persons/:id', (req, res) => {
+    console.log('Get request for one person, id: ' + req.params.id);
+    
+    Person.findById(req.params.id).exec( (err, person) => {
+        if(err) {
+            console.log('Error retrieving person: ' + err);
+        } else {
+            res.json(person);
+        }
+    });
+})
+
 router.post('/person', (req, res) => {
     console.log('Post a person');
     var newPerson = new Person({
@@ -295,7 +307,7 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, description: req.body.description }
+            $set: { name: req.body.name, url: req.body.url, description: req.body.description }
         },
         {
             new: true

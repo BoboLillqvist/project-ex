@@ -1,1 +1,153 @@
-<h1>Company - Edit profile</h1>
+<div class="jumbotron">
+
+    <div class="row">
+
+        <!-- Name-->
+        <div class="col">
+            <br>
+            <input  class="form-control"
+                    type="text"
+                    placeholder="{{ company.name }}"
+                    [(ngModel)]="company.name"
+                    id="companyName"
+                    name="companyName"
+            >
+        </div>
+
+        <div class="col">
+            <img src="http://via.placeholder.com/140x140" 
+                class="img-fluid" 
+                alt="Responsive image"
+            >
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <div class="row">
+
+        <div id="leftCol" class="col">
+
+            <div>
+                <h3>
+                    <span class="badge badge-primary">
+                        Hemsida
+                    </span>
+                </h3>
+            </div>
+            
+            <div class="container">
+                <input  class="form-control"
+                        type="text"
+                        placeholder="{{ company.url }}"
+                        [(ngModel)]="company.url"
+                        id="companyUrl"
+                        name="companyUrl"
+                >
+            </div>
+
+            <br><br>
+
+            <div>
+                <h3>
+                    <span class="badge badge-primary">
+                        Om {{ company.name }}
+                    </span>
+                </h3>
+            </div>
+        
+            <div class="container">
+                <textarea   class="form-control" 
+                            id="companyDesc" 
+                            rows="6" 
+                            name="companyDesc" 
+                            [(ngModel)]="company.description">
+                </textarea>
+            </div>
+
+
+        </div>
+
+        <div id="rightCol" class="col">
+
+            <div>
+                <h3>
+                    <span class="badge badge-primary">
+                        Examensarbeten
+                    </span>
+                </h3>
+            </div>
+
+            <div class="container">
+
+                <ul class="list-group" id="examworkList" >
+
+                    <button class="btn btn-info" 
+                            *ngFor="let examWork of company.examWorks">
+                        {{ examWork.title }}
+                    </button>
+
+                    <button class="btn btn-primary"
+                            type="button"
+                            (click)="goToManageExamWorks()">
+                        Hantera Examensarbeten
+                    </button>
+
+                </ul>
+
+            </div>
+        
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <div>
+        <h3>
+            <span class="badge badge-primary">
+                Kontaktperson
+            </span>
+        </h3>
+    </div>
+
+    <div class="container">
+
+        <h5>
+            {{ contact.firstName }}  {{ contact.lastName }}
+        </h5>
+
+        <div class="row">
+
+            <div class="col">
+                <h5>
+                    <a
+                        href="mailto:{{ contact.email }}" 
+                        target="_blank"> 
+                        {{ contact.email }}
+                    </a>
+                </h5>
+            </div>
+    
+            <div class="col">
+                <h5>
+                    {{ contact.phoneNbr }}
+                </h5>
+            </div>
+
+        </div>
+
+    </div>
+
+    <br><br>
+    <button class="btn btn-primary"
+            (click)="updateCompany()">
+        Spara och gå tillbaka
+    </button>
+    <button class="btn btn-primary"
+            (click)="cancelEdit()">
+        Avbryt
+    </button>
+
+</div>

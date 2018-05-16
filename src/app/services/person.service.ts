@@ -10,12 +10,18 @@ export class PersonService {
   private _putPerson = '/api/person/';
   private _deletePerson = '/api/person/';
 
+  public _id = '5af959580b35eb2d20611448';
+
   constructor(private _http: Http) { }
 
   getPersons() {
     return this._http.get(this._getPersons).map((res: Response) => res.json());
   }
-  
+
+  getPerson(personId) {
+    return this._http.get(this._getPersons + '/' + personId).map( (res: Response) => res.json());
+  }
+
   addPerson(person: Person) {
     const headers = new Headers( {'Content-Type': 'application/json'} );
     const options = new RequestOptions( {headers: headers } );
