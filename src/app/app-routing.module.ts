@@ -18,6 +18,7 @@ import { FindStudentsComponent } from './components/exam-work-pages/company/find
 import { EditExamWorkComponent } from './components/exam-work-pages/company/edit-exam-work/edit-exam-work.component';
 import { LoginComponent } from './components/register-login/login/login.component';
 import { RegisterChoiceComponent } from './components/register-login/register-choice/register-choice.component';
+import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 
 // Routes sköts här
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
 {path: 'company/exam-work/find-students', component: FindStudentsComponent},
 {path: 'company/exam-work/edit-exam-work', component: EditExamWorkComponent},
 {path: 'company/post-exam-work', component: PostExamWorkComponent},
+{path: 'company/exam-work-dashboard/:id', component: ExamWorkDashboardComponent},
 
 {path: 'companies', component: CompaniesComponent},
 {path: 'students', component: StudentsComponent}
