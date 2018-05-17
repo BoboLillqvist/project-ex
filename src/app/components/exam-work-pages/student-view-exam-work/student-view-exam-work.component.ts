@@ -26,4 +26,14 @@ export class StudentViewExamWorkComponent implements OnInit {
     this.examService.getExamWork(this.exWorkId).subscribe(resData => this.examWork = resData);
   }
 
+  goToUrl() {
+    let url: string = '';
+    if (!/^http[s]?:\/\//.test(this.examWork.company.url)) {
+        url += 'http://';
+    }
+
+    url += this.examWork.company.url;
+    window.open(url, '_blank');
+  }
+
 }
