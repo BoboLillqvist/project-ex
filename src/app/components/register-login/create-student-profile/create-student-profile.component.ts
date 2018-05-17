@@ -65,6 +65,7 @@ export class CreateStudentProfileComponent implements OnInit {
                                 this.courses, this.email, this.phoneNbr
     );
     student.pictureID = this.imageUpload.id;
+    student.pictureURL = this.imageUpload.url;
     this.addPerson(student);
   }
 

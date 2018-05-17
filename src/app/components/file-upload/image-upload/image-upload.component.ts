@@ -36,7 +36,7 @@ export class ImageUploadComponent implements OnInit {
   // firebase
   upload(image){
     this.id = Math.random().toString(36).substring(2);
-    console.log("generated image id: " + this.id);
+    //console.log("generated image id: " + this.id);
 
     if(this.router.url == "/create-company-profile"){
       this.imagepath = "company-profile-pictures/"+this.id;
@@ -48,7 +48,6 @@ export class ImageUploadComponent implements OnInit {
     }
 
     this.task = this.ref.put(image);  //ladda upp fil till given referensplats
-    //this.uploadProgress = this.task.percentageChanges();  //används för progressbar 
     this.task.downloadURL().subscribe(url => {
       this.downloadURL = this.afStorage.ref(this.imagepath).getDownloadURL();
     })
@@ -57,7 +56,7 @@ export class ImageUploadComponent implements OnInit {
   // anropas i html:en när downloadUrl.subscribe i upload() är "färdig"
   getImageUrl(url) {
     this.url = url;
-    console.log(this.url);
+    //console.log(this.url);
   }
 
   getFile(event) {
