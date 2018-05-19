@@ -10,17 +10,18 @@
                     placeholder="{{ company.name }}"
                     [(ngModel)]="company.name"
                     id="companyName"
-                    name="companyName"
-            >
+                    name="companyName">
         </div>
 
+        
         <div class="col">
-            <img src="http://via.placeholder.com/140x140" 
-                class="img-fluid" 
-                alt="Responsive image"
-            >
+            <img src="{{company.pictureURL}}" 
+                class="img-fluid">
         </div>
-
+        <div>
+            <app-image-upload></app-image-upload>
+        </div>
+        
     </div>
 
     <br><br>
