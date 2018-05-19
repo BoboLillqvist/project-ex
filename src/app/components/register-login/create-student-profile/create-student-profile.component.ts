@@ -70,7 +70,7 @@ export class CreateStudentProfileComponent implements OnInit {
 
     // om ingen profilbild valts sätt profilbild till standard avatar
     if(student.pictureURL == ''){
-      student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=af93f67a-7c14-463e-9177-751da0df7239';
+      student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=8b5b1092-ab8d-4df4-b923-11ae01c6ca3b';
     }
     this.addPerson(student);
   }
