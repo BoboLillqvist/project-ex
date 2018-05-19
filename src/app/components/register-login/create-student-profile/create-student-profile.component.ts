@@ -64,8 +64,14 @@ export class CreateStudentProfileComponent implements OnInit {
                                 this.examYear, this.description, this.skills,
                                 this.courses, this.email, this.phoneNbr
     );
+
     student.pictureID = this.imageUpload.id;
     student.pictureURL = this.imageUpload.url;
+
+    // om ingen profilbild valts sätt profilbild till standard avatar
+    if(student.pictureURL == ''){
+      student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=af93f67a-7c14-463e-9177-751da0df7239';
+    }
     this.addPerson(student);
   }
 
