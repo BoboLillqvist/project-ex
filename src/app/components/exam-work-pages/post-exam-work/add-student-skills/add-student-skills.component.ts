@@ -73,7 +73,8 @@ export class AddStudentSkillsComponent implements OnInit {
       return;
     }
 
-    const inputElement = event.originalTarget;
+    // const inputElement = event.originalTarget; // fungerar ej i chrome
+    const inputElement = event.target;
 
     this.tagList = inputElement.id;
     this.selectedTag = inputElement.value;
