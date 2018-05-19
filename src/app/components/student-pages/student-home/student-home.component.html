@@ -32,7 +32,7 @@
                     <a [routerLink]="['/student/view-exam-work', examWork._id]" class="btn btn-primary">Gå till examensarbetet</a>
                 </div>
                 <div class="col col-3 center-content">
-                    <img src="http://via.placeholder.com/140x140" alt="company-logo" class="float-right">
+                    <img id="company-logo" src={{examWork.company.pictureURL}} alt="company-logo" class="float-right">
                 </div>
             </div>
         </div>
