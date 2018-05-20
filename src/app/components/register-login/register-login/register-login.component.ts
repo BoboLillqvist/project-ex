@@ -12,6 +12,7 @@ import { User } from '../../../models/user.model';
 export class RegisterLoginComponent implements OnInit {
 
   user: User;
+
   constructor(private auth: UserAuthService, private router: Router) {
     this.user = new User('', '', '', '');
 
