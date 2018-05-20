@@ -6,10 +6,24 @@
 
     <form>
       <div class="form-group">
-        <input type="text" class="form-control" id="inputUserName" placeholder="Användarnamn">
+        <input  type="text" 
+                class="form-control" 
+                id="inputUserName" 
+                placeholder="Användarnamn"
+                [(ngModel)]="user.username"
+                name="username"
+                #inputUserName="ngModel"
+        >
       </div>
       <div class="form-group">
-        <input type="password" class="form-control" id="inputPassword" placeholder="Lösenord">
+        <input  type="password" 
+                class="form-control" 
+                id="inputPassword" 
+                placeholder="Lösenord"
+                [(ngModel)]="user.password"
+                name="password"
+                #inputPassword="ngModel"
+        >
       </div>
       <button type="submit" class="btn btn-primary">Logga in</button>
       <a routerLink="/register-choice" routerLinkActive="active" class="btn btn-primary">Skapa konto</a>
