@@ -478,6 +478,36 @@ router.post('/register', (req, res) => {
     
 });
 
+router.post('/login', (req, res) => {
+    console.log('login user: ' + req.body.username);
+
+    User.findOne({ username: req.body.username}, (err, user) => {
+        console.log('user? : ' + user);
+        if(err) {
+            console.log(err);
+            return res.json(new User());
+        }
+
+        if(!user) {
+            console.log('User not found');
+            return res.json(new User());
+        }
+
+        user.validPassword(req.body.password, user.password, (isValid) => {
+            // wrong password
+            if(!isValid){
+                console.log('invalid password');
+                return res.json(new User());
+            } else {
+                // everything good, return user
+                console.log('Login successful: ' + user);
+                return res.json(user);
+            }
+        });
+    });
+});
+
+
 //#endregion
 
 
