@@ -125,7 +125,7 @@ export class CreateStudentProfileComponent implements OnInit {
       this.students.push(resNewStudent);
 
       // create user
-      this.regform.credentials.roleId = resNewStudent._id;
+      this.regform.user.roleId = resNewStudent._id;
       this.regform.register();
     });
   }
