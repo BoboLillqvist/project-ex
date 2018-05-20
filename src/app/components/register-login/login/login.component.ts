@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
         this.user = resData;
         this.auth.user = this.user;
 
+        this.getRoleObject();
+
       }
     });
   }
