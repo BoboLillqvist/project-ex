@@ -23,6 +23,7 @@ import { ImageUploadComponent } from '../../file-upload/image-upload/image-uploa
 export class CreateStudentProfileComponent implements OnInit {
 
   @ViewChild(NgForm) studentForm: NgForm;
+  @ViewChild('registerForm') regform;
 
   eduPrograms: string[] = [];
   yearRange = [];
@@ -116,6 +117,10 @@ export class CreateStudentProfileComponent implements OnInit {
   addStudent(stud: Student) {
     this.studentService.addStudent(stud).subscribe(resNewStudent => {
       this.students.push(resNewStudent);
+
+      // create user
+      this.regform.credentials.roleId = resNewStudent._id;
+      this.regform.register();
     });
   }
 
