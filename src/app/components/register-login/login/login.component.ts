@@ -50,4 +50,24 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  getRoleObject() {
+    if (this.user.role === 'student') {
+      // TODO: get student
+      console.log('student ey');
+      this.studServ.getStudent(this.user.roleId).subscribe( resData => {
+        console.log(resData);
+        this.student = resData;
+        this.router.navigate(['/students/profile']);
+      });
+    } else {
+      // TODO: get company
+      console.log('company ey');
+    }
+  }
+
+  clearInput() {
+    this.user.username = '';
+    this.user.password = '';
+  }
+
 }
