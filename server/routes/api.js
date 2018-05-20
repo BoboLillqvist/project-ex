@@ -92,7 +92,8 @@ router.put('/student/:id', (req, res) => {
                 examYear: req.body.examYear,
                 description: req.body.description,
                 skills: req.body.skills,
-                courses: courseIds
+                courses: courseIds,
+                pictureURL: req.body.pictureURL
             }
         },
         {
@@ -311,7 +312,7 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, url: req.body.url, description: req.body.description }
+            $set: { name: req.body.name, url: req.body.url, description: req.body.description, pictureURL: req.body.pictureURL }
         },
         {
             new: true

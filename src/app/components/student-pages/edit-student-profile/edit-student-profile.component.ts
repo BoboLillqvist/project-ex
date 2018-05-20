@@ -5,6 +5,7 @@ import { Course } from '../../../models/course.model';
 import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { Router } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
+import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 
 @Component({
   selector: 'app-edit-student-profile',
@@ -15,6 +16,7 @@ import { PersonService } from '../../../services/person.service';
 export class EditStudentProfileComponent implements OnInit {
 
   @ViewChild(SimpleTagComponent) studentSkillsComp;
+  @ViewChild(ImageUploadComponent) imageUpload;
 
   eduPrograms: any;
   courseName: string;
@@ -53,6 +55,7 @@ export class EditStudentProfileComponent implements OnInit {
   }
 
   updateStudent() {
+    this.changePicture();
     this.student.name = this.student.person.firstName + ' ' + this.student.person.lastName;
 
     this.persService.updatePerson(this.student.person).subscribe(resData => {
@@ -113,5 +116,11 @@ export class EditStudentProfileComponent implements OnInit {
 
   removeCourse(index) {
     this.student.courses.splice(index, 1);
+  }
+
+  changePicture(){
+    if(this.imageUpload.url != ''){
+      this.student.pictureURL = this.imageUpload.url;
+    }
   }
 }

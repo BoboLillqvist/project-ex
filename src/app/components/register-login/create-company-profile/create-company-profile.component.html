@@ -2,9 +2,11 @@
 <div class="jumbotron">
   <h4>Fyll i företagets uppgifter</h4>
 
+  Ladda upp profilbild:
   <app-image-upload></app-image-upload>
 
   <br>
+  
   <form #form="ngForm" name="companyForm" (ngSubmit)="onSubmitAddCompany(form.value)">
 
     <!-- name -->

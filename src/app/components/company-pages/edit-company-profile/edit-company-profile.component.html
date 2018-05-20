@@ -5,22 +5,42 @@
         <!-- Name-->
         <div class="col">
             <br>
+            <div>
+                    <h3>
+                        <span class="badge badge-primary">
+                            Företagsnamn
+                         </span>
+                        </h3>
+                    </div>
             <input  class="form-control"
                     type="text"
                     placeholder="{{ company.name }}"
                     [(ngModel)]="company.name"
                     id="companyName"
-                    name="companyName"
-            >
+                    name="companyName">
         </div>
 
+        
         <div class="col">
-            <img src="http://via.placeholder.com/140x140" 
-                class="img-fluid" 
-                alt="Responsive image"
-            >
+            <div>
+                <h3>
+                    <span class="badge badge-primary">
+                        Profilbild
+                    </span>
+                    </h3>
+                </div>
+            <img src="{{company.pictureURL}}" 
+                class="img-fluid">
         </div>
-
+        <div>
+            <h3>
+                <span class="badge badge-primary">
+                    Byt profilbild
+                 </span>
+            </h3>
+            <app-image-upload></app-image-upload>
+        </div>
+        
     </div>
 
     <br><br>
