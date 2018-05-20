@@ -25,8 +25,17 @@
                 #inputPassword="ngModel"
         >
       </div>
-      <button type="submit" class="btn btn-primary">Logga in</button>
-      <a routerLink="/register-choice" routerLinkActive="active" class="btn btn-primary">Skapa konto</a>
+      <div class="alert alert-danger" *ngIf="!validInfo">
+        Fel användarnamn/lösenord
+      </div>
+
+      <button type="button" (click)="login()"
+              class="btn btn-primary">
+        Logga in
+      </button>
+      <a  routerLink="/register-choice" 
+          routerLinkActive="active" 
+          class="btn btn-primary">Skapa konto</a>
     </form>
 
   </div>

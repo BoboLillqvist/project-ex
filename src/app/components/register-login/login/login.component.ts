@@ -30,4 +30,24 @@ export class LoginComponent implements OnInit {
       document.body.style.backgroundImage = "url('https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/background%2Fwp_blue.jpg?alt=media&token=d30c846b-0907-45b2-a7bc-19eb1a549212')"; 
   }
 
+  login() {
+    this.auth.login(this.user).subscribe( resData => {
+      if (resData.username === undefined) {
+        this.clearInput();
+        this.validInfo = false;
+
+        // setInterval(() => {
+        //   this.validInfo = true;
+        // }, 5000);
+
+      } else {
+        // login successful
+        this.validInfo = true;
+        this.user = resData;
+        this.auth.user = this.user;
+
+      }
+    });
+  }
+
 }
