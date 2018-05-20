@@ -7,6 +7,7 @@ const Person = require('../models/person');
 const Examwork = require('../models/examwork');
 const Course = require('../models/course');
 const Tags = require('../models/tags');
+const User = require('../models/user');
 
 const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
@@ -16,6 +17,7 @@ mongoose.connect(db, function (err) {
         console.error("error!" + err);
     }
 });
+
 
 //#region Student API
 
@@ -338,7 +340,6 @@ router.delete('/company/:id', function (req, res) {
 
 //#endregion
 
-
 //#region examwork API
 
 router.get('/examworks', function (req, res) {
@@ -450,5 +451,34 @@ router.get('/tags', function (req, res) {
         });
 });
 // #endregion
+
+//#region User API
+
+router.post('/register', (req, res) => {
+    console.log('Post new user');
+
+    let user = new User();
+    user.username = req.body.username;
+    user.role = req.body.role;
+    user.roleId = req.body.roleId;
+
+    user.setPassword(req.body.password, (hash) => {
+        user.password = hash;
+        user.save( (err, newUser) => {
+            if(err) {
+                console.log('Error registrering user: ' + err);
+                res.end();
+            } else {
+                console.log('new user added');
+                res.json(newUser);
+            }
+        });
+    });
+
+    
+});
+
+//#endregion
+
 
 module.exports = router;
