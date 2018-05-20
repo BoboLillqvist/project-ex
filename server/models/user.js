@@ -1,5 +1,8 @@
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt');
+const saltFactor = 5;
 
 const userSchema = new Schema({
 
@@ -20,5 +23,16 @@ const userSchema = new Schema({
     },
     roleId: String
 });
+
+userSchema.methods.setPassword = (password, callback) => {
+
+    bcrypt.hash(password, saltFactor, (err, hash) => {
+        if(err) 
+            return err;
+
+        callback(hash);
+    });
+    
+};
 
 module.exports = mongoose.model('user', userSchema, 'users');
