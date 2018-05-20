@@ -35,4 +35,13 @@ userSchema.methods.setPassword = (password, callback) => {
     
 };
 
+userSchema.methods.validPassword = (password, hashedPass, callback) => {
+
+    bcrypt.compare(password, hashedPass, (err, isValid) => {
+        console.log(isValid);
+    
+        callback(isValid);
+    });
+};
+
 module.exports = mongoose.model('user', userSchema, 'users');
