@@ -12,4 +12,15 @@ export class RegisterLoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  changePasswordType()
+  {
+    if (document.getElementById('inputPassword').getAttribute('type')==='password')
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'text');
+    }
+    else 
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'password');
+    }
+  }
 }
