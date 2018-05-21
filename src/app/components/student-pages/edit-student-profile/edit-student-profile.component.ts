@@ -32,11 +32,6 @@ export class EditStudentProfileComponent implements OnInit {
    }
 
   ngOnInit() {
-      // temp student för dev
-      // const desc = 'I enjoy long walks on the beach and coding sessions that last deep into the night. I also enjoy baking bread.';
-      // this.student = new Student('Andy', 'Milonakis', 'Högskoleingenjör, datateknik', 2019, desc, ['C#', 'Javascript'],
-      //                             [new Course('Programmeringsmetodik', 7.5), new Course('Digitalteknik', 7.5)],
-      //                             'jahn@test.se', '070555111');
 
       this.student = new Student('', '', '', 0, '', [], [], '', '');
       // TODO: hämta in student/student id från någonstans. Kanske kan hamna i någon Auth service vid login?
