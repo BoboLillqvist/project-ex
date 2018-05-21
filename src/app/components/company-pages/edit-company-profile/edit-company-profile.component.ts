@@ -61,7 +61,7 @@ export class EditCompanyProfileComponent implements OnInit {
 
   goToManageExamWorks() {
     // TODO: Fixa en sida där företagen kan överblicka sina arbeten, men knappar för redigera, ta bort osv.
-    //this.router.navigate(['/company/exam-works/']);
+    this.router.navigate(['/company/home/']);
   }
 
 }
