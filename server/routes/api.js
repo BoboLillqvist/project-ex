@@ -40,7 +40,7 @@ router.get('/students/:id', (req, res) => {
         if (err) {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
         } else {
-            console.log('Found it: ' + student);
+            console.log('Found student: ' + student.name);
         }
         res.json(student);
     });
@@ -117,7 +117,7 @@ router.delete('/student/:id', (req, res) => {
             console.log('Error deleting student' + err);
             res.send('Error deleting student' + err);
         } else {
-            console.log('Deleting student: ' + deletedStudent);
+            console.log('Deleting student: ' + deletedStudent.name);
             res.json(deletedStudent);
         }
     });
@@ -194,10 +194,10 @@ router.put('/person/:id', (req, res) => {
 router.delete('/person/:id', (req, res) => {
     Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
         if (err) {
-            console.log('Error person: ' + deletedPerson);
+            console.log('Error deleting person: ' + err);
             res.send('Error deleting person');
         } else {
-            console.log('Deleting person: ' + deletedPerson);
+            console.log('Deleting person: ' + deletedPerson.name);
             res.json(deletedPerson);
         }
     });
@@ -313,7 +313,11 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, url: req.body.url, description: req.body.description, pictureURL: req.body.pictureURL }
+            $set: { name: req.body.name, 
+                    url: req.body.url, 
+                    description: req.body.description, 
+                    pictureURL: req.body.pictureURL 
+            }
         },
         {
             new: true
@@ -481,17 +485,16 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    console.log('login user: ' + req.body.username);
+    console.log('login with username: ' + req.body.username);
 
     User.findOne({ username: req.body.username}, (err, user) => {
-        console.log('user? : ' + user);
         if(err) {
             console.log(err);
             return res.json(new User());
         }
 
         if(!user) {
-            console.log('User not found');
+            console.log('User not found: ' + req.body.username);
             return res.json(new User());
         }
 
@@ -502,7 +505,7 @@ router.post('/login', (req, res) => {
                 return res.json(new User());
             } else {
                 // everything good, return user
-                console.log('Login successful: ' + user);
+                console.log('Login successful: ' + user.username);
                 return res.json(user);
             }
         });
