@@ -55,14 +55,12 @@ export class LoginComponent implements OnInit {
   getRoleObject() {
     let path;
     if (this.user.role === 'student') {
-      // TODO: get student
       console.log('student ey');
       this.studServ.getStudent(this.user.roleId).subscribe( resData => {
         this.student = resData;
         this.redirect('/student/');
       });
     } else {
-      // TODO: get company
       console.log('company ey');
       this.compServ.getCompany(this.user.roleId).subscribe( resData => {
         this.company = resData;
