@@ -7,6 +7,7 @@ const Person = require('../models/person');
 const Examwork = require('../models/examwork');
 const Course = require('../models/course');
 const Tags = require('../models/tags');
+const User = require('../models/user');
 
 const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
@@ -16,6 +17,7 @@ mongoose.connect(db, function (err) {
         console.error("error!" + err);
     }
 });
+
 
 //#region Student API
 
@@ -86,11 +88,13 @@ router.put('/student/:id', (req, res) => {
     Student.findByIdAndUpdate(req.params.id,
         {
             $set: {
+                name: req.body.name,
                 education: req.body.education,
                 examYear: req.body.examYear,
                 description: req.body.description,
                 skills: req.body.skills,
-                courses: courseIds
+                courses: courseIds,
+                pictureURL: req.body.pictureURL
             }
         },
         {
@@ -309,7 +313,7 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, url: req.body.url, description: req.body.description }
+            $set: { name: req.body.name, url: req.body.url, description: req.body.description, pictureURL: req.body.pictureURL }
         },
         {
             new: true
@@ -337,7 +341,6 @@ router.delete('/company/:id', function (req, res) {
 });
 
 //#endregion
-
 
 //#region examwork API
 
@@ -450,5 +453,64 @@ router.get('/tags', function (req, res) {
         });
 });
 // #endregion
+
+//#region User API
+
+router.post('/register', (req, res) => {
+    console.log('Post new user');
+
+    let user = new User();
+    user.username = req.body.username;
+    user.role = req.body.role;
+    user.roleId = req.body.roleId;
+
+    user.setPassword(req.body.password, (hash) => {
+        user.password = hash;
+        user.save( (err, newUser) => {
+            if(err) {
+                console.log('Error registrering user: ' + err);
+                res.end();
+            } else {
+                console.log('new user added');
+                res.json(newUser);
+            }
+        });
+    });
+
+    
+});
+
+router.post('/login', (req, res) => {
+    console.log('login user: ' + req.body.username);
+
+    User.findOne({ username: req.body.username}, (err, user) => {
+        console.log('user? : ' + user);
+        if(err) {
+            console.log(err);
+            return res.json(new User());
+        }
+
+        if(!user) {
+            console.log('User not found');
+            return res.json(new User());
+        }
+
+        user.validPassword(req.body.password, user.password, (isValid) => {
+            // wrong password
+            if(!isValid){
+                console.log('invalid password');
+                return res.json(new User());
+            } else {
+                // everything good, return user
+                console.log('Login successful: ' + user);
+                return res.json(user);
+            }
+        });
+    });
+});
+
+
+//#endregion
+
 
 module.exports = router;

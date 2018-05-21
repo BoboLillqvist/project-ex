@@ -29,6 +29,10 @@ export class CreateCompanyProfileComponent implements OnInit {
     console.log(company.pictureURL);
     company.pictureID = this.imageUpload.id;
     company.pictureURL = this.imageUpload.url;
+
+    if(company.pictureURL == ''){
+      company.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/company.png?alt=media&token=3d5807b0-e6b5-4d66-8c05-b7f36c6360e5';
+    }
     this.companyService.addCompany(company)
     .subscribe();
 

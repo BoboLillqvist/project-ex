@@ -10,9 +10,8 @@
           </h3>
       </div>
       <div class="col">
-          <img src="" 
-              class="img-fluid" 
-              alt="Responsive image">
+          <img src={{examWork.company.pictureURL}} 
+              class="img-fluid">
       </div>
   </div>
 
@@ -59,14 +58,16 @@
 
   <div class="row">
    <div class="col">
-      <h4>
-          <span class="badge badge-primary">
-              Företag som håller examensarbetet 
-          </span>
-      </h4>
-      {{ examWork.company.name }} 
+        <h4>
+            <span class="badge badge-primary">
+                Företag som håller examensarbetet 
+            </span>
+        </h4>
+        <a [routerLink]="['/company/profile/']">
+            {{ examWork.company.name }} 
+        </a>
       <br>
-      <a href="url">{{examWork.company.url}}</a>
+      <a (click)="goToUrl()">{{examWork.company.url}}</a>
     </div>
 
     <div class="col">
@@ -88,9 +89,11 @@
               Kontaktperson
           </span>
       </h4>
-          {{ examWork.contact.firstName }}&nbsp;{{ examWork.contact.lastName }} 
+          {{ examWork.contact.firstName }}&nbsp;{{ examWork.contact.lastName }}
     </div>
   </div>
+  
+  <br>
 
   <div class="row">
     <div class="col">

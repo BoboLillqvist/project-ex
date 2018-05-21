@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Company } from '../../../models/company.model';
 import { CompanyService } from '../../../services/company.service';
 import { Person } from '../../../models/person.model';
 import { Router } from '@angular/router';
+import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 
 @Component({
   selector: 'app-edit-company-profile',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 })
 export class EditCompanyProfileComponent implements OnInit {
 
+  @ViewChild(ImageUploadComponent) imageUpload;
+  
   company: Company;
   contact: Person;
 
@@ -36,7 +39,14 @@ export class EditCompanyProfileComponent implements OnInit {
     });
   }
 
+  changePicture(){
+    if(this.imageUpload.url != ''){
+      this.company.pictureURL = this.imageUpload.url;
+    }
+  }
+
   updateCompany() {
+    this.changePicture();
     this.compServ.updateCompany(this.company).subscribe( resData => {
       this.company = resData;
       this.router.navigate(['/company/profile']);
@@ -51,7 +61,7 @@ export class EditCompanyProfileComponent implements OnInit {
 
   goToManageExamWorks() {
     // TODO: Fixa en sida där företagen kan överblicka sina arbeten, men knappar för redigera, ta bort osv.
-    //this.router.navigate(['/company/exam-works/']);
+    this.router.navigate(['/company/home/']);
   }
 
 }

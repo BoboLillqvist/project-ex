@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators/map';
 export class ImageUploadComponent implements OnInit {
 
   id: string = "";
-  url: string;
+  url: string = "";
   uploadedImage: File = null; 
   imagepath: string = "";
   maxWidth: number = 100;
@@ -38,12 +38,12 @@ export class ImageUploadComponent implements OnInit {
     this.id = Math.random().toString(36).substring(2);
     //console.log("generated image id: " + this.id);
 
-    if(this.router.url == "/create-company-profile"){
+    if(this.router.url == '/create-company-profile' || this.router.url == '/company/edit-profile'){
       this.imagepath = "company-profile-pictures/"+this.id;
       this.ref = this.afStorage.ref(this.imagepath); 
     }
-    else if(this.router.url == "/create-student-profile"){
-      this.imagepath = "student-profile-pictures/"+this.id;
+    else if(this.router.url == '/create-student-profile' || this.router.url == '/student/edit-profile'){
+      this.imagepath = 'student-profile-pictures/'+this.id;
       this.ref = this.afStorage.ref(this.imagepath);
     }
 
@@ -56,7 +56,6 @@ export class ImageUploadComponent implements OnInit {
   // anropas i html:en när downloadUrl.subscribe i upload() är "färdig"
   getImageUrl(url) {
     this.url = url;
-    //console.log(this.url);
   }
 
   getFile(event) {
