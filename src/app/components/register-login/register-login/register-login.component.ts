@@ -27,7 +27,8 @@ export class RegisterLoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  register() {
+  register(roleId) {
+    this.user.roleId = roleId;
     this.auth.register(this.user).subscribe( resData => {
       console.log('success!');
       this.router.navigateByUrl('/students/profile');
