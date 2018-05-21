@@ -87,7 +87,7 @@ export class EditStudentProfileComponent implements OnInit {
     this.student.skills = this.studentSkillsComp.skills;
     this.studService.updateStudent(this.student).subscribe(resStudData => {
       this.student = resStudData;
-      this.router.navigate(['/student/profile']);
+      this.router.navigate(['/students/profile']);
     });
   }
 
@@ -100,7 +100,7 @@ export class EditStudentProfileComponent implements OnInit {
   cancelEdit() {
     this.student = Object.assign({}, this.backupStudent);
     this.student.person = Object.assign({}, this.backupStudent.person);
-    this.router.navigate(['/student/profile']);
+    this.router.navigate(['/students/profile']);
   }
 
   onPointsChange() {
