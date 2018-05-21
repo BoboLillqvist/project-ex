@@ -88,6 +88,7 @@ router.put('/student/:id', (req, res) => {
     Student.findByIdAndUpdate(req.params.id,
         {
             $set: {
+                name: req.body.name,
                 education: req.body.education,
                 examYear: req.body.examYear,
                 description: req.body.description,
