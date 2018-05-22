@@ -7,6 +7,7 @@ import { ExamworkService } from '../../../services/examwork.service';
 import { PersonService } from '../../../services/person.service';
 import { NotificationService } from '../../../services/notification.service';
 import { AddStudentSkillsComponent } from './add-student-skills/add-student-skills.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-post-exam-work',
@@ -15,7 +16,8 @@ import { AddStudentSkillsComponent } from './add-student-skills/add-student-skil
   providers: [
     ExamworkService,
     PersonService,
-    NotificationService
+    NotificationService,
+    ToastrService
   ]
 })
 export class PostExamWorkComponent implements OnInit {
@@ -32,7 +34,8 @@ export class PostExamWorkComponent implements OnInit {
     private examWorkService: ExamworkService,
     private personService: PersonService,
     private router: Router,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -83,6 +86,7 @@ export class PostExamWorkComponent implements OnInit {
   }
 
   sendUserBack() {
+    this.toastr.success('Examensarbetet är nu publicerat!');
     this.router.navigate(['/company/home']);
   }
 }
