@@ -39,7 +39,7 @@ const routes: Routes = [
 {path: 'company/profile', component: CompanyProfileComponent},
 {path: 'company/edit-profile', component: EditCompanyProfileComponent},
 {path: 'company/exam-work/find-students', component: FindStudentsComponent},
-{path: 'company/exam-work/edit-exam-work', component: EditExamWorkComponent},
+{path: 'company/exam-work/edit-exam-work/:id', component: EditExamWorkComponent, },
 {path: 'company/post-exam-work', component: PostExamWorkComponent},
 {path: 'company/exam-work-dashboard/:id', component: ExamWorkDashboardComponent},
 
