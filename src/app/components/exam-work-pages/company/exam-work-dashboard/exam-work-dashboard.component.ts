@@ -27,10 +27,10 @@ export class ExamWorkDashboardComponent implements OnInit {
     private activatedRoute: ActivatedRoute
   ) {
     this.examWorkId = this.activatedRoute.snapshot.params['id'];
-    this.examWork = new ExamWork('', '', '', [], [], '', '',
-                                 new Person('', '', '', ''), '',
-                                 new Company('', '', '', [])
-    );
+    this.examWork = new ExamWork('', '', [], [], '', '', '',
+    new Person('', '', '', ''), '',
+    new Company('', '', '', [])
+);
 
   }
 
