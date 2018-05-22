@@ -95,7 +95,10 @@ import { ToastrModule } from 'ngx-toastr';
     }),
     AngularFireStorageModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true
+    })
   ],
 
   exports: [
