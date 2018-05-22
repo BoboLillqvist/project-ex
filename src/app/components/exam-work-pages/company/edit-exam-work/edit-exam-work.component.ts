@@ -69,6 +69,25 @@ export class EditExamWorkComponent implements OnInit {
         this.backupFetchedExamWork(this.examWork);
       });
   }
+
+  updateExamWork() {
+    // Update tags
+    this.tagsSerives.updateAvailableTags(
+      this.studentSkillsComponent.tags,
+      this.studentSkillsComponent.storedTags
+    ).subscribe(resData => this.studentSkillsComponent.tags = resData);
+
+    // Update person
+    this.personService.updatePerson(this.examWork.contact)
+      .subscribe(resData => this.examWork.contact = resData);
+
+    // Update examwork
+    this.examWorkService.updateExamWork(this.examWork)
+      .subscribe(resData => {
+        this.examWork = resData;
+        this.router.navigate(['/company/exam-work-dashboard/', this.examWorkId]);
+    });
+  }
   }
 
 }
