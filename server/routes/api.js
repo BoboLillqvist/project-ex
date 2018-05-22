@@ -174,7 +174,8 @@ router.put('/person/:id', (req, res) => {
         $set: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            phoneNbr: req.body.phoneNbr
+            phoneNbr: req.body.phoneNbr,
+            email: req.body.email
         }
     }, {
         new: true
