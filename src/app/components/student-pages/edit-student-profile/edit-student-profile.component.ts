@@ -105,6 +105,8 @@ export class EditStudentProfileComponent implements OnInit {
   cancelEdit() {
     this.student = Object.assign({}, this.backupStudent);
     this.student.person = Object.assign({}, this.backupStudent.person);
+
+    this.toastr.info('Inga förändringar har utförts');
     this.router.navigate(['/student/profile']);
   }
 
