@@ -38,6 +38,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { ProgressBarComponent } from './components/misc/progress-bar/progress-ba
     RegisterChoiceComponent,
     RegisterLoginComponent,
     ExamWorkDashboardComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
