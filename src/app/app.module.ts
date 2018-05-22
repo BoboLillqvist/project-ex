@@ -37,6 +37,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import { EditStudentSkillsComponent } from './components/exam-work-pages/company/edit-exam-work/edit-student-skills/edit-student-skills.component';
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -73,8 +74,9 @@ import { ToastrModule } from 'ngx-toastr';
     RegisterLoginComponent,
     ExamWorkDashboardComponent,
     ProgressBarComponent,
+    FooterComponent,
     EditStudentSkillsComponent,
-    TitleCasePipe
+    TitleCasePipe,
   ],
   imports: [
     BrowserModule,
