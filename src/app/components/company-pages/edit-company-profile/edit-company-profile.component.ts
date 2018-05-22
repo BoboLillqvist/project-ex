@@ -63,6 +63,8 @@ export class EditCompanyProfileComponent implements OnInit {
   cancelEdit() {
     this.company = Object.assign({}, this.backupCompany);
     this.contact = Object.assign({}, this.backupContact);
+
+    this.toastr.info('Inga förändringar har utförts');
     this.router.navigate(['/company/profile']);
   }
 
