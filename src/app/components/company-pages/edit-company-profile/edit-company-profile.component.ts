@@ -54,6 +54,8 @@ export class EditCompanyProfileComponent implements OnInit {
     this.changePicture();
     this.compServ.updateCompany(this.company).subscribe( resData => {
       this.company = resData;
+
+      this.toastr.success('Företagets profil har uppdaterats!');
       this.router.navigate(['/company/profile']);
     });
   }
