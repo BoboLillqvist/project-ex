@@ -27,6 +27,7 @@ export class ExamWorkDashboardComponent implements OnInit {
   isEmpty: boolean = false;
   showLimit: number = 5;
   showMoreBtn: boolean = false;
+
   constructor(
     private examService: ExamworkService,
     private studentService: StudentService,
@@ -37,12 +38,14 @@ export class ExamWorkDashboardComponent implements OnInit {
     new Person('', '', '', ''), '',
     new Company('', '', '', [])
 );
+        
 
   }
 
   ngOnInit() {
+
+
     this.examService.getExamWork(this.examWorkId)
-      .subscribe(fetchedExamWork => this.examWork = fetchedExamWork);
       .subscribe((fetchedExamWork) => {
   
         this.examWork = fetchedExamWork;
@@ -56,6 +59,9 @@ export class ExamWorkDashboardComponent implements OnInit {
         this.sortedStudents = fetchedStudents;
 
     }));
+
+  }
+
   showMoreStudents()
   {
     this.showLimit += 5;
