@@ -68,5 +68,38 @@
   </div> <!-- /card-body -->
 </div> <!-- card -->
 
+<div class="row">
+  <div class="col col-8">
+    <h1 class="text-title">Studenter med matchande färdigheter till examensarbetet</h1>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-10" *ngFor="let student of students | filter:examWork.essentialSkills">
+      <div class="card">
+      <div class="card-body">
+
+          <div class="row">
+              <div class="col col-9">
+
+                  <h6 class="card-subtitle mb-2 text-muted">{{student.name}}</h6>
+                  <p class="card-text">
+                      <small>
+                          <li>
+                                  {{student.description}}
+                          </li>
+
+                      </small>
+                  </p>
+                  <a [routerLink]="['/students', student._id]" class="btn btn-primary">Gå till profilsidan</a>
+              </div>
+              <div class="col col-3 center-content">
+                  <img src="{{student.pictureURL}}" class="float-right">
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+</div>          
 
 <app-back></app-back>

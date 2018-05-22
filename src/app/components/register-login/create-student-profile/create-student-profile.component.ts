@@ -23,6 +23,7 @@ import { ImageUploadComponent } from '../../file-upload/image-upload/image-uploa
 export class CreateStudentProfileComponent implements OnInit {
 
   @ViewChild(NgForm) studentForm: NgForm;
+  @ViewChild('registerForm') regform;
 
   eduPrograms: string[] = [];
   yearRange = [];
@@ -64,8 +65,14 @@ export class CreateStudentProfileComponent implements OnInit {
                                 this.examYear, this.description, this.skills,
                                 this.courses, this.email, this.phoneNbr
     );
+
     student.pictureID = this.imageUpload.id;
     student.pictureURL = this.imageUpload.url;
+
+    // om ingen profilbild valts sätt profilbild till standard avatar
+    if(student.pictureURL == ''){
+      student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=8b5b1092-ab8d-4df4-b923-11ae01c6ca3b';
+    }
     this.addPerson(student);
   }
 
@@ -116,6 +123,9 @@ export class CreateStudentProfileComponent implements OnInit {
   addStudent(stud: Student) {
     this.studentService.addStudent(stud).subscribe(resNewStudent => {
       this.students.push(resNewStudent);
+
+      // create user
+      this.regform.register(resNewStudent._id);
     });
   }
 

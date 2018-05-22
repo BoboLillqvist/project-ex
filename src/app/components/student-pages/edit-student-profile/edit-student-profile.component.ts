@@ -5,6 +5,7 @@ import { Course } from '../../../models/course.model';
 import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { Router } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
+import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 
 @Component({
   selector: 'app-edit-student-profile',
@@ -15,6 +16,7 @@ import { PersonService } from '../../../services/person.service';
 export class EditStudentProfileComponent implements OnInit {
 
   @ViewChild(SimpleTagComponent) studentSkillsComp;
+  @ViewChild(ImageUploadComponent) imageUpload;
 
   eduPrograms: any;
   courseName: string;
@@ -30,15 +32,11 @@ export class EditStudentProfileComponent implements OnInit {
    }
 
   ngOnInit() {
-      // temp student för dev
-      // const desc = 'I enjoy long walks on the beach and coding sessions that last deep into the night. I also enjoy baking bread.';
-      // this.student = new Student('Andy', 'Milonakis', 'Högskoleingenjör, datateknik', 2019, desc, ['C#', 'Javascript'],
-      //                             [new Course('Programmeringsmetodik', 7.5), new Course('Digitalteknik', 7.5)],
-      //                             'jahn@test.se', '070555111');
 
       this.student = new Student('', '', '', 0, '', [], [], '', '');
       // TODO: hämta in student/student id från någonstans. Kanske kan hamna i någon Auth service vid login?
       const studId = this.studService._id;  // tar in hårdkodat id just nu
+      
       this.studService.getStudent(studId).subscribe(resStudentData => {
         this.student = resStudentData;
         this.studentSkillsComp.skills = this.student.skills;
@@ -53,6 +51,7 @@ export class EditStudentProfileComponent implements OnInit {
   }
 
   updateStudent() {
+    this.changePicture();
     this.student.name = this.student.person.firstName + ' ' + this.student.person.lastName;
 
     this.persService.updatePerson(this.student.person).subscribe(resData => {
@@ -84,7 +83,8 @@ export class EditStudentProfileComponent implements OnInit {
     this.student.skills = this.studentSkillsComp.skills;
     this.studService.updateStudent(this.student).subscribe(resStudData => {
       this.student = resStudData;
-      this.router.navigate(['/student/profile']);
+      let path = '/student/' + resStudData._id;
+      this.router.navigateByUrl(path);
     });
   }
 
@@ -113,5 +113,11 @@ export class EditStudentProfileComponent implements OnInit {
 
   removeCourse(index) {
     this.student.courses.splice(index, 1);
+  }
+
+  changePicture(){
+    if(this.imageUpload.url != ''){
+      this.student.pictureURL = this.imageUpload.url;
+    }
   }
 }

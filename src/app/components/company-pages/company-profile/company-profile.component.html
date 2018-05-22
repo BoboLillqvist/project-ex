@@ -2,17 +2,15 @@
 
     <div class="row">
 
-        <div class="col">
+        <div class="col-9">
             <h1>
                 {{ company.name }}
             </h1>
         </div>
 
-        <div class="col">
-            <img id="companyPicture" src="http://via.placeholder.com/140x140" 
-                class="img-fluid" 
-                alt="Responsive image"
-            >
+        <div class="col-3">
+            <img id="companyPicture" src="{{company.pictureURL}}" 
+                class="img-fluid">
         </div>
 
     </div>
@@ -85,12 +83,6 @@
 
     </div>
 
-
-
-    
-
-    
-
     <br><br>
 
     <div>
@@ -133,7 +125,7 @@
 
     <div>
         <button class="btn btn-primary"
-                routerLink="/company/edit-profile">
+                routerLink="/company/profile/edit">
             Redigera profil
         </button>
     </div>
