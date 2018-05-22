@@ -100,4 +100,7 @@ export class EditExamWorkComponent implements OnInit {
     this.maxDate.setDate(this.maxDate.getDate() + 365);
   }
 
+  changeDate(value: Date) {
+    this.examWork.applyDueDate = value;
+  }
 }
