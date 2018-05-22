@@ -92,6 +92,12 @@ export class EditExamWorkComponent implements OnInit {
   backupFetchedExamWork(examWorkToBackUp: ExamWork) {
     this.backupExamWork = Object.assign({}, examWorkToBackUp);
   }
+
+  setDates() {
+    this.minDate = new Date();
+    this.maxDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() - 1);
+    this.maxDate.setDate(this.maxDate.getDate() + 365);
   }
 
 }
