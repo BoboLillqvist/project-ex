@@ -45,7 +45,10 @@ export class ExamWorkDashboardComponent implements OnInit {
 
       });
     this.studentService.getStudents()
-      .subscribe(fetchedStudents => this.students = fetchedStudents);
-    console.log(this.examWork);
+      .subscribe((fetchedStudents => {
+        this.students = fetchedStudents;
+        this.sortedStudents = fetchedStudents;
+
+    }));
   }
 }
