@@ -88,6 +88,10 @@ export class EditExamWorkComponent implements OnInit {
         this.router.navigate(['/company/exam-work-dashboard/', this.examWorkId]);
     });
   }
+
+  backupFetchedExamWork(examWorkToBackUp: ExamWork) {
+    this.backupExamWork = Object.assign({}, examWorkToBackUp);
+  }
   }
 
 }
