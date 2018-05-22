@@ -11,4 +11,13 @@ export class TagsService {
     return this.http.get(this.getUrl)
       .map((response: Response) => response.json());
   }
+  // Source: https://stackoverflow.com/a/23080662
+  union(a, b) {
+    const unionArray = a.concat(b.filter(function(item) {
+          return a.indexOf(item) < 0;
+        })
+    );
+
+    return unionArray;
+  }
 }
