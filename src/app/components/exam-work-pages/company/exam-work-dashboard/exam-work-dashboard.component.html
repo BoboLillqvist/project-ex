@@ -68,15 +68,29 @@
   </div> <!-- /card-body -->
 </div> <!-- card -->
 
+<div class="row justify-content-center">
+
+
+  <div class="col-sm-10" *ngIf="isEmpty">
+      <br>
+      <h3>
+          Hittar inga studenter! Ta bort något nyckelord.
+      </h3>
+  </div>
+
 <div class="row">
   <div class="col col-8">
     <h1 class="text-title">Studenter med matchande färdigheter till examensarbetet</h1>
   </div>
 </div>
+    
+<div class="col-sm-10">
+  <app-simple-tag (onNewTag)="sortStudents($event)"></app-simple-tag>
+</div>
 
 <div class="row justify-content-center">
-  <div class="col-sm-10" *ngFor="let student of students | filter:examWork.essentialSkills">
-      <div class="card">
+  <div class="col-sm-10" *ngFor="let student of sortedStudents; let i = index">
+      <div class="card" *ngIf="i < showLimit">
       <div class="card-body">
 
           <div class="row">
@@ -100,6 +114,23 @@
       </div>
   </div>
 </div>
+<div class="col-sm-10" *ngIf="showMoreBtn">
+  <div class="card">
+      <div class="card-body">
+          <div class="row">
+              <div class="col">
+                  <button class="btn btn-block"
+                          (click)="showMoreStudents()">
+                      Läs in fler
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
 </div>          
+
+
 
 <app-back></app-back>
