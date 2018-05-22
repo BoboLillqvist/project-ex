@@ -53,9 +53,10 @@
 
     <div class="row" style="padding-top:1em">
       <div class="col-auto mr-auto">
-          <button type="button" class="btn btn-outline-primary disabled">
+          <a class="btn btn-outline-primary"
+             [routerLink]="['/company/exam-work/edit-exam-work', examWork._id]">
             <fa name="edit"></fa> Redigera
-          </button>
+          </a>
       </div>
       <div class="col-auto">
           <button type="button" class="btn btn-outline-danger disabled">
