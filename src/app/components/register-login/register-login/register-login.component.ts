@@ -27,11 +27,28 @@ export class RegisterLoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  register() {
+  changePasswordType()
+  {
+    if (document.getElementById('inputPassword').getAttribute('type')==='password')
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'text');
+    }
+    else 
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'password');
+    }
+  }
+  register(roleId) {
+    this.user.roleId = roleId;
+    let path;
     this.auth.register(this.user).subscribe( resData => {
-      console.log('success!');
-      this.router.navigateByUrl('/students/profile');
-      console.log('LOGINCOMPONENT: ' + resData);
+      if (this.user.role === 'student') {
+        path = '/student/' + roleId;
+      } else {
+        path = '/company/' + roleId;
+      }
+      this.router.navigateByUrl(path);
+      
     }, (err) => {
       console.error(err);
     });

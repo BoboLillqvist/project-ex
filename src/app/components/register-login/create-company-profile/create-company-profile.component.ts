@@ -3,6 +3,7 @@ import { CompanyService } from '../../../services/company.service';
 import { Company } from '../../../models/company.model';
 import { NgForm } from '@angular/forms';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+import { RegisterLoginComponent } from '../register-login/register-login.component';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class CreateCompanyProfileComponent implements OnInit {
 
   @ViewChild(NgForm) myForm: NgForm;
   @ViewChild(ImageUploadComponent) imageUpload;
+  @ViewChild('registerForm') regform: RegisterLoginComponent;
 
   constructor(private companyService: CompanyService) { }
   
@@ -33,8 +35,10 @@ export class CreateCompanyProfileComponent implements OnInit {
     if(company.pictureURL == ''){
       company.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/company.png?alt=media&token=3d5807b0-e6b5-4d66-8c05-b7f36c6360e5';
     }
-    this.companyService.addCompany(company)
-    .subscribe();
+    this.companyService.addCompany(company).subscribe( (resData) => {
+      // create user
+      this.regform.register(resData._id);
+    });
 
     this.clearValues();
   }
