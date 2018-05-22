@@ -449,6 +449,28 @@ router.get('/tags', function (req, res) {
             }
         });
 });
+
+router.put('/tags:id', function(req, res) {
+    console.log('Updating available tags..');
+    Tags.findByIdAndUpdate(req.params.id,
+    {
+        $set: {
+            type: req.body.type,
+            values: req.body.values
+        }
+    },
+    {
+        new: true
+    },
+    function (error, updatedTags) {
+        if (error) {
+            res.send('error updating tags: ' + error);
+        } else {
+            res.json(updatedTags);
+            console.log('succeeded!');
+        }
+    })
+});
 // #endregion
 
 module.exports = router;
