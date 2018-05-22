@@ -50,6 +50,25 @@ export class EditExamWorkComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.examWorkService.getExamWork(this.examWorkId)
+      .subscribe(fetchedExamWork => {
+        // Get exam-work
+        this.examWork = fetchedExamWork;
+
+        // Get tags
+        this.studentSkillsComponent
+              .storedTags.essentials = fetchedExamWork.essentialSkills;
+        this.studentSkillsComponent
+              .storedTags.complimentary = fetchedExamWork.complementarySkills;
+
+        // Format date for HTML input element
+        this.initialApplyDueDate = new Date(
+          moment(this.examWork.applyDueDate).format('YYYY-MM-DD')
+        );
+
+        this.backupFetchedExamWork(this.examWork);
+      });
+  }
   }
 
 }
