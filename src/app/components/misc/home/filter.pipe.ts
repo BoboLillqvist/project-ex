@@ -24,7 +24,10 @@ export class FilterPipe implements PipeTransform {
 
         })
 
-        return sortedArray;
+        if(sortedArray.length !== 0)
+            return sortedArray;
+        else
+            return items;
 
         }
     }
