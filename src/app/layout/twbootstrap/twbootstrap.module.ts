@@ -9,6 +9,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { Alert } from 'selenium-webdriver';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     TypeaheadModule.forRoot(),
     ModalModule.forRoot(),
     AlertModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -28,7 +30,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
     TypeaheadModule,
     ModalModule,
     AlertModule,
-    ProgressbarModule
+    ProgressbarModule,
+    BsDatepickerModule
   ],
   declarations: []
 })

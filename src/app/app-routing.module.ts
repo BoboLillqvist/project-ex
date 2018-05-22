@@ -31,16 +31,17 @@ const routes: Routes = [
 {path: 'create-student-profile', component: CreateStudentProfileComponent},
 
 {path: 'student/home', component: StudentHomeComponent},
-{path: 'students/:id', component: StudentProfileComponent},
-{path: 'students/profile', component: StudentProfileComponent},
-{path: 'student/edit-profile', component: EditStudentProfileComponent},
+{path: 'student/:id', component: StudentProfileComponent},
+{path: 'student/profile', component: StudentProfileComponent},
+{path: 'student/profile/edit', component: EditStudentProfileComponent},
 {path: 'student/view-exam-work/:id', component: StudentViewExamWorkComponent},
 
 {path: 'company/home', component: CompanyHomeComponent},
+{path: 'company/:id', component: CompanyProfileComponent},
 {path: 'company/profile', component: CompanyProfileComponent},
-{path: 'company/edit-profile', component: EditCompanyProfileComponent},
+{path: 'company/profile/edit', component: EditCompanyProfileComponent},
 {path: 'company/exam-work/find-students', component: FindStudentsComponent},
-{path: 'company/exam-work/edit-exam-work', component: EditExamWorkComponent},
+{path: 'company/exam-work/edit-exam-work/:id', component: EditExamWorkComponent, },
 {path: 'company/post-exam-work', component: PostExamWorkComponent},
 {path: 'company/exam-work-dashboard/:id', component: ExamWorkDashboardComponent},
 

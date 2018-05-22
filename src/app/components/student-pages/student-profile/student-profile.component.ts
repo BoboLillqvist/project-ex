@@ -15,18 +15,13 @@ export class StudentProfileComponent implements OnInit {
   student: Student;
 
   constructor(private studService: StudentService, private route: ActivatedRoute) {
-    // temp student för dev
-    // const desc = 'I enjoy long walks on the beach and coding sessions that last deep into the night. I also enjoy baking bread.';
-    // this.student = new Student('Andy', 'Milonakis', 'Högskoleingenjör, datateknik', 2019, desc, ['c#', 'js'],
-    //                             [new Course('Programmeringsmetodik', 7.5), new Course('Digitalteknik', 7.5)],
-    //                             'jahn@test.se', '070555111'
-    // );
-
     this.student = new Student('', '', '', 0, '', [], [], '', '');
     // TODO: hämta in student/student id från någonstans. Kanske kan hamna i någon Auth service vid login?
-    let studId = this.route.snapshot.params['id'];  // tar in hårdkodat id just nu
-    if (studId === 'profile') 
+    let studId: string = this.route.snapshot.params['id'];  // tar in hårdkodat id just nu
+    if (studId === 'profile') {
       studId = this.studService._id;
+    }
+      
       
     this.studService.getStudent(studId).subscribe(resStudentData => this.student = resStudentData);
   }

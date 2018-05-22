@@ -32,15 +32,11 @@ export class EditStudentProfileComponent implements OnInit {
    }
 
   ngOnInit() {
-      // temp student för dev
-      // const desc = 'I enjoy long walks on the beach and coding sessions that last deep into the night. I also enjoy baking bread.';
-      // this.student = new Student('Andy', 'Milonakis', 'Högskoleingenjör, datateknik', 2019, desc, ['C#', 'Javascript'],
-      //                             [new Course('Programmeringsmetodik', 7.5), new Course('Digitalteknik', 7.5)],
-      //                             'jahn@test.se', '070555111');
 
       this.student = new Student('', '', '', 0, '', [], [], '', '');
       // TODO: hämta in student/student id från någonstans. Kanske kan hamna i någon Auth service vid login?
       const studId = this.studService._id;  // tar in hårdkodat id just nu
+      
       this.studService.getStudent(studId).subscribe(resStudentData => {
         this.student = resStudentData;
         this.studentSkillsComp.skills = this.student.skills;
@@ -87,7 +83,8 @@ export class EditStudentProfileComponent implements OnInit {
     this.student.skills = this.studentSkillsComp.skills;
     this.studService.updateStudent(this.student).subscribe(resStudData => {
       this.student = resStudData;
-      this.router.navigate(['/students/profile']);
+      let path = '/student/' + resStudData._id;
+      this.router.navigateByUrl(path);
     });
   }
 
@@ -100,7 +97,7 @@ export class EditStudentProfileComponent implements OnInit {
   cancelEdit() {
     this.student = Object.assign({}, this.backupStudent);
     this.student.person = Object.assign({}, this.backupStudent.person);
-    this.router.navigate(['/students/profile']);
+    this.router.navigate(['/student/profile']);
   }
 
   onPointsChange() {

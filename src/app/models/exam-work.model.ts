@@ -11,7 +11,7 @@ export class ExamWork {
     description: string;
     presence: string;
     contact: Person;
-    teachings: string;
+    teachings: String;
     company: Company;
     companyId: string;
     contactId: string;

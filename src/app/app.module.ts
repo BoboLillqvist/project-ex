@@ -38,6 +38,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
+import { EditStudentSkillsComponent } from './components/exam-work-pages/company/edit-exam-work/edit-student-skills/edit-student-skills.component';
+import { TitleCasePipe } from './pipes/title-case.pipe';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { ProgressBarComponent } from './components/misc/progress-bar/progress-ba
     RegisterChoiceComponent,
     RegisterLoginComponent,
     ExamWorkDashboardComponent,
-    ProgressBarComponent
+    ProgressBarComponent,
+    EditStudentSkillsComponent,
+    TitleCasePipe
   ],
   imports: [
     BrowserModule,

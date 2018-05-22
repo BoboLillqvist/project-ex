@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ExamWork } from '../../../../models/exam-work.model';
 import { Person } from '../../../../models/person.model';
 import { Company } from '../../../../models/company.model';
@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { StudentService } from '../../../../services/student.service';
 import { Student } from '../../../../models/student.model';
 import { SimpleTagComponent } from '../../../misc/simple-tag/simple-tag.component';
+import { User } from '../../../../models/user.model';
 
 @Component({
   selector: 'app-exam-work-dashboard',
@@ -28,10 +29,12 @@ export class ExamWorkDashboardComponent implements OnInit {
   showLimit: number = 5;
   showMoreBtn: boolean = false;
 
+  user: User;
   constructor(
     private examService: ExamworkService,
     private studentService: StudentService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.examWorkId = this.activatedRoute.snapshot.params['id'];
     this.examWork = new ExamWork('', '', [], [], '', '', '',
@@ -39,7 +42,7 @@ export class ExamWorkDashboardComponent implements OnInit {
     new Company('', '', '', [])
 );
         
-
+    this.user = new User('', '', '', '');
   }
 
   ngOnInit() {
@@ -60,6 +63,14 @@ export class ExamWorkDashboardComponent implements OnInit {
 
     }));
 
+       //TODO: byt ut denna mot vem som är inloggad.
+       if (document.URL.includes('company')) {
+        this.user.role = 'company';
+      } else {
+        this.user.role = 'student';
+      }
+    this.goToPathBasedOnUserRole(this.user._id, this.examWorkId)
+    console.log(this.examWork);
   }
 
   showMoreStudents()
@@ -92,5 +103,14 @@ export class ExamWorkDashboardComponent implements OnInit {
     else
       this.showMoreBtn = true;
 
+
+  }
+
+  goToPathBasedOnUserRole(roleId, exWorkId) {
+    let path;
+    if (this.user.role === 'student') {
+      path = '/student/view-exam-work/' + exWorkId;
+      this.router.navigateByUrl(path);
+    }
   }
 }
