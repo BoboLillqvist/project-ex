@@ -40,6 +40,7 @@ import { ProgressBarComponent } from './components/misc/progress-bar/progress-ba
 import { EditStudentSkillsComponent } from './components/exam-work-pages/company/edit-exam-work/edit-student-skills/edit-student-skills.component';
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
     AngularFireStorageModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
 
   exports: [

@@ -27,3 +27,5 @@
 // Include Bootstrap
 @import "node_modules/bootstrap/scss/bootstrap";
 
+// Packages that depend on bootstrap must be included after
+@import "~ngx-toastr/toastr-bs4-alert";
