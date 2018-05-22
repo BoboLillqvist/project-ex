@@ -21,8 +21,33 @@ import * as moment from 'moment';
   ]
 })
 export class EditExamWorkComponent implements OnInit {
+  @ViewChild (EditStudentSkillsComponent) studentSkillsComponent: EditStudentSkillsComponent;
 
-  constructor() { }
+  examWork: ExamWork;
+  examWorkId: String;
+
+  initialApplyDueDate: Date;
+  minDate: Date;
+  maxDate: Date;
+
+  backupExamWork: ExamWork;
+
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private examWorkService: ExamworkService,
+    private router: Router,
+    private tagsSerives: TagsService,
+    private personService: PersonService
+  ) {
+    this.examWorkId = this.activatedRoute.snapshot.params['id'];
+    this.examWork = new ExamWork('', '', '', [], [], '', '',
+                                 new Person('', '', '', ''), '',
+                                 new Company('', '', '', [])
+    );
+
+
+    this.setDates();
+  }
 
   ngOnInit() {
   }
