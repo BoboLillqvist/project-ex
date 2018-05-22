@@ -1,5 +1,16 @@
-.container{
+.jumbotron{
   margin-top: 10em;
+
+}
+
+
+.container{
+  @media (min-width:1281px){
+    width: 35%;
+  }
+  @media (min-width:961px){
+    width: 35%;
+  }
 }
 
 .centered {
