@@ -90,6 +90,8 @@ export class EditStudentProfileComponent implements OnInit {
     this.studService.updateStudent(this.student).subscribe(resStudData => {
       this.student = resStudData;
       let path = '/student/' + resStudData._id;
+
+      this.toastr.success('Din profil är nu uppdaterad!');
       this.router.navigateByUrl(path);
     });
   }
