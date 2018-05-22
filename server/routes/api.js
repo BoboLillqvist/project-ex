@@ -40,7 +40,7 @@ router.get('/students/:id', (req, res) => {
         if (err) {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
         } else {
-            console.log('Found it: ' + student);
+            console.log('Found student: ' + student.name);
         }
         res.json(student);
     });
@@ -117,7 +117,7 @@ router.delete('/student/:id', (req, res) => {
             console.log('Error deleting student' + err);
             res.send('Error deleting student' + err);
         } else {
-            console.log('Deleting student: ' + deletedStudent);
+            console.log('Deleting student: ' + deletedStudent.name);
             res.json(deletedStudent);
         }
     });
@@ -178,7 +178,8 @@ router.put('/person/:id', (req, res) => {
         $set: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            phoneNbr: req.body.phoneNbr
+            phoneNbr: req.body.phoneNbr,
+            email: req.body.email
         }
     }, {
         new: true
@@ -194,10 +195,10 @@ router.put('/person/:id', (req, res) => {
 router.delete('/person/:id', (req, res) => {
     Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
         if (err) {
-            console.log('Error person: ' + deletedPerson);
+            console.log('Error deleting person: ' + err);
             res.send('Error deleting person');
         } else {
-            console.log('Deleting person: ' + deletedPerson);
+            console.log('Deleting person: ' + deletedPerson.name);
             res.json(deletedPerson);
         }
     });
@@ -313,7 +314,11 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, url: req.body.url, description: req.body.description, pictureURL: req.body.pictureURL }
+            $set: { name: req.body.name, 
+                    url: req.body.url, 
+                    description: req.body.description, 
+                    pictureURL: req.body.pictureURL 
+            }
         },
         {
             new: true
@@ -408,8 +413,8 @@ router.delete('/examwork/:id', function (req, res) {
 });
 
 router.put('/examwork/:id', function (req, res) {
-    console.log('update examwork');
-    Company.findByIdAndUpdate(req.params.id,
+    process.stdout.write('Updating examwork.. ');
+    Examwork.findByIdAndUpdate(req.params.id,
         {
             $set: {
                 title: req.body.title,
@@ -426,15 +431,14 @@ router.put('/examwork/:id', function (req, res) {
         {
             new: true
         },
-        function (err, updatedExamwork) {
-            if (err) {
-                res.send("Error updating exam work");
+        function (error, updatedExamwork) {
+            if (error) {
+                res.send('error: ' + error);
             } else {
                 res.json(updatedExamwork);
-                console.log('Exam work updated');
+                console.log('succeeded!');
             }
         }
-
     );
 });
 
@@ -451,6 +455,28 @@ router.get('/tags', function (req, res) {
                 res.json(tags);
             }
         });
+});
+
+router.put('/tags:id', function(req, res) {
+    console.log('Updating available tags..');
+    Tags.findByIdAndUpdate(req.params.id,
+    {
+        $set: {
+            type: req.body.type,
+            values: req.body.values
+        }
+    },
+    {
+        new: true
+    },
+    function (error, updatedTags) {
+        if (error) {
+            res.send('error updating tags: ' + error);
+        } else {
+            res.json(updatedTags);
+            console.log('succeeded!');
+        }
+    })
 });
 // #endregion
 
@@ -481,17 +507,16 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/login', (req, res) => {
-    console.log('login user: ' + req.body.username);
+    console.log('login with username: ' + req.body.username);
 
     User.findOne({ username: req.body.username}, (err, user) => {
-        console.log('user? : ' + user);
         if(err) {
             console.log(err);
             return res.json(new User());
         }
 
         if(!user) {
-            console.log('User not found');
+            console.log('User not found: ' + req.body.username);
             return res.json(new User());
         }
 
@@ -502,7 +527,7 @@ router.post('/login', (req, res) => {
                 return res.json(new User());
             } else {
                 // everything good, return user
-                console.log('Login successful: ' + user);
+                console.log('Login successful: ' + user.username);
                 return res.json(user);
             }
         });

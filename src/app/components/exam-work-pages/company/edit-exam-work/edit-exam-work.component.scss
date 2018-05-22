@@ -1,0 +1,25 @@
+$title-space: 1em;
+
+h1, h4 {
+    margin-bottom: $title-space;
+}
+
+.jumbotron {
+    margin-right: 0em;
+    .btn {
+        margin-top: 3em;
+    }
+    padding: 4em;
+}
+    
+label {
+    margin-top: 1.5em;
+}
+
+#contact-person-title {
+    margin-top: ($title-space * 2);
+}
+
+.form-control.ng-touched.ng-invalid{
+    border: 2px solid red;
+}

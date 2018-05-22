@@ -18,18 +18,31 @@
     </div>
 
     <div class="col-sm-10" *ngFor="let examWork of sortedWorks; let i = index">
-        <div class="card" *ngIf="i < showLimit">
+        <div id="exam-card" class="card shadow-sm" *ngIf="i < showLimit">
         <div class="card-body">
             <div class="row">
                 <div class="col col-9">
-                    <h5 class="card-title">{{ examWork.title }}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{ examWork.company.name }}</h6>
-                    <p class="card-text">
-                        <small>
-                            {{ examWork.description }}
-                        </small>
-                    </p>
-                    <a [routerLink]="['/student/view-exam-work', examWork._id]" class="btn btn-primary">Gå till examensarbetet</a>
+                    <div class="row">
+                        <div class="col-7">
+                            <h5 class="card-title">{{ examWork.title }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ examWork.company.name }}</h6>
+                        </div>
+                        <div class="col-5 float-right">
+                            <!-- TODO: Visa location och deadline här? -->
+                        </div>
+                    </div>
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <p class="card-text description"><small>{{ examWork.description }}</small></p>
+                        </div>
+                    </div>
+                    <div class="row align-items-end">
+                        <div class="col align-bottom">
+                            <a [routerLink]="['/student/view-exam-work', examWork._id]" class="btn btn-sm btn-primary">
+                                Gå till examensarbetet
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col col-3 center-content">
                     <img id="company-logo" src={{examWork.company.pictureURL}} class="float-right">
@@ -40,16 +53,12 @@
     </div>
 
     <div class="col-sm-10" *ngIf="showMoreBtn">
-        <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-block"
-                                (click)="showMoreWorks()">
-                            Läs in fler
-                        </button>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-block"
+                        (click)="showMoreWorks()">
+                            <fa name="arrow-down "></fa> Läs in fler
+                </button>
             </div>
         </div>
     </div>

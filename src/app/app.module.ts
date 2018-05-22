@@ -26,7 +26,6 @@ import { EditCompanyProfileComponent } from './components/company-pages/edit-com
 import { CompanyHomeComponent } from './components/company-pages/company-home/company-home.component';
 import { CompanyProfileComponent } from './components/company-pages/company-profile/company-profile.component';
 import { StudentViewExamWorkComponent } from './components/exam-work-pages/student-view-exam-work/student-view-exam-work.component';
-import { FindStudentsComponent } from './components/exam-work-pages/company/find-students/find-students.component';
 import { EditExamWorkComponent } from './components/exam-work-pages/company/edit-exam-work/edit-exam-work.component';
 import { LoginComponent } from './components/register-login/login/login.component';
 import { CancleComponent } from './components/misc/cancle/cancle.component';
@@ -39,6 +38,8 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { EditStudentSkillsComponent } from './components/exam-work-pages/company/edit-exam-work/edit-student-skills/edit-student-skills.component';
+import { TitleCasePipe } from './pipes/title-case.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,6 @@ import { FooterComponent } from './layout/footer/footer.component';
     CompanyHomeComponent,
     CompanyProfileComponent,
     StudentViewExamWorkComponent,
-    FindStudentsComponent,
     EditExamWorkComponent,
     LoginComponent,
     CancleComponent,
@@ -73,6 +73,8 @@ import { FooterComponent } from './layout/footer/footer.component';
     ExamWorkDashboardComponent,
     ProgressBarComponent,
     FooterComponent,
+    EditStudentSkillsComponent,
+    TitleCasePipe,
   ],
   imports: [
     BrowserModule,

@@ -54,18 +54,26 @@ export class LoginComponent implements OnInit {
   }
 
   getRoleObject() {
+    let path;
     if (this.user.role === 'student') {
-      // TODO: get student
       console.log('student ey');
       this.studServ.getStudent(this.user.roleId).subscribe( resData => {
-        console.log(resData);
         this.student = resData;
-        this.router.navigate(['/students/profile']);
+        this.redirect('/student/');
       });
     } else {
-      // TODO: get company
       console.log('company ey');
+      this.compServ.getCompany(this.user.roleId).subscribe( resData => {
+        this.company = resData;
+        this.redirect('/company/');
+      });
     }
+  }
+
+  redirect(path) {
+    document.getElementById("main-navbar").setAttribute('hidden', 'false');
+    path += this.user.roleId;
+    this.router.navigateByUrl(path);
   }
 
   clearInput() {
