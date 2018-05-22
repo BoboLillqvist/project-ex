@@ -9,6 +9,7 @@ import { EditStudentSkillsComponent } from './edit-student-skills/edit-student-s
 import { TagsService } from '../../../../services/tags.service';
 import { PersonService } from '../../../../services/person.service';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-exam-work',
@@ -17,7 +18,8 @@ import * as moment from 'moment';
   providers: [
     ExamworkService,
     TagsService,
-    PersonService
+    PersonService,
+    ToastrService
   ]
 })
 export class EditExamWorkComponent implements OnInit {
@@ -37,7 +39,8 @@ export class EditExamWorkComponent implements OnInit {
     private examWorkService: ExamworkService,
     private router: Router,
     private tagsSerives: TagsService,
-    private personService: PersonService
+    private personService: PersonService,
+    private toastr: ToastrService
   ) {
     this.examWorkId = this.activatedRoute.snapshot.params['id'];
     this.examWork = new ExamWork('', '', '', [], [], '', '',
@@ -85,6 +88,8 @@ export class EditExamWorkComponent implements OnInit {
     this.examWorkService.updateExamWork(this.examWork)
       .subscribe(resData => {
         this.examWork = resData;
+
+        this.toastr.success('Examensarbetet är uppdaterat!');
         this.router.navigate(['/company/exam-work-dashboard/', this.examWorkId]);
     });
   }
