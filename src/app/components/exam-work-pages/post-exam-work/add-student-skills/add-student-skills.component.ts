@@ -113,7 +113,7 @@ export class AddStudentSkillsComponent implements OnInit {
   }
 
   fetchTagsFromDatabase(tagsService: TagsService): Boolean {
-    this.tagsService.getTags()
+    this.tagsService.getAvailableTags()
       .subscribe((resTags) => {
         this.availableTags = resTags[0].values;
 

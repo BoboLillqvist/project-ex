@@ -7,7 +7,7 @@ export class TagsService {
 
   constructor(private http: Http) { }
 
-  getTags() {
+  getAvailableTags() {
     return this.http.get(this.getUrl)
       .map((response: Response) => response.json());
   }
