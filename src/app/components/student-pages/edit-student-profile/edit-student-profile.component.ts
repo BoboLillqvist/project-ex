@@ -6,12 +6,13 @@ import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { Router } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-student-profile',
   templateUrl: './edit-student-profile.component.html',
   styleUrls: ['./edit-student-profile.component.scss'],
-  providers: [StudentService, PersonService]
+  providers: [StudentService, PersonService, ToastrService]
 })
 export class EditStudentProfileComponent implements OnInit {
 
@@ -26,8 +27,13 @@ export class EditStudentProfileComponent implements OnInit {
   student: Student;
   backupStudent: Student;
 
-  constructor(private studService: StudentService, private persService: PersonService,
-              private cdr: ChangeDetectorRef, private router: Router) {
+  constructor(
+    private studService: StudentService,
+    private persService: PersonService,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.eduPrograms = studService.eduPrograms;
    }
 
