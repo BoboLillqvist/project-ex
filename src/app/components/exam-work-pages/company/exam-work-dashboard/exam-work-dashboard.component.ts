@@ -8,6 +8,7 @@ import { ProgressBarComponent } from '../../../misc/progress-bar/progress-bar.co
 import * as moment from 'moment';
 import { StudentService } from '../../../../services/student.service';
 import { Student } from '../../../../models/student.model';
+import { SimpleTagComponent } from '../../../misc/simple-tag/simple-tag.component';
 
 @Component({
   selector: 'app-exam-work-dashboard',
@@ -17,10 +18,15 @@ import { Student } from '../../../../models/student.model';
 })
 export class ExamWorkDashboardComponent implements OnInit {
   @ViewChild(ProgressBarComponent) progressBar: ProgressBarComponent;
+  @ViewChild(SimpleTagComponent) tagComp;
 
   examWorkId: String;
   examWork: ExamWork;
   students: Array<Student> = [];
+  sortedStudents: Array<Student> = [];
+  isEmpty: boolean = false;
+  showLimit: number = 5;
+  showMoreBtn: boolean = false;
   constructor(
     private examService: ExamworkService,
     private studentService: StudentService,
@@ -50,5 +56,35 @@ export class ExamWorkDashboardComponent implements OnInit {
         this.sortedStudents = fetchedStudents;
 
     }));
+  showMoreStudents()
+  {
+    this.showLimit += 5;
+    if(this.showLimit > this.sortedStudents.length)
+      this.showMoreBtn = false;
+
+  }
+
+  sortStudents()
+  {
+    this.isEmpty = false;
+
+    this.students = [];
+
+    this.students.forEach(student => {
+      this.tagComp.skills.forEach(skill => {    
+        student.skills.forEach(essSkill => {
+          if(skill === essSkill)
+            this.sortedStudents.push(student);
+        });
+      });
+    });
+
+    if (this.sortedStudents.length < 1)
+      this.isEmpty = true;
+    else if (this.sortedStudents.length < this.showLimit)
+      this.showMoreBtn = false;
+    else
+      this.showMoreBtn = true;
+
   }
 }
