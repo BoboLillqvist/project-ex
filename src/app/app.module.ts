@@ -39,6 +39,7 @@ import { ExamWorkDashboardComponent } from './components/exam-work-pages/company
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
 import { EditStudentSkillsComponent } from './components/exam-work-pages/company/edit-exam-work/edit-student-skills/edit-student-skills.component';
 import { TitleCasePipe } from './pipes/title-case.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,8 @@ import { TitleCasePipe } from './pipes/title-case.pipe';
       projectId: "firstcontact-3ad7f",
       storageBucket: "firstcontact-3ad7f.appspot.com",
     }),
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    BrowserAnimationsModule,
   ],
 
   exports: [
