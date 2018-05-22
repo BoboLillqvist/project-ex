@@ -4,12 +4,13 @@ import { CompanyService } from '../../../services/company.service';
 import { Person } from '../../../models/person.model';
 import { Router } from '@angular/router';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-company-profile',
   templateUrl: './edit-company-profile.component.html',
   styleUrls: ['./edit-company-profile.component.scss'],
-  providers: [CompanyService]
+  providers: [CompanyService, ToastrService]
 })
 export class EditCompanyProfileComponent implements OnInit {
 
@@ -21,7 +22,11 @@ export class EditCompanyProfileComponent implements OnInit {
   backupCompany: Company;
   backupContact: Person;
 
-  constructor(private compServ: CompanyService, private router: Router) {
+  constructor(
+    private compServ: CompanyService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
     this.company = new Company('ÖRebro uni', 'Bra uni du vet', 'https://oru.se', []);
     this.contact = new Person('', '', '', '');
   }
