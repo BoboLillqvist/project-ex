@@ -76,6 +76,12 @@ export class UserAuthService {
     return decodedToken.roleId;
   }
 
+  getUserName() {
+    const decodedToken = this.jwt.decodeToken(this.getToken());
+
+    return decodedToken.name;
+  }
+
   getExpiration() {
     const expireDate = this.jwt.getTokenExpirationDate(this.getToken());
     console.log('Decoded expiredate: ' + expireDate);
