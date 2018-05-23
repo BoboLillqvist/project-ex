@@ -42,8 +42,8 @@ router.get('/students/:id', (req, res) => {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
         } else {
             console.log('Found student: ' + student.name);
+            res.status(200).send( student );
         }
-        res.status(200).send( student );
     });
 
 });
