@@ -9,7 +9,8 @@ export class CompanyGuard implements CanActivate {
   constructor(private auth: UserAuthService, private router: Router) {}
   
   canActivate() {
-    if (this.auth.loggedIn() && ( this.auth.getRole() === 'company' )) {
+    const role = this.auth.getRole();
+    if (this.auth.loggedIn() && ( role === 'company' || role === 'admin' )) {
       return true;
     } else {
       this.router.navigateByUrl('/login');
