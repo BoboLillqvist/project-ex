@@ -1,4 +1,6 @@
 const express = require('express');
+const jwt = require('jsonwebtoken')
+const exJwt = require('express-jwt');
 const bodyParser = require('body-parser');
 const path = require('path');
 
@@ -11,6 +13,27 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+
+//#region jasonwebtoken
+const isTokenValid = exJwt({
+    secret: new Buffer('ohhSecret', 'base64')
+});
+
+function verifyToken(req, res, next) {
+    const bearerHeader = req.headers['authorization'];
+
+    if(typeof bearerHeader !== 'undefined') {
+        const bearerToken = bearerHeader.split(' ')[1];
+
+        req.token = bearerToken;
+
+        next();
+
+    } else {
+        console.log('403 ???');
+        res.sendStatus(403);
+    }
+}
 
 
 app.use('/api', api);
