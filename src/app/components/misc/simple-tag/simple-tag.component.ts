@@ -25,7 +25,7 @@ export class SimpleTagComponent implements OnInit {
     'Javascript'
   ];
 
-  skills: string[] = [];
+  skills: Array<String> = [];
 
   constructor() { }
 

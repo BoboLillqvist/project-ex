@@ -9,7 +9,7 @@ export class FilterPipe implements PipeTransform {
     transform(items: any[], filter: Array<String>): any {
         if (filter === undefined)
             return items;
-        
+            
         let sortedArray = [];
 
 
@@ -24,7 +24,10 @@ export class FilterPipe implements PipeTransform {
 
         })
 
-        return sortedArray;
+        if(sortedArray.length !== 0)
+            return sortedArray;
+        else
+            return items;
 
         }
     }

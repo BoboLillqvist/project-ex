@@ -179,7 +179,8 @@ router.put('/person/:id', (req, res) => {
         $set: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            phoneNbr: req.body.phoneNbr
+            phoneNbr: req.body.phoneNbr,
+            email: req.body.email
         }
     }, {
         new: true
@@ -413,8 +414,8 @@ router.delete('/examwork/:id', function (req, res) {
 });
 
 router.put('/examwork/:id', function (req, res) {
-    console.log('update examwork');
-    Company.findByIdAndUpdate(req.params.id,
+    process.stdout.write('Updating examwork.. ');
+    Examwork.findByIdAndUpdate(req.params.id,
         {
             $set: {
                 title: req.body.title,
@@ -431,15 +432,14 @@ router.put('/examwork/:id', function (req, res) {
         {
             new: true
         },
-        function (err, updatedExamwork) {
-            if (err) {
-                res.send("Error updating exam work");
+        function (error, updatedExamwork) {
+            if (error) {
+                res.send('error: ' + error);
             } else {
                 res.json(updatedExamwork);
-                console.log('Exam work updated');
+                console.log('succeeded!');
             }
         }
-
     );
 });
 
@@ -456,6 +456,28 @@ router.get('/tags', function (req, res) {
                 res.json(tags);
             }
         });
+});
+
+router.put('/tags:id', function(req, res) {
+    console.log('Updating available tags..');
+    Tags.findByIdAndUpdate(req.params.id,
+    {
+        $set: {
+            type: req.body.type,
+            values: req.body.values
+        }
+    },
+    {
+        new: true
+    },
+    function (error, updatedTags) {
+        if (error) {
+            res.send('error updating tags: ' + error);
+        } else {
+            res.json(updatedTags);
+            console.log('succeeded!');
+        }
+    })
 });
 // #endregion
 

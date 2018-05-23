@@ -6,13 +6,17 @@ import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { Router } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+<<<<<<< HEAD
 import { UserAuthService } from '../../../services/user-auth.service';
+=======
+import { ToastrService } from 'ngx-toastr';
+>>>>>>> 62b8995c53bf1007965b5453fa4acff0817bb87a
 
 @Component({
   selector: 'app-edit-student-profile',
   templateUrl: './edit-student-profile.component.html',
   styleUrls: ['./edit-student-profile.component.scss'],
-  providers: [StudentService, PersonService]
+  providers: [StudentService, PersonService, ToastrService]
 })
 export class EditStudentProfileComponent implements OnInit {
 
@@ -27,18 +31,18 @@ export class EditStudentProfileComponent implements OnInit {
   student: Student;
   backupStudent: Student;
 
-  constructor(private studService: StudentService, private persService: PersonService,
-              private cdr: ChangeDetectorRef, private router: Router, private auth: UserAuthService
-            ) {
+  constructor(
+    private studService: StudentService,
+    private persService: PersonService,
+    private cdr: ChangeDetectorRef,
+    private router: Router,
+    private toastr: ToastrService,
+    private auth: UserAuthService
+  ) {
     this.eduPrograms = studService.eduPrograms;
    }
 
   ngOnInit() {
-      // temp student för dev
-      // const desc = 'I enjoy long walks on the beach and coding sessions that last deep into the night. I also enjoy baking bread.';
-      // this.student = new Student('Andy', 'Milonakis', 'Högskoleingenjör, datateknik', 2019, desc, ['C#', 'Javascript'],
-      //                             [new Course('Programmeringsmetodik', 7.5), new Course('Digitalteknik', 7.5)],
-      //                             'jahn@test.se', '070555111');
 
       this.student = new Student('', '', '', 0, '', [], [], '', '');
      
@@ -90,7 +94,9 @@ export class EditStudentProfileComponent implements OnInit {
     this.student.skills = this.studentSkillsComp.skills;
     this.studService.updateStudent(this.student).subscribe((resStudData: any) => {
       this.student = resStudData;
-      const path = '/student/' + resStudData._id;
+      let path = '/student/' + resStudData._id;
+
+      this.toastr.success('Din profil är nu uppdaterad!');
       this.router.navigateByUrl(path);
     });
   }
@@ -104,6 +110,8 @@ export class EditStudentProfileComponent implements OnInit {
   cancelEdit() {
     this.student = Object.assign({}, this.backupStudent);
     this.student.person = Object.assign({}, this.backupStudent.person);
+
+    this.toastr.info('Inga förändringar har utförts');
     this.router.navigate(['/student/profile']);
   }
 

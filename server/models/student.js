@@ -1,4 +1,3 @@
-//TODO: schema för studenter som matchar vår modell
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const course = require('./course')

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const tagsSchema = new Schema({
     type: String,
-    value: []
+    values: []
 });
 
 module.exports = mongoose.model('tag', tagsSchema, 'tags');

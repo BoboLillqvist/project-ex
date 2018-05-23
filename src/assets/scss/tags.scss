@@ -1,0 +1,12 @@
+@import 'colors';
+
+.tag {
+    margin-right: 1%;
+    margin-bottom: .5em;
+}
+.essential-tag {
+    background-color: $primary !important;
+}
+.complimentary-tag {
+    background-color: $secondary !important;
+}

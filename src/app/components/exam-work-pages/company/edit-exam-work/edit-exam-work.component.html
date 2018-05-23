@@ -1,11 +1,154 @@
-<div class="row">
-  <div class="col col-10">
-    <h1 class="text-title">Company - Redigera publicerat examensarbete</h1>
-  </div>
-</div>
+<h1>Redigera examensarbete</h1>
 
-<div class="row justify-content-center">
-  <div class="col-sm-10">
-    <h4>Content</h4>
-  </div>
-</div>
+<div class="jumbotron content">
+ 
+  <form #form="ngForm">
+
+    <!-- title -->
+    <div class="form-row">
+      <div class="col">
+        <label for="title">Titel</label>
+        <input id="title" name="title" class="form-control form-control-lg" 
+               required minlength="2"
+               #title="ngModel"
+               [(ngModel)]="examWork.title"
+               value="{{ examWork.title }}">
+        <div *ngIf="title.invalid && title.dirty"
+             class="text-danger small">Titel måste vara ifyllt</div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <!-- location -->
+      <div class="col col-6">
+        <label for="location">Ort</label>
+          <input id="location" name="location" class="form-control"
+                  required 
+                  #location="ngModel"
+                  [(ngModel)]="examWork.location"
+                  value="{{ examWork.location }}">
+          <div *ngIf="location.invalid && title.dirty" 
+                class="text-danger small">Ort måste vara ifyllt</div>
+      </div>
+
+      <!-- apply-due-date -->
+      <div class="col col-3">
+        <label for="applyDueDate">Sista anmälningsdag</label>
+        <input type="text" class="form-control"
+               [minDate]="minDate"
+               [maxDate]="maxDate"
+               #applyDueDate="bsDatepicker"
+               bsDatepicker
+               [bsValue]="initialApplyDueDate"
+               (bsValueChange)="changeDate($event)"
+               [bsConfig]="{ dateInputFormat: 'YYYY-MM-DD' }">
+        <div *ngIf="applyDueDate.invalid && applyDueDate.dirty"
+              class="text-danger small">Sista anmälningsdag måste vara ifyllt</div>
+      </div>
+    </div> <!-- /form-row -->
+  
+    <app-edit-student-skills></app-edit-student-skills>
+
+    <!-- description -->
+    <div class="form-row">
+      <div class="col">
+        <label for="description">Beskrivning</label>
+        <textarea id="description" name="description" class="form-control small" 
+                  rows="6"
+                  equired minlength="2"
+                  #description="ngModel"
+                  [(ngModel)]="examWork.description"
+                  value="{{ examWork.description }}">
+        </textarea>
+        <div *ngIf="description.invalid && description.dirty"
+              class="text-danger small">Du måste skriva en beskrivning</div>
+      </div>
+    </div>
+
+    <!-- teachings -->
+    <div class="form-row">
+      <div class="col">
+        <label for="teachings">Lärdomar</label>
+          <textarea id="teachings" name="teachings" class="form-control small"
+                    rows="2"
+                    #teachings="ngModel"
+                    [(ngModel)]="examWork.teachings"
+                    placeholder="Vad får studenten chans att lära sig under examensarbetet?"
+                    value="{{ examWork.teachings }}">
+        </textarea>
+      </div>
+    </div>
+
+    <!-- contact-person -->
+    <h4 id="contact-person-title">Kontaktperson</h4>
+
+      <!-- firstname -->
+      <div class="form-row">
+        <div class="col">
+          <label for="constactFirstName">Förnamn</label>
+          <input id="contactFirstName" name="contactFirstName" class="form-control"
+                  required
+                  #contactFirstName="ngModel"
+                  [(ngModel)]="examWork.contact.firstName"
+                  value="{{ examWork.contact.fName }}">
+          <div *ngIf="contactFirstName.invalid && contactFirstName.dirty"
+                class="text-danger small">Förnamn måste vara ifyllt</div>
+        </div>
+
+        <!-- last-name -->
+        <div class="col">
+          <label for="contactLastName">Efternamn</label>
+            <input id="contactLastName" name="contactLastName" class="form-control"
+                   required
+                   #contactLastName="ngModel"
+                   [(ngModel)]="examWork.contact.lastName"
+                   value="{{ examWork.contact.lastName }}">
+          <div *ngIf="contactLastName.invalid"
+                class="text-danger small">Efternamn måste vara ifyllt</div>
+        </div>
+      </div> <!-- /form-row -->
+
+    <!-- phoneNumber -->
+    <div class="form-row">
+      <div class="col-4">
+        <label for="contactPhoneNr">Telefon</label>
+        <input id="contactPhoneNr" name="contactPhoneNr" class="form-control"
+               required minlength="9"
+               #contactPhoneNr="ngModel"
+               [(ngModel)]="examWork.contact.phoneNbr"
+               value="{{ examWork.contact.phoneNbr }}">
+        <div *ngIf="contactPhoneNr.invalid && contactPhoneNr.dirty"
+              class="text-danger small">Telefonnummer måste vara ifyllt</div>
+      </div>
+
+    <!-- email -->
+      <div class="col-6">
+        <label for="contactEmail">E-postadress</label>
+        <input id="contactEmail" name="contactEmail" class="form-control"
+               required
+               #contactEmail="ngModel"
+               [(ngModel)]="examWork.contact.email"
+               value="{{ examWork.contact.email }}">
+          <div *ngIf="contactEmail.invalid && contactEmail.dirty"
+                class="text-danger small">E-postadress måste vara ifyllt</div>
+      </div>
+    </div>
+    
+    <!-- Submit button -->
+    <div class="row aligns-items-end">
+      <div class="col col-sm-6">
+        <button id="submit" 
+                name="submit" 
+                type="submit" 
+                (mouseup)="updateExamWork()"
+                class="btn btn-success"><fa name="check"></fa> Spara ändringar
+        </button>
+      </div>
+      
+      <div class="col col-sm-6 align-self-end">
+        <app-cancle></app-cancle>
+      </div>
+    </div>
+  
+  </form>
+</div> <!-- /jumbotron -->

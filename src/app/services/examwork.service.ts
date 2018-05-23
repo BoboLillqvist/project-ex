@@ -8,6 +8,7 @@ export class ExamworkService {
 
   private _getUrl = '/api/examworks';
   private _postUrl = '/api/examwork';
+  private _putUrl = '/api/examwork';
 
   constructor(private _http: HttpClient) { }
 
@@ -22,6 +23,17 @@ export class ExamworkService {
   addExamWork(examwork: ExamWork) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this._http.post(this._postUrl, JSON.stringify(examwork), {headers}).map((response: Response) => response.json());
+  }
+
+  updateExamWork(examWork: ExamWork) {
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this._http.put(
+      this._putUrl + '/' + examWork._id,
+      JSON.stringify(examWork),
+      options
+    ).map((response: Response) => response.json());
   }
 
 }
