@@ -13,6 +13,9 @@ export class NavbarComponent implements OnInit {
 
   name: string;
 
+  isStudent: boolean = true;
+  isCompany: boolean = true;
+
   constructor(private auth: UserAuthService,
               private router: Router
             ) {

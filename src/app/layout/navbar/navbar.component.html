@@ -22,17 +22,17 @@
                 id="navbarSupportedContent"
                 [ngClass]="{'show': !isCollapsed}">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isStudent">
                     <a routerLink="/student/home" routerLinkActive="active" class="nav-link">Student Hem</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" *ngIf="isCompany">
                     <a routerLink="/company/home" routerLinkActive="active" class="nav-link">Företag Hem</a>
                 </li>
             </ul>
                 
             <ul class="nav navbar-expand-lg">
                 <!-- Student dropdown -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="isStudent">
                     <div class="btn-group float-right" dropdown>
                         <button id="button-basic" dropdownToggle 
                                 type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
@@ -54,7 +54,7 @@
                 </li>
                 
                  <!-- Company dropdown -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown" *ngIf="isCompany">
                     <div class="btn-group float-right" dropdown>
                         <button id="button-basic" dropdownToggle
                                 type="button" class="btn btn-primary dropdown-toggle" aria-controls="dropdown-basic">
