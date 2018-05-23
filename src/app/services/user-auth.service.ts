@@ -88,4 +88,28 @@ export class UserAuthService {
     return localStorage.getItem('expires');
   }
 
+  private getDecodedToken() {
+
+    const decodedToken = {
+      name: '',
+      username: '',
+      role: '',
+      roleId: '',
+    };
+
+    const token = this.getToken();
+
+    if (token !== '') {
+      const decoded = this.jwt.decodeToken(token);
+
+      decodedToken.name = decoded.name;
+      decodedToken.username = decoded.username;
+      decodedToken.role = decoded.role;
+      decodedToken.roleId = decoded.roleId;
+
+      console.log('Decoded name? ' + decodedToken.name);
+    }
+
+    return decodedToken;
+  }
 }
