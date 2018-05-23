@@ -37,7 +37,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
+import { StudentAuthGuard } from './guards/student-auth.guard';
 import { UserAuthService } from './services/user-auth.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
@@ -96,7 +98,13 @@ import { JwtHelper } from 'angular2-jwt';
   ],
   providers: [
     UserAuthService,
+    StudentAuthGuard,
     JwtHelper,
+    {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
