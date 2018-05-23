@@ -73,38 +73,38 @@ export class ExamWorkDashboardComponent implements OnInit {
     console.log(this.examWork);
   }
 
-  showMoreStudents()
-  {
-    this.showLimit += 5;
-    if(this.showLimit > this.sortedStudents.length)
-      this.showMoreBtn = false;
+  // showMoreStudents()
+  // {
+  //   this.showLimit += 5;
+  //   if(this.showLimit > this.sortedStudents.length)
+  //     this.showMoreBtn = false;
 
-  }
+  // }
 
-  sortStudents()
-  {
-    this.isEmpty = false;
+  // sortStudents()
+  // {
+  //   this.isEmpty = false;
 
-    this.students = [];
+  //   this.sortedStudents = [];
 
-    this.students.forEach(student => {
-      this.tagComp.skills.forEach(skill => {    
-        student.skills.forEach(essSkill => {
-          if(skill === essSkill)
-            this.sortedStudents.push(student);
-        });
-      });
-    });
+  //   this.students.forEach(student => {
+  //     this.tagComp.skills.forEach(skill => {    
+  //       student.skills.forEach(essSkill => {
+  //         if(skill === essSkill)
+  //           this.sortedStudents.push(student);
+  //       });
+  //     });
+  //   });
 
-    if (this.sortedStudents.length < 1)
-      this.isEmpty = true;
-    else if (this.sortedStudents.length < this.showLimit)
-      this.showMoreBtn = false;
-    else
-      this.showMoreBtn = true;
+  //   if (this.sortedStudents.length < 1)
+  //     this.isEmpty = true;
+  //   else if (this.sortedStudents.length < this.showLimit)
+  //     this.showMoreBtn = false;
+  //   else
+  //     this.showMoreBtn = true;
 
 
-  }
+  // }
 
   goToPathBasedOnUserRole(roleId, exWorkId) {
     let path;
