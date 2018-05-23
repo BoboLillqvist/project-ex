@@ -85,11 +85,18 @@
 </div>
     
 <div class="col-sm-10">
-  <app-simple-tag></app-simple-tag>
+  <app-simple-tag (onNewTag)="updateSkills($event)"></app-simple-tag>
 </div>
 
 <div class="row justify-content-center">
   <div class="col-sm-10" *ngFor="let student of sortedStudents | filter:tagSkills">
+      <div class="col-sm-10" *ngIf="sortedStudents.length < 1">
+          <br>
+          <h3>
+              Hittar inga studenter! Ta bort något nyckelord.
+          </h3>
+      </div>
+      
       <div class="card">
       <div class="card-body">
 
@@ -113,6 +120,8 @@
           </div>
       </div>
   </div>
+
+
 </div>
 <!-- <div class="col-sm-10" *ngIf="sortedStudents.length < showLimit">
   <div class="card">
