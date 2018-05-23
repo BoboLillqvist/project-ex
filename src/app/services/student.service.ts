@@ -32,7 +32,7 @@ export class StudentService {
 
   addStudent(student: Student) {
     const headers = new HttpHeaders( {'Content-Type': 'application/json'} );
-    return this._http.post(this._postStudent, JSON.stringify(student), {headers}).map( (res: any) => res.student );
+    return this._http.post(this._postStudent, JSON.stringify(student), {headers}).map( (res: any) => res );
   }
 
   updateStudent(student: Student) {
