@@ -85,12 +85,12 @@
 </div>
     
 <div class="col-sm-10">
-  <app-simple-tag (onNewTag)="sortStudents($event)"></app-simple-tag>
+  <app-simple-tag></app-simple-tag>
 </div>
 
 <div class="row justify-content-center">
-  <div class="col-sm-10" *ngFor="let student of sortedStudents; let i = index">
-      <div class="card" *ngIf="i < showLimit">
+  <div class="col-sm-10" *ngFor="let student of sortedStudents | filter:tagSkills">
+      <div class="card">
       <div class="card-body">
 
           <div class="row">
@@ -114,7 +114,7 @@
       </div>
   </div>
 </div>
-<div class="col-sm-10" *ngIf="showMoreBtn">
+<!-- <div class="col-sm-10" *ngIf="sortedStudents.length < showLimit">
   <div class="card">
       <div class="card-body">
           <div class="row">
@@ -127,7 +127,7 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
 
 </div>          
 

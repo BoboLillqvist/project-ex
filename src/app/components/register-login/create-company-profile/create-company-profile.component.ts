@@ -18,6 +18,8 @@ export class CreateCompanyProfileComponent implements OnInit {
   @ViewChild(ImageUploadComponent) imageUpload;
   @ViewChild('registerForm') regform: RegisterLoginComponent;
 
+  user: any;
+
   constructor(private companyService: CompanyService) { }
   
   ngOnInit() {
@@ -35,9 +37,21 @@ export class CreateCompanyProfileComponent implements OnInit {
     if(company.pictureURL == ''){
       company.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/company.png?alt=media&token=3d5807b0-e6b5-4d66-8c05-b7f36c6360e5';
     }
-    this.companyService.addCompany(company).subscribe( (resData) => {
-      // create user
-      this.regform.register(resData._id);
+
+     // try to create user
+    this.regform.register((data) => {
+      // username already exists
+      if (data.status === 406) {
+        // do something
+      } else {
+        this.companyService.addCompany(company).subscribe( (resData: any) => {
+          console.log(resData);
+
+          if (this.regform.setRoleId(resData._id)) {
+            this.regform.redirect(resData._id);
+          }
+        });
+      }
     });
 
     this.clearValues();

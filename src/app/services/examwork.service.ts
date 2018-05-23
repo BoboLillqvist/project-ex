@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { ExamWork } from '../models/exam-work.model';
 
@@ -10,21 +10,19 @@ export class ExamworkService {
   private _postUrl = '/api/examwork';
   private _putUrl = '/api/examwork';
 
-  constructor(private _http: Http) { }
+  constructor(private _http: HttpClient) { }
 
   getExamWorks() {
-    return this._http.get(this._getUrl).map((res: Response) => res.json());
+    return this._http.get(this._getUrl).map((res: Response) => res);
   }
 
   getExamWork(examId) {
-    return this._http.get(this._getUrl + '/' + examId).map((res: Response) => res.json());
+    return this._http.get(this._getUrl + '/' + examId).map((res: Response) => res);
   }
-  
+
   addExamWork(examwork: ExamWork) {
-    const headers = new Headers({ 'Content-Type': 'application/json' });
-    const options = new RequestOptions({ headers: headers});
-    return this._http.post(this._postUrl, JSON.stringify(examwork), options)
-      .map((response: Response) => response.json());
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this._postUrl, JSON.stringify(examwork), {headers}).map((response: Response) => response.json());
   }
 
   updateExamWork(examWork: ExamWork) {

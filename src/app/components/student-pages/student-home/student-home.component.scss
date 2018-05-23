@@ -26,14 +26,15 @@
   }
 
 .card {
-    border-color: rgb(236, 236, 236);
-    box-shadow: 0px 0px 9px #ececec !important;
-
     margin-top: .5em;
     margin-bottom: .5em;
 
     .description {
         @include multiLineEllipsis($lineHeight: 1.2em, $lineCount: 3, $bgColor: white);
+    }
+
+    &:hover {
+        box-shadow: 0px 0px 9px #e0e0e0  !important;
     }
 }
 
