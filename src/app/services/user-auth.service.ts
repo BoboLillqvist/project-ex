@@ -34,6 +34,17 @@ export class UserAuthService {
     localStorage.removeItem('expires');
   }
 
+   // returns true or false depending on if token is expired
+  loggedIn() {
+    const now = new Date().getTime() / 1000;
+
+    if (now.toString() > this.getExpiration()) {
+      return false;
+    }
+
+    return true;
+  }
+
   getToken() {
     return localStorage.getItem('token');
   }
