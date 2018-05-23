@@ -4,6 +4,7 @@ import { CompanyService } from '../../../services/company.service';
 import { ExamWork } from '../../../models/exam-work.model';
 import { Person } from '../../../models/person.model';
 import { Router } from '@angular/router';
+import { UserAuthService } from '../../../services/user-auth.service';
 
 @Component({
   selector: 'app-company-profile',
@@ -16,7 +17,7 @@ export class CompanyProfileComponent implements OnInit {
   company: Company;
   contact: Person;
 
-  constructor(private companyService: CompanyService, private router: Router) { }
+  constructor(private companyService: CompanyService, private router: Router, private auth: UserAuthService) { }
 
   ngOnInit() {
     // för ng serve develop
@@ -24,9 +25,9 @@ export class CompanyProfileComponent implements OnInit {
 
     this.company = new Company('', '', '',  []);
 
-    const _id = this.companyService._id;
+    const _id = this.auth.getRoleId();
 
-    this.companyService.getCompany(_id).subscribe( resCompData => this.company = resCompData);
+    this.companyService.getCompany(_id).subscribe( (resCompData: any) => this.company = resCompData);
   }
 
   goToExamWork(id) {

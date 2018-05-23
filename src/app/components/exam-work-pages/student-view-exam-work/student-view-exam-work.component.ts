@@ -27,7 +27,7 @@ export class StudentViewExamWorkComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.examService.getExamWork(this.exWorkId).subscribe(resData => this.examWork = resData);
+    this.examService.getExamWork(this.exWorkId).subscribe((resData: any)  => this.examWork = resData);
     
     //TODO: byt ut denna mot vem som är inloggad.
     if (document.URL.includes('student')) {

@@ -15,7 +15,7 @@ import { User } from '../../../../models/user.model';
   selector: 'app-exam-work-dashboard',
   templateUrl: './exam-work-dashboard.component.html',
   styleUrls: ['./exam-work-dashboard.component.scss'],
-  providers: [ExamworkService,StudentService]
+  providers: [ExamworkService, StudentService]
 })
 export class ExamWorkDashboardComponent implements OnInit {
   @ViewChild(ProgressBarComponent) progressBar: ProgressBarComponent;
@@ -50,19 +50,17 @@ export class ExamWorkDashboardComponent implements OnInit {
 
 
     this.examService.getExamWork(this.examWorkId)
-      .subscribe((fetchedExamWork) => {
+      .subscribe((fetchedExamWork: any) => {
   
         this.examWork = fetchedExamWork;
-       for(let i = 0; i < this.examWork.essentialSkills.length; i++)
-       {
-        this.tagComp.skills.push(this.examWork.essentialSkills[i]);
-
-       }
-
+        for(let i = 0; i < this.examWork.essentialSkills.length; i++) {
+            this.tagComp.skills.push(this.examWork.essentialSkills[i]);
+        }
+          
         this.tagSkills = this.tagComp.skills;
       });
     this.studentService.getStudents()
-      .subscribe((fetchedStudents => {
+      .subscribe(((fetchedStudents: any) => {
         this.students = fetchedStudents;
         this.sortedStudents = fetchedStudents;
 

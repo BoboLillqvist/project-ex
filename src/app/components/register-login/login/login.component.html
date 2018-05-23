@@ -26,6 +26,11 @@
                 #inputPassword="ngModel"
         >
       </div>
+
+      <div class="alert alert-danger" *ngIf="serverErr">
+        Det är problem med servern just nu, försök igen senare.
+      </div>
+
       <div class="alert alert-danger" *ngIf="!validInfo">
         Fel användarnamn/lösenord
       </div>
