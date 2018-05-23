@@ -35,6 +35,20 @@ function verifyToken(req, res, next) {
     }
 }
 
+app.route('/api/*').get(verifyToken, (req, res, next) => {
+
+    jwt.verify(req.token, 'ohhSecret', (err, authData) => {
+        if(err) {
+            console.log(err);
+            res.sendStatus(403);
+        } else {
+            next();
+        }
+    });
+    
+});
+
+//#endregion
 
 app.use('/api', api);
 
