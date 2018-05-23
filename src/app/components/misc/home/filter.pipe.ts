@@ -11,23 +11,29 @@ export class FilterPipe implements PipeTransform {
             return items;
             
         let sortedArray = [];
+        
+        console.log("pipe skills:", filter);
 
+        console.log("students:",items);
 
         items.forEach(item => {
+            let countMatching = 0;
             filter.forEach(skill => {
+
                 item.skills.forEach(essSkill => {
                     if(skill === essSkill)
-                        sortedArray.push(item);
+                        countMatching++;
                 });
-            })
-
+            });
+            if(filter.length === countMatching){
+                sortedArray.push(item);
+            }
 
         })
 
-        if(sortedArray.length !== 0)
-            return sortedArray;
-        else
-            return items;
+        console.log("sortedArray: ",sortedArray);
+
+        return sortedArray;
 
         }
     }
