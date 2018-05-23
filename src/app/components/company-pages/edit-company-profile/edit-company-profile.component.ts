@@ -4,6 +4,7 @@ import { CompanyService } from '../../../services/company.service';
 import { Person } from '../../../models/person.model';
 import { Router } from '@angular/router';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+import { UserAuthService } from '../../../services/user-auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,27 +16,26 @@ import { ToastrService } from 'ngx-toastr';
 export class EditCompanyProfileComponent implements OnInit {
 
   @ViewChild(ImageUploadComponent) imageUpload;
-  
+
   company: Company;
   contact: Person;
 
   backupCompany: Company;
   backupContact: Person;
 
-  constructor(
-    private compServ: CompanyService,
-    private router: Router,
-    private toastr: ToastrService
+  constructor(private compServ: CompanyService,
+              private router: Router,
+              private auth: UserAuthService,
+              private toastr: ToastrService
   ) {
-    this.company = new Company('ÖRebro uni', 'Bra uni du vet', 'https://oru.se', []);
+    this.company = new Company('', '', '', []);
     this.contact = new Person('', '', '', '');
   }
 
   ngOnInit() {
-    // hårdkodat id hämtas nu
-    const _id = this.compServ._id;
+    const _id = this.auth.getRoleId();
 
-    this.compServ.getCompany(_id).subscribe(resData => {
+    this.compServ.getCompany(_id).subscribe((resData: any) => {
       this.company = resData;
 
       // deep copy
@@ -52,7 +52,7 @@ export class EditCompanyProfileComponent implements OnInit {
 
   updateCompany() {
     this.changePicture();
-    this.compServ.updateCompany(this.company).subscribe( resData => {
+    this.compServ.updateCompany(this.company).subscribe( (resData: any) => {
       this.company = resData;
 
       this.toastr.success('Företagets profil har uppdaterats!');

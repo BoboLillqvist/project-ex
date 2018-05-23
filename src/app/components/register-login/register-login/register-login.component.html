@@ -34,5 +34,9 @@
             </button>
         </div>
     </div>
+    <br>
+    <div class="alert alert-danger" *ngIf="!usernameValid">
+        Användarnamnet finns redan
+    </div>
 </div>
   <!-- Extra: Lägg till dubbelbekräftelse på lösenordet". -->

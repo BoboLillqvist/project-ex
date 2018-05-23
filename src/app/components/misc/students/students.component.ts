@@ -18,8 +18,8 @@ export class StudentsComponent implements OnInit {
   constructor(private studentService: StudentService) { }
 
   ngOnInit() {
-    this.studentService.getStudents().subscribe(resStudentData => {
-      this.students = resStudentData;
+    this.studentService.getStudents().subscribe((resData: any) => {
+      this.students = resData;
     });
 //    document.getElementById('main-navbar').setAttribute('hidden', 'true');
 
