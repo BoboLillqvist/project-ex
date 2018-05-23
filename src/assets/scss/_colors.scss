@@ -27,6 +27,8 @@ $gray-dark:  #5e6168 !default;
 $red:        #d41217 !default;
 $green:      #2a7b3e !default;
 
+$bgGray:     #f9f9f8 !default;
+
 // Color-variables
 $primary:       $blue !default;
 $secondary:     $gray !default;
@@ -36,6 +38,8 @@ $warning:       $yellow !default;
 $danger:        $red !default;
 $light:         $gray-light !default;
 $dark:          $gray-dark !default;
+$backgroundColor: $bgGray !default;
+$footerColor:   $gray-dark !default;
 
 // Theme colors
 $theme-colors: (
