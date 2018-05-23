@@ -39,7 +39,6 @@ export class StudentProfileComponent implements OnInit {
 
 
     this.studService.getStudent(studId).subscribe((resStudentData: any) => {
-      console.log(resStudentData);
       this.student = resStudentData;
     }, (err) => {
       router.navigateByUrl('/student/home');

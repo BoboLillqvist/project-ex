@@ -61,12 +61,12 @@ export class RegisterLoginComponent implements OnInit {
     let path;
 
     if (document.URL.includes('student')) {
-      path = '/student/' + id;
+      path = '/student/';
     } else {
-      path = '/company/' + id;
+      path = '/company/';
     }
 
-    this.router.navigateByUrl(path);
+    this.router.navigateByUrl(path + 'home');
   }
 
   clearUserinfo() {
