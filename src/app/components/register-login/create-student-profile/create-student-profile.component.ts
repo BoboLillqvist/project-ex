@@ -98,6 +98,7 @@ export class CreateStudentProfileComponent implements OnInit {
     this.personService.addPerson(stud.person).subscribe((resNewPerson: any) => {
       // spara en kopia av det id som personen fått av mongoose
       stud.personId = resNewPerson._id;
+      stud.person = resNewPerson;
 
       // personen är tillagd, dags att lägga till kurser
       this.addCourses(stud);
@@ -144,7 +145,7 @@ export class CreateStudentProfileComponent implements OnInit {
       console.log('add student?? ' + resNewStudent.name);
       // Lägg till roleId på i ny user
       if (this.regform.setRoleId(resNewStudent._id)) {
-        this.regform.redirect(resNewStudent._id);
+        this.regform.redirect();
       }
 
     });

@@ -30,9 +30,9 @@ export class RegisterLoginComponent implements OnInit {
 
   register(name, callback) {
     this.user.name = name;
+    this.user.username = this.user.username.toLowerCase();
     this.auth.register(this.user).subscribe( (resData: any) => {
       // jwt-token kommer tillbaka
-      console.log('register resdata: ' + resData);
       this.user = resData.user;
       callback(resData);
 
@@ -57,10 +57,10 @@ export class RegisterLoginComponent implements OnInit {
     });
   }
 
-  redirect(id) {
+  redirect() {
     let path;
-
-    if (document.URL.includes('student')) {
+    console.log('redirect?? ');
+    if (this.auth.getRole() === 'student') {
       path = '/student/';
     } else {
       path = '/company/';

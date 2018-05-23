@@ -518,6 +518,7 @@ router.post('/register', (req, res) => {
                 
             } else {
                 // fixa jwt-token
+                
                 let payload = getPayload(user.name, user.username, user.role, user.roleId);
 
                 jwt.sign(payload, 'ohhSecret', (err, token) => {
@@ -592,11 +593,28 @@ router.put('/user/:id', (req, res) => {
         }
     }, {
         new: true
-    }, (err, updatedUser) => {
+    }, (err, user) => {
         if(err) {
             res.status(400).send('Error updating person' + err);
         } else {
-            res.status(200).send({ id: updatedUser._id })
+            // everything good, create and send token
+            let payload = getPayload(user.name, user.username, user.role, user.roleId);
+
+            jwt.sign(payload, 'ohhSecret', (err, token) => {
+
+                if (err) {
+                    console.log('error creating token');
+                    res.status(400).send( {err} );
+                }
+
+                console.log('update successful: ' + user.username);;
+
+                res.status(200).send( { 
+                    token,
+                    user,
+                    expiresIn: payload.exp
+                });
+            });
         }
     });
 });

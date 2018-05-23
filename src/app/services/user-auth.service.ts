@@ -20,8 +20,9 @@ export class UserAuthService {
   register(user: User) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post('/api/register', user, { headers } ).map( (res: any) => {
-      console.log('from auth?? ' + res.user.role);
-      return this.setupSession(res);
+      console.log('from auth?? ' + res);
+      this.setupSession(res);
+      return res;
     });
   }
 
@@ -46,7 +47,10 @@ export class UserAuthService {
   }
 
   updateRoleId(user: User) {
-    return this.http.put('/api/user/' + user._id, user).map( (res: any) => res);
+    return this.http.put('/api/user/' + user._id, user).map( (res: any) => {
+      localStorage.setItem('token', res.token);
+      return res;
+    });
   }
 
    // returns true or false depending on if token is expired
@@ -90,8 +94,15 @@ export class UserAuthService {
   }
 
   getExpiration() {
-    const expireDate = this.jwt.getTokenExpirationDate(this.getToken());
-    console.log('Decoded expiredate: ' + expireDate);
+
+    const token = this.getToken();
+    let expireDate = new Date();
+    expireDate.setFullYear(1970);
+
+    if (token !== '') {
+      expireDate = this.jwt.getTokenExpirationDate(this.getToken());
+    }
+
     return expireDate;
   }
 
@@ -107,6 +118,7 @@ export class UserAuthService {
     const token = this.getToken();
 
     if (token !== '') {
+
       const decoded = this.jwt.decodeToken(token);
 
       decodedToken.name = decoded.name;
@@ -114,7 +126,6 @@ export class UserAuthService {
       decodedToken.role = decoded.role;
       decodedToken.roleId = decoded.roleId;
 
-      console.log('Decoded name? ' + decodedToken.name);
     }
 
     return decodedToken;

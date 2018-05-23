@@ -48,7 +48,7 @@ export class CreateCompanyProfileComponent implements OnInit {
           console.log(resData);
 
           if (this.regform.setRoleId(resData._id)) {
-            this.regform.redirect(resData._id);
+            this.regform.redirect();
           }
         });
       }
