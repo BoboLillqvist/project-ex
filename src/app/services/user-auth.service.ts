@@ -21,10 +21,39 @@ export class UserAuthService {
 
   login(user: User) {
     return this.http.post('/api/login', user).map( (res: Response) => res.json());
+  setupSession(res) {
+    localStorage.setItem('token', res.token);
+    localStorage.setItem('role', res.user.role);
+    localStorage.setItem('expires', res.expiresIn);
+    return res;
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+    localStorage.removeItem('expires');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 
   getRole() {
-    return this.user.role;
+    const decodedToken = this.jwt.decodeToken(this.getToken());
+
+    return decodedToken.role;
+  }
+
+  getRoleId() {
+    const decodedToken = this.jwt.decodeToken(this.getToken());
+
+    return decodedToken.roleId;
+  }
+
+  getExpiration() {
+    const expireDate = this.jwt.getTokenExpirationDate(this.getToken());
+    console.log('Decoded expiredate: ' + expireDate);
+    return localStorage.getItem('expires');
   }
 
 }
