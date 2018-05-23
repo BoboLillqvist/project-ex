@@ -18,11 +18,32 @@ export class NavbarComponent implements OnInit {
 
   constructor(private auth: UserAuthService,
               private router: Router
-            ) {
+            ) { }
+
+  ngOnInit() {
+    const role = this.auth.getRole();
+
+    if (role === 'admin') {
+
+      this.isStudent = this.isCompany = true;
+
+    } else if (role === 'student') {
+
+      this.isStudent = true;
+      this.isCompany = false;
+
+    } else {
+
+      this.isStudent = false;
+      this.isCompany = true;
+
+    }
+
     this.name = this.auth.getUserName();
   }
 
-  ngOnInit() {
+  ngAfterContentChecked() {
+    this.name = this.auth.getUserName();
   }
 
   logout() {
