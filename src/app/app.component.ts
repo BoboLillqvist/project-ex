@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserAuthService } from './services/user-auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,4 +14,7 @@ export class AppComponent {
     this.hideNavbar = true;
   }
 
+  ngAfterContentChecked() {
+    this.hideNavbar = !this.auth.loggedIn();
+  }
 }
