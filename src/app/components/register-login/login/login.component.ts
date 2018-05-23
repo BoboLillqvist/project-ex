@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
 
   redirect(path) {
     document.getElementById('main-navbar').setAttribute('hidden', 'false');
-    path += this.user.roleId;
+    path += 'home';
     this.router.navigateByUrl(path);
   }
 

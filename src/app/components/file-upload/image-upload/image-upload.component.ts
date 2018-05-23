@@ -38,11 +38,11 @@ export class ImageUploadComponent implements OnInit {
     this.id = Math.random().toString(36).substring(2);
     //console.log("generated image id: " + this.id);
 
-    if(this.router.url == '/create-company-profile' || this.router.url == '/company/edit-profile'){
+    if(this.router.url == '/create-company-profile' || this.router.url == '/company/profile/edit'){
       this.imagepath = "company-profile-pictures/"+this.id;
       this.ref = this.afStorage.ref(this.imagepath); 
     }
-    else if(this.router.url == '/create-student-profile' || this.router.url == '/student/edit-profile'){
+    else if(this.router.url == '/create-student-profile' || this.router.url == '/student/profile/edit'){
       this.imagepath = 'student-profile-pictures/'+this.id;
       this.ref = this.afStorage.ref(this.imagepath);
     }
