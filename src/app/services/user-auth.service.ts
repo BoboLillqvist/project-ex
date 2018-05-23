@@ -37,7 +37,6 @@ export class UserAuthService {
     localStorage.setItem('token', res.token);
     localStorage.setItem('role', res.user.role);
     localStorage.setItem('expires', res.expiresIn);
-    return res;
   }
 
   logout() {
