@@ -559,6 +559,23 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.put('/user/:id', (req, res) => {
+    console.log('update user roleId');
+    User.findByIdAndUpdate(req.params.id, {
+        $set: {
+            roleId: req.body.roleId,
+        }
+    }, {
+        new: true
+    }, (err, updatedUser) => {
+        if(err) {
+            res.status(400).send('Error updating person' + err);
+        } else {
+            res.status(200).send({ id: updatedUser._id })
+        }
+    });
+});
+
 
 //#endregion
 
