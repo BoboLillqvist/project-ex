@@ -29,7 +29,7 @@ router.get('/students', (req, res) => {
         if (err) {
             console.log('Error retrieving students: ' + err);
         } else {
-            res.json(students);
+            res.status(200).send( students );
         }
     });
 });
@@ -43,7 +43,7 @@ router.get('/students/:id', (req, res) => {
         } else {
             console.log('Found student: ' + student.name);
         }
-        res.json(student);
+        res.status(200).send( student );
     });
 
 });
@@ -73,7 +73,7 @@ router.post('/student', (req, res) => {
             console.log('Error saving student ' + err);
         } else {
             console.log('saving student');
-            res.status(200).send( {student} );
+            res.status(200).send( student );
         }
     });
 });
@@ -101,11 +101,11 @@ router.put('/student/:id', (req, res) => {
         {
             new: true
         },
-        (err, updatedStudent) => {
+        (err, student) => {
             if (err) {
                 res.send('Error updating student: ' + err);
             } else {
-                res.json(updatedStudent);
+                res.status(200).send( student );
             }
         }
     );
@@ -113,13 +113,13 @@ router.put('/student/:id', (req, res) => {
 
 router.delete('/student/:id', (req, res) => {
     console.log('Delete a student');
-    Student.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
+    Student.findByIdAndRemove(req.params.id, (err, student) => {
         if (err) {
             console.log('Error deleting student' + err);
             res.send('Error deleting student' + err);
         } else {
-            console.log('Deleting student: ' + deletedStudent.name);
-            res.json(deletedStudent);
+            console.log('Deleting student: ' + student.name);
+            res.status(200).send( student );
         }
     });
 });
@@ -135,7 +135,7 @@ router.get('/persons', (req, res) => {
         if (err) {
             console.log('Error retrieving persons: ' + err);
         } else {
-            res.json(persons);
+            res.status(200).send( persons );
         }
     });
 })
@@ -147,7 +147,7 @@ router.get('/persons/:id', (req, res) => {
         if(err) {
             console.log('Error retrieving person: ' + err);
         } else {
-            res.json(person);
+            res.status(200).send( person );
         }
     });
 })
@@ -169,7 +169,7 @@ router.post('/person', (req, res) => {
 
         console.log('saving person');
 
-        res.json(insertedPerson);
+        res.status(200).send( insertedPerson );
     });
 });
 
@@ -188,7 +188,7 @@ router.put('/person/:id', (req, res) => {
         if(err) {
             res.send('Error updating person' + err);
         } else {
-            res.json(updatedPerson);
+            res.status(200).send( updatedPerson );
         }
     });
 });
@@ -200,7 +200,7 @@ router.delete('/person/:id', (req, res) => {
             res.send('Error deleting person');
         } else {
             console.log('Deleting person: ' + deletedPerson.name);
-            res.json(deletedPerson);
+            res.status(200).send( deletedPerson );
         }
     });
 });
@@ -224,7 +224,7 @@ router.post('/course', (req, res) => {
 
         console.log('saving course');
 
-        res.json(insertedCourse);
+        res.status(200).send(insertedCourse);
     });
 });
 
@@ -234,7 +234,7 @@ router.get('/courses', (req, res) => {
         if (err) {
             console.log('Error retrieving courses: ' + err);
         } else {
-            res.json(courses);
+            res.status(200).send(courses);
         }
     });
 })
@@ -247,7 +247,7 @@ router.get('/courses/:name', (req, res) => {
         } else {
             console.log('Found it: ' + course);
         }
-        res.json(course);
+        res.status(200).send(course);
     });
 
 });
@@ -259,7 +259,7 @@ router.delete('/course/:id', (req, res) => {
             res.send('Error deleting course');
         } else {
             console.log('Deleting course: ' + deletedCourse);
-            res.json(deletedCourse);
+            res.status(200).send(deletedCourse);
         }
     });
 });
@@ -275,7 +275,7 @@ router.get('/companies', function (req, res) {
             if (err) {
                 console.log('error retrieving companies' + err);
             } else {
-                res.json(companies);
+                res.status(200).send(companies);
             }
         });
 });
@@ -288,7 +288,7 @@ router.get('/companies/:id', function (req, res) {
             if (err) {
                 console.log('error retrieving companies: ' + err);
             } else {
-                res.json(company);
+                res.status(200).send(company);
             }
         });
 });
@@ -305,7 +305,7 @@ router.post('/company', function (req, res) {
         if (err) {
             console.log('Error saving company' + err);
         } else {
-            res.json(insertedCompany);
+            res.status(200).send(insertedCompany);
             console.log('Company saved');
         }
     });
@@ -328,7 +328,7 @@ router.put('/company/:id', function (req, res) {
             if (err) {
                 res.send("Error updating company");
             } else {
-                res.json(updatedCompay);
+                res.status(200).send(updatedCompay);
             }
         }
 
@@ -341,7 +341,7 @@ router.delete('/company/:id', function (req, res) {
         if (err) {
             res.send("Error deleting company");
         } else {
-            res.json(deletedCompany);
+            res.status(200).send(deletedCompany);
         }
     });
 });
@@ -358,7 +358,7 @@ router.get('/examworks', function (req, res) {
             if (err) {
                 console.log('error retrieving exam works' + err);
             } else {
-                res.json(examworks);
+                res.status(200).send(examworks);
             }
         });
 });
@@ -371,7 +371,7 @@ router.get('/examworks/:id', function (req, res) {
             if (err) {
                 console.log('error retrieving exam work' + err);
             } else {
-                res.json(examwork);
+                res.status(200).send(examwork);
             }
         });
 });
@@ -395,7 +395,7 @@ router.post('/examwork', function (req, res) {
         if (err) {
             console.log('Error saving exam work' + err);
         } else {
-            res.json(insertedExamwork);
+            res.status(200).send(insertedExamwork);
             console.log('Exam work saved');
         }
     });
@@ -407,7 +407,7 @@ router.delete('/examwork/:id', function (req, res) {
         if (err) {
             res.send("Error deleting exam work");
         } else {
-            res.json(deletedCompany);
+            res.status(200).send(deletedExamwork);
             console.log('Exam work deleted');
         }
     });
@@ -436,7 +436,7 @@ router.put('/examwork/:id', function (req, res) {
             if (error) {
                 res.send('error: ' + error);
             } else {
-                res.json(updatedExamwork);
+                res.status(200).send(updatedExamwork);
                 console.log('succeeded!');
             }
         }
@@ -453,7 +453,7 @@ router.get('/tags', function (req, res) {
             if (err) {
                 console.log('error retrieving tags' + err);
             } else {
-                res.json(tags);
+                res.status(200).send(tags);
             }
         });
 });
@@ -474,7 +474,7 @@ router.put('/tags:id', function(req, res) {
         if (error) {
             res.send('error updating tags: ' + error);
         } else {
-            res.json(updatedTags);
+            res.status(200).send(updatedTags);
             console.log('succeeded!');
         }
     })
