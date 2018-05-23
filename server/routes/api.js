@@ -560,8 +560,8 @@ router.post('/login', (req, res) => {
                 console.log('invalid password');
                 return res.status(401).send('invalid login');
             } else {
-                // everything good, return token
-                let payload = getPayload(user.role, user.roleId);
+                // everything good, create and send token
+                let payload = getPayload(user.username, user.role, user.roleId);
                 jwt.sign(payload, 'ohhSecret', (err, token) => {
 
                     if (err) {
