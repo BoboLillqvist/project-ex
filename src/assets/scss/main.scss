@@ -20,7 +20,7 @@ $footerHeight: 60px;
   }
 
   body {
-    margin-bottom: 60px; /* Margin bottom by footer height */
+    background-color: $backgroundColor !important;
     margin-bottom: $footerHeight; /* Margin bottom by footer height */
   }
 
@@ -30,9 +30,9 @@ $footerHeight: 60px;
     width: 100%;
     height: $footerHeight; /* Set the fixed height of the footer here */
     line-height: 60px; /* Vertically center the text there */
-    background-color: #5e6168;
+    background-color: $footerColor;
   }
-  }
+}
 
 .center-content {
     display: flex;
