@@ -484,9 +484,10 @@ router.put('/tags:id', function(req, res) {
 //#region User API
 
 // skapa payload till jwt
-function getPayload(role, roleId) {
+function getPayload(username, role, roleId) {
     return payload = { 
         subject: 'user',
+        name: username,
         role: role,
         roleId: roleId,
         exp: (new Date().getTime() + 120 * 60 * 1000)/1000 // 2h
@@ -515,7 +516,7 @@ router.post('/register', (req, res) => {
                 
             } else {
                 // fixa jwt-token
-                let payload = getPayload(user.role, user.roleId);
+                let payload = getPayload(user.username, user.role, user.roleId);
 
                 jwt.sign(payload, 'ohhSecret', (err, token) => {
 
