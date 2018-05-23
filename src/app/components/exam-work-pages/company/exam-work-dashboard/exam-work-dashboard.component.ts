@@ -87,8 +87,12 @@ export class ExamWorkDashboardComponent implements OnInit {
   // sortStudents()
   // {
   //   this.isEmpty = false;
+  updateSkills(){
+    this.tagSkills = [];
+    this.tagSkills = this.tagComp.skills;
+    console.log(this.tagComp.skills);
 
-  //   this.sortedStudents = [];
+    console.log("tagskills:", this.tagSkills);
 
   //   this.students.forEach(student => {
   //     this.tagComp.skills.forEach(skill => {    
