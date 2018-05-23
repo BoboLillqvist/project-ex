@@ -61,23 +61,29 @@ export class UserAuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    let token = localStorage.getItem('token');
+
+    if (token === null) {
+      token = '';
+    }
+
+    return token;
   }
 
   getRole() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.role;
   }
 
   getRoleId() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.roleId;
   }
 
   getUserName() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.name;
   }
