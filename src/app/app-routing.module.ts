@@ -19,6 +19,7 @@ import { LoginComponent } from './components/register-login/login/login.componen
 import { RegisterChoiceComponent } from './components/register-login/register-choice/register-choice.component';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { StudentAuthGuard } from './guards/student-auth.guard';
+import { CompanyGuard } from './guards/company.guard';
 
 // Routes sköts här
 const routes: Routes = [
@@ -57,13 +58,41 @@ const routes: Routes = [
   ]
 },
 
-{path: 'company/home', component: CompanyHomeComponent},
-{path: 'company/:id', component: CompanyProfileComponent},
-{path: 'company/profile', component: CompanyProfileComponent},
-{path: 'company/profile/edit', component: EditCompanyProfileComponent},
-{path: 'company/exam-work/edit-exam-work/:id', component: EditExamWorkComponent, },
-{path: 'company/post-exam-work', component: PostExamWorkComponent},
-{path: 'company/exam-work-dashboard/:id', component: ExamWorkDashboardComponent},
+{
+  path: 'company',
+  canActivate: [CompanyGuard],
+  children: [
+    {
+      path: 'home', 
+      component: CompanyHomeComponent
+    },
+    {
+      path: ':id', 
+      component: CompanyProfileComponent
+    },
+    {
+      path: 'profile', 
+      component: CompanyProfileComponent
+    },
+    {
+      path: 'profile/edit', 
+      component: EditCompanyProfileComponent
+    },
+    {
+      path: 'exam-work/edit-exam-work/:id', 
+      component: EditExamWorkComponent
+    },
+    {
+      path: 'post-exam-work', 
+      component: PostExamWorkComponent
+    },
+    {
+      path: 'exam-work-dashboard/:id',
+      component: ExamWorkDashboardComponent
+    },
+  ]
+
+},
 
 {path: 'companies', component: CompaniesComponent},
 {path: 'students', component: StudentsComponent}
