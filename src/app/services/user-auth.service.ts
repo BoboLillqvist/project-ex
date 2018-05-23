@@ -52,8 +52,9 @@ export class UserAuthService {
    // returns true or false depending on if token is expired
   loggedIn() {
     const now = new Date().getTime() / 1000;
+    const expire = this.getExpiration().getTime() / 1000;
 
-    if (now.toString() > this.getExpiration()) {
+    if (now > expire) {
       return false;
     }
 
@@ -91,7 +92,7 @@ export class UserAuthService {
   getExpiration() {
     const expireDate = this.jwt.getTokenExpirationDate(this.getToken());
     console.log('Decoded expiredate: ' + expireDate);
-    return localStorage.getItem('expires');
+    return expireDate;
   }
 
   private getDecodedToken() {
