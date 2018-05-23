@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: UserAuthService, private router: Router,
               private studServ: StudentService, private compServ: CompanyService) {
-    this.user = new User('', '', '', '');
+    this.user = new User('', '', '', '', '');
   }
 
   ngOnInit() {

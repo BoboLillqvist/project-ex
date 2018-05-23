@@ -498,6 +498,7 @@ router.post('/register', (req, res) => {
     console.log('Post new user');
 
     let newUser = new User();
+    newUser.name = req.body.name;
     newUser.username = req.body.username;
     newUser.role = req.body.role;
     newUser.roleId = req.body.roleId;

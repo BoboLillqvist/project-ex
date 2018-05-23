@@ -39,7 +39,7 @@ export class CreateCompanyProfileComponent implements OnInit {
     }
 
      // try to create user
-    this.regform.register((data) => {
+    this.regform.register(company.name, (data) => {
       // username already exists
       if (data.status === 406) {
         // do something

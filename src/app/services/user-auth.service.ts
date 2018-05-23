@@ -14,7 +14,7 @@ export class UserAuthService {
   user: User;
 
   constructor(private http: HttpClient, private router: Router, private jwt: JwtHelper) {
-    this.user = new User('', '', '' , '');
+    this.user = new User('', '', '', '' , '');
   }
 
   register(user: User) {

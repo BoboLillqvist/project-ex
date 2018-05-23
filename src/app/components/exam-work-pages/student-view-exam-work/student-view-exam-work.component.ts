@@ -23,7 +23,7 @@ export class StudentViewExamWorkComponent implements OnInit {
   constructor(private auth: UserAuthService, private route: ActivatedRoute, private examService: ExamworkService, private router: Router) {
     this.exWorkId = route.snapshot.params['id'];
     this.examWork= new ExamWork("","","",[],[],"","",new Person("", "", "", ""),"",new Company("", "", "", []));
-    this.user = new User('', '', '', '');
+    this.user = new User('', '', '', '', '');
   }
 
   ngOnInit() {

@@ -15,7 +15,7 @@ export class RegisterLoginComponent implements OnInit {
   usernameValid: boolean = true;
 
   constructor(private auth: UserAuthService, private router: Router) {
-    this.user = new User('', '', '', '');
+    this.user = new User('', '', '', '', '');
 
     if (document.URL.includes('student')) {
       this.user.role = 'student';
@@ -28,19 +28,8 @@ export class RegisterLoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  changePasswordType()
-  {
-    if (document.getElementById('inputPassword').getAttribute('type')==='password')
-    {
-      document.getElementById('inputPassword').setAttribute('type', 'text');
-    }
-    else 
-    {
-      document.getElementById('inputPassword').setAttribute('type', 'password');
-    }
-  }
-
-  register(callback) {
+  register(name, callback) {
+    this.user.name = name;
     this.auth.register(this.user).subscribe( (resData: any) => {
       // jwt-token kommer tillbaka
       console.log('register resdata: ' + resData);
@@ -83,6 +72,18 @@ export class RegisterLoginComponent implements OnInit {
   clearUserinfo() {
     this.user.username = '';
     this.user.password = '';
+  }
+
+  changePasswordType()
+  {
+    if (document.getElementById('inputPassword').getAttribute('type')==='password')
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'text');
+    }
+    else 
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'password');
+    }
   }
 
 }

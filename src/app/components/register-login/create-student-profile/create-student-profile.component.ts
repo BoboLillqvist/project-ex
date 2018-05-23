@@ -74,12 +74,12 @@ export class CreateStudentProfileComponent implements OnInit {
     student.pictureURL = this.imageUpload.url;
 
     // om ingen profilbild valts sätt profilbild till standard avatar
-    if(student.pictureURL == ''){
+    if(student.pictureURL === ''){
       student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=8b5b1092-ab8d-4df4-b923-11ae01c6ca3b';
     }
 
     // try to create user
-    this.regform.register((data) => {
+    this.regform.register(student.name, (data) => {
       console.log(data);
       // username already exists
       if (data.status === 406) {

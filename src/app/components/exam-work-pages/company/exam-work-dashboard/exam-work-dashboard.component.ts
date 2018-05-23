@@ -43,7 +43,7 @@ export class ExamWorkDashboardComponent implements OnInit {
     new Company('', '', '', [])
 );
         
-    this.user = new User('', '', '', '');
+    this.user = new User('', '', '', '', '');
   }
 
   ngOnInit() {
