@@ -19,6 +19,7 @@ import { EditExamWorkComponent } from './components/exam-work-pages/company/edit
 import { LoginComponent } from './components/register-login/login/login.component';
 import { RegisterChoiceComponent } from './components/register-login/register-choice/register-choice.component';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
+import { StudentAuthGuard } from './guards/student-auth.guard';
 
 // Routes sköts här
 const routes: Routes = [
@@ -30,11 +31,32 @@ const routes: Routes = [
 {path: 'create-company-profile', component: CreateCompanyProfileComponent},
 {path: 'create-student-profile', component: CreateStudentProfileComponent},
 
-{path: 'student/home', component: StudentHomeComponent},
-{path: 'student/:id', component: StudentProfileComponent},
-{path: 'student/profile', component: StudentProfileComponent},
-{path: 'student/profile/edit', component: EditStudentProfileComponent},
-{path: 'student/view-exam-work/:id', component: StudentViewExamWorkComponent},
+{
+  path: 'student',
+  canActivate: [StudentAuthGuard],
+  children: [
+    {
+      path: 'home',
+      component: StudentHomeComponent
+    },
+    {
+      path: ':id',
+      component: StudentProfileComponent
+    },
+    {
+      path: 'profile',
+      component: StudentProfileComponent
+    },
+    {
+      path: 'profile/edit',
+      component: EditStudentProfileComponent
+    },
+    {
+      path: 'view-exam-work/:id',
+      component: StudentViewExamWorkComponent
+    },
+  ]
+},
 
 {path: 'company/home', component: CompanyHomeComponent},
 {path: 'company/:id', component: CompanyProfileComponent},
