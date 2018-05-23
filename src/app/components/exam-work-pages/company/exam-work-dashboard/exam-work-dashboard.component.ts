@@ -28,6 +28,7 @@ export class ExamWorkDashboardComponent implements OnInit {
   isEmpty: boolean = false;
   showLimit: number = 5;
   showMoreBtn: boolean = false;
+  tagSkills: Array<String> = [];
 
   user: User;
   constructor(
@@ -53,8 +54,12 @@ export class ExamWorkDashboardComponent implements OnInit {
   
         this.examWork = fetchedExamWork;
        for(let i = 0; i < this.examWork.essentialSkills.length; i++)
+       {
         this.tagComp.skills.push(this.examWork.essentialSkills[i]);
 
+       }
+
+        this.tagSkills = this.tagComp.skills;
       });
     this.studentService.getStudents()
       .subscribe((fetchedStudents => {
