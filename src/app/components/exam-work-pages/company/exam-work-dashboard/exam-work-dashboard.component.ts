@@ -36,9 +36,9 @@ export class ExamWorkDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.examService.getExamWork(this.examWorkId)
-      .subscribe(fetchedExamWork => this.examWork = fetchedExamWork);
+      .subscribe((fetchedExamWork: any) => this.examWork = fetchedExamWork);
     this.studentService.getStudents()
-      .subscribe(fetchedStudents => this.students = fetchedStudents);
+      .subscribe((fetchedStudents: any) => this.students = fetchedStudents);
     console.log(this.examWork);
   }
 }

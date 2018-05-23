@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const Company = require('../models/company');
 const Student = require('../models/student');
@@ -67,12 +68,12 @@ router.post('/student', (req, res) => {
         pictureURL: req.body.pictureURL
     });
 
-    newStudent.save((err, insertedStudent) => {
+    newStudent.save((err, student) => {
         if (err) {
             console.log('Error saving student ' + err);
         } else {
             console.log('saving student');
-            res.json(insertedStudent);
+            res.status(200).send( {student} );
         }
     });
 });
@@ -460,23 +461,55 @@ router.get('/tags', function (req, res) {
 
 //#region User API
 
+// skapa payload till jwt
+function getPayload(role, roleId) {
+    return payload = { 
+        subject: 'user',
+        role: role,
+        roleId: roleId,
+        exp: (new Date().getTime() + 120 * 60 * 1000)/1000 // 2h
+    };
+}
+
 router.post('/register', (req, res) => {
     console.log('Post new user');
 
-    let user = new User();
-    user.username = req.body.username;
-    user.role = req.body.role;
-    user.roleId = req.body.roleId;
+    let newUser = new User();
+    newUser.username = req.body.username;
+    newUser.role = req.body.role;
+    newUser.roleId = req.body.roleId;
 
-    user.setPassword(req.body.password, (hash) => {
-        user.password = hash;
-        user.save( (err, newUser) => {
-            if(err) {
+    newUser.setPassword(req.body.password, (hash) => {
+        newUser.password = hash;
+        newUser.save( (err, user) => {
+            if (err) {
                 console.log('Error registrering user: ' + err);
-                res.end();
+                // username finns redan
+                if (err.code === 11000) {
+                    res.status(406).send( { err } )
+                } else {
+                    res.status(400).send( { err } );
+                }
+                
             } else {
-                console.log('new user added');
-                res.json(newUser);
+                // fixa jwt-token
+                let payload = getPayload(user.role, user.roleId);
+
+                jwt.sign(payload, 'ohhSecret', (err, token) => {
+
+                    if (err) {
+                        console.log('error creating token');
+                        res.status(400).send( {err} );
+                    }
+
+                    console.log('new user added');
+
+                    res.status(200).send( { 
+                        token,
+                        user,
+                        expiresIn: payload.exp
+                    });
+                });
             }
         });
     });
@@ -488,25 +521,39 @@ router.post('/login', (req, res) => {
     console.log('login with username: ' + req.body.username);
 
     User.findOne({ username: req.body.username}, (err, user) => {
-        if(err) {
+        if (err) {
             console.log(err);
-            return res.json(new User());
+            return res.status(400).send('error');
         }
 
-        if(!user) {
+        if (!user) {
             console.log('User not found: ' + req.body.username);
-            return res.json(new User());
+            return res.status(401).send('invalid login');
         }
 
         user.validPassword(req.body.password, user.password, (isValid) => {
             // wrong password
             if(!isValid){
                 console.log('invalid password');
-                return res.json(new User());
+                return res.status(401).send('invalid login');
             } else {
-                // everything good, return user
-                console.log('Login successful: ' + user.username);
-                return res.json(user);
+                // everything good, return token
+                let payload = getPayload(user.role, user.roleId);
+                jwt.sign(payload, 'ohhSecret', (err, token) => {
+
+                    if (err) {
+                        console.log('error creating token');
+                        res.status(400).send( {err} );
+                    }
+
+                    console.log('Login successful: ' + user.username);;
+
+                    res.status(200).send( { 
+                        token,
+                        user,
+                        expiresIn: payload.exp
+                    });
+                });
             }
         });
     });

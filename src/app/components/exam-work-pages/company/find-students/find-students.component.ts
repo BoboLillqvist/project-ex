@@ -31,7 +31,7 @@ export class FindStudentsComponent implements OnInit {
 
   
  ngOnInit() {
-   this.studentService.getStudents().subscribe( resData => {
+   this.studentService.getStudents().subscribe( (resData: any) => {
      this.students = resData;
    });
  }

@@ -17,7 +17,7 @@ export class CompaniesComponent implements OnInit {
   //TODO:: resten av CRUD operationerna
   ngOnInit() {
     this._companyService.getCompanies()
-      .subscribe(resComanyData => this.companies = resComanyData);
+      .subscribe((resComanyData: any) => this.companies = resComanyData);
   }
 
 }

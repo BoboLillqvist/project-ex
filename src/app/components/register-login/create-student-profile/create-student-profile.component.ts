@@ -13,6 +13,9 @@ import { TypeaheadMatch } from 'ngx-bootstrap';
 import { PersonService } from '../../../services/person.service';
 import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
+import { User } from '@firebase/auth-types';
+import { Router } from '@angular/router';
+import { RegisterLoginComponent } from '../register-login/register-login.component';
 
 @Component({
   selector: 'app-create-student-profile',
@@ -23,7 +26,7 @@ import { ImageUploadComponent } from '../../file-upload/image-upload/image-uploa
 export class CreateStudentProfileComponent implements OnInit {
 
   @ViewChild(NgForm) studentForm: NgForm;
-  @ViewChild('registerForm') regform;
+  @ViewChild('registerForm') regform: RegisterLoginComponent;
 
   eduPrograms: string[] = [];
   yearRange = [];
@@ -40,11 +43,12 @@ export class CreateStudentProfileComponent implements OnInit {
   courseName: string;
   coursePoints: number;
   courses: Array<Course> = [];
+  user: any;
 
   @ViewChild(SimpleTagComponent) studentSkills;
   @ViewChild(ImageUploadComponent) imageUpload;
 
-  constructor(private studentService: StudentService, private personService: PersonService) {
+  constructor(private studentService: StudentService, private personService: PersonService, private router: Router) {
     this.eduPrograms = studentService.eduPrograms;
    }
 
@@ -73,12 +77,25 @@ export class CreateStudentProfileComponent implements OnInit {
     if(student.pictureURL == ''){
       student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=8b5b1092-ab8d-4df4-b923-11ae01c6ca3b';
     }
-    this.addPerson(student);
+
+    // try to create user
+    this.regform.register((data) => {
+      console.log(data);
+      // username already exists
+      if (data.status === 406) {
+        // do something
+      } else {
+        // start the create student chain
+        console.log('start chain');
+        this.user = data.user;
+        this.addPerson(student);
+      }
+    });
   }
 
   // Startar kedjan med att lägga till en hel student.
   addPerson(stud: Student) {
-    this.personService.addPerson(stud.person).subscribe(resNewPerson => {
+    this.personService.addPerson(stud.person).subscribe((resNewPerson: any) => {
       // spara en kopia av det id som personen fått av mongoose
       stud.personId = resNewPerson._id;
 
@@ -94,15 +111,16 @@ export class CreateStudentProfileComponent implements OnInit {
     let i = 0;
     stud.courses.forEach(course => {
       // kolla om kurs finns i databas
-      this.studentService.getCourse(course.name).subscribe(resCourse => {
+      this.studentService.getCourse(course.name).subscribe((resCourse: any) => {
         if (resCourse != null) {
           console.log('Kurs fanns: ' + resCourse.name);
           stud.courseIds.push(resCourse._id);
           i++;
           this.readyToAddStudent(stud, i);
         } else {
-          this.studentService.addCourse(course).subscribe(resNewCourse => {
+          this.studentService.addCourse(course).subscribe((resNewCourse: any) => {
             // spara en kopia av det id som kursen har fått av mongoose
+            console.log('courses?? ' + resNewCourse);
             stud.courseIds.push(resNewCourse._id);
             i++;
             this.readyToAddStudent(stud, i);
@@ -121,11 +139,14 @@ export class CreateStudentProfileComponent implements OnInit {
 
   // och tillsist lagra studenten med korrekta referenser till det som skapats innan
   addStudent(stud: Student) {
-    this.studentService.addStudent(stud).subscribe(resNewStudent => {
+    this.studentService.addStudent(stud).subscribe((resNewStudent: any) => {
       this.students.push(resNewStudent);
+      console.log('add student?? ' + resNewStudent.name);
+      // Lägg till roleId på i ny user
+      if (this.regform.setRoleId(resNewStudent._id)) {
+        this.regform.redirect(resNewStudent._id);
+      }
 
-      // create user
-      this.regform.register(resNewStudent._id);
     });
   }
 

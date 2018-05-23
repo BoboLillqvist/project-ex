@@ -2,13 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CompaniesComponent } from './components/misc/companies/companies.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, HttpRequest } from '@angular/common/http';
 import { TwbootstrapModule } from './layout/twbootstrap/twbootstrap.module';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { AppComponent } from './app.component';
 import { FilterPipe } from './components/misc/home/filter.pipe';
 import { HttpModule } from '@angular/http';
-import { HttpClient } from 'selenium-webdriver/http';
 import { HomeComponent } from './components/misc/home/home.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { StudentsComponent } from './components/misc/students/students.component';
@@ -38,6 +37,8 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { ProgressBarComponent } from './components/misc/progress-bar/progress-bar.component';
+import { UserAuthService } from './services/user-auth.service';
+import { JwtHelper } from 'angular2-jwt';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,10 @@ import { ProgressBarComponent } from './components/misc/progress-bar/progress-ba
   exports: [
     TwbootstrapModule
   ],
-  providers: [],
+  providers: [
+    UserAuthService,
+    JwtHelper,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

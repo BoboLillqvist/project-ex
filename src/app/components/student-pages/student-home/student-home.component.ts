@@ -23,11 +23,11 @@ export class StudentHomeComponent implements OnInit {
 
   ngOnInit() {
     this.tagComp.placeholderText = 'Filtrera med nyckelord';
-    this.examService.getExamWorks().subscribe( resData => {
+    this.examService.getExamWorks().subscribe( (resData: any) => {
       this.examWorks = resData;
       this.sortedWorks = resData;
 
-      if(this.sortedWorks.length > this.showLimit) {
+      if (this.sortedWorks.length > this.showLimit) {
         this.showMoreBtn = true;
       }
     });

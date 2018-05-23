@@ -23,7 +23,7 @@ export class StudentViewExamWorkComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.examService.getExamWork(this.exWorkId).subscribe(resData => this.examWork = resData);
+    this.examService.getExamWork(this.exWorkId).subscribe((resData: any) => this.examWork = resData);
   }
 
   goToUrl() {
