@@ -11,9 +11,13 @@ export class NavbarComponent implements OnInit {
 
   isCollapsed: boolean = true;
 
+  name: string;
+
   constructor(private auth: UserAuthService,
               private router: Router
-            ) { }
+            ) {
+    this.name = this.auth.getUserName();
+  }
 
   ngOnInit() {
   }
