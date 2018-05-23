@@ -54,7 +54,7 @@ export class EditExamWorkComponent implements OnInit {
 
   ngOnInit() {
     this.examWorkService.getExamWork(this.examWorkId)
-      .subscribe(fetchedExamWork => {
+      .subscribe((fetchedExamWork: any) => {
         // Get exam-work
         this.examWork = fetchedExamWork;
 
@@ -78,15 +78,15 @@ export class EditExamWorkComponent implements OnInit {
     this.tagsSerives.updateAvailableTags(
       this.studentSkillsComponent.tags,
       this.studentSkillsComponent.storedTags
-    ).subscribe(resData => this.studentSkillsComponent.tags = resData);
+    ).subscribe((resData: any) => this.studentSkillsComponent.tags = resData);
 
     // Update person
     this.personService.updatePerson(this.examWork.contact)
-      .subscribe(resData => this.examWork.contact = resData);
+      .subscribe((resData: any) => this.examWork.contact = resData);
 
     // Update examwork
     this.examWorkService.updateExamWork(this.examWork)
-      .subscribe(resData => {
+      .subscribe((resData: any) => {
         this.examWork = resData;
 
         this.toastr.success('Examensarbetet är uppdaterat!');

@@ -26,13 +26,11 @@ export class ExamworkService {
   }
 
   updateExamWork(examWork: ExamWork) {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({headers: headers});
-
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
     return this._http.put(
       this._putUrl + '/' + examWork._id,
       JSON.stringify(examWork),
-      options
+      {headers}
     ).map((response: Response) => response.json());
   }
 

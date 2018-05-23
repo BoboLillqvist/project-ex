@@ -6,11 +6,8 @@ import { SimpleTagComponent } from '../../misc/simple-tag/simple-tag.component';
 import { Router } from '@angular/router';
 import { PersonService } from '../../../services/person.service';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
-<<<<<<< HEAD
 import { UserAuthService } from '../../../services/user-auth.service';
-=======
 import { ToastrService } from 'ngx-toastr';
->>>>>>> 62b8995c53bf1007965b5453fa4acff0817bb87a
 
 @Component({
   selector: 'app-edit-student-profile',
