@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'First Contact';
+  hideNavbar: boolean;
+
+  constructor(private auth: UserAuthService) {
+    this.hideNavbar = true;
+  }
+
 }
