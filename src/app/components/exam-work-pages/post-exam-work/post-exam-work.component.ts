@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Person } from '../../../models/person.model';
 import { ExamworkService } from '../../../services/examwork.service';
 import { PersonService } from '../../../services/person.service';
-import { NotificationService } from '../../../services/notification.service';
 import { AddStudentSkillsComponent } from './add-student-skills/add-student-skills.component';
 import { ToastrService } from 'ngx-toastr';
 
@@ -16,7 +15,6 @@ import { ToastrService } from 'ngx-toastr';
   providers: [
     ExamworkService,
     PersonService,
-    NotificationService,
     ToastrService
   ]
 })
@@ -34,7 +32,6 @@ export class PostExamWorkComponent implements OnInit {
     private examWorkService: ExamworkService,
     private personService: PersonService,
     private router: Router,
-    private notificationService: NotificationService,
     private toastr: ToastrService
   ) { }
 
@@ -45,10 +42,6 @@ export class PostExamWorkComponent implements OnInit {
     this.addTagsFromAddStudentSkillsComponent(examWork);
     this.createPerson(this.personService);
     this.createExamWork(this.examWorkService, examWork);
-
-    // Store success for notification
-    this.notificationService.notify('Examensarbetet är publicerat!', 'success');
-
     this.sendUserBack();
   }
 
