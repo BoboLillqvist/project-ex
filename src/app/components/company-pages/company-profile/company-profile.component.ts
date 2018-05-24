@@ -3,7 +3,7 @@ import { Company } from '../../../models/company.model';
 import { CompanyService } from '../../../services/company.service';
 import { ExamWork } from '../../../models/exam-work.model';
 import { Person } from '../../../models/person.model';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { UserAuthService } from '../../../services/user-auth.service';
 
 @Component({
@@ -17,21 +17,30 @@ export class CompanyProfileComponent implements OnInit {
   company: Company;
   contact: Person;
 
-  constructor(private companyService: CompanyService, private router: Router, private auth: UserAuthService) { }
+  myProfile: boolean = false;
+
+  constructor(private companyService: CompanyService, 
+              private router: Router, 
+              private auth: UserAuthService,
+              private route: ActivatedRoute
+            ) { }
 
   ngOnInit() {
-    // för ng serve develop
-    this.contact = new Person('Monti', 'Berg', 'montiberg321@ggcorp.co', '070555111');
 
     this.company = new Company('', '', '',  []);
 
-    const _id = this.auth.getRoleId();
+    let _id: string = this.route.snapshot.params['id'];  // tar in hårdkodat id just nu
+    if (_id === 'profile') {
+      _id = this.auth.getRoleId();
+      this.myProfile = true;
+    }
 
     this.companyService.getCompany(_id).subscribe( (resCompData: any) => this.company = resCompData);
   }
 
   goToExamWork(id) {
-    this.router.navigate(['/student/view-exam-work/' + id]);
+    const path = '/company/exam-work/edit-exam-work/' + id;
+    this.router.navigateByUrl(path);
   }
 
   goToUrl() {

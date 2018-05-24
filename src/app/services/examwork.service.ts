@@ -22,7 +22,7 @@ export class ExamworkService {
 
   addExamWork(examwork: ExamWork) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this._http.post(this._postUrl, JSON.stringify(examwork), {headers}).map((response: Response) => response.json());
+    return this._http.post(this._postUrl, JSON.stringify(examwork), {headers}).map((response: Response) => response);
   }
 
   updateExamWork(examWork: ExamWork) {
@@ -31,7 +31,7 @@ export class ExamworkService {
       this._putUrl + '/' + examWork._id,
       JSON.stringify(examWork),
       {headers}
-    ).map((response: Response) => response.json());
+    ).map((response: Response) => response);
   }
 
 }

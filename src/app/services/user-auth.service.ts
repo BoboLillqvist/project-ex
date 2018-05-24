@@ -14,14 +14,15 @@ export class UserAuthService {
   user: User;
 
   constructor(private http: HttpClient, private router: Router, private jwt: JwtHelper) {
-    this.user = new User('', '', '' , '');
+    this.user = new User('', '', '', '' , '');
   }
 
   register(user: User) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post('/api/register', user, { headers } ).map( (res: any) => {
-      console.log('from auth?? ' + res.user.role);
-      return this.setupSession(res);
+      console.log('from auth?? ' + res);
+      this.setupSession(res);
+      return res;
     });
   }
 
@@ -36,7 +37,6 @@ export class UserAuthService {
     localStorage.setItem('token', res.token);
     localStorage.setItem('role', res.user.role);
     localStorage.setItem('expires', res.expiresIn);
-    return res;
   }
 
   logout() {
@@ -46,14 +46,18 @@ export class UserAuthService {
   }
 
   updateRoleId(user: User) {
-    return this.http.put('/api/user/' + user._id, user).map( (res: any) => res);
+    return this.http.put('/api/user/' + user._id, user).map( (res: any) => {
+      localStorage.setItem('token', res.token);
+      return res;
+    });
   }
 
    // returns true or false depending on if token is expired
   loggedIn() {
     const now = new Date().getTime() / 1000;
+    const expire = this.getExpiration().getTime() / 1000;
 
-    if (now.toString() > this.getExpiration()) {
+    if (now > expire) {
       return false;
     }
 
@@ -61,25 +65,68 @@ export class UserAuthService {
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    let token = localStorage.getItem('token');
+
+    if (token === null) {
+      token = '';
+    }
+
+    return token;
   }
 
   getRole() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.role;
   }
 
   getRoleId() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.roleId;
   }
 
-  getExpiration() {
-    const expireDate = this.jwt.getTokenExpirationDate(this.getToken());
-    console.log('Decoded expiredate: ' + expireDate);
-    return localStorage.getItem('expires');
+  getUserName() {
+    const decodedToken = this.getDecodedToken();
+
+    return decodedToken.name;
   }
 
+  getExpiration() {
+
+    const token = this.getToken();
+    let expireDate = new Date();
+    expireDate.setFullYear(1970);
+
+    if (token !== '') {
+      expireDate = this.jwt.getTokenExpirationDate(this.getToken());
+    }
+
+    return expireDate;
+  }
+
+  private getDecodedToken() {
+
+    const decodedToken = {
+      name: '',
+      username: '',
+      role: '',
+      roleId: '',
+    };
+
+    const token = this.getToken();
+
+    if (token !== '') {
+
+      const decoded = this.jwt.decodeToken(token);
+
+      decodedToken.name = decoded.name;
+      decodedToken.username = decoded.username;
+      decodedToken.role = decoded.role;
+      decodedToken.roleId = decoded.roleId;
+
+    }
+
+    return decodedToken;
+  }
 }

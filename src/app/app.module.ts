@@ -45,6 +45,8 @@ import { EditStudentSkillsComponent } from './components/exam-work-pages/company
 import { TitleCasePipe } from './pipes/title-case.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { CompanyGuard } from './guards/company.guard';
+import { LoginGuard } from './guards/login.guard';
 
 @NgModule({
   declarations: [
@@ -110,6 +112,8 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     UserAuthService,
     StudentAuthGuard,
+    CompanyGuard,
+    LoginGuard,
     JwtHelper,
     {
     provide: HTTP_INTERCEPTORS,

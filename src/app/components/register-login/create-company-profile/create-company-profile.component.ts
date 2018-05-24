@@ -39,7 +39,7 @@ export class CreateCompanyProfileComponent implements OnInit {
     }
 
      // try to create user
-    this.regform.register((data) => {
+    this.regform.register(company.name, (data) => {
       // username already exists
       if (data.status === 406) {
         // do something
@@ -48,7 +48,7 @@ export class CreateCompanyProfileComponent implements OnInit {
           console.log(resData);
 
           if (this.regform.setRoleId(resData._id)) {
-            this.regform.redirect(resData._id);
+            this.regform.redirect();
           }
         });
       }

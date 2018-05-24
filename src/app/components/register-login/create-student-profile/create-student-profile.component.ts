@@ -74,12 +74,12 @@ export class CreateStudentProfileComponent implements OnInit {
     student.pictureURL = this.imageUpload.url;
 
     // om ingen profilbild valts sätt profilbild till standard avatar
-    if(student.pictureURL == ''){
+    if(student.pictureURL === ''){
       student.pictureURL = 'https://firebasestorage.googleapis.com/v0/b/firstcontact-3ad7f.appspot.com/o/avatar.png?alt=media&token=8b5b1092-ab8d-4df4-b923-11ae01c6ca3b';
     }
 
     // try to create user
-    this.regform.register((data) => {
+    this.regform.register(student.name, (data) => {
       console.log(data);
       // username already exists
       if (data.status === 406) {
@@ -98,6 +98,7 @@ export class CreateStudentProfileComponent implements OnInit {
     this.personService.addPerson(stud.person).subscribe((resNewPerson: any) => {
       // spara en kopia av det id som personen fått av mongoose
       stud.personId = resNewPerson._id;
+      stud.person = resNewPerson;
 
       // personen är tillagd, dags att lägga till kurser
       this.addCourses(stud);
@@ -144,7 +145,7 @@ export class CreateStudentProfileComponent implements OnInit {
       console.log('add student?? ' + resNewStudent.name);
       // Lägg till roleId på i ny user
       if (this.regform.setRoleId(resNewStudent._id)) {
-        this.regform.redirect(resNewStudent._id);
+        this.regform.redirect();
       }
 
     });

@@ -15,6 +15,8 @@ export class StudentProfileComponent implements OnInit {
 
   student: Student;
 
+  myProfile: boolean = false;
+
   constructor(private studService: StudentService,
               private route: ActivatedRoute,
               private router: Router,
@@ -32,14 +34,14 @@ export class StudentProfileComponent implements OnInit {
     let studId: string = this.route.snapshot.params['id'];  // tar in hårdkodat id just nu
     if (studId === 'profile') {
       studId = this.auth.getRoleId();
+      this.myProfile = true;
     }
 
 
     this.studService.getStudent(studId).subscribe((resStudentData: any) => {
-      console.log(resStudentData);
       this.student = resStudentData;
     }, (err) => {
-      router.navigateByUrl('/home');
+      router.navigateByUrl('/student/home');
     });
   }
 
