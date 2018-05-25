@@ -1,0 +1,56 @@
+@import "../../../../assets/scss/colors";
+
+.profile {
+    background-color: white;
+    color: #363636;
+
+    span {
+        background-color: lighten($blue-light, 35);
+        color: #3f3f3f;
+        border-radius: 5% !important;
+    }
+
+    border-color: rgb(233, 233, 233) !important;
+    box-shadow: 0px 0px 10px #ebebeb !important;
+
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-right: 4em;
+    padding-bottom: 4em;
+
+    @media (max-width: 767.98px) {
+        padding: 1em;
+    }
+
+    fa {
+        margin-right: .5em !important;
+    }
+}
+
+.profile-side {
+    padding: 3em;
+    .img-circle {
+        border-radius: 50% !important;
+        border-color: rgb(233, 233, 233) !important;
+        box-shadow: 0px 0px 8px #ebebeb !important;
+    }
+    .profile-picture {
+        margin-bottom: 1em;
+    }
+}
+
+.profile-body {
+    fa {
+        color: $blue-light;
+        // color: paleturquoise;
+        color: $blue-light !important;
+    }
+    h3,h4,h6 {
+        margin-top: 1em;
+        font-weight: 200;
+    }
+}
+
+.buttons {
+    margin-top: 2em;
+}
