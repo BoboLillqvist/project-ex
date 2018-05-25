@@ -8,24 +8,26 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   constructor() { }
 
+
+  // Denna metod kallas så fort en HttpRequest görs
+  // Den fångar alltså upp request calls, och lägger till en ny header med lagrad token (om den finns).
+  // Detta gör så att servern kan verifiera att requesten kommer från en inloggad användare
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     const token = localStorage.getItem('token');
-    const role = localStorage.getItem('role');
 
     if (token) {
       // Lägg till egen header
       const tokenReq = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + token,
-          Role: role
+          Authorization: 'Bearer ' + token
         }
       });
 
       // skicka vidare modifierat request objekt
       return next.handle(tokenReq);
     } else {
-      console.log('token is null? ' + token);
+
       return next.handle(request);
     }
   }

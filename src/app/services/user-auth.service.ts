@@ -33,16 +33,13 @@ export class UserAuthService {
     });
   }
 
+  // store the token(s) for the session. (valid for 2 hours)
   setupSession(res) {
     localStorage.setItem('token', res.token);
-    localStorage.setItem('role', res.user.role);
-    localStorage.setItem('expires', res.expiresIn);
   }
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('expires');
   }
 
   updateRoleId(user: User) {
@@ -64,12 +61,9 @@ export class UserAuthService {
     return true;
   }
 
+  // returns token from localstorage
   getToken() {
-    let token = localStorage.getItem('token');
-
-    if (token === null) {
-      token = '';
-    }
+    const token = localStorage.getItem('token');
 
     return token;
   }
@@ -92,14 +86,16 @@ export class UserAuthService {
     return decodedToken.name;
   }
 
+  // returns expiration date of the token.
   getExpiration() {
 
-    const token = this.getToken();
     let expireDate = new Date();
     expireDate.setFullYear(1970);
 
-    if (token !== '') {
-      expireDate = this.jwt.getTokenExpirationDate(this.getToken());
+    const token = this.getToken();
+
+    if (token !== null) {
+      expireDate = this.jwt.getTokenExpirationDate(token);
     }
 
     return expireDate;
@@ -116,7 +112,7 @@ export class UserAuthService {
 
     const token = this.getToken();
 
-    if (token !== '') {
+    if (token !== null) {
 
       const decoded = this.jwt.decodeToken(token);
 
