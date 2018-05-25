@@ -411,14 +411,14 @@ router.post('/examwork', function (req, res) {
     newExamWork.applyDueDate = req.body.applyDueDate;
     newExamWork.presence = req.body.presence;
     newExamWork.teachings = req.body.teachings;
-    newExamWork.contact = new mongoose.mongo.ObjectId('5af94b79af22a127ea036673'),
-    newExamWork.company = new mongoose.mongo.ObjectId('5ae2b45513ed9310c06691a9'),
+    newExamWork.contact = new mongoose.mongo.ObjectId(req.body.contactId),
+    newExamWork.company = new mongoose.mongo.ObjectId(req.body.companyId),
 
-    newExamWork.save(function (err, insertedExamwork) {
+    newExamWork.save(function (err, examwork) {
         if (err) {
             console.log('Error saving exam work' + err);
         } else {
-            res.status(200).send(insertedExamwork);
+            res.status(200).send(examwork);
             console.log('Exam work saved');
         }
     });

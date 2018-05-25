@@ -7,6 +7,9 @@ import { ExamworkService } from '../../../services/examwork.service';
 import { PersonService } from '../../../services/person.service';
 import { AddStudentSkillsComponent } from './add-student-skills/add-student-skills.component';
 import { ToastrService } from 'ngx-toastr';
+import { UserAuthService } from '../../../services/user-auth.service';
+import { CompanyService } from '../../../services/company.service';
+import { Company } from '../../../models/company.model';
 
 @Component({
   selector: 'app-post-exam-work',
@@ -15,7 +18,8 @@ import { ToastrService } from 'ngx-toastr';
   providers: [
     ExamworkService,
     PersonService,
-    ToastrService
+    ToastrService,
+    CompanyService
   ]
 })
 export class PostExamWorkComponent implements OnInit {
@@ -28,21 +32,26 @@ export class PostExamWorkComponent implements OnInit {
   phoneNbr: string;
   email: string;
 
+  personId: string;
+  examWork: ExamWork;
+
   constructor(
     private examWorkService: ExamworkService,
     private personService: PersonService,
+    private compServ: CompanyService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private auth: UserAuthService
   ) { }
 
   ngOnInit() {
+    console.log('oninit??');
   }
 
   onSubmitAddExamWork(examWork: ExamWork) {
-    this.addTagsFromAddStudentSkillsComponent(examWork);
-    this.createPerson(this.personService);
-    this.createExamWork(this.examWorkService, examWork);
-    this.sendUserBack();
+    this.examWork = examWork;
+    this.addTagsFromAddStudentSkillsComponent(this.examWork);
+    this.createPerson();
   }
 
   clearValues() {
@@ -54,28 +63,60 @@ export class PostExamWorkComponent implements OnInit {
     examWork.complementarySkills  = this.studentSkillsComponent.storedTags.complimentary;
   }
 
-  createPerson(personService: PersonService) {
+  createPerson() {
     const contact = new Person(this.fName, this.lName, this.email, this.phoneNbr);
 
-    // TODO: Kolla om användaren finns, isf hämta
-    personService.addPerson(contact).subscribe();
+    // skapa person
+    this.personService.addPerson(contact).subscribe((resData: any) => {
+      // spara undan id
+      this.personId = resData._id;
+      this.createExamWork();
+
+    });
   }
 
-  createExamWork(examWorkService: ExamworkService, examWork: any) {
+  createExamWork() {
     const newExamWork = new ExamWork(
-      examWork.title,
-      examWork.location,
-      examWork.essentialSkills,
-      examWork.complementarySkills,
-      examWork.description,
-      examWork.applyDueDate,
-      null, // Contact
-      null, // Company
+      this.examWork.title,
+      this.examWork.location,
+      this.examWork.essentialSkills,
+      this.examWork.complementarySkills,
+      this.examWork.description,
+      this.examWork.applyDueDate,
+      null,
+      null,
       'precense',
-      examWork.teachings
+      this.examWork.teachings
     );
 
-    examWorkService.addExamWork(newExamWork).subscribe();
+    // lagra korrekt id:s på nytt examwork
+    newExamWork.contactId = this.personId;
+    newExamWork.companyId = this.auth.getRoleId();
+
+    // lägg till examwork i db
+    this.examWorkService.addExamWork(newExamWork).subscribe((resWork: any) => {
+
+      // spara undan id
+      const workId = resWork._id;
+
+      // hämta inloggat företag
+      this.compServ.getCompany(this.auth.getRoleId()).subscribe( (resComp: any) => {
+
+        let company = new Company('', '', '', []);
+
+        company = resComp;
+
+        // lägg till examwork i listan
+        company.examWorks.push(resWork);
+
+        // uppdatera företag så nya listan läggs till
+        this.compServ.updateExamworkList(company).subscribe( (resCompUpdated: any) => {
+          this.sendUserBack();
+        });
+
+      });
+
+    });
   }
 
   sendUserBack() {
