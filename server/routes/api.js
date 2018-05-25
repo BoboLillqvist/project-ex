@@ -162,14 +162,14 @@ router.post('/person', (req, res) => {
         phoneNbr: req.body.phoneNbr
     });
 
-    newPerson.save((err, insertedPerson) => {
+    newPerson.save((err, person) => {
         if (err) {
             console.log('error saving person ' + err);
         }
 
         console.log('saving person');
 
-        res.status(200).send( insertedPerson );
+        res.status(200).send( person );
     });
 });
 
@@ -288,6 +288,7 @@ router.get('/companies/:id', function (req, res) {
             if (err) {
                 console.log('error retrieving companies: ' + err);
             } else {
+                console.log(company);
                 res.status(200).send(company);
             }
         });
@@ -319,6 +320,28 @@ router.put('/company/:id', function (req, res) {
                     url: req.body.url, 
                     description: req.body.description, 
                     pictureURL: req.body.pictureURL 
+            }
+        },
+        {
+            new: true
+        },
+        function (err, updatedCompay) {
+            if (err) {
+                res.send("Error updating company");
+            } else {
+                res.status(200).send(updatedCompay);
+            }
+        }
+
+    );
+});
+
+router.put('/company/examwork/:id', (req, res) => {
+    console.log('update a company examworks');
+    Company.findByIdAndUpdate(req.params.id,
+        {
+            $set: { 
+                examWorks: req.body.examWorks,
             }
         },
         {
