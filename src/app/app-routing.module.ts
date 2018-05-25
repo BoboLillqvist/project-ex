@@ -70,7 +70,7 @@ const routes: Routes = [
       component: StudentHomeComponent
     },
     {
-      path: ':id',
+      path: 'profile/id/:id',
       component: StudentProfileComponent
     },
     {
@@ -99,7 +99,7 @@ const routes: Routes = [
       component: CompanyHomeComponent
     },
     {
-      path: ':id',
+      path: 'profile/id/:id',
       component: CompanyProfileComponent
     },
     {

@@ -10,7 +10,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
 
   // Denna metod kallas så fort en HttpRequest görs
-  // Den fångar alltså upp request calls, och lägger till en ny header med lagrad token (om den finns).
+  // Den fångar alltså upp request calls, och lägger till en ny header på lagrad token (om den finns).
   // Detta gör så att servern kan verifiera att requesten kommer från en inloggad användare
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
