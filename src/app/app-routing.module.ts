@@ -24,6 +24,9 @@ import { LoginGuard } from './guards/login.guard';
 
 // Routes sköts här
 const routes: Routes = [
+
+  // register/login paths
+  // Guarded by LoginGuard
 {
   path: '',
   canActivate: [LoginGuard],
@@ -56,6 +59,8 @@ const routes: Routes = [
   ]
 },
 
+// Student paths
+// Guarded by StudentAuthGuard
 {
   path: 'student',
   canActivate: [StudentAuthGuard],
@@ -83,6 +88,8 @@ const routes: Routes = [
   ]
 },
 
+// Company paths
+// Guarded by CompanyGuard
 {
   path: 'company',
   canActivate: [CompanyGuard],
@@ -117,10 +124,8 @@ const routes: Routes = [
     },
   ]
 
-},
+}
 
-{path: 'companies', component: CompaniesComponent},
-{path: 'students', component: StudentsComponent}
 ];
 
 @NgModule({

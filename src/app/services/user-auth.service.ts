@@ -17,18 +17,25 @@ export class UserAuthService {
     this.user = new User('', '', '', '' , '');
   }
 
+  // handle register request
   register(user: User) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+
     return this.http.post('/api/register', user, { headers } ).map( (res: any) => {
-      console.log('from auth?? ' + res);
+
       this.setupSession(res);
+
       return res;
     });
   }
 
+  // handle login request
   login(user: User) {
+
     return this.http.post('/api/login', user).map( res => {
+
       this.setupSession(res);
+
       return res;
     });
   }
@@ -42,6 +49,7 @@ export class UserAuthService {
     localStorage.removeItem('token');
   }
 
+  // This updates the roleId inside a user stored in the DB. This is called towards the end of registration
   updateRoleId(user: User) {
     return this.http.put('/api/user/' + user._id, user).map( (res: any) => {
       localStorage.setItem('token', res.token);
@@ -68,18 +76,21 @@ export class UserAuthService {
     return token;
   }
 
+  // returns role decoded from the token
   getRole() {
     const decodedToken = this.getDecodedToken();
 
     return decodedToken.role;
   }
 
+  // returns roleId decoded from the token
   getRoleId() {
     const decodedToken = this.getDecodedToken();
 
     return decodedToken.roleId;
   }
 
+  // returns username decoded from the token
   getUserName() {
     const decodedToken = this.getDecodedToken();
 
@@ -101,6 +112,7 @@ export class UserAuthService {
     return expireDate;
   }
 
+  // decode the stored token and return it
   private getDecodedToken() {
 
     const decodedToken = {
