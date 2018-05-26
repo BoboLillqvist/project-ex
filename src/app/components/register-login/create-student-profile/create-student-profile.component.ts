@@ -16,6 +16,7 @@ import { ImageUploadComponent } from '../../file-upload/image-upload/image-uploa
 import { User } from '@firebase/auth-types';
 import { Router } from '@angular/router';
 import { RegisterLoginComponent } from '../register-login/register-login.component';
+import { CourseService } from '../../../services/course.service';
 
 @Component({
   selector: 'app-create-student-profile',
@@ -48,7 +49,10 @@ export class CreateStudentProfileComponent implements OnInit {
   @ViewChild(SimpleTagComponent) studentSkills;
   @ViewChild(ImageUploadComponent) imageUpload;
 
-  constructor(private studentService: StudentService, private personService: PersonService, private router: Router) {
+  constructor(private studentService: StudentService,
+              private personService: PersonService,
+              private courseService: CourseService,
+              private router: Router) {
     this.eduPrograms = studentService.eduPrograms;
    }
 
@@ -112,14 +116,14 @@ export class CreateStudentProfileComponent implements OnInit {
     let i = 0;
     stud.courses.forEach(course => {
       // kolla om kurs finns i databas
-      this.studentService.getCourse(course.name).subscribe((resCourse: any) => {
+      this.courseService.getCourse(course.name).subscribe((resCourse: any) => {
         if (resCourse != null) {
           console.log('Kurs fanns: ' + resCourse.name);
           stud.courseIds.push(resCourse._id);
           i++;
           this.readyToAddStudent(stud, i);
         } else {
-          this.studentService.addCourse(course).subscribe((resNewCourse: any) => {
+          this.courseService.addCourse(course).subscribe((resNewCourse: any) => {
             // spara en kopia av det id som kursen har fått av mongoose
             console.log('courses?? ' + resNewCourse);
             stud.courseIds.push(resNewCourse._id);

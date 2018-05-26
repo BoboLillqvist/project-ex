@@ -47,6 +47,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CompanyGuard } from './guards/company.guard';
 import { LoginGuard } from './guards/login.guard';
+import { CourseService } from './services/course.service';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import { LoginGuard } from './guards/login.guard';
     CompanyGuard,
     LoginGuard,
     JwtHelper,
+    CourseService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
