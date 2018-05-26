@@ -99,7 +99,7 @@ export class EditStudentProfileComponent implements OnInit {
     this.student.skills = this.studentSkillsComp.skills;
     this.studService.updateStudent(this.student).subscribe((resStudData: any) => {
       this.student = resStudData;
-      let path = '/student/' + resStudData._id;
+      let path = '/student/profile'
 
       this.toastr.success('Din profil är nu uppdaterad!');
       this.router.navigateByUrl(path);
