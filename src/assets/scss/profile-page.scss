@@ -1,0 +1,45 @@
+@import "colors";
+
+$font-color: #363636;
+
+.profile {
+    background-color: white;
+    color: $font-color;
+
+    fa {
+        color: $font-color;
+        margin-right: .5em !important;
+    }
+
+    span {
+        background-color: lighten($blue-light, 35);
+        color: #3f3f3f;
+        border-radius: 5% !important;
+    }
+
+    border-color: rgb(233, 233, 233) !important;
+    box-shadow: 0px 0px 10px #ebebeb !important;
+
+    .img-circle {
+        border-radius: 50% !important;
+        // border-color: rgb(233, 233, 233) !important;
+        // box-shadow: 0px 0px 8px #ebebeb !important;
+    }
+
+}
+
+.profile-body {
+    fa {
+        color: $blue-light;
+        // color: paleturquoise;
+        color: $blue-light !important;
+    }
+    h1,h3,h4,h5,h6 {
+        margin-top: 1em;
+        font-weight: 200;
+    }
+
+    .tag {
+        margin: 0.1em 0.05em !important;
+    }
+}
