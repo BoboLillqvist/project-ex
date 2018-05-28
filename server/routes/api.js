@@ -426,7 +426,7 @@ router.post('/examwork', function (req, res) {
 
 router.delete('/examwork/:id', function (req, res) {
     console.log('Deleting exam work');
-    Company.findByIdAndRemove(req.params.id, function (err, deletedExamwork) {
+    Examwork.findByIdAndRemove(req.params.id, function (err, deletedExamwork) {
         if (err) {
             res.send("Error deleting exam work");
         } else {

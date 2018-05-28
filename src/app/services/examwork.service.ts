@@ -9,6 +9,7 @@ export class ExamworkService {
   private _getUrl = '/api/examworks';
   private _postUrl = '/api/examwork';
   private _putUrl = '/api/examwork';
+  private _deleteUrl = '/api/examwork/';
 
   constructor(private _http: HttpClient) { }
 
@@ -32,6 +33,11 @@ export class ExamworkService {
       JSON.stringify(examWork),
       {headers}
     ).map((response: Response) => response);
+  }
+
+  deleteExamWork(examWork: ExamWork){
+    return this._http.delete(this._deleteUrl + examWork._id)
+    .map((response: Response) => response);
   }
 
 }
