@@ -85,8 +85,8 @@ export class PostExamWorkComponent implements OnInit {
       this.examWork.applyDueDate,
       null,
       null,
-      'precense',
-      this.examWork.teachings
+      this.examWork.teachings,
+      null
     );
 
     // lagra korrekt id:s på nytt examwork
