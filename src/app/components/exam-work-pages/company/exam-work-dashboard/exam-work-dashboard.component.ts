@@ -122,4 +122,13 @@ export class ExamWorkDashboardComponent implements OnInit {
       this.router.navigateByUrl(path);
     }
   }
+ showMoreStudents() {
+  this.showLimit += 5;
+
 }
+
+ updateSkills(){
+   this.tagSkills = [];
+   this.tagSkills = this.tagComp.skills;
+ }
+

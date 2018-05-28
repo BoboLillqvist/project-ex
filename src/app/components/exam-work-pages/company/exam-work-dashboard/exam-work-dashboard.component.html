@@ -66,50 +66,49 @@
     </div>
 
   </div> <!-- /card-body -->
-</div> <!-- card -->
-
-<div class="row justify-content-center">
-
-
-  <div class="col-sm-10" *ngIf="isEmpty">
-      <br>
-      <h3>
-          Hittar inga studenter! Ta bort något nyckelord.
-      </h3>
   </div>
-
-<div class="row">
+ </ng-template>
+ 
+ 
+ <div class="row justify-content-center">
+ 
+ 
+ 
+ <div class="row">
   <div class="col col-8">
     <h1 class="text-title">Studenter med matchande färdigheter till examensarbetet</h1>
   </div>
 </div>
     
 <div class="col-sm-10">
+ </div>
+   
+ <div class="col-sm-10">
   <app-simple-tag (onNewTag)="updateSkills($event)"></app-simple-tag>
+ </div>
+ 
+ <div class="col-sm-10" *ngIf="(sortedStudents | filter:tagSkills).length < 1">
+  <br>
+  <h3>
+      Hittar inga studenter! Ta bort något nyckelord.
+  </h3>
 </div>
 
-<div class="row justify-content-center">
-  <div class="col-sm-10" *ngFor="let student of sortedStudents | filter:tagSkills">
-      <div class="col-sm-10" *ngIf="sortedStudents.length < 1">
-          <br>
-          <h3>
-              Hittar inga studenter! Ta bort något nyckelord.
-          </h3>
-      </div>
-      
-      <div class="card">
-      <div class="card-body">
+ <div class="row justify-content-center">
+  <div class="col-sm-10" *ngFor="let student of (sortedStudents | filter:tagSkills); let i = index">
 
+      <div class="card" *ngIf="i < showLimit">
+      <div class="card-body">
+ 
           <div class="row">
               <div class="col col-9">
-
-                  <h6 class="card-subtitle mb-2 text-muted">{{student.name}}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ student.name }}</h6>
                   <p class="card-text">
                       <small>
                           <li>
                                   {{student.description}}
                           </li>
-
+ 
                       </small>
                   </p>
                   <a [routerLink]="['/student', student._id]" class="btn btn-primary">Gå till profilsidan</a>
@@ -120,10 +119,10 @@
           </div>
       </div>
   </div>
-
-
-</div>
-<!-- <div class="col-sm-10" *ngIf="sortedStudents.length < showLimit">
+ 
+ 
+ </div>
+<div class="col-sm-10" *ngIf="(sortedStudents | filter:tagSkills).length > showLimit">
   <div class="card">
       <div class="card-body">
           <div class="row">
@@ -136,10 +135,13 @@
           </div>
       </div>
   </div>
-</div> -->
-
-</div>          
-
-
-
-<app-back></app-back>
+ </div>
+ 
+ </div>         
+ 
+ 
+ 
+ <app-back></app-back>
+ 
+ 
+ 
