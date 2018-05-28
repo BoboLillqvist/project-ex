@@ -120,8 +120,20 @@ export class ExamWorkDashboardComponent implements OnInit {
     if (this.user.role === 'student') {
       path = '/student/view-exam-work/' + exWorkId;
       this.router.navigateByUrl(path);
+ getExamWork(){
+  this.examService.getExamWork(this.examWorkId)
+  .subscribe((fetchedExamWork: any) => {
+    this.examWork = fetchedExamWork;
+
+    //Initiera tags med examensarbetens essentialskills
+    for(let i = 0; i < this.examWork.essentialSkills.length; i++) {
+        this.tagComp.skills.push(this.examWork.essentialSkills[i]);
     }
-  }
+     
+    this.tagSkills = this.tagComp.skills;
+  });
+ }
+
  showMoreStudents() {
   this.showLimit += 5;
 
