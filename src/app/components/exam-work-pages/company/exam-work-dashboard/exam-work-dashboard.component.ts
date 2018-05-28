@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExamWork } from '../../../../models/exam-work.model';
 import { Person } from '../../../../models/person.model';
@@ -10,6 +10,8 @@ import { StudentService } from '../../../../services/student.service';
 import { Student } from '../../../../models/student.model';
 import { SimpleTagComponent } from '../../../misc/simple-tag/simple-tag.component';
 import { User } from '../../../../models/user.model';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { Location } from '@angular/common';
 
 @Component({
  selector: 'app-exam-work-dashboard',
@@ -29,6 +31,9 @@ export class ExamWorkDashboardComponent implements OnInit {
  showMoreBtn: boolean = false;
  tagSkills: Array<String> = [];
 
+ //variabler till ta bort funktion
+ modalRef: BsModalRef;
+ message: String;
 
  user: User;
  constructor(
@@ -48,8 +53,31 @@ export class ExamWorkDashboardComponent implements OnInit {
    this.user = new User('', '', '', '','');
  }
 
-  ngOnInit() {
+//metoder till ta bort funktion
+ openModal(template: TemplateRef<any>){
+   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+ }
 
+ confirm(): void {
+   this.message = 'Confirmed';
+   this.modalRef.hide();
+
+   this.deleteExamWork(this.examWork);
+   this.location.back();
+
+ }
+
+ decline(): void {
+   this.message = 'Declined';
+   this.modalRef.hide();
+ }
+
+ deleteExamWork(examWork: ExamWork){
+   this.examService.deleteExamWork(examWork)
+    .subscribe((res: any) => {
+    });
+
+ }
 
  getExamWork(){
   this.examService.getExamWork(this.examWorkId)
