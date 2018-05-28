@@ -22,6 +22,7 @@ export class StudentHomeComponent implements OnInit {
   constructor(private examService: ExamworkService) { }
 
   ngOnInit() {
+    document.body.style.backgroundImage = '';
     this.tagComp.placeholderText = 'Filtrera med nyckelord';
     this.examService.getExamWorks().subscribe( (resData: any) => {
       this.examWorks = resData;

@@ -55,6 +55,7 @@ DaysLeftOfExamwork(date){
 
 
   ngOnInit() {
+    document.body.style.backgroundImage = '';
     this.companyService.getCompany(this.userAuthService.getRoleId()).subscribe((resData: any)=>{
       console.log(this.userAuthService.getRoleId());
       this.company = resData;
