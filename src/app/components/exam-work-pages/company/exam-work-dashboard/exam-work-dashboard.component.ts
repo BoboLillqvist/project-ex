@@ -134,6 +134,17 @@ export class ExamWorkDashboardComponent implements OnInit {
   });
  }
 
+ getAllStudents(){
+       
+  this.studentService.getStudents()
+  .subscribe(((fetchedStudents: any) => {
+    this.students = fetchedStudents;
+    this.sortedStudents = fetchedStudents;
+
+}));
+ }
+    this.getExamWork();
+    this.getAllStudents();
  showMoreStudents() {
   this.showLimit += 5;
 
