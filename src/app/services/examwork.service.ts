@@ -9,6 +9,7 @@ export class ExamworkService {
   private _getUrl = '/api/examworks';
   private _postUrl = '/api/examwork';
   private _putUrl = '/api/examwork';
+  private _deleteUrl = '/api/examwork/';
 
   constructor(private _http: HttpClient) { }
 
