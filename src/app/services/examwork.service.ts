@@ -35,4 +35,9 @@ export class ExamworkService {
     ).map((response: Response) => response);
   }
 
+  deleteExamWork(examWork: ExamWork){
+    return this._http.delete(this._deleteUrl + examWork._id)
+    .map((response: Response) => response);
+  }
+
 }
