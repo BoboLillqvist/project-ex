@@ -14,72 +14,127 @@ export class UserAuthService {
   user: User;
 
   constructor(private http: HttpClient, private router: Router, private jwt: JwtHelper) {
-    this.user = new User('', '', '' , '');
+    this.user = new User('', '', '', '' , '');
   }
 
+  // handle register request
   register(user: User) {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
-    return this.http.post('/api/register', user, { headers } ).map( (res: any) => {
-      console.log('from auth?? ' + res.user.role);
-      return this.setupSession(res);
-    });
-  }
 
-  login(user: User) {
-    return this.http.post('/api/login', user).map( res => {
+    return this.http.post('/api/register', user, { headers } ).map( (res: any) => {
+
       this.setupSession(res);
+
       return res;
     });
   }
 
+  // handle login request
+  login(user: User) {
+
+    return this.http.post('/api/login', user).map( res => {
+
+      this.setupSession(res);
+
+      return res;
+    });
+  }
+
+  // store the token(s) for the session. (valid for 2 hours)
   setupSession(res) {
     localStorage.setItem('token', res.token);
-    localStorage.setItem('role', res.user.role);
-    localStorage.setItem('expires', res.expiresIn);
-    return res;
   }
 
   logout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('expires');
   }
 
+  // This updates the roleId inside a user stored in the DB. This is called towards the end of registration
   updateRoleId(user: User) {
-    return this.http.put('/api/user/' + user._id, user).map( (res: any) => res);
+    return this.http.put('/api/user/' + user._id, user).map( (res: any) => {
+      localStorage.setItem('token', res.token);
+      return res;
+    });
   }
 
    // returns true or false depending on if token is expired
   loggedIn() {
     const now = new Date().getTime() / 1000;
+    const expire = this.getExpiration().getTime() / 1000;
 
-    if (now.toString() > this.getExpiration()) {
+    if (now > expire) {
       return false;
     }
 
     return true;
   }
 
+  // returns token from localstorage
   getToken() {
-    return localStorage.getItem('token');
+    const token = localStorage.getItem('token');
+
+    return token;
   }
 
+  // returns role decoded from the token
   getRole() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.role;
   }
 
+  // returns roleId decoded from the token
   getRoleId() {
-    const decodedToken = this.jwt.decodeToken(this.getToken());
+    const decodedToken = this.getDecodedToken();
 
     return decodedToken.roleId;
   }
 
-  getExpiration() {
-    const expireDate = this.jwt.getTokenExpirationDate(this.getToken());
-    console.log('Decoded expiredate: ' + expireDate);
-    return localStorage.getItem('expires');
+  // returns username decoded from the token
+  getUserName() {
+    const decodedToken = this.getDecodedToken();
+
+    return decodedToken.name;
   }
 
+  // returns expiration date of the token.
+  getExpiration() {
+
+    let expireDate = new Date();
+    expireDate.setFullYear(1970);
+
+    const token = this.getToken();
+
+    if (token !== null) {
+      expireDate = this.jwt.getTokenExpirationDate(token);
+    }
+
+    return expireDate;
+  }
+
+  // decode the stored token and return it
+  private getDecodedToken() {
+
+    const decodedToken = {
+      name: '',
+      username: '',
+      role: '',
+      roleId: '',
+    };
+
+    const token = this.getToken();
+
+    if (token !== null) {
+
+      const decoded = this.jwt.decodeToken(token);
+
+      decodedToken.name = decoded.name;
+      decodedToken.username = decoded.username;
+      decodedToken.role = decoded.role;
+      decodedToken.roleId = decoded.roleId;
+
+    }
+
+    return decodedToken;
+  }
 }

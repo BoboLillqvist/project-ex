@@ -20,17 +20,47 @@ import { RegisterChoiceComponent } from './components/register-login/register-ch
 import { ExamWorkDashboardComponent } from './components/exam-work-pages/company/exam-work-dashboard/exam-work-dashboard.component';
 import { StudentAuthGuard } from './guards/student-auth.guard';
 import { CompanyGuard } from './guards/company.guard';
+import { LoginGuard } from './guards/login.guard';
 
 // Routes sköts här
 const routes: Routes = [
-{path: '', redirectTo: '/home', pathMatch: 'full'},
-{path: 'home', component: HomeComponent},
-{path: 'login', component: LoginComponent},
-{path: 'register-choice', component: RegisterChoiceComponent},
 
-{path: 'create-company-profile', component: CreateCompanyProfileComponent},
-{path: 'create-student-profile', component: CreateStudentProfileComponent},
+  // register/login paths
+  // Guarded by LoginGuard
+{
+  path: '',
+  canActivate: [LoginGuard],
+  children: [
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: '/login',
+    },
+    {
+      path: 'home',
+      component: HomeComponent
+    },
+    {
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+      path: 'register-choice',
+      component: RegisterChoiceComponent
+    },
+    {
+      path: 'create-company-profile',
+      component: CreateCompanyProfileComponent
+    },
+    {
+      path: 'create-student-profile',
+      component: CreateStudentProfileComponent
+    },
+  ]
+},
 
+// Student paths
+// Guarded by StudentAuthGuard
 {
   path: 'student',
   canActivate: [StudentAuthGuard],
@@ -40,7 +70,7 @@ const routes: Routes = [
       component: StudentHomeComponent
     },
     {
-      path: ':id',
+      path: 'profile/id/:id',
       component: StudentProfileComponent
     },
     {
@@ -58,32 +88,34 @@ const routes: Routes = [
   ]
 },
 
+// Company paths
+// Guarded by CompanyGuard
 {
   path: 'company',
   canActivate: [CompanyGuard],
   children: [
     {
-      path: 'home', 
+      path: 'home',
       component: CompanyHomeComponent
     },
     {
-      path: ':id', 
+      path: 'profile/id/:id',
       component: CompanyProfileComponent
     },
     {
-      path: 'profile', 
+      path: 'profile',
       component: CompanyProfileComponent
     },
     {
-      path: 'profile/edit', 
+      path: 'profile/edit',
       component: EditCompanyProfileComponent
     },
     {
-      path: 'exam-work/edit-exam-work/:id', 
+      path: 'exam-work/edit-exam-work/:id',
       component: EditExamWorkComponent
     },
     {
-      path: 'post-exam-work', 
+      path: 'post-exam-work',
       component: PostExamWorkComponent
     },
     {
@@ -92,10 +124,8 @@ const routes: Routes = [
     },
   ]
 
-},
+}
 
-{path: 'companies', component: CompaniesComponent},
-{path: 'students', component: StudentsComponent}
 ];
 
 @NgModule({

@@ -8,6 +8,7 @@ import { PersonService } from '../../../services/person.service';
 import { ImageUploadComponent } from '../../file-upload/image-upload/image-upload.component';
 import { UserAuthService } from '../../../services/user-auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { CourseService } from '../../../services/course.service';
 
 @Component({
   selector: 'app-edit-student-profile',
@@ -25,12 +26,15 @@ export class EditStudentProfileComponent implements OnInit {
   coursePoints: number;
   courses: Array<Course> = [];
 
+  courseIndex: Array<Course> = [];
+
   student: Student;
   backupStudent: Student;
 
   constructor(
     private studService: StudentService,
     private persService: PersonService,
+    private courseService: CourseService,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private toastr: ToastrService,
@@ -41,17 +45,21 @@ export class EditStudentProfileComponent implements OnInit {
 
   ngOnInit() {
 
-      this.student = new Student('', '', '', 0, '', [], [], '', '');
-     
-      const studId = this.auth.getRoleId();
-      
-      this.studService.getStudent(studId).subscribe((resStudentData: any) => {
-        this.student = resStudentData;
-        this.studentSkillsComp.skills = this.student.skills;
-        // deep copy
-        this.backupStudent = Object.assign({}, this.student);
-        this.backupStudent.person = Object.assign({}, this.student.person);
-      });
+    this.courseService.getCourses().subscribe( (resCourses: any) => {
+      this.courseIndex = resCourses;
+    });
+
+    this.student = new Student('', '', '', 0, '', [], [], '', '');
+    
+    const studId = this.auth.getRoleId();
+    
+    this.studService.getStudent(studId).subscribe((resStudentData: any) => {
+      this.student = resStudentData;
+      this.studentSkillsComp.skills = this.student.skills;
+      // deep copy
+      this.backupStudent = Object.assign({}, this.student);
+      this.backupStudent.person = Object.assign({}, this.student.person);
+    });
   }
 
   ngAfterViewInit() {
@@ -69,13 +77,13 @@ export class EditStudentProfileComponent implements OnInit {
       let i = 0;
       this.student.courses.forEach(course => {
         // kolla om kurs finns i databas
-        this.studService.getCourse(course.name).subscribe((resCourse: any) => {
+        this.courseService.getCourse(course.name).subscribe((resCourse: any) => {
           if (resCourse != null) {
             this.student.courseIds.push(resCourse._id);
             i++;
             this.readyToAddStudent(this.student, i);
           } else {
-            this.studService.addCourse(course).subscribe((resNewCourse: any) => {
+            this.courseService.addCourse(course).subscribe((resNewCourse: any) => {
               // spara en kopia av det id som kursen har fått av mongoose
               this.student.courseIds.push(resNewCourse._id);
               i++;
@@ -91,7 +99,7 @@ export class EditStudentProfileComponent implements OnInit {
     this.student.skills = this.studentSkillsComp.skills;
     this.studService.updateStudent(this.student).subscribe((resStudData: any) => {
       this.student = resStudData;
-      let path = '/student/' + resStudData._id;
+      let path = '/student/profile'
 
       this.toastr.success('Din profil är nu uppdaterad!');
       this.router.navigateByUrl(path);

@@ -42,5 +42,11 @@ export class CompanyService {
       .map((response: Response) => response);
   }
 
+  updateExamworkList(company: Company) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this._http.put(this._putUrl + 'examwork/' + company._id, JSON.stringify(company), {headers})
+      .map((response: Response) => response);
+  }
+
 
 }

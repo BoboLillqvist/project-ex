@@ -1,24 +1,24 @@
 <div class="row">
     <div class="col col-12">
-        <h1 class="text-title">Företag - Hem</h1>
+        <h1 class="text-title">Hem</h1>
     </div>
 </div>
 
 <div class="row justify-content-center">
     <div class="col-sm-10">
-        <div class="card">
+        <div class="card" *ngFor="let examwork of company.examWorks">
 
             <div class="card-body">
-                <h5 class="card-title">Publicerat examensarbete</h5>
-                <p class="card-text">Tillfälliga knappar nu för att hantera länkar</p>
-                <a routerLink="/company/exam-work-dashboard/5af953b9e6f84b2aecce76fa" class="btn btn-primary">Gå till "Dashboard"</a>
+                <h5 class="card-title">{{examwork.title}}</h5>
+                <a [routerLink]="['/company/exam-work-dashboard', examwork._id]" class="btn btn-primary">Gå till "Dashboard"</a>
             </div>
 
             <div class="card-footer">
                 <div class="progress">
-                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">22 dagar kvar</div>
+                    <div id="progbar" class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{DaysLeftOfExamwork(examwork.applyDueDate)}}</div>
                 </div>
             </div>
+            <br>
         </div>
     </div>
 </div>

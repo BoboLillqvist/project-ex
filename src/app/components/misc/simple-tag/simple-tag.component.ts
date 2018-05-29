@@ -1,10 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TypeaheadMatch } from 'ngx-bootstrap';
+import { TagsService } from '../../../services/tags.service';
 
 @Component({
   selector: 'app-simple-tag',
   templateUrl: './simple-tag.component.html',
-  styleUrls: ['./simple-tag.component.scss']
+  styleUrls: ['./simple-tag.component.scss'],
+  providers: [TagsService]
 })
 export class SimpleTagComponent implements OnInit {
 
@@ -15,24 +17,24 @@ export class SimpleTagComponent implements OnInit {
   tagList: string;
   noResult = false;
 
-  availableTags: any[] = [
-    'C++',
-    'C#',
-    'C',
-    'PHP',
-    'Python',
-    'Java',
-    'Javascript'
-  ];
+  availableTags: any[] = [];
 
   skills: Array<String> = [];
 
-  constructor() { }
+  constructor(private tagsServ: TagsService) {
+  }
 
   ngOnInit() {
+    this.fillWithTagsFromDb();
   }
 
   //#region Tag functions
+
+  fillWithTagsFromDb() {
+    this.tagsServ.getAvailableTags().subscribe( (resData: any) => {
+      this.availableTags = resData[0].values;
+    });
+  }
 
   tagAlreadyStored(tag: any): boolean {
     if (this.skills.includes(tag)) {

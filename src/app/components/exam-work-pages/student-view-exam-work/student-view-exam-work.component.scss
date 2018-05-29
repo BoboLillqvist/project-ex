@@ -1,0 +1,36 @@
+.profile {
+    padding: 2em 6em 4em 2em;
+
+    .exam-sidebar {
+        fa {
+            color: #383838 !important;
+        }
+        h4 {
+            margin-top: 1em;
+            margin-bottom: 2em;
+            font-size: 120%;
+        }
+        .profile-picture {
+            padding-top: 3.6em;
+        }
+    }
+
+    .exam-title {
+        h1 {
+            padding-top: 0em !important;
+        }
+    }
+
+    .exam-info {
+        dt, dd {
+            font-size: 90%;
+        }
+        fa {
+            color: #383838 !important;
+        }
+    }
+}
+
+.exam-sidebar {
+    padding: 0em 2em;
+}

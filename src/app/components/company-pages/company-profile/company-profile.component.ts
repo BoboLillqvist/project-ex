@@ -15,12 +15,11 @@ import { UserAuthService } from '../../../services/user-auth.service';
 export class CompanyProfileComponent implements OnInit {
 
   company: Company;
-  contact: Person;
 
   myProfile: boolean = false;
 
-  constructor(private companyService: CompanyService, 
-              private router: Router, 
+  constructor(private companyService: CompanyService,
+              private router: Router,
               private auth: UserAuthService,
               private route: ActivatedRoute
             ) { }
@@ -29,13 +28,16 @@ export class CompanyProfileComponent implements OnInit {
 
     this.company = new Company('', '', '',  []);
 
-    let _id: string = this.route.snapshot.params['id'];  // tar in hårdkodat id just nu
-    if (_id === 'profile') {
+    let _id: string = this.route.snapshot.params['id'];
+
+    if (_id === undefined) {
       _id = this.auth.getRoleId();
       this.myProfile = true;
     }
 
-    this.companyService.getCompany(_id).subscribe( (resCompData: any) => this.company = resCompData);
+    this.companyService.getCompany(_id).subscribe( (resCompData: any) => {
+      this.company = resCompData;
+    });
   }
 
   goToExamWork(id) {

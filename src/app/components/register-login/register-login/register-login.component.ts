@@ -15,7 +15,7 @@ export class RegisterLoginComponent implements OnInit {
   usernameValid: boolean = true;
 
   constructor(private auth: UserAuthService, private router: Router) {
-    this.user = new User('', '', '', '');
+    this.user = new User('', '', '', '', '');
 
     if (document.URL.includes('student')) {
       this.user.role = 'student';
@@ -28,22 +28,11 @@ export class RegisterLoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  changePasswordType()
-  {
-    if (document.getElementById('inputPassword').getAttribute('type')==='password')
-    {
-      document.getElementById('inputPassword').setAttribute('type', 'text');
-    }
-    else 
-    {
-      document.getElementById('inputPassword').setAttribute('type', 'password');
-    }
-  }
-
-  register(callback) {
+  register(name, callback) {
+    this.user.name = name;
+    this.user.username = this.user.username.toLowerCase();
     this.auth.register(this.user).subscribe( (resData: any) => {
       // jwt-token kommer tillbaka
-      console.log('register resdata: ' + resData);
       this.user = resData.user;
       callback(resData);
 
@@ -68,21 +57,33 @@ export class RegisterLoginComponent implements OnInit {
     });
   }
 
-  redirect(id) {
+  redirect() {
     let path;
-
-    if (document.URL.includes('student')) {
-      path = '/student/' + id;
+    console.log('redirect?? ');
+    if (this.auth.getRole() === 'student') {
+      path = '/student/';
     } else {
-      path = '/company/' + id;
+      path = '/company/';
     }
 
-    this.router.navigateByUrl(path);
+    this.router.navigateByUrl(path + 'home');
   }
 
   clearUserinfo() {
     this.user.username = '';
     this.user.password = '';
+  }
+
+  changePasswordType()
+  {
+    if (document.getElementById('inputPassword').getAttribute('type')==='password')
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'text');
+    }
+    else 
+    {
+      document.getElementById('inputPassword').setAttribute('type', 'password');
+    }
   }
 
 }
