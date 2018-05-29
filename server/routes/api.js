@@ -288,7 +288,7 @@ router.get('/companies/:id', function (req, res) {
             if (err) {
                 console.log('error retrieving companies: ' + err);
             } else {
-                console.log(company);
+                console.log('Retrieved company: ' + company.name);
                 res.status(200).send(company);
             }
         });
