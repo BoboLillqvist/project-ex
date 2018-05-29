@@ -194,7 +194,7 @@ router.put('/person/:id', (req, res) => {
 });
 
 router.delete('/person/:id', (req, res) => {
-    Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
+    Person.findByIdAndRemove(req.params.id, (err, deletedPerson) => {
         if (err) {
             console.log('Error deleting person: ' + err);
             res.send('Error deleting person');

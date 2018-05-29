@@ -13,6 +13,7 @@ import { User } from '../../../../models/user.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { PersonService } from '../../../../services/person.service';
 
 @Component({
  selector: 'app-exam-work-dashboard',
@@ -20,6 +21,7 @@ import { ToastrService } from 'ngx-toastr';
  styleUrls: ['./exam-work-dashboard.component.scss'],
  providers: [ExamworkService,
              StudentService,
+             PersonService,
              ToastrService
             ]
 })
@@ -43,6 +45,7 @@ export class ExamWorkDashboardComponent implements OnInit {
  constructor(
    private examService: ExamworkService,
    private studentService: StudentService,
+   private personService: PersonService,
    private activatedRoute: ActivatedRoute,
    private router: Router,
    private modalService: BsModalService,
@@ -83,6 +86,9 @@ export class ExamWorkDashboardComponent implements OnInit {
     .subscribe((res: any) => {
     });
 
+   this.personService.deletePerson(examWork.contact)
+    .subscribe((res: any) => {
+    }); 
  }
 
  getExamWork(){
