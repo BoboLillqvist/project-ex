@@ -85,6 +85,10 @@ const routes: Routes = [
       path: 'view-exam-work/:id',
       component: StudentViewExamWorkComponent
     },
+    {
+      path: 'company/:id',
+      component: CompanyProfileComponent
+    },
   ]
 },
 
@@ -121,6 +125,10 @@ const routes: Routes = [
     {
       path: 'exam-work-dashboard/:id',
       component: ExamWorkDashboardComponent
+    },
+    {
+      path: 'student/:id',
+      component: StudentProfileComponent
     },
   ]
 

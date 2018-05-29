@@ -41,7 +41,16 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   goToExamWork(id) {
-    const path = '/company/exam-work/edit-exam-work/' + id;
+    let path;
+
+    // who is looking at the profile?
+    if (this.auth.getRole() === 'company') {
+      path = '/company/exam-work/edit-exam-work/';
+    } else {
+      path = '/student/view-exam-work/';
+    }
+
+    path += id;
     this.router.navigateByUrl(path);
   }
 

@@ -23,7 +23,7 @@
                 <fa name="external-link"></fa> Hemsida</a>
               
               <!-- TODO: Länk till företagsprofil -->
-              <a class="btn btn-light btn-block" [routerLink]="['/company/profile/', examWork.company._id]">
+              <a class="btn btn-light btn-block" [routerLink]="['/student/company', examWork.company._id]">
                 <fa name="user-circle "></fa> Profil
               </a>
             </div>
@@ -122,4 +122,3 @@
 
   </div>
 </div>
-<pre>{{ examWork | json}}</pre>

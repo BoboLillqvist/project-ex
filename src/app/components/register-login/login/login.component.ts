@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       // login successful
       this.validInfo = true;
 
-      // get role id form token data
+      // get role id from token data
       this.user = resData.user;
       this.auth.user = this.user;
 
