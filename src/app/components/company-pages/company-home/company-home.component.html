@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col col-12">
-        <h1 class="text-title">Hem</h1>
+        <h1 class="text-title text-center">Publicerade examensarbeten</h1>
     </div>
 </div>
 
@@ -10,13 +10,12 @@
 
             <div class="card-body">
                 <h5 class="card-title">{{examwork.title}}</h5>
-                <a [routerLink]="['/company/exam-work-dashboard', examwork._id]" class="btn btn-primary">Gå till "Dashboard"</a>
+                <a [routerLink]="['/company/exam-work-dashboard', examwork._id]" class="btn btn-primary">
+                   Översikt</a>
             </div>
 
             <div class="card-footer">
-                <div class="progress">
-                    <div id="progbar" class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">{{DaysLeftOfExamwork(examwork.applyDueDate)}}</div>
-                </div>
+                {{ DaysLeftOfExamwork(examwork.applyDueDate) }}
             </div>
             <br>
         </div>
