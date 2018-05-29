@@ -12,12 +12,16 @@ import { SimpleTagComponent } from '../../../misc/simple-tag/simple-tag.componen
 import { User } from '../../../../models/user.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
  selector: 'app-exam-work-dashboard',
  templateUrl: './exam-work-dashboard.component.html',
  styleUrls: ['./exam-work-dashboard.component.scss'],
- providers: [ExamworkService, StudentService]
+ providers: [ExamworkService,
+             StudentService,
+             ToastrService
+            ]
 })
 export class ExamWorkDashboardComponent implements OnInit {
  @ViewChild(ProgressBarComponent) progressBar: ProgressBarComponent;
@@ -42,7 +46,8 @@ export class ExamWorkDashboardComponent implements OnInit {
    private activatedRoute: ActivatedRoute,
    private router: Router,
    private modalService: BsModalService,
-   private location: Location
+   private location: Location,
+   private toastr: ToastrService
  ) {
    this.examWorkId = this.activatedRoute.snapshot.params['id'];
    this.examWork = new ExamWork('', '', [], [], '', '', '',
@@ -62,75 +67,8 @@ export class ExamWorkDashboardComponent implements OnInit {
    this.message = 'Confirmed';
    this.modalRef.hide();
 
-<<<<<<< HEAD
-    this.examService.getExamWork(this.examWorkId)
-      .subscribe((fetchedExamWork: any) => {
-  
-        this.examWork = fetchedExamWork;
-        for(let i = 0; i < this.examWork.essentialSkills.length; i++) {
-            this.tagComp.skills.push(this.examWork.essentialSkills[i]);
-        }
-          
-        this.tagSkills = this.tagComp.skills;
-      });
-    this.studentService.getStudents()
-      .subscribe(((fetchedStudents: any) => {
-        this.students = fetchedStudents;
-        this.sortedStudents = fetchedStudents;
-
-    }));
-
-       //TODO: byt ut denna mot vem som är inloggad.
-       if (document.URL.includes('company')) {
-        this.user.role = 'company';
-      } else {
-        this.user.role = 'student';
-      }
-    this.goToPathBasedOnUserRole(this.user._id, this.examWorkId)
-    console.log(this.examWork);
-  }
-
-  // showMoreStudents()
-  // {
-  //   this.showLimit += 5;
-  //   if(this.showLimit > this.sortedStudents.length)
-  //     this.showMoreBtn = false;
-
-  // }
-
-  // sortStudents()
-  // {
-  //   this.isEmpty = false;
-  updateSkills(){
-    this.tagSkills = [];
-    this.tagSkills = this.tagComp.skills;
-
-  //   this.students.forEach(student => {
-  //     this.tagComp.skills.forEach(skill => {    
-  //       student.skills.forEach(essSkill => {
-  //         if(skill === essSkill)
-  //           this.sortedStudents.push(student);
-  //       });
-  //     });
-  //   });
-
-  //   if (this.sortedStudents.length < 1)
-  //     this.isEmpty = true;
-  //   else if (this.sortedStudents.length < this.showLimit)
-  //     this.showMoreBtn = false;
-  //   else
-  //     this.showMoreBtn = true;
-
-
-  // }
-
-  goToPathBasedOnUserRole(roleId, exWorkId) {
-    let path;
-    if (this.user.role === 'student') {
-      path = '/student/view-exam-work/' + exWorkId;
-      this.router.navigateByUrl(path);
-=======
    this.deleteExamWork(this.examWork);
+   this.toastr.success('Examensarbetet är borttagen!');
    this.location.back();
 
  }
@@ -155,7 +93,6 @@ export class ExamWorkDashboardComponent implements OnInit {
     //Initiera tags med examensarbetens essentialskills
     for(let i = 0; i < this.examWork.essentialSkills.length; i++) {
         this.tagComp.skills.push(this.examWork.essentialSkills[i]);
->>>>>>> 17798207f01b805fa091b56b49164cc0a2ddc1f8
     }
      
     this.tagSkills = this.tagComp.skills;
