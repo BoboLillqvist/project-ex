@@ -57,7 +57,7 @@
                     <div class="row exam-work" *ngFor="let examWork of company.examWorks">
                         <div class="col">
                             <a type="button" class="btn btn-light btn-lg btn-block"
-                               [routerLink]="['/view-exam-work/', examWork._id]">
+                               (click)="goToExamWork(examWork._id)">
                                 {{ examWork.title }}
                             </a>
                         </div>
@@ -71,9 +71,9 @@
     </div>
 </div>
     
-<div class="row">
+<div class="row" *ngIf="myProfile">
     <div class="col buttons">
-        <a class="btn btn-primary" routerLink="/student/profile/edit">
+        <a class="btn btn-primary" routerLink="/company/profile/edit">
         <fa name="edit"></fa> Redigera profil
         </a>
     </div>

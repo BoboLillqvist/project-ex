@@ -42,7 +42,6 @@ export class CompanyProfileComponent implements OnInit {
 
   goToExamWork(id) {
     let path;
-
     // who is looking at the profile?
     if (this.auth.getRole() === 'company') {
       path = '/company/exam-work/edit-exam-work/';
