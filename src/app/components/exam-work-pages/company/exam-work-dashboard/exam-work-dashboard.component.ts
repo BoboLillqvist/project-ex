@@ -12,12 +12,18 @@ import { SimpleTagComponent } from '../../../misc/simple-tag/simple-tag.componen
 import { User } from '../../../../models/user.model';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { PersonService } from '../../../../services/person.service';
 
 @Component({
  selector: 'app-exam-work-dashboard',
  templateUrl: './exam-work-dashboard.component.html',
  styleUrls: ['./exam-work-dashboard.component.scss'],
- providers: [ExamworkService, StudentService]
+ providers: [ExamworkService,
+             StudentService,
+             PersonService,
+             ToastrService
+            ]
 })
 export class ExamWorkDashboardComponent implements OnInit {
  @ViewChild(ProgressBarComponent) progressBar: ProgressBarComponent;
@@ -39,10 +45,12 @@ export class ExamWorkDashboardComponent implements OnInit {
  constructor(
    private examService: ExamworkService,
    private studentService: StudentService,
+   private personService: PersonService,
    private activatedRoute: ActivatedRoute,
    private router: Router,
    private modalService: BsModalService,
-   private location: Location
+   private location: Location,
+   private toastr: ToastrService
  ) {
    this.examWorkId = this.activatedRoute.snapshot.params['id'];
    this.examWork = new ExamWork('', '', [], [], '', '', '',
@@ -63,6 +71,7 @@ export class ExamWorkDashboardComponent implements OnInit {
    this.modalRef.hide();
 
    this.deleteExamWork(this.examWork);
+   this.toastr.success('Examensarbetet är borttagen!');
    this.location.back();
 
  }
@@ -77,6 +86,9 @@ export class ExamWorkDashboardComponent implements OnInit {
     .subscribe((res: any) => {
     });
 
+   this.personService.deletePerson(examWork.contact)
+    .subscribe((res: any) => {
+    }); 
  }
 
  getExamWork(){

@@ -12,10 +12,6 @@ export class FilterPipe implements PipeTransform {
             
         let sortedArray = [];
         
-        console.log("pipe skills:", filter);
-
-        console.log("students:",items);
-
         items.forEach(item => {
             let countMatching = 0;
             filter.forEach(skill => {
@@ -30,8 +26,6 @@ export class FilterPipe implements PipeTransform {
             }
 
         })
-
-        console.log("sortedArray: ",sortedArray);
 
         return sortedArray;
 
