@@ -1,0 +1,23 @@
+@import "../../../../assets/scss/colors";
+
+.profile {
+    padding-left: 2em;
+    padding-top: 2em;
+    padding-right: 4em;
+    padding-bottom: 4em;
+
+    @media (max-width: 767.98px) {
+        padding: 1em;
+    }
+}
+
+.profile-side {
+    padding: 3em;
+    .profile-picture {
+        margin-bottom: 1em;
+    }
+}
+
+.buttons {
+    margin-top: 2em;
+}

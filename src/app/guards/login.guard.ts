@@ -4,16 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import { UserAuthService } from '../services/user-auth.service';
 
 @Injectable()
-export class CompanyGuard implements CanActivate {
+export class LoginGuard implements CanActivate {
 
   constructor(private auth: UserAuthService, private router: Router) {}
-  
+
   canActivate() {
-    const role = this.auth.getRole();
-    if (this.auth.loggedIn() && ( role === 'company' || role === 'admin' )) {
-      return true;
+    if (this.auth.loggedIn()) {
+      this.router.navigateByUrl('/' + this.auth.getRole() + '/home');
     } else {
-      this.router.navigateByUrl('/login');
+      return true;
     }
   }
 }

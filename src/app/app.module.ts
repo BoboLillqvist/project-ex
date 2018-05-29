@@ -46,6 +46,8 @@ import { TitleCasePipe } from './pipes/title-case.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { CompanyGuard } from './guards/company.guard';
+import { LoginGuard } from './guards/login.guard';
+import { CourseService } from './services/course.service';
 
 @NgModule({
   declarations: [
@@ -112,7 +114,9 @@ import { CompanyGuard } from './guards/company.guard';
     UserAuthService,
     StudentAuthGuard,
     CompanyGuard,
+    LoginGuard,
     JwtHelper,
+    CourseService,
     {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,

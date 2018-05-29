@@ -32,14 +32,14 @@ export class StudentProfileComponent implements OnInit {
     this.student = new Student('', '', '', 0, '', [], [], '', '');
     // TODO: hämta in student/student id från någonstans. Kanske kan hamna i någon Auth service vid login?
     let studId: string = this.route.snapshot.params['id'];  // tar in hårdkodat id just nu
-    if (studId === 'profile') {
+    
+    if (studId === undefined) {
       studId = this.auth.getRoleId();
       this.myProfile = true;
     }
 
 
     this.studService.getStudent(studId).subscribe((resStudentData: any) => {
-      console.log(resStudentData);
       this.student = resStudentData;
     }, (err) => {
       router.navigateByUrl('/student/home');
