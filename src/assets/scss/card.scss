@@ -1,4 +1,8 @@
 .card {
     border-color: rgb(233, 233, 233) !important;
     box-shadow: 0px 0px 4px #e7e7e7 !important;
+    
+    .image-circle {
+        border-radius: 50% !important;
+    }
 }
