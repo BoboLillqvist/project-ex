@@ -1,4 +1,3 @@
-//TODO: schema för studenter som matchar vår modell
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const course = require('./course')
@@ -11,7 +10,9 @@ const studentSchema = new Schema({
     examYear: Number,
     description: String,
     skills: [String],
-    courses: [ { type: Schema.Types.ObjectId, ref: 'course' } ]
+    courses: [ { type: Schema.Types.ObjectId, ref: 'course' } ],
+    pictureID: String,
+    pictureURL: String
 });
 
 module.exports = mongoose.model('student', studentSchema, 'students');

@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col col-12">
+    <h1 class="text-title">Hem</h1>
+</div>
+
+
+<div class="row justify-content-center">
+    
+    <div class="col-sm-10">
+        <app-simple-tag (onNewTag)="sortExamWorks($event)"></app-simple-tag>
+    </div>
+
+    <div class="col-sm-10" *ngIf="noWorks">
+        <br>
+        <h3>
+            Hittar inga examensarbeten! Ta bort något nyckelord.
+        </h3>
+    </div>
+
+    <!-- Card -->
+    <div class="col-sm-10" *ngFor="let examWork of sortedWorks; let i = index">
+        <div id="exam-card" class="card shadow-sm" *ngIf="i < showLimit">
+            <div class="card-body">
+                <div class="row">
+
+                    <!-- Main content -->
+                    <div class="col-9">
+
+                        <!-- Title -->
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title">{{ examWork.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ examWork.company.name }}</h6>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text description"><small>{{ examWork.description }}</small></p>
+                            </div>
+                        </div>
+
+                        <!-- Extra info -->
+                        <div class="row">
+                            <div class="col extra-info">
+                                <ul class="list-unstyled">
+                                    <li class="exam-location"><fa name="map-marker"></fa>&nbsp; {{ examWork.location }}</li>
+                                    <li><fa name="check-circle"></fa>&nbsp; {{ examWork.applyDueDate | date:'yyyy-MM-dd'}}</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Button -->
+                        <div class="row">
+                            <div class="col go-to-exam-btn">
+                                <a [routerLink]="['/student/view-exam-work', examWork._id]" class="btn btn-sm btn-primary">
+                                    Gå till examensarbetet
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /Main content -->
+
+                    <!-- Logo -->
+                    <div class="col-3 center-content company-logo">
+                        <img id="company-logo" src={{examWork.company.pictureURL}} class="float-right image-circle">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Card -->
+
+    <div class="col-sm-10" *ngIf="showMoreBtn">
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-block"
+                        (click)="showMoreWorks()">
+                            <fa name="arrow-down "></fa> Läs in fler
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

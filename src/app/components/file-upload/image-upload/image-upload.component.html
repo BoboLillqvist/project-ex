@@ -1,0 +1,11 @@
+
+<canvas #previewcanvas width="140px" height="140px" style="border: 0.5px solid gray;"></canvas>
+<br>
+<input type="file" (change)="getFile($event)" accept="image/*">
+<br>
+
+<!-- Tilldela url till this.url i komponenten när bilden laddats färdigt -->
+<div class="container" *ngIf="downloadURL | async; let url">
+    {{ getImageUrl(url)}}
+  </div>
+  

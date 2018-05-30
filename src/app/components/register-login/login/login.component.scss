@@ -1,0 +1,24 @@
+.jumbotron{
+  margin-top: 10em;
+
+}
+
+
+.container{
+  @media (min-width:1281px){
+    width: 35%;
+  }
+  @media (min-width:961px){
+    width: 35%;
+  }
+}
+
+.centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.jumbotron{
+  background: rgba(255, 255, 255, 0.5); 
+}

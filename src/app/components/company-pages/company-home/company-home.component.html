@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col col-12">
+        <h1 class="text-title text-center">Publicerade examensarbeten</h1>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-sm-10">
+        <div class="card" *ngFor="let examwork of company.examWorks">
+
+            <div class="card-body">
+                <h5 class="card-title">{{examwork.title}}</h5>
+                <a [routerLink]="['/company/exam-work-dashboard', examwork._id]" class="btn btn-primary">
+                   Översikt</a>
+            </div>
+
+            <div class="card-footer">
+                {{ DaysLeftOfExamwork(examwork.applyDueDate) }}
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center new-exam-work">
+    <div class="col-sm-10">
+        <a routerLink="/company/post-exam-work" type="button" class="btn btn-primary btn-block small">
+            PUBLICERA NYTT EXAMENSARBETE</a>
+    </div>
+</div>

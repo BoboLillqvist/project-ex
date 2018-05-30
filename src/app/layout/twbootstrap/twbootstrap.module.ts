@@ -6,6 +6,10 @@ import { TooltipModule } from 'ngx-bootstrap';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { Alert } from 'selenium-webdriver';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 @NgModule({
   imports: [
@@ -14,14 +18,20 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TooltipModule.forRoot(),
     CollapseModule.forRoot(),
     TypeaheadModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    AlertModule.forRoot(),
+    ProgressbarModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
     TooltipModule,
     CollapseModule,
     TypeaheadModule,
-    ModalModule
+    ModalModule,
+    AlertModule,
+    ProgressbarModule,
+    BsDatepickerModule
   ],
   declarations: []
 })

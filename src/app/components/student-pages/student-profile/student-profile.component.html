@@ -1,0 +1,96 @@
+<div class="row">
+  <div class="col profile">
+    <div class="row">
+
+      <div class="col-4 profile-side text-center">
+        <div class="row">
+          <div class="col profile-picture">
+            <img [src]="student.pictureURL" class="img-fluid img-circle">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h2 class="font-weight-bold">
+                {{ student.person.firstName }} {{ student.person.lastName}}
+            </h2>
+            <p class="lead">{{ student.education}}</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <a style="margin-top: 1em;" type="button"
+                 class="btn btn-light btn-block font-weight-bold contact-btn"
+                 href="mailto:{{student.person.email}}">
+                <fa name="envelope"></fa> Kontakta mig
+              </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col profile-body">
+
+        <div class="row">
+          <div class="col">
+            <h4><fa name="user"></fa> Om mig</h4>
+            <p>{{ student.description }}</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-5">
+
+            <div class="row">
+              <div class="col">
+                <h4><fa name="cubes"></fa> Färdigheter</h4>
+                <ul class="list-inline">
+                    <li *ngFor="let skill of student.skills" class="list-inline-item">
+                      <h5 class="tag"><span class="badge badge-light">{{ skill }}</span></h5>
+                    </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <h6><fa name="heart"></fa> Favoritkurser: </h6>
+                <ul class="list-unstyled">
+                  <li *ngFor="let course of student.courses">
+                    <span class="badge badge-pill badge-light">
+                      {{ course.name }}, {{ course.points }} HP
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-7">
+            <h4><fa class="ic" name="info-circle"></fa> Personliga detaljer</h4>
+            <dl class="row">
+              <dt class="col-sm-3">Namn</dt>
+              <dd class="col-sm-9">{{ student.person.firstName}} {{ student.person.lastName}}</dd>
+            
+              <dt class="col-sm-3">Email</dt>
+              <dd class="col-sm-9">{{ student.person.email }}</dd>
+
+              <dt class="col-sm-3">Utbildning</dt>
+              <dd class="col-sm-9">{{ student.education }}</dd>
+
+              <dt class="col-sm-3">Examensår</dt>
+              <dd class="col-sm-9">{{ student.examYear }}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="row" *ngIf="myProfile">
+  <div class="col buttons">
+    <a class="btn btn-primary" routerLink="/student/profile/edit">
+    <fa name="edit"></fa> Redigera profil
+    </a>
+  </div>
+</div>

@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken')
 const mongoose = require('mongoose');
 const Company = require('../models/company');
 const Student = require('../models/student');
 const Person = require('../models/person');
 const Examwork = require('../models/examwork');
 const Course = require('../models/course');
+const Tags = require('../models/tags');
+const User = require('../models/user');
 
 const db = "mongodb://firstcontact:projectex1@ds113849.mlab.com:13849/projectex";
 mongoose.Promise = global.Promise;
@@ -16,6 +19,7 @@ mongoose.connect(db, function (err) {
     }
 });
 
+
 //#region Student API
 
 router.get('/students', (req, res) => {
@@ -25,7 +29,7 @@ router.get('/students', (req, res) => {
         if (err) {
             console.log('Error retrieving students: ' + err);
         } else {
-            res.json(students);
+            res.status(200).send( students );
         }
     });
 });
@@ -37,9 +41,9 @@ router.get('/students/:id', (req, res) => {
         if (err) {
             console.log('Error retrieving student with id:' + req.params.id + '. ' + err);
         } else {
-            console.log('Found it: ' + student);
+            console.log('Found student: ' + student.name);
+            res.status(200).send( student );
         }
-        res.json(student);
     });
 
 });
@@ -59,15 +63,17 @@ router.post('/student', (req, res) => {
         examYear: req.body.examYear,
         description: req.body.description,
         skills: req.body.skills,
-        courses: courseIds
+        courses: courseIds,
+        pictureID: req.body.pictureID,
+        pictureURL: req.body.pictureURL
     });
 
-    newStudent.save((err, insertedStudent) => {
+    newStudent.save((err, student) => {
         if (err) {
             console.log('Error saving student ' + err);
         } else {
             console.log('saving student');
-            res.json(insertedStudent);
+            res.status(200).send( student );
         }
     });
 });
@@ -83,21 +89,23 @@ router.put('/student/:id', (req, res) => {
     Student.findByIdAndUpdate(req.params.id,
         {
             $set: {
+                name: req.body.name,
                 education: req.body.education,
                 examYear: req.body.examYear,
                 description: req.body.description,
                 skills: req.body.skills,
-                courses: courseIds
+                courses: courseIds,
+                pictureURL: req.body.pictureURL
             }
         },
         {
             new: true
         },
-        (err, updatedStudent) => {
+        (err, student) => {
             if (err) {
                 res.send('Error updating student: ' + err);
             } else {
-                res.json(updatedStudent);
+                res.status(200).send( student );
             }
         }
     );
@@ -105,13 +113,13 @@ router.put('/student/:id', (req, res) => {
 
 router.delete('/student/:id', (req, res) => {
     console.log('Delete a student');
-    Student.findByIdAndRemove(req.params.id, (err, deletedStudent) => {
+    Student.findByIdAndRemove(req.params.id, (err, student) => {
         if (err) {
             console.log('Error deleting student' + err);
             res.send('Error deleting student' + err);
         } else {
-            console.log('Deleting student: ' + deletedStudent);
-            res.json(deletedStudent);
+            console.log('Deleting student: ' + student.name);
+            res.status(200).send( student );
         }
     });
 });
@@ -127,7 +135,19 @@ router.get('/persons', (req, res) => {
         if (err) {
             console.log('Error retrieving persons: ' + err);
         } else {
-            res.json(persons);
+            res.status(200).send( persons );
+        }
+    });
+})
+
+router.get('/persons/:id', (req, res) => {
+    console.log('Get request for one person, id: ' + req.params.id);
+    
+    Person.findById(req.params.id).exec( (err, person) => {
+        if(err) {
+            console.log('Error retrieving person: ' + err);
+        } else {
+            res.status(200).send( person );
         }
     });
 })
@@ -142,14 +162,14 @@ router.post('/person', (req, res) => {
         phoneNbr: req.body.phoneNbr
     });
 
-    newPerson.save((err, insertedPerson) => {
+    newPerson.save((err, person) => {
         if (err) {
             console.log('error saving person ' + err);
         }
 
         console.log('saving person');
 
-        res.json(insertedPerson);
+        res.status(200).send( person );
     });
 });
 
@@ -159,7 +179,8 @@ router.put('/person/:id', (req, res) => {
         $set: {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
-            phoneNbr: req.body.phoneNbr
+            phoneNbr: req.body.phoneNbr,
+            email: req.body.email
         }
     }, {
         new: true
@@ -167,19 +188,19 @@ router.put('/person/:id', (req, res) => {
         if(err) {
             res.send('Error updating person' + err);
         } else {
-            res.json(updatedPerson);
+            res.status(200).send( updatedPerson );
         }
     });
 });
 
 router.delete('/person/:id', (req, res) => {
-    Person.findByIdAndUpdate(req.params.id, (err, deletedPerson) => {
+    Person.findByIdAndRemove(req.params.id, (err, deletedPerson) => {
         if (err) {
-            console.log('Error person: ' + deletedPerson);
+            console.log('Error deleting person: ' + err);
             res.send('Error deleting person');
         } else {
-            console.log('Deleting person: ' + deletedPerson);
-            res.json(deletedPerson);
+            console.log('Deleting person: ' + deletedPerson.name);
+            res.status(200).send( deletedPerson );
         }
     });
 });
@@ -203,7 +224,7 @@ router.post('/course', (req, res) => {
 
         console.log('saving course');
 
-        res.json(insertedCourse);
+        res.status(200).send(insertedCourse);
     });
 });
 
@@ -213,7 +234,7 @@ router.get('/courses', (req, res) => {
         if (err) {
             console.log('Error retrieving courses: ' + err);
         } else {
-            res.json(courses);
+            res.status(200).send(courses);
         }
     });
 })
@@ -226,7 +247,7 @@ router.get('/courses/:name', (req, res) => {
         } else {
             console.log('Found it: ' + course);
         }
-        res.json(course);
+        res.status(200).send(course);
     });
 
 });
@@ -238,7 +259,7 @@ router.delete('/course/:id', (req, res) => {
             res.send('Error deleting course');
         } else {
             console.log('Deleting course: ' + deletedCourse);
-            res.json(deletedCourse);
+            res.status(200).send(deletedCourse);
         }
     });
 });
@@ -249,24 +270,26 @@ router.delete('/course/:id', (req, res) => {
 
 router.get('/companies', function (req, res) {
     console.log('get request for all companies');
-    Company.find({})
-        .exec(function (err, companies) {
+    var populateQuery = [{ path: 'examWorks', model: 'examwork' }];
+    Company.find({}).populate(populateQuery).exec(function (err, companies) {
             if (err) {
                 console.log('error retrieving companies' + err);
             } else {
-                res.json(companies);
+                res.status(200).send(companies);
             }
         });
 });
 
 router.get('/companies/:id', function (req, res) {
     console.log('get request for a single company');
-    Company.findById(req.params.id)
+    var populateQuery = [{ path: 'examWorks', model: 'examwork' }];
+    Company.findById(req.params.id).populate(populateQuery)
         .exec(function (err, company) {
             if (err) {
                 console.log('error retrieving companies: ' + err);
             } else {
-                res.json(company);
+                console.log('Retrieved company: ' + company.name);
+                res.status(200).send(company);
             }
         });
 });
@@ -277,11 +300,13 @@ router.post('/company', function (req, res) {
     newCompany.name = req.body.name;
     newCompany.url = req.body.url;
     newCompany.description = req.body.description;
+    newCompany.pictureID = req.body.pictureID;
+    newCompany.pictureURL = req.body.pictureURL;
     newCompany.save(function (err, insertedCompany) {
         if (err) {
             console.log('Error saving company' + err);
         } else {
-            res.json(insertedCompany);
+            res.status(200).send(insertedCompany);
             console.log('Company saved');
         }
     });
@@ -291,7 +316,11 @@ router.put('/company/:id', function (req, res) {
     console.log('update a company');
     Company.findByIdAndUpdate(req.params.id,
         {
-            $set: { name: req.body.name, description: req.body.description }
+            $set: { name: req.body.name, 
+                    url: req.body.url, 
+                    description: req.body.description, 
+                    pictureURL: req.body.pictureURL 
+            }
         },
         {
             new: true
@@ -300,7 +329,29 @@ router.put('/company/:id', function (req, res) {
             if (err) {
                 res.send("Error updating company");
             } else {
-                res.json(updatedCompay);
+                res.status(200).send(updatedCompay);
+            }
+        }
+
+    );
+});
+
+router.put('/company/examwork/:id', (req, res) => {
+    console.log('update a company examworks');
+    Company.findByIdAndUpdate(req.params.id,
+        {
+            $set: { 
+                examWorks: req.body.examWorks,
+            }
+        },
+        {
+            new: true
+        },
+        function (err, updatedCompay) {
+            if (err) {
+                res.send("Error updating company");
+            } else {
+                res.status(200).send(updatedCompay);
             }
         }
 
@@ -313,28 +364,40 @@ router.delete('/company/:id', function (req, res) {
         if (err) {
             res.send("Error deleting company");
         } else {
-            res.json(deletedCompany);
+            res.status(200).send(deletedCompany);
         }
     });
 });
 
 //#endregion
 
-
 //#region examwork API
 
 router.get('/examworks', function (req, res) {
     console.log('get request for all exam works');
-    Examwork.find({})
+    var populateQuery = [{ path: 'contact', model: 'person' }, { path: 'company', model: 'company' }];
+    Examwork.find({}).populate(populateQuery)
         .exec(function (err, examworks) {
             if (err) {
                 console.log('error retrieving exam works' + err);
             } else {
-                res.json(examworks);
+                res.status(200).send(examworks);
             }
         });
 });
 
+router.get('/examworks/:id', function (req, res) {
+    console.log('get request for a single exam work');
+    var populateQuery = [{ path: 'contact', model: 'person' }, { path: 'company', model: 'company' }];
+    Examwork.findById(req.params.id).populate(populateQuery)
+        .exec(function (err, examwork) {
+            if (err) {
+                console.log('error retrieving exam work' + err);
+            } else {
+                res.status(200).send(examwork);
+            }
+        });
+});
 
 router.post('/examwork', function (req, res) {
     console.log('Post an exam work');
@@ -342,19 +405,20 @@ router.post('/examwork', function (req, res) {
     var newExamWork = new Examwork();
     newExamWork.title = req.body.title;
     newExamWork.location = req.body.location;
-    newExamWork.applyDueDate = req.body.applyDueDate;
     newExamWork.essentialSkills = req.body.essentialSkills;
     newExamWork.complementarySkills = req.body.complementarySkills;
     newExamWork.description = req.body.description;
+    newExamWork.applyDueDate = req.body.applyDueDate;
+    newExamWork.presence = req.body.presence;
     newExamWork.teachings = req.body.teachings;
-    newExamWork.contact = req.body.contact;
-    newExamWork.company = req.body.company;
+    newExamWork.contact = new mongoose.mongo.ObjectId(req.body.contactId),
+    newExamWork.company = new mongoose.mongo.ObjectId(req.body.companyId),
 
-    newExamWork.save(function (err, insertedExamwork) {
+    newExamWork.save(function (err, examwork) {
         if (err) {
             console.log('Error saving exam work' + err);
         } else {
-            res.json(insertedExamwork);
+            res.status(200).send(examwork);
             console.log('Exam work saved');
         }
     });
@@ -362,19 +426,19 @@ router.post('/examwork', function (req, res) {
 
 router.delete('/examwork/:id', function (req, res) {
     console.log('Deleting exam work');
-    Company.findByIdAndRemove(req.params.id, function (err, deletedExamwork) {
+    Examwork.findByIdAndRemove(req.params.id, function (err, deletedExamwork) {
         if (err) {
             res.send("Error deleting exam work");
         } else {
-            res.json(deletedCompany);
+            res.status(200).send(deletedExamwork);
             console.log('Exam work deleted');
         }
     });
 });
 
 router.put('/examwork/:id', function (req, res) {
-    console.log('update examwork');
-    Company.findByIdAndUpdate(req.params.id,
+    process.stdout.write('Updating examwork.. ');
+    Examwork.findByIdAndUpdate(req.params.id,
         {
             $set: {
                 title: req.body.title,
@@ -391,17 +455,195 @@ router.put('/examwork/:id', function (req, res) {
         {
             new: true
         },
-        function (err, updatedExamwork) {
-            if (err) {
-                res.send("Error updating exam work");
+        function (error, updatedExamwork) {
+            if (error) {
+                res.send('error: ' + error);
             } else {
-                res.json(updatedExamwork);
-                console.log('Exam work updated');
+                res.status(200).send(updatedExamwork);
+                console.log('succeeded!');
             }
         }
-
     );
 });
 
 //#endregion
+
+// #region Tags API
+router.get('/tags', function (req, res) {
+    console.log('get request for all tags');
+    Tags.find({})
+        .exec(function (err, tags) {
+            if (err) {
+                console.log('error retrieving tags' + err);
+            } else {
+                res.status(200).send(tags);
+            }
+        });
+});
+
+router.put('/tags:id', function(req, res) {
+    console.log('Updating available tags..');
+    Tags.findByIdAndUpdate(req.params.id,
+    {
+        $set: {
+            type: req.body.type,
+            values: req.body.values
+        }
+    },
+    {
+        new: true
+    },
+    function (error, updatedTags) {
+        if (error) {
+            res.send('error updating tags: ' + error);
+        } else {
+            res.status(200).send(updatedTags);
+            console.log('succeeded!');
+        }
+    })
+});
+// #endregion
+
+//#region User API
+
+// skapa payload till jwt
+function getPayload(name, username, role, roleId) {
+    return payload = { 
+        subject: 'user',
+        name: name,
+        username: username,
+        role: role,
+        roleId: roleId,
+        exp: (new Date().getTime() + 120 * 60 * 1000)/1000 // 2h
+    };
+}
+
+router.post('/register', (req, res) => {
+    console.log('Post new user');
+
+    let newUser = new User();
+    newUser.name = req.body.name;
+    newUser.username = req.body.username;
+    newUser.role = req.body.role;
+    newUser.roleId = req.body.roleId;
+
+    newUser.setPassword(req.body.password, (hash) => {
+        newUser.password = hash;
+        newUser.save( (err, user) => {
+            if (err) {
+                console.log('Error registrering user: ' + err);
+                // username finns redan
+                if (err.code === 11000) {
+                    res.status(406).send( { err } )
+                } else {
+                    res.status(400).send( { err } );
+                }
+                
+            } else {
+                // fixa jwt-token
+                
+                let payload = getPayload(user.name, user.username, user.role, user.roleId);
+
+                jwt.sign(payload, 'ohhSecret', (err, token) => {
+
+                    if (err) {
+                        console.log('error creating token');
+                        res.status(400).send( {err} );
+                    }
+
+                    console.log('new user added');
+
+                    res.status(200).send( { 
+                        token,
+                        user,
+                        expiresIn: payload.exp
+                    });
+                });
+            }
+        });
+    });
+
+    
+});
+
+router.post('/login', (req, res) => {
+    console.log('login with username: ' + req.body.username);
+
+    User.findOne({ username: req.body.username}, (err, user) => {
+        if (err) {
+            console.log(err);
+            return res.status(400).send('error');
+        }
+
+        if (!user) {
+            console.log('User not found: ' + req.body.username);
+            return res.status(401).send('invalid login');
+        }
+
+        user.validPassword(req.body.password, user.password, (isValid) => {
+            // wrong password
+            if(!isValid){
+                console.log('invalid password');
+                return res.status(401).send('invalid login');
+            } else {
+                // everything good, create and send token
+                let payload = getPayload(user.name, user.username, user.role, user.roleId);
+                jwt.sign(payload, 'ohhSecret', (err, token) => {
+
+                    if (err) {
+                        console.log('error creating token');
+                        res.status(400).send( {err} );
+                    }
+
+                    console.log('Login successful: ' + user.username);;
+
+                    res.status(200).send( { 
+                        token,
+                        user,
+                        expiresIn: payload.exp
+                    });
+                });
+            }
+        });
+    });
+});
+
+router.put('/user/:id', (req, res) => {
+    console.log('update user roleId');
+    User.findByIdAndUpdate(req.params.id, {
+        $set: {
+            roleId: req.body.roleId,
+        }
+    }, {
+        new: true
+    }, (err, user) => {
+        if(err) {
+            res.status(400).send('Error updating person' + err);
+        } else {
+            // everything good, create and send token
+            let payload = getPayload(user.name, user.username, user.role, user.roleId);
+
+            jwt.sign(payload, 'ohhSecret', (err, token) => {
+
+                if (err) {
+                    console.log('error creating token');
+                    res.status(400).send( {err} );
+                }
+
+                console.log('update successful: ' + user.username);;
+
+                res.status(200).send( { 
+                    token,
+                    user,
+                    expiresIn: payload.exp
+                });
+            });
+        }
+    });
+});
+
+
+//#endregion
+
+
 module.exports = router;

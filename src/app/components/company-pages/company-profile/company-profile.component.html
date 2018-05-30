@@ -1,0 +1,82 @@
+<div class="row">
+    <div class="col profile company-profile">
+
+        <div class="row">
+    
+        <div class="col-4 profile-side text-center">
+            <div class="row">
+            <div class="col profile-picture">
+                <img [src]="company.pictureURL" class="img-fluid img-circle">
+            </div>
+            </div>
+            <div class="row">
+            <div class="col">
+                <h2 class="font-weight-bold"></h2>
+                <p class="lead">{{ company.name }}</p>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col">
+                <a style="margin-top: 1em;" type="button"
+                    class="btn btn-light btn-block font-weight-bold contact-btn"
+                    href="{{ company.url }}" target="_blank">
+                    <fa name="external-link"></fa> Hemsida
+                </a>
+            </div>
+            </div>
+        </div>
+    
+        <div class="col profile-body">
+
+            <!-- Description -->
+            <div class="row">
+                <div class="col">
+                    <h4><fa class="ic" name="comment"></fa> Om {{ company.name }}</h4>
+                    <p>{{ company.description }}</p>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="row">
+                <div class="col">
+                    <h4><fa class="ic" name="info-circle"></fa> Information om företaget</h4>
+                    <dl class="row">
+                        <dt class="col-sm-2">Namn</dt>
+                        <dd class="col-sm-10">{{ company.name }}</dd>
+                        
+                        <dt class="col-sm-2">Hemsida</dt>
+                        <dd class="col-sm-10">{{ company.url }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <!-- Examensarbeten -->
+            <div class="row">
+                <div class="col">
+                    <h4><fa class="ic" name="laptop"></fa> Publicerade examensarbeten</h4>
+                    <div class="row exam-work" *ngFor="let examWork of company.examWorks">
+                        <div class="col">
+                            <a type="button" class="btn btn-light btn-lg btn-block"
+                               (click)="goToExamWork(examWork._id)">
+                                {{ examWork.title }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    
+        </div>
+    </div>
+</div>
+    
+<div class="row" *ngIf="myProfile">
+    <div class="col buttons">
+        <a class="btn btn-primary" routerLink="/company/profile/edit">
+        <fa name="edit"></fa> Redigera profil
+        </a>
+    </div>
+</div>
+
+<!-- <pre>{{ company | json }}</pre> -->

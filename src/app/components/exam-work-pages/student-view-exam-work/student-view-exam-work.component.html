@@ -1,0 +1,124 @@
+<div class="row">
+  <div class="col profile">
+
+
+    <!-- Body -->
+    <div class="row profile-body">
+
+        <!-- Sidebar -->
+        <div class="col-3 exam-sidebar text-center">
+
+          <!-- Picture -->
+          <div class="row justify-content-center">
+            <div class="col-8 profile-picture">
+              <img [src]="examWork.company.pictureURL" class="img-fluid img-circle">
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="row">
+            <div class="col">
+              <h4>{{ examWork.company.name }}</h4>
+              <a class="btn btn-light btn-block" href="{{ examWork.company.url }}" target="_blank">
+                <fa name="external-link"></fa> Hemsida</a>
+              
+              <!-- TODO: Länk till företagsprofil -->
+              <a class="btn btn-light btn-block" [routerLink]="['/student/company', examWork.company._id]">
+                <fa name="user-circle "></fa> Profil
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <!-- /Sidebar -->
+
+        <!-- Content -->
+        <div class="col exam-content">
+
+          <!-- Title -->
+          <div class="row">
+            <div class="col exam-title">
+              <h1>{{ examWork.title }}</h1>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="row">
+            <div class="col">
+              <h4><fa name="comment"></fa> Beskrivning</h4>
+              <p>{{ examWork.description }}</p>
+            </div>
+          </div>
+
+          <!-- Info -->
+          <div class="row">
+            <div class="col exam-info">
+
+              <dl class="row">
+                <dt class="col-3"><fa name="building"></fa> Uppdragsgivare</dt>
+                <dd class="col-9">{{ examWork.company.name }}</dd>
+
+                <dt class="col-3"><fa name="map-marker"></fa>&nbsp; Plats</dt>
+                <dd class="col-9">{{ examWork.location }}</dd>
+
+                <dt class="col-3"><fa name="calendar"></fa> Sista ans.dag</dt>
+                <dd class="col-9">{{ examWork.applyDueDate | date:'yyyy-MM-dd' }}</dd>
+              </dl>
+
+            </div>
+          </div>
+
+          <!-- Teachings -->
+          <div class="row">
+            <div class="col">
+              <h5><fa name="graduation-cap"></fa> Lärdomar</h5>
+              <p>{{ examWork.teachings }}</p>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="row">
+            <!-- Essential -->
+            <div class="col-6">
+              <h5><fa name="cube"></fa> Grundläggande färdigheter</h5>
+              <ul class="list-inline">
+                  <li *ngFor="let skill of examWork.essentialSkills" class="list-inline-item">
+                    <h5 class="tag"><span class="badge badge-light">{{ skill }}</span></h5>
+                  </li>
+              </ul>
+            </div>
+            <!-- Complementary -->
+            <div class="col-6">
+              <h5><fa name="cubes"></fa> Komplementerande färdigheter</h5>
+              <ul class="list-inline">
+                  <li *ngFor="let skill of examWork.complementarySkills" class="list-inline-item">
+                    <h5 class="tag"><span class="badge badge-light">{{ skill }}</span></h5>
+                  </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div class="row">
+            <div class="col">
+              <h4><fa name="user"></fa> Kontaktperson</h4>
+              <ul class="list-unstyled">
+                <li>{{ examWork.contact.firstName }} {{ examWork.contact.lastName }}</li>
+                <li>{{ examWork.contact.phoneNbr }}</li>
+                <li>
+                  <a href="mailto:{{examWork.contact.email }}" class="exam-contact-mail">
+                    {{ examWork.contact.email }}
+                  </a>
+                <li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <!-- /Content -->
+
+      </div>
+      <!-- /Body -->
+
+  </div>
+</div>

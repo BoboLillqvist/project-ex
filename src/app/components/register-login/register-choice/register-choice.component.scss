@@ -1,0 +1,13 @@
+.container{
+  margin-top: 10em;
+  @media (min-width:1281px){
+    width: 35%;
+  }
+  @media (min-width:961px){
+    width: 35%;
+  }
+}
+
+.jumbotron{
+    background: rgba(255, 255, 255, 0.5); 
+  }

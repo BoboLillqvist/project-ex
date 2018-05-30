@@ -6,7 +6,9 @@ const companySchema = new Schema({
     name: String,
     description: String,
     url: String,
-    examWorks: [{ type: Schema.Types.ObjectId, ref: 'examwork' }]
+    examWorks: [{ type: Schema.Types.ObjectId, ref: 'examwork' }],
+    pictureID: String,
+    pictureURL: String
 });
 
 module.exports = mongoose.model('company', companySchema, 'companies');

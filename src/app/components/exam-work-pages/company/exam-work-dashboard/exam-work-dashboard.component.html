@@ -1,0 +1,136 @@
+<!-- Title -->
+<div class="row">
+  <div class="col col-12">
+    <h1>{{ examWork.title }}</h1>
+  </div>
+ </div>
+ 
+ <div class="card">
+  <div class="card-body">
+     <div class="row">
+      <div class="col col-6">
+        <h5>Plats</h5>
+        <p class="card-text">{{ examWork.location }}</p>
+      </div>
+    </div>
+ 
+    <div class="row">
+      <div class="col col-10">
+        <h5>Beskrivning</h5>
+        <p class="card-text">{{ examWork.description }}</p>
+      </div>
+    </div>
+ 
+    <div class="row">
+      <div class="col col-6">
+        <h5>Grundläggande färdigheter</h5>
+          <span *ngFor="let essentialSkill of examWork.essentialSkills"
+                class="badge badge-primary">{{ essentialSkill }}&nbsp;
+          </span>
+      </div>
+      <div class="col col-6">
+        <h5>Komplementerande färdigheter</h5>
+        <span *ngFor="let complementarySkill of examWork.complementarySkills"
+              class="badge badge-secondary">{{ complementarySkill }}&nbsp;
+        </span>
+      </div>
+    </div>
+ 
+    <div class="row">
+      <div class="col">
+        <h5>Vad lär du dig?</h5>
+        <p class="card-text">{{ examWork.teachings }}</p>
+      </div>
+    </div>
+ 
+    <div class="row">
+      <div class="col col-6">
+        <h6>Sista ansökningsdag</h6>
+        <p class="card-text">{{ examWork.applyDueDate | date: 'longDate' : 'sv-SE' }}</p>
+      </div>
+    </div>
+ 
+    <div class="row" style="padding-top:1em">
+      <div class="col-auto mr-auto">
+          <a class="btn btn-outline-primary"
+             [routerLink]="['/company/exam-work/edit-exam-work', examWork._id]">
+            <fa name="edit"></fa> Redigera
+          </a>
+      </div>
+      <div class="col-auto">
+          <button type="button" class="btn btn-outline-danger" (click)="openModal(template)">
+            <fa name="trash"></fa> Ta bort
+          </button>
+      </div>
+    </div>
+ 
+  </div> <!-- /card-body -->
+ </div> <!-- card -->
+ 
+ <ng-template #template>
+  <div class="modal-body text-center">
+    <p>Vill du verkligen ta bort examensarbetet?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Ja</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Nej</button>
+  </div>
+ </ng-template>
+ 
+ 
+ <div class="row justify-content-center">
+ 
+ <div class="row">
+  <div class="col col-12">
+    <h1 class="text-title text-center">Matchade studenter</h1>
+  </div>
+ </div>
+   
+ <div class="col-sm-10">
+  <app-simple-tag (onNewTag)="updateSkills($event)"></app-simple-tag>
+ </div>
+ 
+ <div class="col-sm-10" *ngIf="(sortedStudents | filter:tagSkills).length < 1">
+  <br>
+  <h3>
+      Hittar inga studenter! Ta bort något nyckelord.
+  </h3>
+</div>
+
+ <div class="row justify-content-center">
+  <div class="col-sm-10" *ngFor="let student of (sortedStudents | filter:tagSkills); let i = index">
+
+      <div class="card" *ngIf="i < showLimit">
+      <div class="card-body">
+ 
+          <div class="row">
+              <div class="col col-9">
+                  <h6 class="card-subtitle mb-2 text-muted">{{ student.name }}</h6>
+                  <h6><small class="text-muted">{{ student.education }}</small></h6>
+                  <p class="card-text">
+                    <small>{{student.description}}</small>
+                  </p>
+                  <a [routerLink]="['/company/student', student._id]" class="btn btn-primary">Gå till profilsidan</a>
+              </div>
+              <div class="col col-3 center-content">
+                  <img src="{{student.pictureURL}}" class="float-right img-circle">
+              </div>
+          </div>
+      </div>
+  </div>
+ 
+ 
+ </div>
+  <div class="col-sm-10" *ngIf="(sortedStudents | filter:tagSkills).length > showLimit">
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-block" (click)="showMoreStudents()">
+          Läs in fler
+        </button>
+      </div>
+    </div>
+  </div>
+ 
+ </div>         
+ 
+ <div class="back-button">
+    <app-back></app-back>
+ </div>

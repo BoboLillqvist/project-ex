@@ -12,6 +12,8 @@ export class Student {
     skills: Array<string>;
     courses: Array<Course>;
     courseIds: string[] = [];
+    pictureID: string;
+    pictureURL: string;
 
     constructor(firstName, lastName, education: string, examYear: number, description, skills: Array<string>,
                     courses: Array<Course>, email: string, phoneNbr: string) {

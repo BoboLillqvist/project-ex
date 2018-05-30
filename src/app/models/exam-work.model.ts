@@ -1,7 +1,8 @@
-import { Company } from "./company.model";
-import { Person } from "./person.model";
+import { Company } from './company.model';
+import { Person } from './person.model';
 
 export class ExamWork {
+    _id: string;
     title: string;
     location: string;
     applyDueDate: Date;
@@ -10,8 +11,10 @@ export class ExamWork {
     description: string;
     presence: string;
     contact: Person;
-    teachings: string;
+    teachings: String;
     company: Company;
+    companyId: string;
+    contactId: string;
 
     constructor(title, location, essentialSkills, complementarySkills, description, applyDueDate, presence, contact, teachings, company){
         this.title = title;

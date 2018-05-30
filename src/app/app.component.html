@@ -1,7 +1,12 @@
-<app-navbar id="main-navbar"></app-navbar>
+  <app-navbar 
+    id="main-navbar"
+    *ngIf="!hideNavbar">
+  </app-navbar>
 
-<div class="container">
-  <router-outlet></router-outlet>
-</div>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+
+  <app-footer></app-footer>
 
 
